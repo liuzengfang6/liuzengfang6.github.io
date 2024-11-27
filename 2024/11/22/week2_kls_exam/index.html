@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>week2_kls_exam | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="题目1配置vsftpd服务，添加ftp服务用户lihua，并限制lihua使用ftp服务的访问路径为&#x2F;usr&#x2F;share&#x2F;ftp_filesid:: 67401618-77f2-4cd7-ab26-b033e352aa66 step1：添加用户，并设置家目录，以及家目录权限，设置密码  step2：修改vsftp配置文件 修改&#x2F;etc&#x2F;vsftpd&#x2F;vsftpd_us">
+<meta property="og:type" content="article">
+<meta property="og:title" content="week2_kls_exam">
+<meta property="og:url" content="http://example.com/2024/11/22/week2_kls_exam/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目1配置vsftpd服务，添加ftp服务用户lihua，并限制lihua使用ftp服务的访问路径为&#x2F;usr&#x2F;share&#x2F;ftp_filesid:: 67401618-77f2-4cd7-ab26-b033e352aa66 step1：添加用户，并设置家目录，以及家目录权限，设置密码  step2：修改vsftp配置文件 修改&#x2F;etc&#x2F;vsftpd&#x2F;vsftpd_us">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/assets/image_1732253536205_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732254737383_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732254394767_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732253873260_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732253955889_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732254036298_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732254539764_0.png">
+<meta property="og:image" content="http://example.com/assets/vsftp_1732254502349_0.gif">
+<meta property="og:image" content="http://example.com/assets/image_1732254970492_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732255036501_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732255169120_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732255239120_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732255267589_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732255349220_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732255758185_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732255898430_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732255960355_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732256290665_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732256695233_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732256373774_0.png">
+<meta property="og:image" content="http://example.com/assets/kalismb_1732256611407_0.gif">
+<meta property="og:image" content="http://example.com/assets/image_1732257125498_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732258931385_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732257384246_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732258009591_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732258122511_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732259498695_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732258814860_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732258841977_0.png">
+<meta property="article:published_time" content="2024-11-22T07:03:19.000Z">
+<meta property="article:modified_time" content="2024-11-22T08:57:42.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="exam">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/image_1732253536205_0.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-week2_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/22/week2_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2024-11-22T07:03:19.000Z" itemprop="datePublished">2024-11-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      week2_kls_exam
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="题目1">题目1</span></h2><p>配置vsftpd服务，添加ftp服务用户lihua，并限制lihua使用ftp服务的访问路径为&#x2F;usr&#x2F;share&#x2F;ftp_files<br>id:: 67401618-77f2-4cd7-ab26-b033e352aa66</p>
+<h3><span id="step1添加用户并设置家目录以及家目录权限设置密码">step1：添加用户，并设置家目录，以及家目录权限，设置密码</span></h3><p><img src="/../assets/image_1732253536205_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732254737383_0.png" alt="image.png"></p>
+<h3><span id="step2修改vsftp配置文件">step2：修改vsftp配置文件</span></h3><p><img src="/../assets/image_1732254394767_0.png" alt="image.png"></p>
+<p>修改<code>/etc/vsftpd/vsftpd_userlist</code></p>
+<p><img src="/../assets/image_1732253873260_0.png" alt="image.png"></p>
+<p>创建<code>/etc/vsftpd/user_conf</code>目录，并添加<code>lihua</code>配置文件</p>
+<p><img src="/../assets/image_1732253955889_0.png" alt="image.png"></p>
+<h3><span id="step3重新加载vsftp配置文件并重启">step3:重新加载vsftp配置文件并重启</span></h3><p><img src="/../assets/image_1732254036298_0.png" alt="image.png"></p>
+<h3><span id="step4连接ftp">step4:连接ftp</span></h3><p><img src="/../assets/image_1732254539764_0.png" alt="image.png"></p>
+<p><img src="/../assets/vsftp_1732254502349_0.gif" alt="vsftp.gif"></p>
+<h2><span id="题目2">题目2</span></h2><p>配置ssh服务，要求用户jack可以使用id_rsa 免密登录ssh</p>
+<p>server: centos.pcx.home</p>
+<p>client: kali.pcx.home</p>
+<h3><span id="step1添加jack用户创建家目录设置密码">step1:添加jack用户,创建家目录，设置密码</span></h3><p><img src="/../assets/image_1732254970492_0.png" alt="image.png"></p>
+<h3><span id="step2让jack生成ssh公私钥匙对">step2:让jack生成ssh公私钥匙对</span></h3><p><img src="/../assets/image_1732255036501_0.png" alt="image.png"></p>
+<h3><span id="step3上传公钥">step3：上传公钥</span></h3><p><img src="/../assets/image_1732255169120_0.png" alt="image.png"></p>
+<h3><span id="step4登陆centos">step4：登陆centos</span></h3><p><img src="/../assets/image_1732255239120_0.png" alt="image.png"></p>
+<p>在centos端查看在线用户：</p>
+<p><img src="/../assets/image_1732255267589_0.png" alt="image.png"></p>
+<p>在centos端查看<code>~/.ssh/authorized_keys</code></p>
+<p><img src="/../assets/image_1732255349220_0.png" alt="image.png"></p>
+<h2><span id="题目3">题目3</span></h2><p>在kali上编写ufw防火墙规则，禁止kali连接任何机器的smb服务</p>
+<h3><span id="step1开启smb服务并测试">step1:开启smb服务并测试</span></h3><p><img src="/../assets/image_1732255758185_0.png" alt="image.png"></p>
+<p>连接测试</p>
+<p><img src="/../assets/image_1732255898430_0.png" alt="image.png"></p>
+<h3><span id="step2ufw规则编写">step2：ufw规则编写</span></h3><p>现有规则查看</p>
+<p><img src="/../assets/image_1732255960355_0.png" alt="image.png"></p>
+<p>新规则添加</p>
+<p><img src="/../assets/image_1732256290665_0.png" alt="image.png"></p>
+<p><code>sudo ufw deny out 139/tcp</code>，445和139都要禁止</p>
+<p>查看规则</p>
+<p><img src="/../assets/image_1732256695233_0.png" alt="image.png"></p>
+<h3><span id="step3重启ufw并尝试连接其他主机的smb">step3：重启ufw并尝试连接其他主机的smb</span></h3><p>重启</p>
+<p><img src="/../assets/image_1732256373774_0.png" alt="image.png"></p>
+<p>尝试连接</p>
+<p><img src="/../assets/kalismb_1732256611407_0.gif" alt="kalismb.gif"></p>
+<h2><span id="题目4">题目4</span></h2><p>基于Dockerfile构建的镜像搭建一个容器，要求同时具有ssh服务与redis服务，基础镜像选择 centos&#x2F;debian&#x2F;ubuntu均可</p>
+<h3><span id="step1拉取ubuntu镜像">step1:拉取ubuntu镜像</span></h3><p><img src="/../assets/image_1732257125498_0.png" alt="image.png"></p>
+<p>这里拉过了，就不拉了</p>
+<h3><span id="step2编写dockerfile">step2:编写Dockerfile</span></h3><p>启动脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动 SSH 服务</span></span><br><span class="line">service ssh start</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动 Redis 服务</span></span><br><span class="line">redis-server &amp;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">保持容器运行</span></span><br><span class="line">tail -f /dev/null</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1732258931385_0.png" alt="image.png"></p>
+<h3><span id="step3构建镜像">step3：构建镜像</span></h3><p><img src="/../assets/image_1732257384246_0.png" alt="image.png"></p>
+<p>查看镜像</p>
+<p><img src="/../assets/image_1732258009591_0.png" alt="image.png"></p>
+<h3><span id="step4测试镜像">step4：测试镜像</span></h3><p>创建容器</p>
+<p><img src="/../assets/image_1732258122511_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732259498695_0.png" alt="image.png"></p>
+<p>测试ssh连接</p>
+<p><img src="/../assets/image_1732258814860_0.png" alt="image.png"></p>
+<p>测试redis连接</p>
+<p><img src="/../assets/image_1732258841977_0.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/22/week2_kls_exam/" data-id="cm3z62vqi001uwyiwf6wo9vae" data-title="week2_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/exam/" rel="tag">exam</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/11/23/day10_kls_review/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          day10_kls_review
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/11/21/day9_kls/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">day9_kls</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 10px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/11/26/day12_kls/">day12_kls</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/25/day11_kls/">day11_kls</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/23/day10_kls_review/">day10_kls_review</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/22/week2_kls_exam/">week2_kls_exam</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/21/day9_kls/">day9_kls</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
