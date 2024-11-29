@@ -69,6 +69,145 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-week3_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/29/week3_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2024-11-29T08:07:21.000Z" itemprop="datePublished">2024-11-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/29/week3_kls_exam/">week3_kls_exam</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="题目1">题目1</span></h2><p>编写shell脚本，能够对指定IP地址段进行icmp探测扫描</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否传入了 CIDR 格式的网段</span></span><br><span class="line">if [ -z &quot;$1&quot; ]; then</span><br><span class="line">  echo &quot;用法: $0 &lt;CIDR格式网段&gt;&quot;</span><br><span class="line">  echo &quot;例如: $0 192.168.0.0/24&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取网段和掩码</span></span><br><span class="line">CIDR=$1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将 CIDR 格式分解为网络地址和子网掩码</span></span><br><span class="line">NETWORK=$(echo $CIDR | cut -d&#x27;/&#x27; -f1)</span><br><span class="line">NETMASK=$(echo $CIDR | cut -d&#x27;/&#x27; -f2)</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将网络地址转为十进制</span></span><br><span class="line">ip_to_decimal() &#123;</span><br><span class="line">  local IFS=.</span><br><span class="line">  read -r i1 i2 i3 i4 &lt;&lt;&lt; &quot;$1&quot;</span><br><span class="line">  echo $(( (i1 &lt;&lt; 24) + (i2 &lt;&lt; 16) + (i3 &lt;&lt; 8) + i4 ))</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将十进制地址转为点分十进制</span></span><br><span class="line">decimal_to_ip() &#123;</span><br><span class="line">  local ip=$1</span><br><span class="line">  echo &quot;$(( (ip &gt;&gt; 24) &amp; 255 )).$(( (ip &gt;&gt; 16) &amp; 255 )).$(( (ip &gt;&gt; 8) &amp; 255 )).$(( ip &amp; 255 ))&quot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">计算起始 IP 和结束 IP</span></span><br><span class="line">start_ip=$(ip_to_decimal $NETWORK)</span><br><span class="line">end_ip=$((start_ip + (1 &lt;&lt; (32 - NETMASK)) - 1))</span><br><span class="line">echo &quot;正在扫描网段 $CIDR ...&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">循环扫描每个 IP</span></span><br><span class="line">for ip in $(seq $start_ip $end_ip); do</span><br><span class="line">  target=$(decimal_to_ip $ip)</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">使用 ping 检查是否在线 (-c 1 表示发送 1 个包, -W 1 表示超时时间 1 秒)</span></span><br><span class="line">  ping -c 1 -W 1 $target &amp;&gt; /dev/null</span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo &quot;发现活动主机: $target&quot;</span><br><span class="line">  fi</span><br><span class="line">done</span><br><span class="line">echo &quot;扫描完成！&quot;</span><br></pre></td></tr></table></figure>
+
+<p>运行</p>
+<p><img src="/../assets/image_1732861634753_0.png" alt="image.png"></p>
+<h2><span id="题目2">题目2</span></h2><p>编写shell脚本，探测指定IP地址段有哪些计算机开启了80（HTTP）端口</p>
+<p>本题对题目1稍加修改即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否传入了 CIDR 格式的网段</span></span><br><span class="line">if [ -z &quot;$1&quot; ]; then</span><br><span class="line">  echo &quot;用法: $0 &lt;CIDR格式网段&gt;&quot;</span><br><span class="line">  echo &quot;例如: $0 192.168.0.0/24&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取网段和掩码</span></span><br><span class="line">CIDR=$1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将 CIDR 格式分解为网络地址和子网掩码</span></span><br><span class="line">NETWORK=$(echo $CIDR | cut -d&#x27;/&#x27; -f1)</span><br><span class="line">NETMASK=$(echo $CIDR | cut -d&#x27;/&#x27; -f2)</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将网络地址转为十进制</span></span><br><span class="line">ip_to_decimal() &#123;</span><br><span class="line">  local IFS=.</span><br><span class="line">  read -r i1 i2 i3 i4 &lt;&lt;&lt; &quot;$1&quot;</span><br><span class="line">  echo $(( (i1 &lt;&lt; 24) + (i2 &lt;&lt; 16) + (i3 &lt;&lt; 8) + i4 ))</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将十进制地址转为点分十进制</span></span><br><span class="line">decimal_to_ip() &#123;</span><br><span class="line">  local ip=$1</span><br><span class="line">  echo &quot;$(( (ip &gt;&gt; 24) &amp; 255 )).$(( (ip &gt;&gt; 16) &amp; 255 )).$(( (ip &gt;&gt; 8) &amp; 255 )).$(( ip &amp; 255 ))&quot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">计算起始 IP 和结束 IP</span></span><br><span class="line">start_ip=$(ip_to_decimal $NETWORK)</span><br><span class="line">end_ip=$((start_ip + (1 &lt;&lt; (32 - NETMASK)) - 1))</span><br><span class="line">echo &quot;正在扫描网段 $CIDR ...&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">循环扫描每个 IP</span></span><br><span class="line">for ip in $(seq $start_ip $end_ip); do</span><br><span class="line">  target=$(decimal_to_ip $ip)</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">使用 curl 检查是否开启80端口</span></span><br><span class="line">  curl &quot;http://$target&quot; &amp;&gt; /dev/null</span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo &quot;发现开启80端口主机: $target&quot;</span><br><span class="line">  fi</span><br><span class="line">done</span><br><span class="line">echo &quot;扫描完成！&quot;</span><br></pre></td></tr></table></figure>
+
+<p>运行</p>
+<p><img src="/../assets/image_1732862424683_0.png" alt="image.png"></p>
+<blockquote>
+<p>小修改没有改脚本名字，和题目1输出不同</p>
+</blockquote>
+<h2><span id="题目3">题目3</span></h2><p>使用物理机CMD连接Windows 7 Samba服务，并在物理机使用CMD命令在Windows7 Samba服务所在机器C:\Windows\Temp\ 文件夹中新建 hello_chaitin.txt</p>
+<h3><span id="step1开启administrator用户">step1:开启administrator用户</span></h3><p>管理员开启cmd</p>
+<p><img src="/../assets/image_1732862389969_0.png" alt="image.png"></p>
+<p>设置administrator的密码并激活改用户</p>
+<p><img src="/../assets/image_1732862839998_0.png" alt="image.png"></p>
+<h3><span id="setp2连接smb中的c">setp2:连接smb中的c$</span></h3><p><img src="/../assets/image_1732862780914_0.png" alt="image.png"></p>
+<h3><span id="setp3cd到挂载的目录并创建hello_chaitintxt">setp3:cd到挂载的目录，并创建hello_chaitin.txt</span></h3><p><img src="/../assets/image_1732863090478_0.png" alt="image.png"></p>
+<p><code>D:\windows\</code>中有Temp文件，我们无需创建，仅需创建txt即可</p>
+<p><img src="/../assets/image_1732863159606_0.png" alt="image.png"></p>
+<h2><span id="题目4">题目4</span></h2><p>描述TCP三次握手与四次挥手过程</p>
+<p>c：client,s：server</p>
+<p>三次握手：</p>
+<p>c：我来了哦SYN</p>
+<p>s：知道来，来吧SYN&#x2F;ACK</p>
+<p>c：那我真的来了哦SYN</p>
+<p>四次挥手</p>
+<p>c：我走了哦，要想我FIN&#x2F;ACK</p>
+<p>s：知道了ACK</p>
+<p>s：你走吧，勿念FIN&#x2F;ACK</p>
+<p>c：555我走了ACK</p>
+<h2><span id="题目5">题目5</span></h2><p>使用docker搭建 Pikachu 网站，要求网站服务单独使用一个容器，数据库服务单独使用一个容器</p>
+<h3><span id="step1分析题目">step1：分析题目</span></h3><p>我们前往pikachu的gayhub中查看readme</p>
+<p><img src="/../assets/image_1732863365464_0.png" alt="image.png"></p>
+<p>几个重要的信息：</p>
+<p>项目使用php，数据库mysql</p>
+<p>提供了现成的镜像，和dockerfile</p>
+<p>结合本题要求，解题步骤如下</p>
+<p>修改pikachu提供的dockerfile</p>
+<blockquote>
+<p>这里想偷懒直接用官方的dockerfile，但是踩了个大坑。。。。</p>
+</blockquote>
+<p>将mysql抽离出来</p>
+<p>创建一个docker网络</p>
+<p>改一下pikachu的配置文件</p>
+<p>编写docker-compose.yml</p>
+<h3><span id="step2修改拉取项目并修改相关配置文件和dockerfile">step2：修改拉取项目并修改相关配置文件和dockerfile</span></h3><p>拉取镜像</p>
+<p><img src="/../assets/image_1732863644998_0.png" alt="image.png"></p>
+<p>查看dockerfile并结合ai提取关键信息</p>
+<p><img src="/../assets/image_1732864124277_0.png" alt="image.png"></p>
+<p><del>官方提供的dockerfile中将数据库密码置空了，好像是等待我们修改这里，我们修改成我们的mysql密码，修改后如下</del></p>
+<p><img src="/../assets/image_1732864181840_0.png" alt="image.png"></p>
+<blockquote>
+<p>蛋，这个不生效</p>
+</blockquote>
+<p>修改mysql连接地址</p>
+<p>由dockerfile可知，数据库连接地址在<code>pkxss/inc/config.inc.php </code>和<code>inc/config.inc.php</code>,因为官方的dockerfile只对这两个文件修改了数据库密码。</p>
+<p><img src="/../assets/image_1732866705573_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732866529091_0.png" alt="image.png"><br>id:: 67496812-d608-4df6-b85c-13881ad6d016</p>
+<blockquote>
+<p>后记：后来发现dockerfile的sed也没生效，没有改密码，所以我们手动修改</p>
+</blockquote>
+<p><del>在对<code>inc/config.inc.php</code>的修改中，我们发现dbpw后面的root不见了，我们给他补上，防止影响我们dockerfile的逻辑</del></p>
+<p><img src="/../assets/image_1732864311232_0.png" alt="image.png"></p>
+<blockquote>
+<p>不用操心了这个根本不生效，手动改密码吧</p>
+</blockquote>
+<p>对dockerfile的测试</p>
+<p>build一下</p>
+<p><img src="/../assets/image_1732864585769_0.png" alt="image.png"></p>
+<p>失败了，被官方摆了一道，官方的dockerfile使用的镜像是arm平台的，我们替换成x64平台的<code>0.8.0-1804-php7</code></p>
+<p>整个mysql</p>
+<p><img src="/../assets/image_1732864602387_0.png" alt="image.png"></p>
+<p>添加一个docker网络</p>
+<p><img src="/../assets/image_1732865158908_0.png" alt="image.png"></p>
+<p>经历了千辛万苦终于调试成功了</p>
+<p><img src="/../assets/image_1732866467091_0.png" alt="image.png"></p>
+<h3><span id="step3编写docker-composeyml">step3编写docker-compose.yml</span></h3><p>最后版本的dockerfile</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> mattrayner/lamp:<span class="number">0.8</span>.<span class="number">0</span>-<span class="number">2004</span>-php7</span><br><span class="line"><span class="keyword">LABEL</span><span class="language-bash"> maintainer=<span class="string">&quot;8023 - i@8023.moe&quot;</span></span></span><br><span class="line"><span class="keyword">LABEL</span><span class="language-bash"> description=<span class="string">&quot;pikachu on php7 with expect @230613&quot;</span></span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . /app/</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update -y &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    apt-get install -y php7.4-dev php-pear expect tcl-dev tcl-expect-dev &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">ln</span> -s /usr/include/tcl8.6/tcl.h /usr/include/tcl.h &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">ln</span> -s /usr/include/tcl8.6/tclDecls.h /usr/include/tclDecls.h &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">ln</span> -s /usr/include/tcl8.6/expect_tcl.h /usr/include/expect_tcl.h &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">ln</span> -s /usr/include/tcl8.6/tclPlatDecls.h /usr/include/tclPlatDecls.h &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    pecl channel-update pecl.php.net &amp;&amp; pecl install expect &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;/AllowNoPassword/s/false/true/g&#x27;</span> /var/www/phpMyAdmin-5.1.1-all-languages/config.inc.php ;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;/display_startup_errors/s/Off/On/g&#x27;</span> /etc/php/7.4/apache2/php.ini ;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;/allow_url_include/s/Off/On/g&#x27;</span> /etc/php/7.4/apache2/php.ini ;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;/allow_url_fopen/s/Off/On/g&#x27;</span> /etc/php/7.4/apache2/php.ini ;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;/display_errors/s/Off/On/g&#x27;</span> /etc/php/7.4/apache2/php.ini ;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;$a extension=expect.so&#x27;</span> /etc/php/7.4/apache2/php.ini ;\</span></span><br><span class="line"><span class="language-bash">    phpenmod expect &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apt-get remove -y php7.4-dev tcl-dev tcl-expect-dev &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    apt-get autoremove -y &amp;&amp; apt-get clean -y &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;/run.sh&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>最后版本的docker-compose.yml</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&#x27;2&#x27;</span></span><br><span class="line">services:</span><br><span class="line">  <span class="comment"># MySQL 服务</span></span><br><span class="line">  pikachu-db:</span><br><span class="line">    image: mysql:<span class="number">5.7</span></span><br><span class="line">    container_name: pikachu-db</span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: pikachu_db_pass  <span class="comment"># 设置 MySQL root 密码</span></span><br><span class="line">      MYSQL_DATABASE: pikachu        <span class="comment"># 可选：指定初始数据库</span></span><br><span class="line">    networks:</span><br><span class="line">        - pikachu-network                      <span class="comment"># 连接到指定的网络</span></span><br><span class="line">    ports:</span><br><span class="line">        - <span class="string">&quot;3306:3306&quot;</span>                     <span class="comment"># 映射 MySQL 端口</span></span><br><span class="line">    volumes:</span><br><span class="line">        - mysql_data:/var/lib/mysql       <span class="comment"># 保持数据持久化</span></span><br><span class="line">  web:</span><br><span class="line">    build: .                      <span class="comment"># 指定 Web 容器的构建目录（包含 Dockerfile）</span></span><br><span class="line">    container_name: pikachu</span><br><span class="line">    networks:</span><br><span class="line">        - pikachu-network                     <span class="comment"># 连接到指定的网络</span></span><br><span class="line">    ports:</span><br><span class="line">        - <span class="string">&quot;8080:80&quot;</span>                      <span class="comment"># 映射 Web 端口</span></span><br><span class="line">    depends_on:</span><br><span class="line">        - pikachu-db</span><br><span class="line">networks:</span><br><span class="line">  pikachu-network:                          <span class="comment"># 自定义网络</span></span><br><span class="line">    driver: bridge</span><br><span class="line">volumes:</span><br><span class="line">  mysql_data:                          <span class="comment"># MySQL 数据卷</span></span><br></pre></td></tr></table></figure>
+
+<p>直接运行</p>
+<p><img src="/../assets/image_1732867031332_0.png" alt="image.png"></p>
+<p>访问8080</p>
+<p><img src="/../assets/image_1732867360190_0.png" alt="image.png"></p>
+<p>存在的问题：</p>
+<p>lnmp会多起一个mysql</p>
+<p>使用pikachu提供的dockerfile踩的坑：</p>
+<p>官方用的镜像是arm的</p>
+<p>修改数据库密码的sed似乎不起作用</p>
+<p>数据库初始化时需要创建一个pikachu的库</p>
+<blockquote>
+<p>😢</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/29/week3_kls_exam/" data-id="cm42gnimf0000quiw9rytgxxo" data-title="week3_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-day14_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/11/29/day14_kls/" class="article-date">
@@ -1155,103 +1294,6 @@
 
 
   
-    <article id="post-day6_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/18/day6_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-11-18T10:46:30.000Z" itemprop="datePublished">2024-11-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/18/day6_kls/">day6_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="ssh服务">ssh服务</span></h3><p>服务<code>sshd</code>，端口<code>22</code>，配置文件:<code>/etc/ssh/sshd_config</code>，重要的相关文件<code>~/.ssh/authorized_keys</code></p>
-<h2><span id="cron">cron</span></h2><p>服务<code>cronie</code>等，重要的相关文件<code>/etc/crontab</code>,<code>/var/spool/cron/username</code></p>
-<h3><span id="smb">SMB</span></h3><h4><span id="服务端">服务端</span></h4><p>安装:<code>yum install samba</code></p>
-<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/04/11/archlinux%E4%B8%8Bsamba%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/">archlinux下samba服务搭建 | ziWindlu的博客</a></p>
-<p>端口<code>445,139</code></p>
-<p>配置文件:<code>/etc/samba/smb.conf</code></p>
-<p>smb用户管理:<code>pdbedit</code></p>
-<h4><span id="客户端">客户端</span></h4><p>smbclient连接smb<code>smbclient --user username //host/share_name</code></p>
-<p>挂载<code>mount -t cifs -o username=user_name,password=passwd //host/share_name /local_mount_point</code></p>
-<blockquote>
-<p>对于linux挂载需要安装<code>cifs-utils</code></p>
-</blockquote>
-<p>win(net use)命令行挂载<code>net use \\host\share_name password /user:user_name</code></p>
-<h4><span id="安全">安全</span></h4><p><strong>windows的安全策略</strong></p>
-<p>防火墙默认组织smb连接</p>
-<p>杀毒软件默认阻止smb连接</p>
-<p><strong>历史漏洞</strong></p>
-<p>ms17010(永恒之蓝)</p>
-<p>CVE-2017-7494</p>
-<h3><span id="ftp">ftp</span></h3><h4><span id="服务端">服务端</span></h4><p>安装:<code>yum install vsftpd</code></p>
-<p>端口:</p>
-<p>配置文件:<code>/etc/vsftpd/vsftpd.conf</code></p>
-<p><strong>常见配置</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 匿名用户关闭</span><br><span class="line">anonymous_enable=NO</span><br><span class="line"># 匿名用户的ftp根目录(匿名用户开启才有效)</span><br><span class="line">anon_root=/opt/ftp</span><br><span class="line"># 允许本地用户登陆</span><br><span class="line">local_enable=YES</span><br><span class="line"># 允许写入</span><br><span class="line">write_enable=YES</span><br><span class="line"># 启用用户列表功能</span><br><span class="line">userlist_enable=YES</span><br><span class="line"># 用户列表文件</span><br><span class="line">userlist_file=/etc/vsftpd/vsftpd.userlist</span><br><span class="line"># 用户列表策略</span><br><span class="line">userlist_deny=NO</span><br><span class="line"># 禁止切换root目录</span><br><span class="line">chroot_local_user=YES</span><br><span class="line">allow_writeable_chroot=NO</span><br></pre></td></tr></table></figure>
-
-<p><strong>多用户列表配置</strong></p>
-<p>使用<code>pam</code></p>
-<p><code>auth required pam_listfile.so item=user sense=allow file=/etc/vsftpd/allow_list2 onerr=fail</code></p>
-<h4><span id="客户端">客户端</span></h4><p>ftp客户端<code>ftp host</code></p>
-<p>挂载<code>mount -t fuse.curlftpfs ftp://user_name:password@host /mnt_point</code><br>id:: 673af920-f628-4041-8bdb-9821d32774c0</p>
-<blockquote>
-<p>对于linux挂载需要安装<code>curlftpfs</code></p>
-</blockquote>
-<h4><span id="安全">安全</span></h4><p>linux默认会有对vsftp的安全配置，比如禁止root用户登陆</p>
-<h3><span id="散碎的知识点">散碎的知识点</span></h3><h4><span id="pip临时使用某镜像源">pip临时使用某镜像源</span></h4><p>清华源</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple some-package</span><br></pre></td></tr></table></figure>
-
-<h4><span id="pyftpdlib使用">pyftpdlib使用</span></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pyftpdlib -u user_name -P password -p port --write</span><br></pre></td></tr></table></figure>
-
-<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="windows连接smb图形化">windows连接smb(图形化)</span></h3><p><img src="/../assets/Peek_2024-11-18_11-25_1731900373481_0.gif" alt="Peek 2024-11-18 11-25.gif"></p>
-<h3><span id="windows连接smbnet-use">windows连接smb(net use)</span></h3><p><img src="/../assets/Peek_2024-11-18_14-10_1731910306453_0.gif" alt="Peek 2024-11-18 14-10.gif"></p>
-<h3><span id="允许root用户登陆ftp配置登陆演示">允许root用户登陆ftp(配置+登陆演示)</span></h3><h4><span id="配置文件修改">配置文件修改</span></h4><p><code>/etc/vsftpd/vsftpd.conf</code>主配置文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable=NO</span><br><span class="line">userlist_enable=YES</span><br><span class="line">userlist_file=/etc/vsftpd/vsftpd.userlist</span><br><span class="line"># 配置策略为允许列表内登陆</span><br><span class="line">userlist_deny=NO</span><br><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br></pre></td></tr></table></figure>
-
-<p><code>/etc/vsftpd/vsftpd.userlist</code>配置文件编写</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">other_user</span><br></pre></td></tr></table></figure>
-
-<h4><span id="允许root登陆">允许root登陆</span></h4><p>在vsftpd安装后，linux会在<code>/etc/pam.d/vsftpd</code>添加相关安全策略</p>
-<p><img src="/../assets/image_1731916314993_0.png" alt="image.png"></p>
-<p>修改<code>/etc/vsftpd/ftpusers</code>将里面的root删除，或者把这条策略删除</p>
-<p>现在你就可以愉快的连接了</p>
-<h4><span id="连接ftp">连接ftp</span></h4><p><img src="/../assets/ftp_1731917042437_0.gif" alt="ftp.gif"></p>
-<h3><span id="使用pyftpdlib开启ftp">使用pyftpdlib开启ftp</span></h3><p>服务端</p>
-<p><img src="/../assets/ftp-s_1731925849706_0.gif" alt="ftp-s.gif"></p>
-<p>客户端</p>
-<p><img src="/../assets/ftp-c_1731925795294_0.gif" alt="ftp-c.gif"></p>
-<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/"> pypi | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/18/day6_kls/" data-id="cm3z62vq7000awyiw0qhr08qt" data-title="day6_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smb/" rel="tag">smb</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1280,7 +1322,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 10px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 13.33px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
     </div>
   </div>
 
@@ -1302,6 +1344,10 @@
       <ul>
         
           <li>
+            <a href="/2024/11/29/week3_kls_exam/">week3_kls_exam</a>
+          </li>
+        
+          <li>
             <a href="/2024/11/29/day14_kls/">day14_kls</a>
           </li>
         
@@ -1315,10 +1361,6 @@
         
           <li>
             <a href="/2024/11/25/day11_kls/">day11_kls</a>
-          </li>
-        
-          <li>
-            <a href="/2024/11/23/day10_kls_review/">day10_kls_review</a>
           </li>
         
       </ul>
