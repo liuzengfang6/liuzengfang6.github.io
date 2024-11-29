@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>day14_kls | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="课程内容计算机网络模型OSI&amp;&amp;TCP&#x2F;IP 设备(网络安全相关)应用层: WAF、IPS&#x2F;IDS等 网络层:防火墙、VPN、IPS&#x2F;IDS等 传输层:防火墙、VPN、IPS&#x2F;IDS等 传输层常见协议ARP、ICMP、IP 网络层常见协议TCP、UDP、OSPF 应用层常见协议及其默认端口   协议 说明 端口号    FTP 文件传输协议">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day14_kls">
+<meta property="og:url" content="http://example.com/2024/11/29/day14_kls/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="课程内容计算机网络模型OSI&amp;&amp;TCP&#x2F;IP 设备(网络安全相关)应用层: WAF、IPS&#x2F;IDS等 网络层:防火墙、VPN、IPS&#x2F;IDS等 传输层:防火墙、VPN、IPS&#x2F;IDS等 传输层常见协议ARP、ICMP、IP 网络层常见协议TCP、UDP、OSPF 应用层常见协议及其默认端口   协议 说明 端口号    FTP 文件传输协议">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/assets/image_1732792214231_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732771878624_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732772669210_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732775304528_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732780002791_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732782831532_0.png">
+<meta property="article:published_time" content="2024-11-29T00:55:23.000Z">
+<meta property="article:modified_time" content="2024-11-29T00:55:23.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="kls">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/image_1732792214231_0.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-day14_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/29/day14_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-29T00:55:23.000Z" itemprop="datePublished">2024-11-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      day14_kls
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="计算机网络模型">计算机网络模型</span></h3><h4><span id="osiampamptcpx2fip">OSI&amp;&amp;TCP&#x2F;IP</span></h4><p><img src="/../assets/image_1732792214231_0.png" alt="image.png"></p>
+<h4><span id="设备网络安全相关">设备(网络安全相关)</span></h4><p>应用层: WAF、IPS&#x2F;IDS等</p>
+<p>网络层:防火墙、VPN、IPS&#x2F;IDS等</p>
+<p>传输层:防火墙、VPN、IPS&#x2F;IDS等</p>
+<h4><span id="传输层常见协议">传输层常见协议</span></h4><p>ARP、ICMP、IP</p>
+<h4><span id="网络层常见协议">网络层常见协议</span></h4><p>TCP、UDP、OSPF</p>
+<h4><span id="应用层常见协议及其默认端口">应用层常见协议及其默认端口</span></h4><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>说明</th>
+<th>端口号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FTP</td>
+<td>文件传输协议</td>
+<td>21</td>
+</tr>
+<tr>
+<td>SFTP</td>
+<td>基于ssh的文件传输协议</td>
+<td>22</td>
+</tr>
+<tr>
+<td>FTPS</td>
+<td>支持SSL&#x2F;TLS的文件传输协议</td>
+<td>21&#x2F;990</td>
+</tr>
+<tr>
+<td>SMTP</td>
+<td>发送邮件协议</td>
+<td>25、587(TLS)</td>
+</tr>
+<tr>
+<td>IMAP</td>
+<td>收取邮件协议</td>
+<td>143 、993 (TLS)</td>
+</tr>
+<tr>
+<td>POP3</td>
+<td>收取邮件协议</td>
+<td>110 、995 (TLS)</td>
+</tr>
+<tr>
+<td>SSH</td>
+<td>安全远程登录协议</td>
+<td>22</td>
+</tr>
+<tr>
+<td>Telnet</td>
+<td>非加密的远程登录协议</td>
+<td>23</td>
+</tr>
+<tr>
+<td>RDP</td>
+<td>远程桌面协议</td>
+<td>3389</td>
+</tr>
+<tr>
+<td>VNC</td>
+<td>远程桌面</td>
+<td>5900</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>MySQL 数据库访问协议</td>
+<td>3306</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>PostgreSQL 数据库访问协议</td>
+<td>5432</td>
+</tr>
+<tr>
+<td>MongoDB</td>
+<td>MongoDB 数据库协议</td>
+<td>27017</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>Redis 数据库协议</td>
+<td>6379</td>
+</tr>
+<tr>
+<td>MsSQL</td>
+<td>MicroSoft数据库协议</td>
+<td>1433</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>甲骨文数据库协议</td>
+<td>1521</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>超文本传输协议</td>
+<td>80</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>加密的 HTTP 协议</td>
+<td>443</td>
+</tr>
+<tr>
+<td>SMB</td>
+<td>用于共享文件、打印机</td>
+<td>445</td>
+</tr>
+<tr>
+<td>NFS</td>
+<td>网络文件系统协议</td>
+<td>2049</td>
+</tr>
+</tbody></table>
+<p>常见的服务及其默认端口号</p>
+<table>
+<thead>
+<tr>
+<th>服务</th>
+<th>端口号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>weblogic</td>
+<td>7001</td>
+</tr>
+<tr>
+<td>tomcat</td>
+<td>8080</td>
+</tr>
+</tbody></table>
+<h4><span id="ipv4">IPv4</span></h4><p>地址:<code>0.0.0.0-255.255.255.255</code></p>
+<h4><span id="内网地址amp外网地址">内网地址&amp;外网地址</span></h4><p>常见的内网地址段<br>:LOGBOOK:<br>CLOCK: [2024-11-28 Thu 15:49:57]–[2024-11-28 Thu 15:49:57] &#x3D;&gt;  00:00:00<br>CLOCK: [2024-11-28 Thu 15:49:58]–[2024-11-28 Thu 15:49:59] &#x3D;&gt;  00:00:01<br>:END:</p>
+<table>
+<thead>
+<tr>
+<th><strong>网段</strong></th>
+<th><strong>地址范围</strong></th>
+<th><strong>适用场景</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>10.0.0.0/8</code></td>
+<td><code>10.0.0.0 - 10.255.255.255</code></td>
+<td>大型组织，需大量地址的场景。</td>
+</tr>
+<tr>
+<td><code>172.16.0.0/12</code></td>
+<td><code>172.16.0.0 - 172.31.255.255</code></td>
+<td>中型组织，灵活的子网划分需求。</td>
+</tr>
+<tr>
+<td><code>192.168.0.0/16</code></td>
+<td><code>192.168.0.0 - 192.168.255.255</code></td>
+<td>小型网络，家庭和办公网络。</td>
+</tr>
+<tr>
+<td><code>127.0.0.0/8</code></td>
+<td><code>127.0.0.1 - 127.255.255.254</code></td>
+<td>本地回环，设备自身通信。</td>
+</tr>
+</tbody></table>
+<h4><span id="一次完整的tcp请求会做什么以http请求为例">一次完整的TCP请求会做什么(以HTTP请求为例)</span></h4><h3><span id="wireshark抓包之icmp">wireshark抓包之ICMP</span></h3><p>整个icmp包，<code>ping baidu.com</code></p>
+<p><img src="/../assets/image_1732771878624_0.png" alt="image.png"></p>
+<h3><span id="wireshark抓包之arp">wireshark抓包之ARP</span></h3><p>要构造出arp包，我们可以手动进行arp请求。我们使用<code>arping 192.168.2.198</code>。</p>
+<p>或是删除arp表等待arp广播</p>
+<p><img src="/../assets/image_1732772669210_0.png" alt="image.png"></p>
+<h3><span id="wireshark抓包之tcp">wireshark抓包之TCP</span></h3><p>浅浅构造一个http包，来观察TCP，<code>curl baidu.com</code></p>
+<p><img src="/../assets/image_1732775304528_0.png" alt="image.png"></p>
+<h5><span id="三次握手">三次握手</span></h5><p>我来了哦SYN 😃</p>
+<p>我知道了哦，你来吧SYN,ACK 😁</p>
+<p>我真的来了哦SYN 🥵</p>
+<h5><span id="四次挥手">四次挥手</span></h5><p>我要走了哦，好想你FIN,ACK 😢</p>
+<p>你走吧SYN 🤔</p>
+<p>你走吧，拜拜了您内FIN,ACK 🤡</p>
+<p>我走了SYN 😭</p>
+<h3><span id="wireshark抓包之udp">wireshark抓包之UDP</span></h3><p>使用nc的udp模式构造udp包</p>
+<p><img src="/../assets/image_1732780002791_0.png" alt="image.png"></p>
+<h3><span id="tcp-vs-udp">TCP vs UDP</span></h3><p>快慢、是否可靠、系统开销、是否有连接</p>
+<p>应用场景：</p>
+<p>TCP：数据敏感型服务，http</p>
+<p>UDP：速度敏感型服务，直播、电话</p>
+<h3><span id="wireshark抓包之dns">wireshark抓包之DNS</span></h3><p>向dns服务器发送dns请求<code>dig kali.pcx.home</code></p>
+<p><img src="/../assets/image_1732782831532_0.png" alt="image.png"></p>
+<h4><span id="dns记录类型">dns记录类型</span></h4><p><strong>A 记录</strong>：将域名解析为 IPv4 地址。</p>
+<p><strong>AAAA 记录</strong>：将域名解析为 IPv6 地址。</p>
+<p><strong>CNAME 记录</strong>：别名记录，将一个域名映射到另一个域名。</p>
+<p><strong>PTR 记录</strong>：反向解析记录。</p>
+<p><strong>MX 记录</strong>：邮件交换记录，用于电子邮件服务器。</p>
+<p><strong>NS 记录</strong>：指向域名的权威 DNS 服务器。</p>
+<p><strong>SOA 记录</strong>：起始授权机构记录，标识区域的主要信息。</p>
+<p><strong>TXT 记录</strong>：存储任意文本数据，常用于身份验证（如 SPF、DKIM）。</p>
+<h4><span id="dns查询模式">dns查询模式</span></h4><p>递归查询</p>
+<p>迭代查询</p>
+<p>反向查询</p>
+<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://xiaolincoding.com/network">图解网络介绍 | 小林coding</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/summary-of-network.html">计算机网络基础知识总结 | 菜鸟教程</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/29/day14_kls/" data-id="cm4217zw30000lyiwgmjd367f" data-title="day14_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/11/28/day13_kls/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">day13_kls</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 10px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/11/29/day14_kls/">day14_kls</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/28/day13_kls/">day13_kls</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/26/day12_kls/">day12_kls</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/25/day11_kls/">day11_kls</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/23/day10_kls_review/">day10_kls_review</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
