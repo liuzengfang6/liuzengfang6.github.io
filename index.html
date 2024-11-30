@@ -69,6 +69,397 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day15_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/30/day15_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-30T04:20:18.000Z" itemprop="datePublished">2024-11-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/30/day15_kls/">day15_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="http">HTTP</span></h3><p>http超文本传输协议</p>
+<h4><span id="urlampampuriampampurn">url&amp;&amp;uri&amp;&amp;urn</span></h4><p><img src="/../assets/image_1709692126096_0.png" alt="image.png"></p>
+<p>url的规范<br>card-last-interval:: -1<br>card-repeats:: 1<br>card-ease-factor:: 2.5<br>card-next-schedule:: 2024-03-06T16:00:00.000Z<br>card-last-reviewed:: 2024-03-06T02:41:01.223Z<br>card-last-score:: 1</p>
+<p>card-last-score:: 1<br>card-repeats:: 1<br>card-next-schedule:: 2024-08-05T16:00:00.000Z<br>card-last-interval:: -1<br>card-ease-factor:: 2.5<br>card-last-reviewed:: 2024-08-05T07:47:11.561Z</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>scheme</td>
+<td>协议也叫protocol</td>
+<td>http,https,ftp</td>
+</tr>
+<tr>
+<td>username:password</td>
+<td>认证</td>
+<td></td>
+</tr>
+<tr>
+<td>parameters</td>
+<td>参数</td>
+<td><code>?id=123</code></td>
+</tr>
+<tr>
+<td>fragment</td>
+<td>片段，对资源描的补充</td>
+<td>vue的路由</td>
+</tr>
+</tbody></table>
+<h4><span id="请求头">请求头</span></h4><table>
+<thead>
+<tr>
+<th>请求头</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User-Agent</td>
+<td>标识客户端发送请求的用户代理（User Agent），通常是浏览器或其他应用程序的标识。</td>
+</tr>
+<tr>
+<td>Accept</td>
+<td>指定客户端可接受的响应媒体类型。服务器可以根据该头部信息返回适合客户端的响应。</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>指定请求体的媒体类型。</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>包含了用于进行身份验证的凭证信息。通常用于向服务器提供身份验证令牌或用户名密码。</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>包含了之前由服务器通过Set-Cookie头发送的Cookie信息。</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>标识了发送请求的页面的URL地址。服务器可以根据该头部信息判断请求的来源。</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>请求体的字节长度。</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>指定请求的目标服务器的主机名和端口号。</td>
+</tr>
+<tr>
+<td>If-Modified-Since</td>
+<td>指定一个日期时间，表示如果资源自指定日期时间之后未被修改，才执行请求的操作。用于缓存控制和条件请求。</td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>控制缓存行为，包含了一系列指令，如max-age、no-cache等。</td>
+</tr>
+<tr>
+<td>X-Requested-With</td>
+<td>标识请求是通过Ajax发送的。</td>
+</tr>
+</tbody></table>
+<h4><span id="请求方式">请求方式</span></h4><table>
+<thead>
+<tr>
+<th>请求方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>用于从服务器获取资源。请求的URL中包含要获取的资源的地址。GET方法是幂等的，多次相同的GET请求应该返回相同的结果。</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>用于向服务器提交数据，并在服务器上创建新资源。通常用于提交表单数据、上传文件等。POST方法不是幂等的，多次相同的POST请求可能会创建多个资源。</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>用于向服务器上传或覆盖指定URL处的资源。PUT方法要求完全替换目标资源，如果目标资源不存在，则创建一个新资源。</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>用于从服务器删除指定URL处的资源。DELETE方法用于删除指定资源，删除成功后返回204状态码或200状态码。</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>用于对资源进行部分更新。PATCH方法类似于PUT方法，但是只需要传输要更新的字段。</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>与GET方法类似，但只返回响应头部信息，不返回响应体。HEAD方法通常用于检查资源是否存在，获取资源的元数据等。</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>用于获取服务器支持的请求方法、CORS（跨域资源共享）相关的信息等。OPTIONS方法请求返回服务器支持的HTTP方法列表。</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>用于在请求-响应链路上执行一个回环诊断。TRACE方法会在目标服务器返回接收到的请求的完整副本，用于调试和诊断。</td>
+</tr>
+<tr>
+<td>CONNECT</td>
+<td>用于将请求连接转换为透明的TCP&#x2F;IP隧道，通常用于代理服务器的通信。CONNECT方法通常用于HTTPS请求。</td>
+</tr>
+</tbody></table>
+<h4><span id="相应码">相应码</span></h4><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>100</td>
+<td>Continue</td>
+<td>服务器已接收到请求的首部，客户端应继续发送请求主体部分</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Switching Protocols</td>
+<td>服务器已根据请求要求切换协议</td>
+</tr>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>请求成功完成</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>请求成功并创建了新资源</td>
+</tr>
+<tr>
+<td>202</td>
+<td>Accepted</td>
+<td>请求已被接受，但处理尚未完成</td>
+</tr>
+<tr>
+<td>203</td>
+<td>Non-Authoritative Information</td>
+<td>请求成功，但返回的信息来自第三方，非官方来源</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content</td>
+<td>服务器成功处理了请求，但响应中不包含返回的实体内容。</td>
+</tr>
+<tr>
+<td>205</td>
+<td>Reset Content</td>
+<td>请求成功完成，客户端应重置当前页面</td>
+</tr>
+<tr>
+<td>206</td>
+<td>Partial Content</td>
+<td>客户端只请求资源的一部分，服务器成功地响应了该部分</td>
+</tr>
+<tr>
+<td>300</td>
+<td>Multiple Choices</td>
+<td>请求的资源存在多个选择，用户或代理可以选择其一进行重定向</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved Permanently</td>
+<td>资源的URL已永久移动到新位置</td>
+</tr>
+<tr>
+<td>302</td>
+<td>Found</td>
+<td>资源的URL已临时移动到新位置</td>
+</tr>
+<tr>
+<td>303</td>
+<td>See Other</td>
+<td>对应当前请求的响应可以在另一个URL下找到</td>
+</tr>
+<tr>
+<td>304</td>
+<td>Not Modified</td>
+<td>资源未修改，客户端可以使用缓存的版本</td>
+</tr>
+<tr>
+<td>307</td>
+<td>Temporary Redirect</td>
+<td>对应当前请求的响应可以在另一个URL下找到，但请继续使用原始请求URL进行访问</td>
+</tr>
+<tr>
+<td>308</td>
+<td>Permanent Redirect</td>
+<td>对应当前请求的响应可以在另一个URL下找到，客户端应使用新的URL进行访问</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>请求无效或无法被服务器理解</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>请求需要身份验证</td>
+</tr>
+<tr>
+<td>402</td>
+<td>Payment Required</td>
+<td>预留状态码，表示需要付款才能访问请求的资源</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>请求被服务器拒绝访问</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>请求的资源不存在</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed</td>
+<td>请求方法不被允许</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable</td>
+<td>服务器无法根据请求的内容特性完成请求</td>
+</tr>
+<tr>
+<td>407</td>
+<td>Proxy Authentication Required</td>
+<td>请求要求代理身份验证</td>
+</tr>
+<tr>
+<td>408</td>
+<td>Request Timeout</td>
+<td>服务器在等待请求时超时</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict</td>
+<td>请求存在冲突，服务器无法处理</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone</td>
+<td>请求的资源已永久消失</td>
+</tr>
+<tr>
+<td>411</td>
+<td>Length Required</td>
+<td>服务器要求在请求中包含Content-Length首部</td>
+</tr>
+<tr>
+<td>412</td>
+<td>Precondition Failed</td>
+<td>请求条件失败，例如请求头中指定的一些前提条件未满足</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Payload Too Large</td>
+<td>请求实体过大，超出服务器的处理能力</td>
+</tr>
+<tr>
+<td>414</td>
+<td>URI Too Long</td>
+<td>请求的URI过长，服务器无法处理</td>
+</tr>
+<tr>
+<td>415</td>
+<td>Unsupported Media Type</td>
+<td>请求的媒体类型不受支持</td>
+</tr>
+<tr>
+<td>416</td>
+<td>Range Not Satisfiable</td>
+<td>服务器无法满足请求中的Range头字段指定的范围</td>
+</tr>
+<tr>
+<td>417</td>
+<td>Expectation Failed</td>
+<td>服务器无法满足Expect请求头字段指定的期望值</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests</td>
+<td>客户端在给定的时间内发送了太多请求</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>服务器内部错误</td>
+</tr>
+<tr>
+<td>501</td>
+<td>Not Implemented</td>
+<td>服务器不支持当前请求的功能或未能实现</td>
+</tr>
+<tr>
+<td>502</td>
+<td>Bad Gateway</td>
+<td>服务器作为网关或代理，从上游服务器接收到无效的响应</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+<td>服务器暂时无法处理请求</td>
+</tr>
+<tr>
+<td>504</td>
+<td>Gateway Timeout</td>
+<td>服务器作为网关或代理，未能及时从上游服务器接收到响应</td>
+</tr>
+<tr>
+<td>505</td>
+<td>HTTP Version Not Supported</td>
+<td>服务器不支持请求中所用的HTTP协议版本</td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3><span id="csrf">csrf</span></h3><p>客户端请求伪造，该漏洞的前提是请求参数可控</p>
+<h3><span id="f12元素与网页源代码的区别">F12元素与网页源代码的区别</span></h3><p>F12元素查看的内容是当前网页上真实的显示，会经过js渲染</p>
+<p>源代码顾名思义就是源代码</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/30/day15_kls/" data-id="cm43nzdry0000bbiw3atlgld8" data-title="day15_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-week3_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/11/29/week3_kls_exam/" class="article-date">
@@ -1106,194 +1497,6 @@
 
 
   
-    <article id="post-day7_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/19/day7_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-11-19T11:29:05.000Z" itemprop="datePublished">2024-11-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/19/day7_kls/">day7_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="防火墙">防火墙</span></h3><h4><span id="linux常用的防火墙">linux常用的防火墙</span></h4><p>iptables(基于netfilter)</p>
-<p>nftables(iptables的后继，现代化的防火墙)</p>
-<p>ufw(基于iptables)</p>
-<p>firewalld</p>
-<h4><span id="基本概念">基本概念</span></h4><h5><span id="四表五链">四表五链</span></h5><p>四表(table)：Filter表、NAT表、Mangle表、Raw表</p>
-<p>五链(chain)：PREROUTING链、INPUT链、FORWARD链、OUTPUT链、POSTROUTING链</p>
-<h5><span id="规则以iptables为例">规则(以iptables为例)</span></h5><p>匹配条件:</p>
-<p>指定规则适用的数据包类型（如源地址、目标地址、协议等）。</p>
-<p>IP 地址：-s 192.168.1.1（源地址）或 -d 10.0.0.1（目标地址）。</p>
-<p>协议：-p tcp。</p>
-<p>端口：–dport 22（目标端口）或 –sport 80（源端口）。</p>
-<p>动作（Action）:</p>
-<p>定义数据包被匹配后执行的操作。</p>
-<p>常见动作：</p>
-<p>ACCEPT：允许数据包通过。</p>
-<p>DROP：直接丢弃数据包。</p>
-<p>REJECT：拒绝数据包并返回响应。</p>
-<p>LOG：记录数据包信息到日志中。</p>
-<p>便捷的规则书写</p>
-<p>多个ip</p>
-<p>指定某个网络：<code>iptables -A INPUT -s 192.168.1.1,192.168.1.0/24 -j ACCEPT</code></p>
-<p>指定多个非连续ip：<code>iptables -A INPUT -s 192.168.1.1,192.168.1.2,192.168.1.3 -j ACCEPT</code></p>
-<p>指定多个连续ip：<code>sudo iptables -A INPUT -m iprange --src-range 192.168.1.100-192.168.1.120 -j ACCEPT</code></p>
-<p>多个端口</p>
-<p>使用<code>,</code>指定多个端口：<code>-m multiport</code>,<code>iptables -A INPUT -p tcp -m multiport --dports 22,80,443 -j ACCEPT</code></p>
-<p>使用<code>:</code>指定多个端口：，<code>iptables -A INPUT -p tcp --dport 1000:2000 -j ACCEPT</code></p>
-<h5><span id="规则匹配逻辑">规则匹配逻辑</span></h5><p>从上到下逐行匹配，第一条匹配成功后立即停止检查后续规则</p>
-<p>因此，规则匹配的顺序应从具体到通用，特例优先，全局策略后置。</p>
-<h3><span id="iptables">iptables</span></h3><h4><span id="启停">启停</span></h4><p><code>systemctl start/stop iptables</code></p>
-<h4><span id="查看规则">查看规则</span></h4><p>查看规则<code>iptables -t [table]  -L [chain] [options]</code></p>
-<p>常用参数:</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-<th>举例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>-n</code></td>
-<td>numeric，显示数字ip和端口</td>
-<td></td>
-</tr>
-<tr>
-<td><code>-v</code></td>
-<td>verbose，冗长的信息</td>
-<td></td>
-</tr>
-<tr>
-<td><code>--line-number</code></td>
-<td>列出规则时在每一行添加数字(这个数字在删除时有帮助)</td>
-<td></td>
-</tr>
-</tbody></table>
-<h4><span id="添加规则">添加规则</span></h4><p><code>iptables -t [table] -A [chain] [match] -j [action]</code></p>
-<h4><span id="删除规则">删除规则</span></h4><p><code>iptables -t [table] -D [chain]</code></p>
-<blockquote>
-<p>table默认为filter</p>
-</blockquote>
-<h4><span id="永久保存防火墙配置">永久保存防火墙配置</span></h4><p>保存<code>iptables-save &gt; file</code></p>
-<p>加载<code>iptables-restore &lt; file</code></p>
-<p>自动导入:写一个开机自启脚本，使用 <code>iptables-persistent</code></p>
-<h3><span id="ufw">ufw</span></h3><h4><span id="启停">启停</span></h4><p><code>systemctl start/stop/restart ufw</code></p>
-<p><code>ufw enable/disable/reload</code></p>
-<p>状态查看:</p>
-<p><code>systemctl status ufw</code></p>
-<p><code>ufw status</code></p>
-<h4><span id="查看规则">查看规则</span></h4><p><code>ufw status [numberd] [verbose]</code></p>
-<h4><span id="添加规则">添加规则</span></h4><p><code>ufw action args</code></p>
-<p>action:<code>allow</code>,<code>reject</code>,<code>deny</code>,<code>limit</code></p>
-<p>简单的args：</p>
-<p>端口号&#x2F;协议<code>port[/protocol]</code></p>
-<p>服务名<code>service</code>，example:<code>samba</code>,<code>ftp</code>,<code>mysql</code></p>
-<blockquote>
-<p>注意这里的mysql等服务都是默认的端口，如果你改了对应服务的端口，这里不会生效</p>
-</blockquote>
-<p>指定出入方向</p>
-<p><code>ufw allow out 22</code></p>
-<blockquote>
-<p>值得注意的，如果没有指定方向那么方向默认为in</p>
-</blockquote>
-<p>指定出入ip,协议，端口</p>
-<p><code>ufw deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 25</code></p>
-<p>from:原ip,to 目的ip</p>
-<p>指定网卡</p>
-<p><code>ufw deny on interface proto tcp</code></p>
-<p>一些方便的写法</p>
-<p><code>any</code>所有的ip</p>
-<h4><span id="删除规则">删除规则</span></h4><p><code>ufw delete add_thing</code></p>
-<blockquote>
-<p><code>add_thing</code>为你添加时输入的内容</p>
-</blockquote>
-<h4><span id="永久保存防火墙配置">永久保存防火墙配置</span></h4><p>ufw默认就是永久保存，无需做其他操作</p>
-<h3><span id="firewalld">firewalld</span></h3><h4><span id="启停">启停</span></h4><p><code>systemctl start/stop/restart firewalld</code></p>
-<h4><span id="查看规则">查看规则</span></h4><p><code>firewall-cmd --list-all</code></p>
-<h4><span id="添加规则">添加规则</span></h4><p><code>firewall-cmd --add-xx args</code></p>
-<p>example:</p>
-<p>添加http服务放行<code>firewall-cmd --add-service http</code></p>
-<p>添加tcp88端口放行<code>firewall-cmd --add-port 88/tcp</code></p>
-<blockquote>
-<p>如果想要添加永久规则，需要添加参数<code>--permanent</code>，例如<code>firewall-cmd --permanent --add-service http</code>，让其生效需要执行<code>firewall-cmd --reload</code></p>
-</blockquote>
-<h4><span id="删除规则">删除规则</span></h4><p><code>firewall-cmd --remove-xx args</code></p>
-<p>example:</p>
-<p>删除服务规则<code>firewall-cmd --remove-service service_name</code></p>
-<h4><span id="其他的">其他的</span></h4><p>应急模式<code>firewall-cmd --panic-on/off</code></p>
-<h3><span id="selinux">selinux</span></h3><p>强制访问控制，为linux提供了细粒度的安全控制。</p>
-<p>临时关闭</p>
-<p><code>setenforce 0</code></p>
-<p>永久关闭</p>
-<p>编辑<code>/etc/selinux/config</code></p>
-<p>修改SELINUX为disable<code>SELINUX=disabled</code></p>
-<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="iptables添加规则拦截icmpiptables">iptables添加规则拦截icmp(iptables)</span></h3><p>规则添加前，ping kali</p>
-<p><img src="/../assets/image_1731984214812_0.png" alt="image.png"></p>
-<p>添加规则</p>
-<p><img src="/../assets/iptables_1731984644135_0.gif" alt="iptables.gif"></p>
-<p>规则添加后，ping kali</p>
-<p><img src="/../assets/image_1731984623918_0.png" alt="image.png"></p>
-<h3><span id="防火墙禁止https出网iptables">防火墙禁止https出网(iptables)</span></h3><p>未配置的情况</p>
-<p><img src="/../assets/image_1731998578134_0.png" alt="image.png"></p>
-<p>添加防火墙规则</p>
-<p><img src="/../assets/image_1731998633835_0.png" alt="image.png"></p>
-<p>配置后的情况</p>
-<p><img src="/../assets/image_1731998653324_0.png" alt="image.png"></p>
-<h3><span id="防火墙禁止访问tcp8000端口iptables">防火墙禁止访问tcp8000端口(iptables)</span></h3><p>在<code>pcx.z.home</code>开启一个8000端口的http服务</p>
-<p><img src="/../assets/image_1731999065689_0.png" alt="image.png"></p>
-<p>访问正常</p>
-<p><img src="/../assets/image_1731999112568_0.png" alt="image.png"></p>
-<p>配置防火墙策略</p>
-<p><img src="/../assets/image_1731999515849_0.png" alt="image.png"></p>
-<p>配置后的情况</p>
-<p><img src="/../assets/image_1731999553907_0.png" alt="image.png"></p>
-<h3><span id="防火墙配置禁止某个网卡发送icmp包">防火墙配置禁止某个网卡发送icmp包</span></h3><p>配置防火墙策略<code>iptables -I OUTPUT -o interface_name -p icmp -j DROP</code></p>
-<p>验证<code>ping -I interface host</code></p>
-<h3><span id="防火墙配置允许连接本地sshufw">防火墙配置允许连接本地ssh(ufw)</span></h3><p>配置前</p>
-<p><img src="/../assets/image_1732003604921_0.png" alt="image.png"></p>
-<blockquote>
-<p>假装连不上</p>
-</blockquote>
-<p>配置防火墙规则</p>
-<p><img src="/../assets/image_1732003123810_0.png" alt="image.png"></p>
-<p>连接成功</p>
-<p><img src="/../assets/image_1732003492874_0.png" alt="image.png"></p>
-<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>TODO kitty+zsh补全显示异常问题解决</p>
-<h2><span id="参考">参考</span></h2><p>man ufw</p>
-<p>man iptables</p>
-<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/SELinux">SELinux ArchWiki</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/19/day7_kls/" data-id="cm3z62vq9000dwyiw9mwgb8t6" data-title="day7_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1312,7 +1515,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
     </div>
   </div>
 
@@ -1322,7 +1525,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 13.33px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 13.33px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
     </div>
   </div>
 
@@ -1344,6 +1547,10 @@
       <ul>
         
           <li>
+            <a href="/2024/11/30/day15_kls/">day15_kls</a>
+          </li>
+        
+          <li>
             <a href="/2024/11/29/week3_kls_exam/">week3_kls_exam</a>
           </li>
         
@@ -1357,10 +1564,6 @@
         
           <li>
             <a href="/2024/11/26/day12_kls/">day12_kls</a>
-          </li>
-        
-          <li>
-            <a href="/2024/11/25/day11_kls/">day11_kls</a>
           </li>
         
       </ul>
