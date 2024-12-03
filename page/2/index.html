@@ -69,6 +69,100 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-week2_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/22/week2_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2024-11-22T07:03:19.000Z" itemprop="datePublished">2024-11-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/22/week2_kls_exam/">week2_kls_exam</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="题目1">题目1</span></h2><p>配置vsftpd服务，添加ftp服务用户lihua，并限制lihua使用ftp服务的访问路径为&#x2F;usr&#x2F;share&#x2F;ftp_files<br>id:: 67401618-77f2-4cd7-ab26-b033e352aa66</p>
+<h3><span id="step1添加用户并设置家目录以及家目录权限设置密码">step1：添加用户，并设置家目录，以及家目录权限，设置密码</span></h3><p><img src="/../assets/image_1732253536205_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732254737383_0.png" alt="image.png"></p>
+<h3><span id="step2修改vsftp配置文件">step2：修改vsftp配置文件</span></h3><p><img src="/../assets/image_1732254394767_0.png" alt="image.png"></p>
+<p>修改<code>/etc/vsftpd/vsftpd_userlist</code></p>
+<p><img src="/../assets/image_1732253873260_0.png" alt="image.png"></p>
+<p>创建<code>/etc/vsftpd/user_conf</code>目录，并添加<code>lihua</code>配置文件</p>
+<p><img src="/../assets/image_1732253955889_0.png" alt="image.png"></p>
+<h3><span id="step3重新加载vsftp配置文件并重启">step3:重新加载vsftp配置文件并重启</span></h3><p><img src="/../assets/image_1732254036298_0.png" alt="image.png"></p>
+<h3><span id="step4连接ftp">step4:连接ftp</span></h3><p><img src="/../assets/image_1732254539764_0.png" alt="image.png"></p>
+<p><img src="/../assets/vsftp_1732254502349_0.gif" alt="vsftp.gif"></p>
+<h2><span id="题目2">题目2</span></h2><p>配置ssh服务，要求用户jack可以使用id_rsa 免密登录ssh</p>
+<p>server: centos.pcx.home</p>
+<p>client: kali.pcx.home</p>
+<h3><span id="step1添加jack用户创建家目录设置密码">step1:添加jack用户,创建家目录，设置密码</span></h3><p><img src="/../assets/image_1732254970492_0.png" alt="image.png"></p>
+<h3><span id="step2让jack生成ssh公私钥匙对">step2:让jack生成ssh公私钥匙对</span></h3><p><img src="/../assets/image_1732255036501_0.png" alt="image.png"></p>
+<h3><span id="step3上传公钥">step3：上传公钥</span></h3><p><img src="/../assets/image_1732255169120_0.png" alt="image.png"></p>
+<h3><span id="step4登陆centos">step4：登陆centos</span></h3><p><img src="/../assets/image_1732255239120_0.png" alt="image.png"></p>
+<p>在centos端查看在线用户：</p>
+<p><img src="/../assets/image_1732255267589_0.png" alt="image.png"></p>
+<p>在centos端查看<code>~/.ssh/authorized_keys</code></p>
+<p><img src="/../assets/image_1732255349220_0.png" alt="image.png"></p>
+<h2><span id="题目3">题目3</span></h2><p>在kali上编写ufw防火墙规则，禁止kali连接任何机器的smb服务</p>
+<h3><span id="step1开启smb服务并测试">step1:开启smb服务并测试</span></h3><p><img src="/../assets/image_1732255758185_0.png" alt="image.png"></p>
+<p>连接测试</p>
+<p><img src="/../assets/image_1732255898430_0.png" alt="image.png"></p>
+<h3><span id="step2ufw规则编写">step2：ufw规则编写</span></h3><p>现有规则查看</p>
+<p><img src="/../assets/image_1732255960355_0.png" alt="image.png"></p>
+<p>新规则添加</p>
+<p><img src="/../assets/image_1732256290665_0.png" alt="image.png"></p>
+<p><code>sudo ufw deny out 139/tcp</code>，445和139都要禁止</p>
+<p>查看规则</p>
+<p><img src="/../assets/image_1732256695233_0.png" alt="image.png"></p>
+<h3><span id="step3重启ufw并尝试连接其他主机的smb">step3：重启ufw并尝试连接其他主机的smb</span></h3><p>重启</p>
+<p><img src="/../assets/image_1732256373774_0.png" alt="image.png"></p>
+<p>尝试连接</p>
+<p><img src="/../assets/kalismb_1732256611407_0.gif" alt="kalismb.gif"></p>
+<h2><span id="题目4">题目4</span></h2><p>基于Dockerfile构建的镜像搭建一个容器，要求同时具有ssh服务与redis服务，基础镜像选择 centos&#x2F;debian&#x2F;ubuntu均可</p>
+<h3><span id="step1拉取ubuntu镜像">step1:拉取ubuntu镜像</span></h3><p><img src="/../assets/image_1732257125498_0.png" alt="image.png"></p>
+<p>这里拉过了，就不拉了</p>
+<h3><span id="step2编写dockerfile">step2:编写Dockerfile</span></h3><p>启动脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动 SSH 服务</span></span><br><span class="line">service ssh start</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动 Redis 服务</span></span><br><span class="line">redis-server &amp;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">保持容器运行</span></span><br><span class="line">tail -f /dev/null</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1732258931385_0.png" alt="image.png"></p>
+<h3><span id="step3构建镜像">step3：构建镜像</span></h3><p><img src="/../assets/image_1732257384246_0.png" alt="image.png"></p>
+<p>查看镜像</p>
+<p><img src="/../assets/image_1732258009591_0.png" alt="image.png"></p>
+<h3><span id="step4测试镜像">step4：测试镜像</span></h3><p>创建容器</p>
+<p><img src="/../assets/image_1732258122511_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732259498695_0.png" alt="image.png"></p>
+<p>测试ssh连接</p>
+<p><img src="/../assets/image_1732258814860_0.png" alt="image.png"></p>
+<p>测试redis连接</p>
+<p><img src="/../assets/image_1732258841977_0.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/22/week2_kls_exam/" data-id="cm45lne0c000ys8iw06gq9jku" data-title="week2_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/exam/" rel="tag">exam</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-day9_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/11/21/day9_kls/" class="article-date">
@@ -1063,115 +1157,6 @@
 
 
   
-    <article id="post-day2_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/12/day2_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-11-12T12:50:58.000Z" itemprop="datePublished">2024-11-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/12/day2_kls/">day2_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="linux文件系统分析">linux文件系统分析</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">├── bin -&gt; usr/bin # 可执行程序</span><br><span class="line">├── boot # 系统启动相关</span><br><span class="line">├── dev # 计算机设备</span><br><span class="line">├── efi # 和他的名字一样</span><br><span class="line">├── etc # linux配置文件</span><br><span class="line">├── home # 用户家目录</span><br><span class="line">├── lib -&gt; usr/lib # 库</span><br><span class="line">├── lib64 -&gt; usr/lib # 库</span><br><span class="line">├── media # 一些自动挂载的存储设备会在这个目录挂载 比如u盘</span><br><span class="line">├── mnt # 一般来说手动挂载的设备都挂载在这里</span><br><span class="line">├── opt # 第三方软件</span><br><span class="line">├── proc # 进程相关</span><br><span class="line">├── root # root家目录</span><br><span class="line">├── run # 系统运行时的文件</span><br><span class="line">├── sbin -&gt; usr/bin # 可执行程序</span><br><span class="line">├── sys # 系统目录</span><br><span class="line">├── tmp # 临时数据目录</span><br><span class="line">├── usr # 用户数据</span><br><span class="line">└── var # 经常变化的数据，如log</span><br></pre></td></tr></table></figure>
-
-<h3><span id="linux常用命令">linux常用命令</span></h3><p><strong>文件增删改查</strong></p>
-<p>新增： touch,mkdir</p>
-<p>删除： rm,rmdir</p>
-<p>修改： vi等文本编辑器</p>
-<p>重命名、移动： mv</p>
-<p>查看： cat等</p>
-<p>复制：cp</p>
-<h3><span id="搜索find常见使用场景">搜索find常见使用场景</span></h3><p><code>find /search/path -name &quot;searchname&quot;</code></p>
-<p>在&#x2F;search&#x2F;path中以”searchname”文件名(name)搜索</p>
-<blockquote>
-<p>searchname可以使用通配符</p>
-</blockquote>
-<h3><span id="grep常见使用场景">grep常见使用场景</span></h3><p><code>grep -rn &quot;example&quot; /path/to/directory</code></p>
-<p>该命令为在目录中递归(r)地搜索example字符串，输出时显示行号(n)</p>
-<h3><span id="打包-打包amp压缩相关">打包、打包&amp;压缩相关</span></h3><p><code>tar -cvf xx.tar /need/package/files</code></p>
-<p>将文件打包(c)为xx.tar(f意为指定打包输出的文件)，并输出详情信息(v)</p>
-<p>特殊的，如果你想要打包时进行压缩可以添加-z(gzip)或 -j(bzip2)参数</p>
-<p><code>tar -xvf xx.tar</code></p>
-<p>将xx.tar(f指定解包文件)解包(x)并输出详情信息(v)</p>
-<p><code>zip -r xx.zip /need/zip/files</code></p>
-<p>递归地(r)将文件压缩为压缩包xx.zip</p>
-<p><code>unzip xx.zip -d /unzip/path</code></p>
-<p>将xx.zip解压到指定目录(d)</p>
-<h3><span id="用户amp用户组管理">用户&amp;用户组管理</span></h3><p><strong>新增</strong></p>
-<p>用户<code>useradd</code></p>
-<p>用户组<code>groupadd</code></p>
-<p><strong>删除</strong></p>
-<p>用户<code>userdel</code></p>
-<p>用户组<code>groupdel</code></p>
-<p><strong>修改</strong></p>
-<p>用户<code>usermod</code></p>
-<p>用户组<code>groupmod</code></p>
-<p><strong>查看</strong></p>
-<p>用户<code>/etc/passwd</code></p>
-<p>用户组<code>/etc/group</code></p>
-<p><strong>用户的用户组查看</strong></p>
-<p>查看用户的用户组<code>groups username</code></p>
-<p>查看用户组下的用户<code>grep ^groupname /etc/group</code></p>
-<p>部分常用参数以及用户相关文件的介绍</p>
-<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/04/07/linux%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84/">linux用户和用户组 | ziWindlu的博客</a></p>
-<h3><span id="虚拟机网络模式">虚拟机网络模式</span></h3><h4><span id="nat">nat</span></h4><p>virt-manager中的nat</p>
-<p><img src="/../assets/image_1731410569367_0.png" alt="image.png"></p>
-<p><img src="/../assets/image_1731410715016_0.png" alt="image.png"></p>
-<h4><span id="bridge">bridge</span></h4><p>virt-manager中的桥接需要手动创建虚拟网卡自行实现，目前存在一些问题。必须使用桥接的场景，则选用vbox</p>
-<p><img src="/../assets/image_1731410858175_0.png" alt="image.png"></p>
-<h4><span id="host-only">host-only</span></h4><p><img src="/../assets/image_1731411797359_0.png" alt="image.png"></p>
-<h3><span id="宿主机与客户机文件传输">宿主机与客户机文件传输</span></h3><p>通用的方法</p>
-<p>使用虚拟机的增强功能</p>
-<p>网络可互通</p>
-<p><code>python -m http.server 8848</code></p>
-<p><img src="/../assets/image_1731412683449_0.png" alt="image.png"></p>
-<p>客户机为windows</p>
-<p>本地开启samba服务</p>
-<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/04/11/samba/">samba | ziWindlu的博客</a></p>
-<p>客户机为linux</p>
-<p>scp、nfs等</p>
-<p>kitty集成</p>
-<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/12/kitty+shell%E9%9B%86%E6%88%90%E6%89%93%E9%80%A0%E5%BC%BA%E5%8A%B2%E7%9A%84ssh%E5%B7%A5%E5%85%B7/">kitty+shell集成打造强劲的ssh工具 | ziWindlu的博客</a></p>
-<h3><span id="vim编辑器">vim编辑器</span></h3><p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/tags/vim/">标签: vim | ziWindlu的博客</a></p>
-<h3><span id="散碎知识点">散碎知识点</span></h3><p>linux中的可执行程序为elf</p>
-<h2><span id="思考amptodo">思考&amp;todo</span></h2><h3><span id="我的kali个性化配置-todo">我的kali个性化配置 todo</span></h3><h4><span id="桌面环境">桌面环境</span></h4><p>因xfce无法使用remmina的自动调整桌面大小，所以使用gnome套件</p>
-<h4><span id="终端-todo">终端 todo</span></h4><p>kitty+zsh(zinit)</p>
-<p>zshrc</p>
-<h3><span id="一个精简的vimrc-todo">一个精简的vimrc todo</span></h3><p>符合个人习惯的移动以及一些简单的函数添加</p>
-<p>避免使用plug</p>
-<p>兼容vi</p>
-<h2><span id="参考">参考</span></h2><p>book: 鸟哥的linux私房菜</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/12/day2_kls/" data-id="cm45lne05000as8iw4koc2oa8" data-title="day2_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1190,7 +1175,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
     </div>
   </div>
 
@@ -1200,7 +1185,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 10px;">burpsuite</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 13.33px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+      <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 13.33px;">burpsuite</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 13.33px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
     </div>
   </div>
 
@@ -1222,6 +1207,10 @@
       <ul>
         
           <li>
+            <a href="/2024/12/03/day17_kls/">day17_kls</a>
+          </li>
+        
+          <li>
             <a href="/2024/12/02/day16_kls/">day16_kls</a>
           </li>
         
@@ -1235,10 +1224,6 @@
         
           <li>
             <a href="/2024/11/29/week3_kls_exam/">week3_kls_exam</a>
-          </li>
-        
-          <li>
-            <a href="/2024/11/29/day14_kls/">day14_kls</a>
           </li>
         
       </ul>
