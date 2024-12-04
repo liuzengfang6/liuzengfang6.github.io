@@ -4,23 +4,15 @@
   <meta charset="utf-8">
   
   
-  <title>virt-manager+remmina舒适的虚拟机体验 | Hexo</title>
+  <title>Tag: web | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="引子在使用virtualbox时，vbox打开的虚拟机窗口无法便捷得最小化和展开。于是俺用了remmina，在每台vbox虚拟机的系统中开启rdp或是vnc。后面越发约感觉鸡肋，每次安装虚拟机后都要重新安装一下远程桌面服务。这时俺想到之前使用的virt-manager可以使用spice直接连接，而且这是虚拟化软件提供的，并非操作系统提供的。一是无需对虚拟机安装多余的软件，二是即便虚拟机网络不通，也">
-<meta property="og:type" content="article">
-<meta property="og:title" content="virt-manager+remmina舒适的虚拟机体验">
-<meta property="og:url" content="http://example.com/2024/11/12/virt-manager+remmina%E8%88%92%E9%80%82%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%93%E9%AA%8C/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/tags/web/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="引子在使用virtualbox时，vbox打开的虚拟机窗口无法便捷得最小化和展开。于是俺用了remmina，在每台vbox虚拟机的系统中开启rdp或是vnc。后面越发约感觉鸡肋，每次安装虚拟机后都要重新安装一下远程桌面服务。这时俺想到之前使用的virt-manager可以使用spice直接连接，而且这是虚拟化软件提供的，并非操作系统提供的。一是无需对虚拟机安装多余的软件，二是即便虚拟机网络不通，也">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/assets/image_1731372521093_0.png">
-<meta property="og:image" content="http://example.com/assets/image_1731372696484_0.png">
-<meta property="article:published_time" content="2024-11-12T10:40:49.000Z">
-<meta property="article:modified_time" content="2024-11-13T11:04:50.000Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="virt-manager">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/assets/image_1731372521093_0.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -75,80 +67,39 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-virt-manager+remmina舒适的虚拟机体验" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/12/virt-manager+remmina%E8%88%92%E9%80%82%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%93%E9%AA%8C/" class="article-date">
-  <time class="dt-published" datetime="2024-11-12T10:40:49.000Z" itemprop="datePublished">2024-11-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      virt-manager+remmina舒适的虚拟机体验
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2024" class="archive-year">2024</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2024/12/04/day18_kls/" class="archive-article-date">
+  <time class="dt-published" datetime="2024-12-04T13:19:29.000Z" itemprop="datePublished">Dec 4</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2024/12/04/day18_kls/">day18_kls</a>
     </h1>
   
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="引子">引子</span></h2><p>在使用virtualbox时，vbox打开的虚拟机窗口无法便捷得最小化和展开。于是俺用了remmina，在每台vbox虚拟机的系统中开启rdp或是vnc。后面越发约感觉鸡肋，每次安装虚拟机后都要重新安装一下远程桌面服务。这时俺想到之前使用的virt-manager可以使用spice直接连接，而且这是虚拟化软件提供的，并非操作系统提供的。一是无需对虚拟机安装多余的软件，二是即便虚拟机网络不通，也可以方便的管理。</p>
-<p>本文会展示一些关键的配置和一些注意事项。</p>
-<h2><span id="正文">正文</span></h2><h3><span id="virt-manager配置spice连接">virt-manager配置spice连接</span></h3><p><img src="/../assets/image_1731372521093_0.png" alt="image.png"></p>
-<p>password可选，如果想要暴露连接可以将address改为”All interfaces“</p>
-<h3><span id="配置remmina连接">配置remmina连接</span></h3><p><img src="/../assets/image_1731372696484_0.png" alt="image.png"></p>
-<p>仅需填入ip+端口号。这里的ip为宿主机的ip并非客户机的ip</p>
-<h3><span id="安装spice增强">安装spice增强</span></h3><p><strong>windows</strong></p>
-<p>下载链接在这里找</p>
-<p><a target="_blank" rel="noopener" href="https://www.spice-space.org/download.html">spice-space download</a></p>
-<p><strong>linux</strong></p>
-<p>debian:</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一般来说linux客户机安装后这个包是默认被安装的</span><br><span class="line">sudo apt install qemu-guest-agent</span><br><span class="line">sudo apt install spice-vdagent</span><br></pre></td></tr></table></figure>
-
-<h2><span id="存在的问题">存在的问题</span></h2><h3><span id="使用xfce桌面环境的客户机无法自动调整屏幕大小">使用xfce桌面环境的客户机无法自动调整屏幕大小</span></h3><p>目前xfce暂时没有办法自动调整屏幕大小，如有需求可以参考下面这个链接或者使用其他桌面环境，比如gnome。kde没有测试</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/seife/spice-autorandr">GitHub seife&#x2F;spice-autorandr: Automatically adjust the client window resolution in Linux KVM guests using the SPICE driver</a></p>
-<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://www.spice-space.org/download.html">spice-space download</a></p>
-<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Virt-manager">Virt-manager ArchWiki</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/12/virt-manager+remmina%E8%88%92%E9%80%82%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%93%E9%AA%8C/" data-id="cm45lne0c000vs8iw86h65x67" data-title="virt-manager+remmina舒适的虚拟机体验" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2024/11/12/day2_kls/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          day2_kls
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2024/11/12/day1_kls/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">day1_kls</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
 
 </section>
