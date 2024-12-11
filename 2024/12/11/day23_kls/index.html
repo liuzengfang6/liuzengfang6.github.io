@@ -4,24 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>day10_kls_review | Hexo</title>
+  <title>day23_kls | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="课程内容docker-composeyml的构成123456789101112131415161718192021222324version: &#x27;3.9&#x27;  # Compose 文件格式版本services:       # 服务定义  service_name: # 服务名称    image: image_name:tag  # 使用的镜像和标签    build:">
+  <meta name="description" content="{}">
 <meta property="og:type" content="article">
-<meta property="og:title" content="day10_kls_review">
-<meta property="og:url" content="http://example.com/2024/11/23/day10_kls_review/index.html">
+<meta property="og:title" content="day23_kls">
+<meta property="og:url" content="http://example.com/2024/12/11/day23_kls/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="课程内容docker-composeyml的构成123456789101112131415161718192021222324version: &#x27;3.9&#x27;  # Compose 文件格式版本services:       # 服务定义  service_name: # 服务名称    image: image_name:tag  # 使用的镜像和标签    build:">
+<meta property="og:description" content="{}">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/assets/image_1732239707110_0.png">
-<meta property="article:published_time" content="2024-11-23T06:45:08.000Z">
-<meta property="article:modified_time" content="2024-11-23T06:45:08.000Z">
+<meta property="article:published_time" content="2024-12-11T15:28:51.000Z">
+<meta property="article:modified_time" content="2024-12-11T15:28:51.000Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="kls">
-<meta property="article:tag" content="review">
-<meta property="article:tag" content="docker-compose">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/assets/image_1732239707110_0.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -76,10 +71,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-day10_kls_review" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-day23_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/11/23/day10_kls_review/" class="article-date">
-  <time class="dt-published" datetime="2024-11-23T06:45:08.000Z" itemprop="datePublished">2024-11-23</time>
+    <a href="/2024/12/11/day23_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-11T15:28:51.000Z" itemprop="datePublished">2024-12-11</time>
 </a>
     
   </div>
@@ -90,7 +85,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      day10_kls_review
+      day23_kls
     </h1>
   
 
@@ -98,42 +93,25 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="docker-compose">docker-compose</span></h3><h4><span id="yml的构成">yml的构成</span></h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.9&#x27;</span>  <span class="comment"># Compose 文件格式版本</span></span><br><span class="line"><span class="attr">services:</span>       <span class="comment"># 服务定义</span></span><br><span class="line">  <span class="attr">service_name:</span> <span class="comment"># 服务名称</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">image_name:tag</span>  <span class="comment"># 使用的镜像和标签</span></span><br><span class="line">    <span class="attr">build:</span>       <span class="comment"># 构建选项（可选）</span></span><br><span class="line">      <span class="attr">context:</span> <span class="string">./path</span>      <span class="comment"># Dockerfile 的上下文目录</span></span><br><span class="line">      <span class="attr">dockerfile:</span> <span class="string">Dockerfile</span>  <span class="comment"># Dockerfile 文件名</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">container_name</span> <span class="comment"># 容器名称（可选）</span></span><br><span class="line">    <span class="attr">ports:</span>        <span class="comment"># 端口映射</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;外部端口:容器端口&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span>      <span class="comment"># 数据卷挂载</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;宿主路径:容器路径&quot;</span></span><br><span class="line">    <span class="attr">environment:</span>  <span class="comment"># 环境变量</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">KEY=value</span></span><br><span class="line">    <span class="attr">depends_on:</span>   <span class="comment"># 服务依赖关系</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">other_service_name</span></span><br><span class="line">    <span class="attr">networks:</span>     <span class="comment"># 网络配置</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">network_name</span></span><br><span class="line"><span class="attr">networks:</span>         <span class="comment"># 自定义网络（可选）</span></span><br><span class="line">  <span class="attr">network_name:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span></span><br><span class="line"><span class="attr">volumes:</span>          <span class="comment"># 定义数据卷（可选）</span></span><br><span class="line">  <span class="attr">volume_name:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">local</span></span><br></pre></td></tr></table></figure>
-
-<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="docker-compose搭建harbor">docker-compose搭建harbor</span></h3><p><img src="/../assets/image_1732239707110_0.png" alt="image.png"></p>
-<blockquote>
-<p>已经启动过了，这里就不演示启动了</p>
-</blockquote>
-<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>复习内容没写，累了，周五下午打游戏去了。</p>
-
+        <hr>
+<h2><span id>{}</span></h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/23/day10_kls_review/" data-id="cm4ha73p50001lziwh8i9cu54" data-title="day10_kls_review" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/12/11/day23_kls/" data-id="cm4k1pi5t0001qliwc4qngq23" data-title="day23_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/review/" rel="tag">review</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2024/11/25/day11_kls/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          day11_kls
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/11/22/week2_kls_exam/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/12/11/day20_kls/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">week2_kls_exam</div>
+      <div class="article-nav-title">day20_kls</div>
     </a>
   
 </nav>
