@@ -69,6 +69,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day24_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/12/day24_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-12T14:12:24.000Z" itemprop="datePublished">2024-12-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/12/day24_kls/">day24_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2><span id>{}</span></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/12/day24_kls/" data-id="cm4lef1fq0000nziwe245f9ff" data-title="day24_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-day23_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/12/11/day23_kls/" class="article-date">
@@ -689,99 +728,11 @@
 
 
   
-    <article id="post-linux常用的系统信息查看命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/30/linux%E5%B8%B8%E7%94%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time class="dt-published" datetime="2024-11-30T15:03:00.000Z" itemprop="datePublished">2024-11-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/30/linux%E5%B8%B8%E7%94%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/">linux常用的系统信息查看命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="引子">引子</span></h2><p>俺经常需要查看某个linux操作系统的版本信息，硬件信息，等等，做个备忘</p>
-<h2><span id="版本信息">版本信息</span></h2><h3><span id="查看操作系统版本">查看操作系统版本</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/os-release</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>实际上对于不同的发行版，他们可能会有自己的专属版本信息文件，<code>os-release</code>很通用，其他的我们不多作介绍了</p>
-</blockquote>
-<h3><span id="查看内核版本架构等">查看内核版本架构等</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>uname</code>提供了一些查看某些内容的参数，我们这里仅介绍了使用<code>-a</code>查看所有的</p>
-</blockquote>
-<h3><span id="检查发行版和版本号">检查发行版和版本号</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>lsb_release</code>也提供了一些查看某些内容的参数</p>
-</blockquote>
-<h2><span id="硬件信息">硬件信息</span></h2><h3><span id="硬件信息">硬件信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">list hardware</span></span><br><span class="line">lshw</span><br></pre></td></tr></table></figure>
-
-<h3><span id="cpu">cpu</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lscpu</span><br></pre></td></tr></table></figure>
-
-<h3><span id="硬盘块设备">硬盘(块设备)</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br></pre></td></tr></table></figure>
-
-<h3><span id="存储空间">存储空间</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">disk use 慢</span></span><br><span class="line">du -h</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">disk free 快</span></span><br><span class="line">df -h</span><br></pre></td></tr></table></figure>
-
-<h3><span id="内存">内存</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure>
-
-<h3><span id="pci设备">pci设备</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci</span><br></pre></td></tr></table></figure>
-
-<h3><span id="主板信息">主板信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmidecode -t baseboard</span><br></pre></td></tr></table></figure>
-
-<h2><span id="网络">网络</span></h2><h3><span id="网卡信息">网卡信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip a</span><br></pre></td></tr></table></figure>
-
-<h3><span id="路由信息">路由信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route -n</span><br></pre></td></tr></table></figure>
-
-<h3><span id="arp表">arp表</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp -a</span><br></pre></td></tr></table></figure>
-
-<h2><span id="其他系统信息">其他系统信息</span></h2><h3><span id="启动时间">启动时间</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uptime</span><br></pre></td></tr></table></figure>
-
-<h3><span id="系统日志">系统日志</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg</span><br></pre></td></tr></table></figure>
-
-<h3><span id="登陆用户">登陆用户</span></h3><p><strong>当前登陆用户</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w</span><br></pre></td></tr></table></figure>
-
-<p><strong>最后登陆用户</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">last</span><br></pre></td></tr></table></figure>
-
-<h2><span id="shell脚本">shell脚本</span></h2><p>为了方便查看，俺添加了vim的折叠</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       系统版本信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;操作系统版本：&quot;</span><br><span class="line">cat /etc/os-release</span><br><span class="line">echo</span><br><span class="line">echo &quot;内核版本：&quot;</span><br><span class="line">uname -r</span><br><span class="line">echo</span><br><span class="line">echo &quot;详细内核信息：&quot;</span><br><span class="line">uname -a</span><br><span class="line">echo</span><br><span class="line">echo &quot;发行版信息：&quot;</span><br><span class="line">lsb_release -a 2&gt;/dev/null || echo &quot;lsb_release 命令未找到，请安装 lsb-release 包&quot;</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       硬件信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;CPU 信息：&quot;</span><br><span class="line">lscpu</span><br><span class="line">echo</span><br><span class="line">echo &quot;内存信息：&quot;</span><br><span class="line">free -h</span><br><span class="line">echo</span><br><span class="line">echo &quot;硬盘信息：&quot;</span><br><span class="line">lsblk</span><br><span class="line">echo</span><br><span class="line">echo &quot;磁盘使用情况：&quot;</span><br><span class="line">df -h</span><br><span class="line">echo</span><br><span class="line">echo &quot;显卡信息：&quot;</span><br><span class="line">lspci | grep -i vga</span><br><span class="line">echo</span><br><span class="line">echo &quot;主板信息：&quot;</span><br><span class="line">sudo dmidecode -t baseboard 2&gt;/dev/null || echo &quot;请以 root 权限运行以查看主板信息&quot;</span><br><span class="line">echo</span><br><span class="line">echo &quot;硬件概览：&quot;</span><br><span class="line">sudo lshw -short 2&gt;/dev/null || echo &quot;请以 root 权限运行以查看硬件信息&quot;</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       网络信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;IP 地址：&quot;</span><br><span class="line">ip a</span><br><span class="line">echo</span><br><span class="line">echo &quot;路由表信息：&quot;</span><br><span class="line">ip route</span><br><span class="line">echo</span><br><span class="line">echo &quot;网络适配器信息：&quot;</span><br><span class="line">lspci | grep -i network</span><br><span class="line">echo</span><br><span class="line">echo &quot;测试网络连通性（到 example.com）：&quot;</span><br><span class="line">ping -c 4 example.com</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       其他系统信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;系统启动时间和负载：&quot;</span><br><span class="line">uptime</span><br><span class="line">echo</span><br><span class="line">echo &quot;当前登录用户：&quot;</span><br><span class="line">w</span><br><span class="line">echo</span><br><span class="line">echo &quot;系统日志（最近 10 行）：&quot;</span><br><span class="line">dmesg | tail -n 10</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       驱动和模块信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;已加载的内核模块：&quot;</span><br><span class="line">lsmod</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       脚本运行完成 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;完成所有信息收集&quot;</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/30/linux%E5%B8%B8%E7%94%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/" data-id="cm4ha73pu0014lziw2xt1a7an" data-title="linux常用的系统信息查看命令" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -827,6 +778,10 @@
       <ul>
         
           <li>
+            <a href="/2024/12/12/day24_kls/">day24_kls</a>
+          </li>
+        
+          <li>
             <a href="/2024/12/11/day23_kls/">day23_kls</a>
           </li>
         
@@ -840,10 +795,6 @@
         
           <li>
             <a href="/2024/12/10/day21_kls/">day21_kls</a>
-          </li>
-        
-          <li>
-            <a href="/2024/12/05/day19_kls/">day19_kls</a>
           </li>
         
       </ul>
