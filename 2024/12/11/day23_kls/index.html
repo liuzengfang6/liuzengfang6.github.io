@@ -6,12 +6,12 @@
   
   <title>day23_kls | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="{}">
+  <meta name="description" content="课程内容sql注入之报错注入原理：通过回显错误夹带信息。 报错注入常用函数 updatexml(1,concat(1,(sql)),1) extractvalue(0x0a,concat(0x0a,(sql))) sql注入之盲注站点存在sql注入，但既不报错也不返回信息。通过猜测每个字段的每个值获取信息。 此时可以通过&#39; and sleep(1)来判断是否存在sql注入 盲注常用函数 S">
 <meta property="og:type" content="article">
 <meta property="og:title" content="day23_kls">
 <meta property="og:url" content="http://example.com/2024/12/11/day23_kls/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="{}">
+<meta property="og:description" content="课程内容sql注入之报错注入原理：通过回显错误夹带信息。 报错注入常用函数 updatexml(1,concat(1,(sql)),1) extractvalue(0x0a,concat(0x0a,(sql))) sql注入之盲注站点存在sql注入，但既不报错也不返回信息。通过猜测每个字段的每个值获取信息。 此时可以通过&#39; and sleep(1)来判断是否存在sql注入 盲注常用函数 S">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-12-11T15:28:51.000Z">
 <meta property="article:modified_time" content="2024-12-12T01:00:18.000Z">
@@ -93,8 +93,29 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <hr>
-<h2><span id>{}</span></h2>
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="sql注入之报错注入">sql注入之报错注入</span></h3><p>原理：通过回显错误夹带信息。</p>
+<p>报错注入常用函数</p>
+<p><code>updatexml(1,concat(1,(sql)),1)</code></p>
+<p><code>extractvalue(0x0a,concat(0x0a,(sql)))</code></p>
+<h3><span id="sql注入之盲注">sql注入之盲注</span></h3><p>站点存在sql注入，但既不报错也不返回信息。通过猜测每个字段的每个值获取信息。</p>
+<p>此时可以通过<code>&#39; and sleep(1)</code>来判断是否存在sql注入</p>
+<p>盲注常用函数</p>
+<p><code>SUBSTRING()</code></p>
+<p><code>LEFT()</code></p>
+<p><code>CHAR_LENGTH()</code></p>
+<p><code>LENGTH()</code></p>
+<p><code>ASCII()</code></p>
+<h3><span id="sqlmap">sqlmap</span></h3><p>梭哈，梭哈，梭哈，梭哈</p>
+<h4><span id="简单用法">简单用法</span></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">简单的用法 -p 指定注入参数</span></span><br><span class="line">sqlmap -u https://host?param=xxx -p param</span><br></pre></td></tr></table></figure>
+
+<h4><span id="进阶用法">进阶用法</span></h4><p>是否厌倦了复杂的cookie填写，header填写。没有关系，我来帮你</p>
+<p>找到牛栏器，找到请求，右键复制请求头。然后把它扔到一个文件里。如果你有请求体，那么请到请求体的地方，选择查看原始内容，复制过来，扔到刚才的文件的最下面，记得添加请求空行</p>
+<h4><span id="利用">利用</span></h4><p><strong>常用参数</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">当前数据库</span></span><br><span class="line">--current-db</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">当前用户</span></span><br><span class="line">--current-user</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">数据库信息</span></span><br><span class="line">--banner</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">数据库名</span></span><br><span class="line">--dbs</span><br></pre></td></tr></table></figure>
+
+<p><strong>dump相关参数</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">拖库基础选项</span></span><br><span class="line">--dump</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">拖库表列</span></span><br><span class="line">--dbs --tables --columns</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">指定库表列，用于细粒度拖库</span></span><br><span class="line">-D -T -C</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
