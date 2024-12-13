@@ -16,6 +16,9 @@
 <meta property="og:image" content="http://example.com/assets/image_1734069840124_0.png">
 <meta property="og:image" content="http://example.com/assets/image_1734069889796_0.png">
 <meta property="og:image" content="http://example.com/assets/image_1734069943322_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1734075558545_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1734075601889_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1734075989390_0.png">
 <meta property="og:image" content="http://example.com/assets/image_1734070227412_0.png">
 <meta property="og:image" content="http://example.com/assets/image_1734068181398_0.png">
 <meta property="og:image" content="http://example.com/assets/image_1734068498217_0.png">
@@ -23,7 +26,7 @@
 <meta property="og:image" content="http://example.com/assets/image_1734068859179_0.png">
 <meta property="og:image" content="http://example.com/assets/image_1734069019532_0.png">
 <meta property="article:published_time" content="2024-12-13T06:14:52.000Z">
-<meta property="article:modified_time" content="2024-12-13T06:14:52.000Z">
+<meta property="article:modified_time" content="2024-12-13T07:47:10.000Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/assets/image_1734069840124_0.png">
@@ -113,6 +116,18 @@
 <p><img src="/../assets/image_1734069943322_0.png" alt="image.png"></p>
 <p>password中有flag</p>
 <p><code>flag&#123;9c233764285d9a7ef4a10b8b7daa7e7b&#125;</code></p>
+<h2><span id="题目1解法2">题目1解法2</span></h2><p>本题不像是手写的，应该是框架(确信</p>
+<p>康康是用啥写的</p>
+<p><img src="/../assets/image_1734075558545_0.png" alt="image.png"></p>
+<p>very good</p>
+<p>整个扫描器扫扫。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/OWASP/joomscan">GitHub OWASP&#x2F;joomscan: OWASP Joomla Vulnerability Scanner Project https://www.secologist.com/</a></p>
+<p><img src="/../assets/image_1734075601889_0.png" alt="image.png"></p>
+<p>没多少信息，不过能够看到版本号</p>
+<p>一番搜索</p>
+<p>该版本存在信息泄漏，能整出来数据库密码。auv，这不巧了吗。数据库密码里有好东西。正好有exp,让俺运行一下</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Acceis/exploit-CVE-2023-23752">GitHub Acceis&#x2F;exploit-CVE-2023-23752: Joomla! &lt; 4.2.8 Unauthenticated information disclosure</a></p>
+<p><img src="/../assets/image_1734075989390_0.png" alt="image.png"></p>
 <h2><span id="题目2">题目2</span></h2><p>题目让俺一把梭，俺抓个搜索包，开始梭哈。</p>
 <p>啥也不看，闭眼一把梭</p>
 <p><img src="/../assets/image_1734070227412_0.png" alt="image.png"></p>
@@ -139,7 +154,7 @@
 <p>啥也不看，闭眼一把梭</p>
 <p><img src="/../assets/image_1734068859179_0.png" alt="image.png"></p>
 <p>timu4</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: 192.168.2.214:10003</span><br><span class="line">Content-Length: 29</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Origin: http://192.168.2.214:10003</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Referer: http://192.168.2.214:10003/</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Cookie: 0350c45adcb555161a8b854c66b9ecff=104f9d1c7c5f921e0bc2588d85c27b1f</span><br><span class="line">Connection: keep-alive</span><br><span class="line">username=admin&amp;password=admin</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: 192.168.2.214:10003</span><br><span class="line">Content-Length: 29</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Origin: http://192.168.2.214:10003</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Referer: http://192.168.2.214:10003/</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Cookie: 0350c45adcb555161a8b854c66b9ecff=104f9d1c7c5f921e0bc2588d85c27b1f</span><br><span class="line">Connection: keep-alive</span><br><span class="line">username=admin&amp;password=admin</span><br></pre></td></tr></table></figure>
 
 
 <p>第一次梭哈，第二次梭哈，第三次梭哈</p>
