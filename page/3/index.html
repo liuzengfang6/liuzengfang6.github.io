@@ -69,6 +69,132 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day9_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/21/day9_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-21T02:42:15.000Z" itemprop="datePublished">2024-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/21/day9_kls/">day9_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="docker网络">docker网络</span></h3><h4><span id="docker中的网络模式">docker中的网络模式</span></h4><p>bridge</p>
+<p>host</p>
+<p>none</p>
+<h4><span id="相关命令">相关命令</span></h4><p>查看:<code>docker network ls</code>,<code>docker network inspect NETWORK</code></p>
+<p>创建:<code>docker network create -d TYPE network_name</code></p>
+<p>加入:<code>docker network connect NETWORK CONTAINER [CONTAINERS]</code></p>
+<h4><span id="使用">使用</span></h4><p>在创建容器时使用<code>--network </code>指定网络即可<code>docker run --network NETWORK IMAGE</code></p>
+<h3><span id="docker卷">docker卷</span></h3><h4><span id="基本用法">基本用法</span></h4><p>查看<code>docker volume ls</code></p>
+<p>创建<code>docker volume create volume_name</code></p>
+<p>删除<code>docker volume rm VOLUME</code></p>
+<h4><span id="使用">使用</span></h4><p>在创建容器时使用<code>-v</code>指定即可<code>docker run -v VOLUME:xxx IMAGE</code></p>
+<h3><span id="docker创建自己的镜像dockerfile">docker创建自己的镜像(dockerfile)</span></h3><h4><span id="不使用dockerfiledocker-commit-不推荐">不使用dockerfile(docker commit 不推荐)</span></h4><p>不使用dockerfile，基于CONIANER的修改生成新的镜像</p>
+<p>使用<code>docker commit CONTAINER IMAGE</code></p>
+<p>不推荐使用:</p>
+<p>难以维护</p>
+<p>不透明，无法得知修改了什么</p>
+<h4><span id="使用dockerfile">使用dockerfile</span></h4><h5><span id="基本语法">基本语法</span></h5><p><code>FROM</code>：指定基础镜像。</p>
+<p><code>RUN</code>：运行命令。</p>
+<p><code>CMD</code> 和 <code>ENTRYPOINT</code>：指定容器启动命令。</p>
+<p><code>COPY</code> 和 <code>ADD</code>：复制文件到镜像中。</p>
+<p><code>WORKDIR</code>：设置工作目录。</p>
+<p><code>ENV</code>：设置环境变量。</p>
+<p><code>EXPOSE</code>：声明端口。</p>
+<p><code>VOLUME</code>：定义挂载点。</p>
+<p><code>LABEL</code>：添加元数据。</p>
+<h5><span id="生成镜像">生成镜像</span></h5><p><code>docker build -t IMAGE docker_file_dirname</code></p>
+<h3><span id="docker-compose">docker-compose</span></h3><h4><span id="概念">概念</span></h4><p><code>docker-compose.yml</code>是docker-compose启动所需的配置文件。默认是这个，如果你要使用其他的请在运行时指定<code>docker-compose up -f /path/to/your_yml</code></p>
+<h4><span id="命令">命令</span></h4><p>创建<code>docker-compose up [options]</code>，常用的参数<code>-d</code>后台运行</p>
+<p>启停<code>docker-compose start/stop</code></p>
+<p>删除<code>docker-compose down</code></p>
+<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="dvwa站库分离php-apachemysql">dvwa站库分离(php-apache+mysql)</span></h3><p>创建docker网络</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d bridge my_self_bridge</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1732153437645_0.png" alt="image.png"></p>
+<p>php-apache环境搭建</p>
+<p><img src="/../assets/image_1732153569619_0.png" alt="image.png"></p>
+<blockquote>
+<p>因拓展无法安装，后面这个我换成了<code>php:8.0-apache</code>，后面发现不是php版本的问题。dvwa官方推荐7.3及以上</p>
+</blockquote>
+<p>创建mysql数据库</p>
+<p><img src="/../assets/image_1732153724752_0.png" alt="image.png"></p>
+<blockquote>
+<p>这里无需进行映射端口，使用主机名(容器名)连接即可</p>
+</blockquote>
+<p>创建结束后，我们查看该网络的信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network inspect my_self_bridge</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1732153969902_0.png" alt="image.png"></p>
+<blockquote>
+<p>我们发现这两个container已经加入到网络中了</p>
+</blockquote>
+<p>把dvwa源码扔到php的app目录</p>
+<p><img src="/../assets/image_1732154086639_0.png" alt="image.png"></p>
+<p>复制配置文件并修改</p>
+<p><img src="/../assets/image_1732154359160_0.png" alt="image.png"></p>
+<blockquote>
+<p>这里的db_server我们可以设置为dvwa-mysql(容器名)</p>
+</blockquote>
+<p>修改完成后访问<code>setup.php</code></p>
+<p><img src="/../assets/image_1732155125186_0.png" alt="image.png"></p>
+<p>发现没有mysqli拓展</p>
+<p>php镜像官方提供了一个工具<code>docker-php-ext-install</code>用于安装拓展</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it my-apache-php-app /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">为dg的安装提前安装相关依赖</span></span><br><span class="line">apt-get update &amp;&amp; apt-get install -y \</span><br><span class="line">    libjpeg-dev \</span><br><span class="line">    libpng-dev \</span><br><span class="line">    libfreetype6-dev \</span><br><span class="line">    zlib1g-dev</span><br><span class="line">docker-php-ext-install mysqli dg pdo_mysql</span><br></pre></td></tr></table></figure>
+
+<p>现在我们退出容器，重新启动容器</p>
+<p><img src="/../assets/image_1732156852055_0.png" alt="image.png"></p>
+<h3><span id="创建第一个自己的镜像docker-commit">创建第一个自己的镜像(docker commit)</span></h3><p>拉取ubuntu镜像</p>
+<p><img src="/../assets/image_1732167921582_0.png" alt="image.png"></p>
+<p>创建一个ubuntu容器，并在后台运行</p>
+<p><img src="/../assets/image_1732168395251_0.png" alt="image.png"></p>
+<p>将<code>kitten</code>可执行文件上传</p>
+<p><img src="/../assets/image_1732168260215_0.png" alt="image.png"></p>
+<p>将镜像提交</p>
+<p><img src="/../assets/image_1732168929925_0.png" alt="image.png"></p>
+<p>根据刚创建的镜像开启一个新的容器，查看<code>/bin</code>下是否有kitten</p>
+<p><img src="/../assets/image_1732168813773_0.png" alt="image.png"></p>
+<h2><span id><img src="/../assets/image_1732168742837_0.png" alt="image.png"></span></h2><h3><span id="构建python程序镜像docker-build">构建python程序镜像(docker build)</span></h3><p>dockerbuild文件编写</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> python:<span class="number">3.8</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">mkdir</span> /opt/app</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /opt/app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pip install --upgrade pip \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; pip install -r requirements.txt</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;python&quot;</span>, <span class="string">&quot;/opt/app/main.py&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>关于参数传递，可以使用，run的参数传递，环境变量，配置文件等</p>
+</blockquote>
+<p><img src="/../assets/image_1732179427146_0.png" alt="image.png"></p>
+<p>创建镜像<code>docker build -t IMAGE:TAG .</code></p>
+<p>运行<code>docker run IMAGE args</code></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>DONE dockerfile编写</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/21/day9_kls/" data-id="cm4mctvge001bz8iwaw9ifpmx" data-title="day9_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-day8_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/11/20/day8_kls/" class="article-date">
@@ -208,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/20/day8_kls/" data-id="cm4lefe1m001cy3iw3a513pn3" data-title="day8_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/20/day8_kls/" data-id="cm4mctvgc0016z8iwbrml7pmo" data-title="day8_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -399,7 +525,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/19/day7_kls/" data-id="cm4lefe1l0017y3iw8erp6k71" data-title="day7_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/19/day7_kls/" data-id="cm4mctvgd0018z8iwcm0sa71l" data-title="day7_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -496,7 +622,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/18/day6_kls/" data-id="cm4lefe1k0014y3iw5izte517" data-title="day6_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/18/day6_kls/" data-id="cm4mctvgb0013z8iwdfqnc590" data-title="day6_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -641,7 +767,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/15/%E6%97%A0%E4%BB%A3%E7%A0%81%E9%BC%A0%E6%A0%87%E5%85%9A%E7%8B%82%E5%96%9C%E5%A5%B6%E5%A6%88%E7%BA%A7%E6%95%99%E5%AD%A6%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8centos%E6%90%AD%E5%BB%BAdvwa/" data-id="cm4lefe1z0040y3iw3uuy3w6b" data-title="无代码鼠标党狂喜奶妈级教学从0开始手把手教你使用centos搭建dvwa" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/15/%E6%97%A0%E4%BB%A3%E7%A0%81%E9%BC%A0%E6%A0%87%E5%85%9A%E7%8B%82%E5%96%9C%E5%A5%B6%E5%A6%88%E7%BA%A7%E6%95%99%E5%AD%A6%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8centos%E6%90%AD%E5%BB%BAdvwa/" data-id="cm4mctvgr0043z8iw7hz6bwj8" data-title="无代码鼠标党狂喜奶妈级教学从0开始手把手教你使用centos搭建dvwa" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -720,7 +846,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/15/day5_kls_review/" data-id="cm4lefe1j000zy3iwcrar0n2l" data-title="day5_kls_review" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/15/day5_kls_review/" data-id="cm4mctvgb0012z8iw8y6lcafm" data-title="day5_kls_review" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -792,7 +918,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/14/day4_kls/" data-id="cm4lefe1j0012y3iw9l675hm9" data-title="day4_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/14/day4_kls/" data-id="cm4mctvga000zz8iw4s99ap0y" data-title="day4_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -837,7 +963,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/14/ssh%E4%B8%8A%E4%BC%A0%E5%85%AC%E9%92%A5%E6%89%8B%E5%8A%A8%E4%B8%8A%E4%BC%A0+%E5%91%BD%E4%BB%A4%E4%B8%8A%E4%BC%A0/" data-id="cm4lefe1o001hy3iw2cq91t5h" data-title="ssh上传公钥手动上传+命令上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/14/ssh%E4%B8%8A%E4%BC%A0%E5%85%AC%E9%92%A5%E6%89%8B%E5%8A%A8%E4%B8%8A%E4%BC%A0+%E5%91%BD%E4%BB%A4%E4%B8%8A%E4%BC%A0/" data-id="cm4mctvge001dz8iwc1qb82hq" data-title="ssh上传公钥手动上传+命令上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -923,7 +1049,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/13/day3_kls/" data-id="cm4lefe1i000xy3iw4kx8gmbn" data-title="day3_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/13/day3_kls/" data-id="cm4mctvg9000xz8iw478v6pio" data-title="day3_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1032,68 +1158,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/12/day2_kls/" data-id="cm4lefe1i000uy3iwf7an2plu" data-title="day2_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/12/day2_kls/" data-id="cm4mctvg9000uz8iw6ip8ao5n" data-title="day2_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-virt-manager+remmina舒适的虚拟机体验" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/12/virt-manager+remmina%E8%88%92%E9%80%82%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%93%E9%AA%8C/" class="article-date">
-  <time class="dt-published" datetime="2024-11-12T10:40:49.000Z" itemprop="datePublished">2024-11-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/12/virt-manager+remmina%E8%88%92%E9%80%82%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%93%E9%AA%8C/">virt-manager+remmina舒适的虚拟机体验</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="引子">引子</span></h2><p>在使用virtualbox时，vbox打开的虚拟机窗口无法便捷得最小化和展开。于是俺用了remmina，在每台vbox虚拟机的系统中开启rdp或是vnc。后面越发约感觉鸡肋，每次安装虚拟机后都要重新安装一下远程桌面服务。这时俺想到之前使用的virt-manager可以使用spice直接连接，而且这是虚拟化软件提供的，并非操作系统提供的。一是无需对虚拟机安装多余的软件，二是即便虚拟机网络不通，也可以方便的管理。</p>
-<p>本文会展示一些关键的配置和一些注意事项。</p>
-<h2><span id="正文">正文</span></h2><h3><span id="virt-manager配置spice连接">virt-manager配置spice连接</span></h3><p><img src="/../assets/image_1731372521093_0.png" alt="image.png"></p>
-<p>password可选，如果想要暴露连接可以将address改为”All interfaces“</p>
-<h3><span id="配置remmina连接">配置remmina连接</span></h3><p><img src="/../assets/image_1731372696484_0.png" alt="image.png"></p>
-<p>仅需填入ip+端口号。这里的ip为宿主机的ip并非客户机的ip</p>
-<h3><span id="安装spice增强">安装spice增强</span></h3><p><strong>windows</strong></p>
-<p>下载链接在这里找</p>
-<p><a target="_blank" rel="noopener" href="https://www.spice-space.org/download.html">spice-space download</a></p>
-<p><strong>linux</strong></p>
-<p>debian:</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一般来说linux客户机安装后这个包是默认被安装的</span><br><span class="line">sudo apt install qemu-guest-agent</span><br><span class="line">sudo apt install spice-vdagent</span><br></pre></td></tr></table></figure>
-
-<h2><span id="存在的问题">存在的问题</span></h2><h3><span id="使用xfce桌面环境的客户机无法自动调整屏幕大小">使用xfce桌面环境的客户机无法自动调整屏幕大小</span></h3><p>目前xfce暂时没有办法自动调整屏幕大小，如有需求可以参考下面这个链接或者使用其他桌面环境，比如gnome。kde没有测试</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/seife/spice-autorandr">GitHub seife&#x2F;spice-autorandr: Automatically adjust the client window resolution in Linux KVM guests using the SPICE driver</a></p>
-<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://www.spice-space.org/download.html">spice-space download</a></p>
-<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Virt-manager">Virt-manager ArchWiki</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/12/virt-manager+remmina%E8%88%92%E9%80%82%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%93%E9%AA%8C/" data-id="cm4lefe1n001dy3iwf8snbzqv" data-title="virt-manager+remmina舒适的虚拟机体验" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li></ul>
 
     </footer>
   </div>
@@ -1153,6 +1222,10 @@
       <ul>
         
           <li>
+            <a href="/2024/12/13/week5_kls_exam/">week5_kls_exam</a>
+          </li>
+        
+          <li>
             <a href="/2024/12/12/day24_kls/">day24_kls</a>
           </li>
         
@@ -1166,10 +1239,6 @@
         
           <li>
             <a href="/2024/12/10/day22_kls/">day22_kls</a>
-          </li>
-        
-          <li>
-            <a href="/2024/12/10/day21_kls/">day21_kls</a>
           </li>
         
       </ul>
