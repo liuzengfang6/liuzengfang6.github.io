@@ -4,19 +4,21 @@
   <meta charset="utf-8">
   
   
-  <title>day25_kls | Hexo</title>
+  <title>day27_kls | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="sql注入分类依据获取信息的方式分类 联合查询注入 报错注入 盲注 布尔 时间 特殊注入 宽字节注入 二次编码注入 二阶注入 堆叠注入 其他类型的注入 值得注意的是，挖这一类要小心再小心，不然慧翅捞饭的 insert update delete 原因用户可控的输入未经严格过滤拼接到了sql中，导致恶意sql被执行 危害信息泄漏 信息篡改 远程控制，木马 挖掘手动测试的一般步骤 实现网站正常功能 测">
+  <meta name="description" content="课程内容csrf原因 请求参数未经严格校验，使得请求可以被伪造 危害 诱导用户执行非本意的操作 盗号 诱使用户发送政治敏感信息 ddos 挖掘 能看懂所有的请求，就说明存在csrf 利用 使用bp构造csrf poc 引用js直接发送ajax请求 防御 加入可变参数 让请求参数不可读(人不可读) 绕过防御 做一个模仿者 csrf+xss组合拳，使用xss，让用户伪造请求。 jsonpjsonp本是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="day25_kls">
-<meta property="og:url" content="http://example.com/2024/12/14/day25_kls/index.html">
+<meta property="og:title" content="day27_kls">
+<meta property="og:url" content="http://example.com/2024/12/17/day27_kls/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="sql注入分类依据获取信息的方式分类 联合查询注入 报错注入 盲注 布尔 时间 特殊注入 宽字节注入 二次编码注入 二阶注入 堆叠注入 其他类型的注入 值得注意的是，挖这一类要小心再小心，不然慧翅捞饭的 insert update delete 原因用户可控的输入未经严格过滤拼接到了sql中，导致恶意sql被执行 危害信息泄漏 信息篡改 远程控制，木马 挖掘手动测试的一般步骤 实现网站正常功能 测">
+<meta property="og:description" content="课程内容csrf原因 请求参数未经严格校验，使得请求可以被伪造 危害 诱导用户执行非本意的操作 盗号 诱使用户发送政治敏感信息 ddos 挖掘 能看懂所有的请求，就说明存在csrf 利用 使用bp构造csrf poc 引用js直接发送ajax请求 防御 加入可变参数 让请求参数不可读(人不可读) 绕过防御 做一个模仿者 csrf+xss组合拳，使用xss，让用户伪造请求。 jsonpjsonp本是">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-12-14T14:34:50.000Z">
-<meta property="article:modified_time" content="2024-12-14T15:55:10.000Z">
+<meta property="article:published_time" content="2024-12-17T14:59:10.000Z">
+<meta property="article:modified_time" content="2024-12-17T14:59:10.000Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="kls">
+<meta property="article:tag" content="xss">
+<meta property="article:tag" content="csrf">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -72,16 +74,12 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-day25_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-day27_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/12/14/day25_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-14T14:34:50.000Z" itemprop="datePublished">2024-12-14</time>
+    <a href="/2024/12/17/day27_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-17T14:59:10.000Z" itemprop="datePublished">2024-12-17</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/web/">web</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -90,7 +88,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      day25_kls
+      day27_kls
     </h1>
   
 
@@ -98,80 +96,37 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2><span id="sql注入">sql注入</span></h2><h3><span id="分类">分类</span></h3><p>依据获取信息的方式分类</p>
-<p>联合查询注入</p>
-<p>报错注入</p>
-<p>盲注</p>
-<p>布尔</p>
-<p>时间</p>
-<p>特殊注入</p>
-<p>宽字节注入</p>
-<p>二次编码注入</p>
-<p>二阶注入</p>
-<p>堆叠注入</p>
-<p>其他类型的注入</p>
-<p>值得注意的是，挖这一类要小心再小心，不然慧翅捞饭的</p>
-<p>insert</p>
-<p>update</p>
-<p>delete</p>
-<h3><span id="原因">原因</span></h3><p>用户可控的输入未经严格过滤拼接到了sql中，导致恶意sql被执行</p>
-<h3><span id="危害">危害</span></h3><p>信息泄漏</p>
-<p>信息篡改</p>
-<p>远程控制，木马</p>
-<h3><span id="挖掘">挖掘</span></h3><p>手动测试的一般步骤</p>
-<p>实现网站正常功能</p>
-<p>测试闭合符号</p>
-<p>注入</p>
-<p>报敏感信息</p>
-<h3><span id="利用">利用</span></h3><p>mysql</p>
-<p>元数据</p>
-<p>information_schema</p>
-<p>schmata</p>
-<p>schema_name数据库名</p>
-<p>tables</p>
-<p>table_name表名</p>
-<p>columns</p>
-<p>column_name列名</p>
-<p>数据库</p>
-<p>SELECT NULL, schema_name FROM information_schema.schemata–</p>
-<p>表名</p>
-<p>SELECT NULL, table_name FROM information_schema.tables WHERE table_schema &#x3D; ‘your_database_name’–</p>
-<p>列名</p>
-<p>SELECT NULL, column_name FROM information_schema.columns WHERE table_name &#x3D; ‘your_table_name’–</p>
-<p>查询注入点列数</p>
-<p>group by 2 –</p>
-<p>查找回显位</p>
-<p>union select 1,2,3,4</p>
-<p>常用函数</p>
-<p>USER()</p>
-<p>CONCAT()</p>
-<p>CURRENT_USER()</p>
-<p>VERSION()</p>
-<p>报错注入</p>
-<p>foor</p>
-<p>updatexml(1,concat(1,(sql)),1)</p>
-<p>extractvalue(0x0a,concat(0x0a,(sql)))</p>
-<p>盲注用</p>
-<p>SUBSTRING()</p>
-<p>LEFT()</p>
-<p>CHAR_LENGTH()</p>
-<p>LENGTH()</p>
-<p>ASCII()</p>
-<h3><span id="防御">防御</span></h3><p>白名单</p>
-<p>只允许用户传入变量为某些特定值，如只允许数字</p>
-<p>黑名单</p>
-<p>过滤恶意字符</p>
-<p>pdo预处理</p>
-<h3><span id="绕过防御">绕过防御</span></h3><p><a target="_blank" rel="noopener" href="https://zu1k.com/posts/security/web-security/bypass-tech-for-sql-injection-keyword-filtering/">SQL注入针对关键字过滤的绕过技巧 zu1k</a></p>
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="csrf">csrf</span></h3><p>原因</p>
+<p>请求参数未经严格校验，使得请求可以被伪造</p>
+<p>危害</p>
+<p>诱导用户执行非本意的操作</p>
+<p>盗号</p>
+<p>诱使用户发送政治敏感信息</p>
+<p>ddos</p>
+<p>挖掘</p>
+<p>能看懂所有的请求，就说明存在csrf</p>
+<p>利用</p>
+<p>使用bp构造csrf poc</p>
+<p>引用js直接发送ajax请求</p>
+<p>防御</p>
+<p>加入可变参数</p>
+<p>让请求参数不可读(人不可读)</p>
+<p>绕过防御</p>
+<p>做一个模仿者</p>
+<h3><span id="csrfxss">csrf+xss</span></h3><p>组合拳，使用xss，让用户伪造请求。</p>
+<h3><span id="jsonp">jsonp</span></h3><p>jsonp本是一种开发中的技巧。为了逃避同源策略。</p>
+<p>大家有时候用这种骚操作去传敏感信息，但没鉴权，导致敏感信息泄漏。</p>
+<h4><span id="应用">应用</span></h4><p>蜜罐获取攻击者信息</p>
+<p>蜜罐通过各个社交网站的jsonp漏洞，获取攻击者的社交媒体信息</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/14/day25_kls/" data-id="cm4ockle5000ta3iw0zrmelos" data-title="day25_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/12/17/day27_kls/" data-id="cm4slag8y0000emiw5fbxbtvh" data-title="day27_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xss/" rel="tag">xss</a></li></ul>
 
     </footer>
   </div>
@@ -179,19 +134,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2024/12/16/day26_kls/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          day26_kls
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/12/13/week5_kls_exam/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/12/16/day26_kls/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">week5_kls_exam</div>
+      <div class="article-nav-title">day26_kls</div>
     </a>
   
 </nav>
