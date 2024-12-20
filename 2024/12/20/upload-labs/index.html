@@ -4,14 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>Tag: 信息收集 | Hexo</title>
+  <title>upload-labs | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/index.html">
+  <meta name="description" content="搭建12去gayhub下载，精简包  过关关卡1没什么好说的，js校验，栓条狗都能 关卡2MIME类型绕过，bp抓包，一抓一个准 关卡3未严格校验，传phtml 关卡4中间件是apache,我们上传.htaccess和shell.png让apache解析png 1Sethandler application&#x2F;x-httpd-php  关卡5-9待定，后面写 关卡10垃圾的双写 关卡11-1200截">
+<meta property="og:type" content="article">
+<meta property="og:title" content="upload-labs">
+<meta property="og:url" content="http://example.com/2024/12/20/upload-labs/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="搭建12去gayhub下载，精简包  过关关卡1没什么好说的，js校验，栓条狗都能 关卡2MIME类型绕过，bp抓包，一抓一个准 关卡3未严格校验，传phtml 关卡4中间件是apache,我们上传.htaccess和shell.png让apache解析png 1Sethandler application&#x2F;x-httpd-php  关卡5-9待定，后面写 关卡10垃圾的双写 关卡11-1200截">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-12-19T16:28:13.000Z">
+<meta property="article:modified_time" content="2024-12-19T16:28:13.000Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="blog">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -67,77 +72,92 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/12/10/day21_kls/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-12-09T16:54:04.000Z" itemprop="datePublished">Dec 10</time>
+        <section id="main"><article id="post-upload-labs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/20/upload-labs/" class="article-date">
+  <time class="dt-published" datetime="2024-12-19T16:28:13.000Z" itemprop="datePublished">2024-12-20</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/web/">web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/12/10/day21_kls/">day21_kls</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      upload-labs
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/12/05/OneForAll/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-12-05T04:19:16.000Z" itemprop="datePublished">Dec 5</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/12/05/OneForAll/">OneForAll</a>
-    </h1>
-  
+        <h2><span id="搭建">搭建</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">去gayhub下载，精简包</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/12/04/day18_kls/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-12-04T13:19:29.000Z" itemprop="datePublished">Dec 4</time>
-</a>
+<h2><span id="过关">过关</span></h2><h3><span id="关卡1">关卡1</span></h3><p>没什么好说的，js校验，栓条狗都能</p>
+<h3><span id="关卡2">关卡2</span></h3><p>MIME类型绕过，bp抓包，一抓一个准</p>
+<h3><span id="关卡3">关卡3</span></h3><p>未严格校验，传<code>phtml</code></p>
+<h3><span id="关卡4">关卡4</span></h3><p>中间件是apache,我们上传<code>.htaccess</code>和<code>shell.png</code>让apache解析png</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sethandler application/x-httpd-php</span><br></pre></td></tr></table></figure>
+
+<h3><span id="关卡5-9">关卡5-9</span></h3><p>待定，后面写</p>
+<h3><span id="关卡10">关卡10</span></h3><p>垃圾的双写</p>
+<h3><span id="关卡11-12">关卡11-12</span></h3><p>00截断，错误的php配置，会将<code>00(ASCII)</code>认为是文件的结束。</p>
+<p>当上传文件带路径时，php会将<code>abc/a.php%00photo.png</code>认为是<code>abc/a.php</code></p>
+<h3><span id="关卡13-16">关卡13-16</span></h3><p>图片马，前提是存在文件解析漏洞，或文件包含漏洞，通过这些漏洞将图片解析为php</p>
+<p>生成图片马</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat pic.png shell.php &gt; webshell.png</span><br></pre></td></tr></table></figure>
+
+<p>压缩的图片马</p>
+<p>这个生成俺不会</p>
+<h3><span id="关卡17">关卡17</span></h3><p>条件竞争，校验逻辑错误的将文件临时存储起来时，这时我们碰巧访问到该文件，则会执行</p>
+<p>便捷的请求方式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while true; do</span><br><span class="line">	curl xxx</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，不要将curl放到后台运行，会卡，如果非要，那么建议指定次数</p>
+</blockquote>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/12/04/day18_kls/">day18_kls</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/20/upload-labs/" data-id="cm4w1kwbs0000kkiwbuvi5d0o" data-title="upload-labs" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/" rel="tag">blog</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/12/20/day29_kls/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          day29_kls
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/12/18/day28_kls/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">day28_kls</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>

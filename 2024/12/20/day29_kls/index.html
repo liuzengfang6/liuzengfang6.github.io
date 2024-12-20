@@ -4,14 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>Tag: 信息收集 | Hexo</title>
+  <title>day29_kls | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/index.html">
+  <meta name="description" content="课程内容文件上传原因 后端未做严格校验，导致用户上传恶意文件 危害 控制站点 资源耗尽 挖掘 传就完事啦 利用 上传webshell 防御 白名单 使用oss存储 存储与站点分离 绕过防御 php 使用其他后缀 .phtml .phar .php5 .php7 00截断 利用条件 配置文件关闭魔法引号 php版本&lt;5.3 上传路径可控 原理 php会将%00认为字符串的结尾 双写 图片马 图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day29_kls">
+<meta property="og:url" content="http://example.com/2024/12/20/day29_kls/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="课程内容文件上传原因 后端未做严格校验，导致用户上传恶意文件 危害 控制站点 资源耗尽 挖掘 传就完事啦 利用 上传webshell 防御 白名单 使用oss存储 存储与站点分离 绕过防御 php 使用其他后缀 .phtml .phar .php5 .php7 00截断 利用条件 配置文件关闭魔法引号 php版本&lt;5.3 上传路径可控 原理 php会将%00认为字符串的结尾 双写 图片马 图">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-12-19T16:28:30.000Z">
+<meta property="article:modified_time" content="2024-12-19T16:28:30.000Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="kls">
+<meta property="article:tag" content="文件上传">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -67,77 +73,92 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/12/10/day21_kls/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-12-09T16:54:04.000Z" itemprop="datePublished">Dec 10</time>
+        <section id="main"><article id="post-day29_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/20/day29_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-19T16:28:30.000Z" itemprop="datePublished">2024-12-20</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/12/10/day21_kls/">day21_kls</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      day29_kls
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/12/05/OneForAll/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-12-05T04:19:16.000Z" itemprop="datePublished">Dec 5</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/12/05/OneForAll/">OneForAll</a>
-    </h1>
-  
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="文件上传">文件上传</span></h3><p>原因</p>
+<p>后端未做严格校验，导致用户上传恶意文件</p>
+<p>危害</p>
+<p>控制站点</p>
+<p>资源耗尽</p>
+<p>挖掘</p>
+<p>传就完事啦</p>
+<p>利用</p>
+<p>上传webshell</p>
+<p>防御</p>
+<p>白名单</p>
+<p>使用oss存储</p>
+<p>存储与站点分离</p>
+<p>绕过防御</p>
+<p>php</p>
+<p>使用其他后缀</p>
+<p>.phtml</p>
+<p>.phar</p>
+<p>.php5</p>
+<p>.php7</p>
+<p>00截断</p>
+<p>利用条件</p>
+<p>配置文件关闭魔法引号</p>
+<p>php版本&lt;5.3</p>
+<p>上传路径可控</p>
+<p>原理</p>
+<p>php会将%00认为字符串的结尾</p>
+<p>双写</p>
+<p>图片马</p>
+<p>图片马生成</p>
+<p>图片马利用条件</p>
+<p>能够解析</p>
+<p>文件包含漏洞</p>
+<p>对抗压缩</p>
+<p>条件竞争</p>
+<p>php写文件</p>
+<p>apache</p>
+<p>修改配置文件，使其解析其他内容</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/12/04/day18_kls/" class="archive-article-date">
-  <time class="dt-published" datetime="2024-12-04T13:19:29.000Z" itemprop="datePublished">Dec 4</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/12/04/day18_kls/">day18_kls</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/20/day29_kls/" data-id="cm4w1kwbu0001kkiw0skkbgee" data-title="day29_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/12/20/upload-labs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">upload-labs</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
