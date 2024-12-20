@@ -69,6 +69,103 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day6_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/18/day6_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-18T10:46:30.000Z" itemprop="datePublished">2024-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/18/day6_kls/">day6_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="ssh服务">ssh服务</span></h3><p>服务<code>sshd</code>，端口<code>22</code>，配置文件:<code>/etc/ssh/sshd_config</code>，重要的相关文件<code>~/.ssh/authorized_keys</code></p>
+<h2><span id="cron">cron</span></h2><p>服务<code>cronie</code>等，重要的相关文件<code>/etc/crontab</code>,<code>/var/spool/cron/username</code></p>
+<h3><span id="smb">SMB</span></h3><h4><span id="服务端">服务端</span></h4><p>安装:<code>yum install samba</code></p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/04/11/archlinux%E4%B8%8Bsamba%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/">archlinux下samba服务搭建 | ziWindlu的博客</a></p>
+<p>端口<code>445,139</code></p>
+<p>配置文件:<code>/etc/samba/smb.conf</code></p>
+<p>smb用户管理:<code>pdbedit</code></p>
+<h4><span id="客户端">客户端</span></h4><p>smbclient连接smb<code>smbclient --user username //host/share_name</code></p>
+<p>挂载<code>mount -t cifs -o username=user_name,password=passwd //host/share_name /local_mount_point</code></p>
+<blockquote>
+<p>对于linux挂载需要安装<code>cifs-utils</code></p>
+</blockquote>
+<p>win(net use)命令行挂载<code>net use \\host\share_name password /user:user_name</code></p>
+<h4><span id="安全">安全</span></h4><p><strong>windows的安全策略</strong></p>
+<p>防火墙默认组织smb连接</p>
+<p>杀毒软件默认阻止smb连接</p>
+<p><strong>历史漏洞</strong></p>
+<p>ms17010(永恒之蓝)</p>
+<p>CVE-2017-7494</p>
+<h3><span id="ftp">ftp</span></h3><h4><span id="服务端">服务端</span></h4><p>安装:<code>yum install vsftpd</code></p>
+<p>端口:</p>
+<p>配置文件:<code>/etc/vsftpd/vsftpd.conf</code></p>
+<p><strong>常见配置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 匿名用户关闭</span><br><span class="line">anonymous_enable=NO</span><br><span class="line"># 匿名用户的ftp根目录(匿名用户开启才有效)</span><br><span class="line">anon_root=/opt/ftp</span><br><span class="line"># 允许本地用户登陆</span><br><span class="line">local_enable=YES</span><br><span class="line"># 允许写入</span><br><span class="line">write_enable=YES</span><br><span class="line"># 启用用户列表功能</span><br><span class="line">userlist_enable=YES</span><br><span class="line"># 用户列表文件</span><br><span class="line">userlist_file=/etc/vsftpd/vsftpd.userlist</span><br><span class="line"># 用户列表策略</span><br><span class="line">userlist_deny=NO</span><br><span class="line"># 禁止切换root目录</span><br><span class="line">chroot_local_user=YES</span><br><span class="line">allow_writeable_chroot=NO</span><br></pre></td></tr></table></figure>
+
+<p><strong>多用户列表配置</strong></p>
+<p>使用<code>pam</code></p>
+<p><code>auth required pam_listfile.so item=user sense=allow file=/etc/vsftpd/allow_list2 onerr=fail</code></p>
+<h4><span id="客户端">客户端</span></h4><p>ftp客户端<code>ftp host</code></p>
+<p>挂载<code>mount -t fuse.curlftpfs ftp://user_name:password@host /mnt_point</code><br>id:: 673af920-f628-4041-8bdb-9821d32774c0</p>
+<blockquote>
+<p>对于linux挂载需要安装<code>curlftpfs</code></p>
+</blockquote>
+<h4><span id="安全">安全</span></h4><p>linux默认会有对vsftp的安全配置，比如禁止root用户登陆</p>
+<h3><span id="散碎的知识点">散碎的知识点</span></h3><h4><span id="pip临时使用某镜像源">pip临时使用某镜像源</span></h4><p>清华源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple some-package</span><br></pre></td></tr></table></figure>
+
+<h4><span id="pyftpdlib使用">pyftpdlib使用</span></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pyftpdlib -u user_name -P password -p port --write</span><br></pre></td></tr></table></figure>
+
+<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="windows连接smb图形化">windows连接smb(图形化)</span></h3><p><img src="/../assets/Peek_2024-11-18_11-25_1731900373481_0.gif" alt="Peek 2024-11-18 11-25.gif"></p>
+<h3><span id="windows连接smbnet-use">windows连接smb(net use)</span></h3><p><img src="/../assets/Peek_2024-11-18_14-10_1731910306453_0.gif" alt="Peek 2024-11-18 14-10.gif"></p>
+<h3><span id="允许root用户登陆ftp配置登陆演示">允许root用户登陆ftp(配置+登陆演示)</span></h3><h4><span id="配置文件修改">配置文件修改</span></h4><p><code>/etc/vsftpd/vsftpd.conf</code>主配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable=NO</span><br><span class="line">userlist_enable=YES</span><br><span class="line">userlist_file=/etc/vsftpd/vsftpd.userlist</span><br><span class="line"># 配置策略为允许列表内登陆</span><br><span class="line">userlist_deny=NO</span><br><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br></pre></td></tr></table></figure>
+
+<p><code>/etc/vsftpd/vsftpd.userlist</code>配置文件编写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">other_user</span><br></pre></td></tr></table></figure>
+
+<h4><span id="允许root登陆">允许root登陆</span></h4><p>在vsftpd安装后，linux会在<code>/etc/pam.d/vsftpd</code>添加相关安全策略</p>
+<p><img src="/../assets/image_1731916314993_0.png" alt="image.png"></p>
+<p>修改<code>/etc/vsftpd/ftpusers</code>将里面的root删除，或者把这条策略删除</p>
+<p>现在你就可以愉快的连接了</p>
+<h4><span id="连接ftp">连接ftp</span></h4><p><img src="/../assets/ftp_1731917042437_0.gif" alt="ftp.gif"></p>
+<h3><span id="使用pyftpdlib开启ftp">使用pyftpdlib开启ftp</span></h3><p>服务端</p>
+<p><img src="/../assets/ftp-s_1731925849706_0.gif" alt="ftp-s.gif"></p>
+<p>客户端</p>
+<p><img src="/../assets/ftp-c_1731925795294_0.gif" alt="ftp-c.gif"></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/"> pypi | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/18/day6_kls/" data-id="cm4ocklea0016a3iwgss703iw" data-title="day6_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smb/" rel="tag">smb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-无代码鼠标党狂喜奶妈级教学从0开始手把手教你使用centos搭建dvwa" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/11/15/%E6%97%A0%E4%BB%A3%E7%A0%81%E9%BC%A0%E6%A0%87%E5%85%9A%E7%8B%82%E5%96%9C%E5%A5%B6%E5%A6%88%E7%BA%A7%E6%95%99%E5%AD%A6%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8centos%E6%90%AD%E5%BB%BAdvwa/" class="article-date">
@@ -739,7 +836,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/blog/" style="font-size: 13.33px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 13.33px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 13.33px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 16.67px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 13.33px;">xss</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 16.67px;">信息收集</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 13.33px;">文件上传</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+      <a href="/tags/blog/" style="font-size: 13.33px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 13.33px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 16.67px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 16.67px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 13.33px;">xss</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 16.67px;">信息收集</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 13.33px;">文件上传</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
     </div>
   </div>
 
@@ -761,6 +858,10 @@
       <ul>
         
           <li>
+            <a href="/2024/12/20/week6_kls_exam/">week6_kls_exam</a>
+          </li>
+        
+          <li>
             <a href="/2024/12/20/day29_kls/">day29_kls</a>
           </li>
         
@@ -774,10 +875,6 @@
         
           <li>
             <a href="/2024/12/17/day27_kls/">day27_kls</a>
-          </li>
-        
-          <li>
-            <a href="/2024/12/16/day26_kls/">day26_kls</a>
           </li>
         
       </ul>
