@@ -69,6 +69,79 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day24_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/12/day24_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-12T14:12:24.000Z" itemprop="datePublished">2024-12-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/12/day24_kls/">day24_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="sqlmap使用">sqlmap使用</span></h3><p>简单用法</p>
+<p><code>sqlmap -u url </code></p>
+<p>常用参数</p>
+<p><code>-p xx</code>选择参数</p>
+<p><code>--batch</code>使用sqlmap的默认策略</p>
+<p><code>--flush-session</code>强制刷新缓存</p>
+<p><code>--dbms</code>指定数据库类型</p>
+<p><code>-v</code>详情信息</p>
+<p><code>--tech TYPE</code>教sqlmap做事，让他使用你指定的注入类型</p>
+<p>sqlmap中的注入类型</p>
+<p>B布尔盲注</p>
+<p>E报错注入</p>
+<p>U联合查询注入</p>
+<p>S堆叠注入</p>
+<p>T时间盲注</p>
+<p>Q内联注入</p>
+<p>发现相关</p>
+<p><code>--level</code>等级，越高探测的内容越多</p>
+<p><code>--rask</code>风险，越高对目标伤害越高</p>
+<p>代理</p>
+<p><code>--proxy</code></p>
+<p>利用</p>
+<p><code>--sql-shell</code>交互式进入sql-shell</p>
+<h3><span id="宽字节注入">宽字节注入</span></h3><p>gbk编码由两个字节作为一个字符，后端开发者处理时没有正确的将gbk编码的字符过滤，但是mysql会将<code>%df%27</code>认为是<code>%df&#39;</code></p>
+<p>要求编码必须为gbk</p>
+<h3><span id="二次编码">二次编码</span></h3><p>后端开发者在过滤sql时错误的进行了编码，在对即将执行的sql语句进行了编码。例如将<code>%2527</code>变为了<code>%27</code>，在传入sql后，数据库将<code>%27</code>解析为<code>&#39;</code>，从而让攻击者绕过了后端程序对某些特殊字符的过滤。</p>
+<h3><span id="二阶注入">二阶注入</span></h3><p>多个接口间存在关联关系，开发者过于信任来源于数据库的信息，导致恶意的sql被拼接执行。</p>
+<h3><span id="堆叠注入">堆叠注入</span></h3><p>一般出现在asp+sqlserver组合中。使用<code>;</code>进行多个sql语句的执行</p>
+<h3><span id="insertupdatedelete注入">insert,update,delete注入</span></h3><p>注意闭合符号的判断。</p>
+<p>sql注入并非仅存在于查询，插入更新删除也会存在。</p>
+<blockquote>
+<p>注意，在不了解sql语句的执行逻辑前，谨慎做这些类型的sql注入。不然你会和凡凡一起踩缝纫机，喜提银手镯一对。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/12/day24_kls/" data-id="cm4ockle6000va3iwaec30ox2" data-title="day24_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-day23_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/12/11/day23_kls/" class="article-date">
@@ -689,99 +762,11 @@
 
 
   
-    <article id="post-linux常用的系统信息查看命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/30/linux%E5%B8%B8%E7%94%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time class="dt-published" datetime="2024-11-30T15:03:00.000Z" itemprop="datePublished">2024-11-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/30/linux%E5%B8%B8%E7%94%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/">linux常用的系统信息查看命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="引子">引子</span></h2><p>俺经常需要查看某个linux操作系统的版本信息，硬件信息，等等，做个备忘</p>
-<h2><span id="版本信息">版本信息</span></h2><h3><span id="查看操作系统版本">查看操作系统版本</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/os-release</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>实际上对于不同的发行版，他们可能会有自己的专属版本信息文件，<code>os-release</code>很通用，其他的我们不多作介绍了</p>
-</blockquote>
-<h3><span id="查看内核版本架构等">查看内核版本架构等</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>uname</code>提供了一些查看某些内容的参数，我们这里仅介绍了使用<code>-a</code>查看所有的</p>
-</blockquote>
-<h3><span id="检查发行版和版本号">检查发行版和版本号</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>lsb_release</code>也提供了一些查看某些内容的参数</p>
-</blockquote>
-<h2><span id="硬件信息">硬件信息</span></h2><h3><span id="硬件信息">硬件信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">list hardware</span></span><br><span class="line">lshw</span><br></pre></td></tr></table></figure>
-
-<h3><span id="cpu">cpu</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lscpu</span><br></pre></td></tr></table></figure>
-
-<h3><span id="硬盘块设备">硬盘(块设备)</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br></pre></td></tr></table></figure>
-
-<h3><span id="存储空间">存储空间</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">disk use 慢</span></span><br><span class="line">du -h</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">disk free 快</span></span><br><span class="line">df -h</span><br></pre></td></tr></table></figure>
-
-<h3><span id="内存">内存</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure>
-
-<h3><span id="pci设备">pci设备</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci</span><br></pre></td></tr></table></figure>
-
-<h3><span id="主板信息">主板信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmidecode -t baseboard</span><br></pre></td></tr></table></figure>
-
-<h2><span id="网络">网络</span></h2><h3><span id="网卡信息">网卡信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip a</span><br></pre></td></tr></table></figure>
-
-<h3><span id="路由信息">路由信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route -n</span><br></pre></td></tr></table></figure>
-
-<h3><span id="arp表">arp表</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp -a</span><br></pre></td></tr></table></figure>
-
-<h2><span id="其他系统信息">其他系统信息</span></h2><h3><span id="启动时间">启动时间</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uptime</span><br></pre></td></tr></table></figure>
-
-<h3><span id="系统日志">系统日志</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg</span><br></pre></td></tr></table></figure>
-
-<h3><span id="登陆用户">登陆用户</span></h3><p><strong>当前登陆用户</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w</span><br></pre></td></tr></table></figure>
-
-<p><strong>最后登陆用户</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">last</span><br></pre></td></tr></table></figure>
-
-<h2><span id="shell脚本">shell脚本</span></h2><p>为了方便查看，俺添加了vim的折叠</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       系统版本信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;操作系统版本：&quot;</span><br><span class="line">cat /etc/os-release</span><br><span class="line">echo</span><br><span class="line">echo &quot;内核版本：&quot;</span><br><span class="line">uname -r</span><br><span class="line">echo</span><br><span class="line">echo &quot;详细内核信息：&quot;</span><br><span class="line">uname -a</span><br><span class="line">echo</span><br><span class="line">echo &quot;发行版信息：&quot;</span><br><span class="line">lsb_release -a 2&gt;/dev/null || echo &quot;lsb_release 命令未找到，请安装 lsb-release 包&quot;</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       硬件信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;CPU 信息：&quot;</span><br><span class="line">lscpu</span><br><span class="line">echo</span><br><span class="line">echo &quot;内存信息：&quot;</span><br><span class="line">free -h</span><br><span class="line">echo</span><br><span class="line">echo &quot;硬盘信息：&quot;</span><br><span class="line">lsblk</span><br><span class="line">echo</span><br><span class="line">echo &quot;磁盘使用情况：&quot;</span><br><span class="line">df -h</span><br><span class="line">echo</span><br><span class="line">echo &quot;显卡信息：&quot;</span><br><span class="line">lspci | grep -i vga</span><br><span class="line">echo</span><br><span class="line">echo &quot;主板信息：&quot;</span><br><span class="line">sudo dmidecode -t baseboard 2&gt;/dev/null || echo &quot;请以 root 权限运行以查看主板信息&quot;</span><br><span class="line">echo</span><br><span class="line">echo &quot;硬件概览：&quot;</span><br><span class="line">sudo lshw -short 2&gt;/dev/null || echo &quot;请以 root 权限运行以查看硬件信息&quot;</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       网络信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;IP 地址：&quot;</span><br><span class="line">ip a</span><br><span class="line">echo</span><br><span class="line">echo &quot;路由表信息：&quot;</span><br><span class="line">ip route</span><br><span class="line">echo</span><br><span class="line">echo &quot;网络适配器信息：&quot;</span><br><span class="line">lspci | grep -i network</span><br><span class="line">echo</span><br><span class="line">echo &quot;测试网络连通性（到 example.com）：&quot;</span><br><span class="line">ping -c 4 example.com</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       其他系统信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;系统启动时间和负载：&quot;</span><br><span class="line">uptime</span><br><span class="line">echo</span><br><span class="line">echo &quot;当前登录用户：&quot;</span><br><span class="line">w</span><br><span class="line">echo</span><br><span class="line">echo &quot;系统日志（最近 10 行）：&quot;</span><br><span class="line">dmesg | tail -n 10</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       驱动和模块信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;已加载的内核模块：&quot;</span><br><span class="line">lsmod</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       脚本运行完成 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;完成所有信息收集&quot;</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/30/linux%E5%B8%B8%E7%94%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/" data-id="cm4ockled001ga3iw184c17zs" data-title="linux常用的系统信息查看命令" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -802,7 +787,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
     </div>
   </div>
 
@@ -812,7 +797,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/blog/" style="font-size: 13.33px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 13.33px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 16.67px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 16.67px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 13.33px;">xss</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 16.67px;">信息收集</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 13.33px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+      <a href="/tags/blog/" style="font-size: 13.33px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 13.33px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 16.67px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 16.67px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 13.33px;">xss</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 16.67px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 13.33px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
     </div>
   </div>
 
@@ -834,6 +819,10 @@
       <ul>
         
           <li>
+            <a href="/2024/12/24/day32_kls/">day32_kls</a>
+          </li>
+        
+          <li>
             <a href="/2024/12/23/day31_kls/">day31_kls</a>
           </li>
         
@@ -847,10 +836,6 @@
         
           <li>
             <a href="/2024/12/20/upload-labs/">upload-labs</a>
-          </li>
-        
-          <li>
-            <a href="/2024/12/18/day28_kls/">day28_kls</a>
           </li>
         
       </ul>

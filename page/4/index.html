@@ -69,6 +69,159 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day8_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/20/day8_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-20T12:35:43.000Z" itemprop="datePublished">2024-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/20/day8_kls/">day8_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="docker">docker</span></h3><h4><span id="安装docker-ce">安装docker-ce</span></h4><p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/04/10/centos%E5%AE%89%E8%A3%85docker%E4%BB%A5%E5%8F%8Adocker-compose/">centos安装docker以及docker-compose | ziWindlu的博客</a></p>
+<p>使用apt包管理器的发行版</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加公钥</span></span><br><span class="line">install -m 0755 -d /etc/apt/keyrings</span><br><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg</span><br><span class="line">sudo chmod a+r /etc/apt/keyrings/docker.gpg</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参加仓库</span></span><br><span class="line">echo \</span><br><span class="line">  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian \</span><br><span class="line">  &quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;)&quot; stable&quot; | \</span><br><span class="line">  tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装</span></span><br><span class="line">apt-get update</span><br><span class="line">apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>特殊的，如果你使用的kalilinux,那么在添加仓库这一步需要将<code>&quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;)&quot;</code>替换为<code>buster</code></p>
+</blockquote>
+<h4><span id="普通权限用户便捷地执行docker">普通权限用户便捷地执行docker</span></h4><p>方案1使用sudo无需输入密码</p>
+<p>编辑你的<code>sudoers</code></p>
+<p><code>user_name ALL=(root:root) NOPASSWD: /bin/docker</code></p>
+<p>这样你就可以愉快的<code>sudo docker</code>啦</p>
+<p>方案2加入docker用户组(好用，推荐)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">usermod -aG docker $USER</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">切换到docker用户组，不想执行这个命令的话，你可以重新登陆一下</span></span><br><span class="line">newgrp docker</span><br></pre></td></tr></table></figure>
+
+<p>这样你就可以愉快的使用<code>docker</code>啦，不用使用<code>sudo</code>哦</p>
+<h4><span id="docker添加代理">docker添加代理</span></h4><p>编辑<code>/etc/docker/daemon.json</code>配置docker的代理</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;proxies&quot;: &#123;</span><br><span class="line">		&quot;http-proxy&quot;: &quot;your_proxy&quot;,</span><br><span class="line">		&quot;https-proxy&quot;: &quot;your_proxy&quot;,</span><br><span class="line">		&quot;no-proxy&quot;: &quot;your_no_proxy_doman,other_doman&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<h4><span id="使用">使用</span></h4><h5><span id="概念">概念</span></h5><p>容器(CONTAINER)、镜像(IMAGE)</p>
+<h5><span id="镜像相关操作">镜像相关操作</span></h5><p>搜索镜像<code>docker search IMAGE</code></p>
+<p>拉取镜像<code>docker pull IMAGE</code></p>
+<h5><span id="创建">创建</span></h5><p><code>docker run [options] IMAGE [command [args]]</code></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-d</code></td>
+<td>以守护程序运行(后台运行)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>创建挂载绑定</td>
+<td><code>docker run -v /host/path:/container/path IMAGE</code></td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>端口映射</td>
+<td><code>docker run -p host_port:container_port IMAGE</code></td>
+</tr>
+<tr>
+<td><code>--name</code></td>
+<td>指定容器名</td>
+<td><code>docker -run --name container_name IMAGE</code></td>
+</tr>
+<tr>
+<td><code>--restart</code></td>
+<td>重启策略</td>
+<td>常用的<code>always</code>,<code>no</code></td>
+</tr>
+<tr>
+<td><code>-e</code></td>
+<td>设置环境变量</td>
+<td><code>docker run -e ENV_KEY=&quot;env_value&quot; IMAGE</code></td>
+</tr>
+<tr>
+<td><code>--rm</code></td>
+<td>容器退出后删除</td>
+<td><code>docker run --rm busybox ping baidu.com </code></td>
+</tr>
+</tbody></table>
+<h5><span id="修改">修改</span></h5><p><code>docker update [options] CONTAINER [CONTAINERS]</code></p>
+<h5><span id="删除">删除</span></h5><p>删除容器<code>docker rm CONTAINER</code></p>
+<p>删除镜像<code>docker rmi IMAGE</code></p>
+<h5><span id="打包与导入">打包与导入</span></h5><p><strong>镜像</strong></p>
+<p>打包:<code>docker save -o xx.tar IMAGE</code></p>
+<p>导入:<code>docker load -i xx.tar</code></p>
+<p><strong>容器</strong></p>
+<p>打包:<code>docker export -o xx.tar CONTAINER</code></p>
+<p>导入:<code>docker import xx.tar IMAGE</code></p>
+<h5><span id="docker网络">docker网络</span></h5><p>TODO [[docker网络]]</p>
+<h5><span id="日志">日志</span></h5><p><code>docker logs -f CONTAINER</code></p>
+<h4><span id="docker添加kitty集成">docker添加kitty集成</span></h4><p>step1：将<code>kitten</code>可执行文件放到docker的<code>/bin</code>或其他可执行目录中</p>
+<p>step2：接下来愉快的执行<code>docker exec -it container_name kitten run-shell --shell=/path/to/shell</code>啦</p>
+<h3><span id="散碎的知识点">散碎的知识点</span></h3><h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="使用docker启动一个nginx">使用docker启动一个nginx</span></h3><h4><span id="寻找可用镜像">寻找可用镜像</span></h4><p>在dockerhub中搜索ngnix</p>
+<p><img src="/../assets/image_1732080453573_0.png" alt="image.png"></p>
+<p>我们使用官方镜像</p>
+<h4><span id="拉取镜像">拉取镜像</span></h4><p><img src="/../assets/image_1732080547597_0.png" alt="image.png"></p>
+<h4><span id="创建docker容器">创建docker容器</span></h4><p>nginx文档给出了一个简单的命令</p>
+<p><img src="/../assets/image_1732081649447_0.png" alt="image.png"></p>
+<h4><span id="测试">测试</span></h4><p>在目录下创建一个<code>index.html</code></p>
+<p><img src="/../assets/image_1732081849987_0.png" alt="image.png">{:height 132, :width 687}</p>
+<p>访问<code>localhost:8080</code></p>
+<p><img src="/../assets/2024-11-20_13-51_1732081933535_0.jpg" alt="2024-11-20_13-51.jpg"><br>id:: 673d78e0-9c74-47bd-b3eb-5f9e34550dff</p>
+<h3><span id="使用docker搭建lampdvwa">使用docker搭建lamp+dvwa</span></h3><p>拉取lamp</p>
+<p><code>docker pull mattrayner/lamp:latest-1804</code></p>
+<p><img src="/../assets/image_1732103257475_0.png" alt="image.png"></p>
+<p>启动容器</p>
+<p><code>docker run -p &quot;80:80&quot; -v $&#123;PWD&#125;/app:/app mattrayner/lamp:latest-1804</code></p>
+<p><img src="/../assets/image_1732103526988_0.png" alt="image.png"></p>
+<p>我们发现了mysql的密码</p>
+<p><img src="/../assets/image_1732103997654_0.png" alt="image.png"></p>
+<p>下一步我们要修改mysql密码，我们直接使用phpmyadmin，账号为admin,密码为mysql的密码</p>
+<p><img src="/../assets/image_1732103618719_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732104065764_0.png" alt="image.png"></p>
+<p>下载dvwa源码并传到目标服务器</p>
+<p><img src="/../assets/image_1732104266691_0.png" alt="image.png"></p>
+<p>解压并复制一份dvwa配置</p>
+<p><img src="/../assets/image_1732104352245_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732104386233_0.png" alt="image.png"></p>
+<p>修改dvwa数据库配置</p>
+<p><img src="/../assets/image_1732104739475_0.png" alt="image.png"></p>
+<p>在网页端初始化dvwa</p>
+<p><img src="/../assets/image_1732104768661_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732104791127_0.png" alt="image.png"></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><h2><span id="参考">参考</span></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/20/day8_kls/" data-id="cm4ocklec001ba3iwgl44apwu" data-title="day8_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-day7_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/11/19/day7_kls/" class="article-date">
@@ -950,53 +1103,11 @@
 
 
   
-    <article id="post-day1_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/12/day1_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-11-12T02:58:00.000Z" itemprop="datePublished">2024-11-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/12/day1_kls/">day1_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><p>vmware安装</p>
-<p>centos7安装</p>
-<h2><span id="思考">思考</span></h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/12/day1_kls/" data-id="cm4ockldz000ha3iw2zft84e2" data-title="day1_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -1017,7 +1128,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
     </div>
   </div>
 
@@ -1027,7 +1138,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/blog/" style="font-size: 13.33px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 13.33px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 16.67px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 16.67px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 13.33px;">xss</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 16.67px;">信息收集</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 13.33px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+      <a href="/tags/blog/" style="font-size: 13.33px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 13.33px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 16.67px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 16.67px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 13.33px;">xss</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 16.67px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 13.33px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
     </div>
   </div>
 
@@ -1049,6 +1160,10 @@
       <ul>
         
           <li>
+            <a href="/2024/12/24/day32_kls/">day32_kls</a>
+          </li>
+        
+          <li>
             <a href="/2024/12/23/day31_kls/">day31_kls</a>
           </li>
         
@@ -1062,10 +1177,6 @@
         
           <li>
             <a href="/2024/12/20/upload-labs/">upload-labs</a>
-          </li>
-        
-          <li>
-            <a href="/2024/12/18/day28_kls/">day28_kls</a>
           </li>
         
       </ul>
