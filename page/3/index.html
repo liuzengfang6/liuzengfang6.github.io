@@ -69,6 +69,84 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day21_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/10/day21_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-09T16:54:04.000Z" itemprop="datePublished">2024-12-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/10/day21_kls/">day21_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="信息收集dirsearch">信息收集dirsearch</span></h3><h4><span id="dirsearch会收集什么东西">dirsearch会收集什么东西</span></h4><p>源代码备份文件，路径等敏感信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python dirsearch.py -u url</span><br></pre></td></tr></table></figure>
+
+<h3><span id="信息收集之git泄漏">信息收集之git泄漏</span></h3><p>当发现了<code>.git</code>泄漏时，需要使用一些工具进行恢复</p>
+<h4><span id="githack">githack</span></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python GitHack.py url</span><br></pre></td></tr></table></figure>
+
+<h3><span id="java信息泄漏">java信息泄漏</span></h3><p>actuator信息泄漏</p>
+<p>接口文档泄漏</p>
+<h4><span id="jdumpspider敏感信息提取工具">JDumpSpider敏感信息提取工具</span></h4><p>如果你获得了heapdump</p>
+<p>可以使用这款工具来提取其敏感信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar JDumpSpider-1.1-SNAPSHOT-full.jar heapdump</span><br></pre></td></tr></table></figure>
+
+<h3><span id="信息泄漏之burpsuite插件">信息泄漏之burpsuite插件</span></h3><h4><span id="routevulscan">RouteVulScan</span></h4><p>这款插件可以帮自动扫描路径，可以自己手动配置规则</p>
+<h4><span id="hae">HaE</span></h4><p>这款插件提供了敏感信息收集，手机号码、邮箱、api、等等，也提供了规则配置。提供了高亮，非常好用</p>
+<h3><span id="信息泄漏之前端代码">信息泄漏之前端代码</span></h3><p>通过前端寻找后端接口等敏感信息。</p>
+<h4><span id="浏览器插件findsomething">浏览器插件findsomething</span></h4><p>点击即用</p>
+<h3><span id="企业信息收集">企业信息收集</span></h3><p>收集企业资产，主要内容：网站、app、公众号、小程序</p>
+<p><strong>常用的信息收集网站：</strong></p>
+<ol>
+<li><p>爱企查</p>
+</li>
+<li><p>企查查</p>
+</li>
+<li><p>小蓝本</p>
+</li>
+<li><p>阿拉丁</p>
+</li>
+</ol>
+<p><strong>其他途径</strong></p>
+<p>微信搜索</p>
+<p>搜狗等国内搜索引擎</p>
+<p><strong>app收集途径</strong></p>
+<p>7麦网</p>
+<h3><span id="快速入门php">快速入门php</span></h3><h4><span id="一个简单的htmlphp登陆逻辑实现">一个简单的html+php登陆逻辑实现</span></h4><p>html代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!-- 登陆到login.php--&gt;</span><br><span class="line">    &lt;form action=&quot;login.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">        用户名:&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br&gt;</span><br><span class="line">        密码:&lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;&lt;br&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;&lt;/input&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">    &lt;form action=&quot;login.php&quot; method=&quot;get&quot;&gt;</span><br><span class="line">        用户名:&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br&gt;</span><br><span class="line">        密码:&lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;&lt;br&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;&lt;/input&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>php代码2</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="variable">$username</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line"><span class="variable">$password</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$username</span> == <span class="string">&quot;admin&quot;</span> &amp;&amp; <span class="variable">$password</span> == <span class="string">&quot;admin&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Login Success&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Login Failed&quot;</span>;</span><br><span class="line">&#125; <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/10/day21_kls/" data-id="cm4ockle2000la3iw2xi9co4w" data-title="day21_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-day19_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/12/05/day19_kls/" class="article-date">
@@ -1278,97 +1356,6 @@
 
 
   
-    <article id="post-day13_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/28/day13_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-11-28T00:50:44.000Z" itemprop="datePublished">2024-11-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/28/day13_kls/">day13_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="windows">windows</span></h3><p>值得注意的几点:win不区分大小写，win的路径应该这么写<code>\xxx\xxx</code></p>
-<h3><span id="windows常用的东西">windows常用的东西</span></h3><p>注册表<code>regedit</code></p>
-<p>服务<code>services.msc</code></p>
-<p>计算机管理<code>compmgmt.msc</code></p>
-<p>windows配置:<code>msconfig</code>记住他就够了</p>
-<p>远程连接<code>mstsc</code></p>
-<h3><span id="windows命令行">windows命令行</span></h3><h4><span id="cmd">cmd</span></h4><h5><span id="常用命令">常用命令</span></h5><p><code>cd</code>切换目录，特殊的如果进入其他盘符应该这样<code>X:</code>而不是<code>cd X:</code>，x为你向进入的盘符</p>
-<p><code>dir</code>列出文件，列出隐藏文件<code>-a</code></p>
-<p><code>findstr</code>查找内容类似grep</p>
-<p><code>netstat -ano</code>查看网络连接</p>
-<p><code>ipconfig</code>网卡信息</p>
-<p><code>type</code>输出文件内容</p>
-<p><code>move</code>移动，重命名文件</p>
-<p><code>copy</code>复制文件</p>
-<h5><span id="小技巧">小技巧</span></h5><p>使用管理员终端：</p>
-<p>方法1：<code>win+x</code>然后你就会看到管理员终端了，点击它</p>
-<p>方法2：找到<code>cmd.exe</code>右键以管理员身份运行</p>
-<h4><span id="powershell">powershell</span></h4><p>兼容部分cmd。</p>
-<h3><span id="用户和用户组管理">用户和用户组管理</span></h3><h4><span id="用户相关操作">用户相关操作</span></h4><p><strong>查看用户信息</strong>:<code>net user [USERNAME]</code></p>
-<p><strong>创建新用户</strong>:<code>net user USERNAME PASSWORD /add</code></p>
-<p><strong>删除用户</strong>:<code>net user USERNAME /delete</code></p>
-<p><strong>修改密码</strong>:<code>net user USERNAME NEW_PASSWORD</code></p>
-<p><strong>启用&#x2F;禁用用户</strong>:<code>net user USERNAME /active:&lt;yes/no&gt;</code></p>
-<h4><span id="用户组相关操作">用户组相关操作</span></h4><p><strong>查看用户组</strong>，<strong>新建用户组</strong>，<strong>删除用户组</strong>和用户的操作相同，将<code>net user</code>改为<code>net localgroup</code>即可</p>
-<p><strong>添加用户到用户组</strong>:<code>net localgroup GROUPNAME USERNAME /add</code></p>
-<p><strong>从用户组中删除用户</strong>:<code>net localgroup GROUPNAME USERNAME /delete</code></p>
-<h3><span id="文件共享">文件共享</span></h3><p>windows默认的smb仅有administrator可以登陆，默认情况下administrator没有密码</p>
-<h3><span id="windows中rdp安全">windows中rdp安全</span></h3><p>一般来说，如果需要rdp连接。要选择这个</p>
-<p><img src="/../assets/image_1732706692033_0.png" alt="image.png"></p>
-<h3><span id="phpstudy部署dvwa">phpstudy部署dvwa</span></h3><p>安装phpstudy</p>
-<p>启动phpstudy</p>
-<p>下载dvwa源码</p>
-<p>拷贝dvwa配置文件</p>
-<p>修改dvwa配置文件</p>
-<p>访问相关路径，创建数据库</p>
-<h3><span id="phpstudy安全配置">phpstudy安全配置</span></h3><h4><span id="数据库mysql">数据库mysql</span></h4><p>仅监听本地</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">bind-address = 127.0.0.1</span><br></pre></td></tr></table></figure>
-
-<h4><span id="中间件">中间件</span></h4><h4><span id="nginx">nginx</span></h4><p>仅监听本地</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 127.0.0.1:80; # 仅监听本地的 80 端口</span><br><span class="line">    server_name localhost;</span><br><span class="line">    location / &#123;</span><br><span class="line">        root /var/www/html;</span><br><span class="line">        index index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4><span id="apache">apache</span></h4><p>仅监听本地</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Listen 127.0.0.1:80</span><br></pre></td></tr></table></figure>
-
-<h4><span id="phpstudy部署sqli-labs">phpstudy部署sqli-labs</span></h4><h4><span id="源码下载">源码下载</span></h4><p><a target="_blank" rel="noopener" href="https://github.com/Audi-1/sqli-labs">GitHub Audi-1&#x2F;sqli-labs: SQLI labs to test error based, Blind boolean based, Time based.</a></p>
-<p>下载后将其扔到phpstudy的www目录。</p>
-<h4><span id="修改配置">修改配置</span></h4><p>readme是洋文，看不太懂，翻译一下。告诉我们修改<code>sql-connections/db-creds.inc</code></p>
-<p><img src="/../assets/image_1732703485449_0.png" alt="image.png"></p>
-<p>修改</p>
-<p><img src="/../assets/image_1732704271404_0.png" alt="image.png"></p>
-<h4><span id="大功告成直接访问">大功告成，直接访问</span></h4><p><img src="/../assets/image_1732697571527_0.png" alt="image.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/28/day13_kls/" data-id="cm4ockldq0005a3iw41xh94kf" data-title="day13_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1384,7 +1371,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/xam/">xam</a></li></ul>
     </div>
   </div>
 
@@ -1413,7 +1400,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
     </div>
   </div>
 
@@ -1424,6 +1411,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2025/01/03/week8_kls_exam/">week8_kls_exam</a>
+          </li>
         
           <li>
             <a href="/2024/12/30/ssrf-vuls/">ssrf-vuls</a>
@@ -1441,10 +1432,6 @@
             <a href="/2024/12/26/sqli-labs/">sqli-labs</a>
           </li>
         
-          <li>
-            <a href="/2024/12/25/day33_kls/">day33_kls</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1458,7 +1445,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2024 John Doe<br>
+      &copy; 2025 John Doe<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

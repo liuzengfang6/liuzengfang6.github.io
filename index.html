@@ -69,6 +69,81 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-week8_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/01/03/week8_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2025-01-03T08:01:39.000Z" itemprop="datePublished">2025-01-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/xam/">xam</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/01/03/week8_kls_exam/">week8_kls_exam</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="题目1">题目1</span></h2><p>555不是管理员</p>
+<p><img src="/../assets/image_1735884082921_0.png" alt="image.png"></p>
+<p>看了看曲奇饼，发现是base64的用户名，直接伪造一个</p>
+<p><img src="/../assets/image_1735884097807_0.png" alt="image.png"></p>
+<p>反弹个shell拿flag</p>
+<p><code>flag&#123;4833f846682676c86360fa717f423c88&#125;</code></p>
+<h2><span id="题目2">题目2</span></h2><p>早知道还是原道，直接购买-10000个原道，商家给了返利，含泪买下flag</p>
+<p><img src="/../assets/image_1735883456624_0.png" alt="image.png"></p>
+<p><code>flag&#123;fb5c50b9dda4ddacaedf622878199ebc&#125;</code></p>
+<h2><span id="题目3">题目3</span></h2><p>扫到了admin.php</p>
+<p><img src="/../assets/image_1735889313448_0.png" alt="image.png"></p>
+<p>但是得登陆，俺登陆不上去</p>
+<p>尝试万能密码</p>
+<p><img src="/../assets/image_1735891183438_0.png" alt="image.png"></p>
+<p>发现admin.php能看了</p>
+<p><img src="/../assets/image_1735888946856_0.png" alt="image.png"></p>
+<p><code>flag&#123;b6acd4cdd256c54704b09f12c1585a51&#125;</code></p>
+<h2><span id="题目4">题目4</span></h2><p>猜不到密码改改曲奇饼</p>
+<p><img src="/../assets/image_1735884477116_0.png" alt="image.png"></p>
+<p>看看upload.php的代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//session_start();</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 检查用户是否登录</span></span><br><span class="line"><span class="comment">//if (!isset($_SESSION[&#x27;user_id&#x27;])) &#123;</span></span><br><span class="line"><span class="comment">//    header(&quot;Location: login.php&quot;);</span></span><br><span class="line"><span class="comment">//    exit();</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_COOKIE</span>[<span class="string">&quot;is_login&quot;</span>] == <span class="string">&quot;false&quot;</span>) &#123;</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Location: login.php&quot;</span>);</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 定义上传文件的目标目录</span></span><br><span class="line"><span class="variable">$target_dir</span> = <span class="string">&quot;uploads/&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_METHOD&#x27;</span>] == <span class="string">&#x27;POST&#x27;</span> &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;fileToUpload&#x27;</span>])) &#123;</span><br><span class="line">    <span class="comment">// 🐮🍺 🐮🍺 🐮🍺 🐮🍺 🐮🍺 🐮🍺</span></span><br><span class="line">    <span class="variable">$filename</span> = <span class="title function_ invoke__">date</span>(<span class="string">&quot;Ymd&quot;</span>).<span class="title function_ invoke__">rand</span>(<span class="number">000</span>,<span class="number">999</span>).<span class="title function_ invoke__">basename</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;fileToUpload&#x27;</span>][<span class="string">&#x27;name&#x27;</span>]);</span><br><span class="line">    <span class="variable">$target_file</span> = <span class="variable">$target_dir</span> . <span class="variable">$filename</span>;</span><br><span class="line">    <span class="variable">$uploadOk</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="variable">$imageFileType</span> = <span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">pathinfo</span>(<span class="variable">$target_file</span>, PATHINFO_EXTENSION));</span><br><span class="line">    <span class="comment">// 检查文件大小（限制 5MB）</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">&#x27;fileToUpload&#x27;</span>][<span class="string">&#x27;size&#x27;</span>] &gt; <span class="number">5000000</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Sorry, your file is too large.&quot;</span>;</span><br><span class="line">        <span class="variable">$uploadOk</span> = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 只允许特定类型的文件上传</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$imageFileType</span> != <span class="string">&quot;jpg&quot;</span> &amp;&amp; <span class="variable">$imageFileType</span> != <span class="string">&quot;jpeg&quot;</span> &amp;&amp; <span class="variable">$imageFileType</span> != <span class="string">&quot;zip&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Sorry,  files are allowed.&quot;</span>;</span><br><span class="line">        <span class="variable">$uploadOk</span> = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 检查 $uploadOk 是否为 0（表示文件上传失败）</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$uploadOk</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Sorry, your file was not uploaded.&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 尝试上传文件</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;fileToUpload&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>], <span class="variable">$target_file</span>)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;The file has been uploaded.&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;Sorry, there was an error uploading your file.&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;File Upload&lt;/title&gt;</span><br><span class="line">    &lt;link rel=<span class="string">&quot;stylesheet&quot;</span> href=<span class="string">&quot;style.css&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">include</span>(<span class="string">&quot;includes/header.php&quot;</span>); <span class="meta">?&gt;</span></span><br><span class="line">&lt;h2&gt;文件上传&lt;/h2&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;upload.php&quot;</span> method=<span class="string">&quot;post&quot;</span> enctype=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span><br><span class="line">    选择一个文件上传&lt;br/&gt;</span><br><span class="line">    &lt;p style=<span class="string">&quot;color: red&quot;</span>&gt;提示：flag文件在 /flag.txt&lt;/p&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;fileToUpload&quot;</span> id=<span class="string">&quot;fileToUpload&quot;</span> required&gt;</span><br><span class="line">    &lt;button type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;Upload File&quot;</span>&gt;上传&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">include</span>(<span class="string">&quot;includes/footer.php&quot;</span>); <span class="meta">?&gt;</span></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>得爆破，开干</p>
+<p><img src="/../assets/image_1735885042570_0.png" alt="image.png"></p>
+<blockquote>
+<p>这个写错了，实际上文件应该长得这样<code>年月日xxxfilename</code><br>          xxx为000-999,filename为文件名</p>
+</blockquote>
+<p>上传zip使用phar解析，使用蚂剑连接</p>
+<p><img src="/../assets/image_1735889217404_0.png" alt="image.png"></p>
+<p>添加曲奇饼，结束</p>
+<p><code>flag&#123;e723e6038bc25659e0675ba068e041a2&#125;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/01/03/week8_kls_exam/" data-id="cm5ggv0is0000hciwc6ku9p2w" data-title="week8_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-ssrf-vuls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/12/30/ssrf-vuls/" class="article-date">
@@ -832,75 +907,6 @@
 
 
   
-    <article id="post-upload-labs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/20/upload-labs/" class="article-date">
-  <time class="dt-published" datetime="2024-12-19T16:28:13.000Z" itemprop="datePublished">2024-12-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/web/">web</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/20/upload-labs/">upload-labs</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="搭建">搭建</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">去gayhub下载，精简包</span><br></pre></td></tr></table></figure>
-
-<h2><span id="过关">过关</span></h2><h3><span id="关卡1">关卡1</span></h3><p>没什么好说的，js校验，栓条狗都能</p>
-<h3><span id="关卡2">关卡2</span></h3><p>MIME类型绕过，bp抓包，一抓一个准</p>
-<h3><span id="关卡3">关卡3</span></h3><p>未严格校验，传<code>phtml</code></p>
-<h3><span id="关卡4">关卡4</span></h3><p>中间件是apache,我们上传<code>.htaccess</code>和<code>shell.png</code>让apache解析png</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sethandler application/x-httpd-php</span><br></pre></td></tr></table></figure>
-
-<h3><span id="关卡5-9">关卡5-9</span></h3><p>待定，后面写</p>
-<h3><span id="关卡10">关卡10</span></h3><p>垃圾的双写</p>
-<h3><span id="关卡11-12">关卡11-12</span></h3><p>00截断，错误的php配置，会将<code>00(ASCII)</code>认为是文件的结束。</p>
-<p>当上传文件带路径时，php会将<code>abc/a.php%00photo.png</code>认为是<code>abc/a.php</code></p>
-<h3><span id="关卡13-16">关卡13-16</span></h3><p>图片马，前提是存在文件解析漏洞，或文件包含漏洞，通过这些漏洞将图片解析为php</p>
-<p>生成图片马</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat pic.png shell.php &gt; webshell.png</span><br></pre></td></tr></table></figure>
-
-<p>压缩的图片马</p>
-<p>这个生成俺不会</p>
-<h3><span id="关卡17">关卡17</span></h3><p>条件竞争，校验逻辑错误的将文件临时存储起来时，这时我们碰巧访问到该文件，则会执行</p>
-<p>便捷的请求方式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while true; do</span><br><span class="line">	curl xxx</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意，不要将curl放到后台运行，会卡，如果非要，那么建议指定次数</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/20/upload-labs/" data-id="cm4w1kwbs0000kkiwbuvi5d0o" data-title="upload-labs" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/" rel="tag">blog</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -916,7 +922,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/xam/">xam</a></li></ul>
     </div>
   </div>
 
@@ -945,7 +951,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
     </div>
   </div>
 
@@ -956,6 +962,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2025/01/03/week8_kls_exam/">week8_kls_exam</a>
+          </li>
         
           <li>
             <a href="/2024/12/30/ssrf-vuls/">ssrf-vuls</a>
@@ -973,10 +983,6 @@
             <a href="/2024/12/26/sqli-labs/">sqli-labs</a>
           </li>
         
-          <li>
-            <a href="/2024/12/25/day33_kls/">day33_kls</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -990,7 +996,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2024 John Doe<br>
+      &copy; 2025 John Doe<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
