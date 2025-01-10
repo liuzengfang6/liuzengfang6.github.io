@@ -69,6 +69,93 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day22_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/10/day22_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-10T09:50:47.000Z" itemprop="datePublished">2024-12-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/10/day22_kls/">day22_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="数据库mysql">数据库(mysql)</span></h3><p><strong>数据库备份</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u username -p database_name &gt; backup_file.sql</span><br></pre></td></tr></table></figure>
+
+<p><strong>数据库恢复</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u username -p database_name &lt; backup_file.sql</span><br></pre></td></tr></table></figure>
+
+<h3><span id="漏洞学习方法">漏洞学习方法</span></h3><p>如何产生的</p>
+<p>会产生何种危害</p>
+<p>如何挖掘</p>
+<p>如何利用</p>
+<p>如何防御，如何修复</p>
+<p>如何绕过防御</p>
+<h3><span id="sql注入">sql注入</span></h3><h4><span id="产生的原因">产生的原因</span></h4><p>开发者没有对传入数据进行严格的校验过滤，导致恶意sql语句被拼接到sql语句中执行。</p>
+<h4><span id="危害">危害</span></h4><p>泄漏信息，控制目标服务器。</p>
+<h4><span id="挖掘">挖掘</span></h4><h5><span id="白盒">白盒</span></h5><p>查看可控参数是否被严格过滤。</p>
+<h5><span id="黑盒">黑盒</span></h5><p>扫描器测试所有参数。</p>
+<p>手工测试：寻找可能与数据库交互的参数</p>
+<h4><span id="利用">利用</span></h4><p>利用</p>
+<p>mysql</p>
+<p>元数据</p>
+<p>information_schema</p>
+<p>数据库</p>
+<p>UNION SELECT NULL, schema_name FROM information_schema.schemata–</p>
+<p>表名</p>
+<p>UNION SELECT NULL, table_name FROM information_schema.tables WHERE table_schema &#x3D; ‘your_database_name’–</p>
+<p>列名</p>
+<p>UNION SELECT NULL, column_name FROM information_schema.columns WHERE table_name &#x3D; ‘your_table_name’–</p>
+<p>查询注入点列数</p>
+<p>group by 2 –</p>
+<p>查找回显位</p>
+<p>union select 1,2,3,4</p>
+<p>常用函数</p>
+<p>USER()</p>
+<p>CONCAT()</p>
+<p>CURRENT_USER()</p>
+<p>VERSION()</p>
+<p>盲注用</p>
+<p>SUBSTRING()</p>
+<p>CHAR_LENGTH()</p>
+<p>LENGTH()</p>
+<p>ASCII()</p>
+<h3><span id="黑盒测试之手工注入">黑盒测试之手工注入</span></h3><h4><span id="注入点测试">注入点测试</span></h4><p>闭合符号，<code>&#39;</code>,<code>&quot;</code>,<code>)</code></p>
+<h5><span id="报错测试">报错测试</span></h5><p>将闭合符号拼接到</p>
+<h5><span id="and测试">and测试</span></h5><p>需要有正确的值，拼接后输入正确的值，服务器仍能返回与之前相同的内容</p>
+<h5><span id="or测试">or测试</span></h5><p><code>&#39; or 1=1</code></p>
+<h5><span id="sleep测试">sleep测试</span></h5><p><code>&#39; or sleep(3)</code></p>
+<h4><span id="分类">分类</span></h4><p><img src="/../assets/image_1733823916686_0.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/10/day22_kls/" data-id="cm4ockle3000oa3iwe08gbr1j" data-title="day22_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-day21_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/12/10/day21_kls/" class="article-date">
@@ -1118,244 +1205,6 @@
 
 
   
-    <article id="post-day14_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/29/day14_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-11-29T00:55:23.000Z" itemprop="datePublished">2024-11-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/29/day14_kls/">day14_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="计算机网络模型">计算机网络模型</span></h3><h4><span id="osiampamptcpx2fip">OSI&amp;&amp;TCP&#x2F;IP</span></h4><p><img src="/../assets/image_1732792214231_0.png" alt="image.png"></p>
-<h4><span id="设备网络安全相关">设备(网络安全相关)</span></h4><p>应用层: WAF、IPS&#x2F;IDS等</p>
-<p>网络层:防火墙、VPN、IPS&#x2F;IDS等</p>
-<p>传输层:防火墙、VPN、IPS&#x2F;IDS等</p>
-<h4><span id="传输层常见协议">传输层常见协议</span></h4><p>ARP、ICMP、IP</p>
-<h4><span id="网络层常见协议">网络层常见协议</span></h4><p>TCP、UDP、OSPF</p>
-<h4><span id="应用层常见协议及其默认端口">应用层常见协议及其默认端口</span></h4><table>
-<thead>
-<tr>
-<th>协议</th>
-<th>说明</th>
-<th>端口号</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>FTP</td>
-<td>文件传输协议</td>
-<td>21</td>
-</tr>
-<tr>
-<td>SFTP</td>
-<td>基于ssh的文件传输协议</td>
-<td>22</td>
-</tr>
-<tr>
-<td>FTPS</td>
-<td>支持SSL&#x2F;TLS的文件传输协议</td>
-<td>21&#x2F;990</td>
-</tr>
-<tr>
-<td>SMTP</td>
-<td>发送邮件协议</td>
-<td>25、587(TLS)</td>
-</tr>
-<tr>
-<td>IMAP</td>
-<td>收取邮件协议</td>
-<td>143 、993 (TLS)</td>
-</tr>
-<tr>
-<td>POP3</td>
-<td>收取邮件协议</td>
-<td>110 、995 (TLS)</td>
-</tr>
-<tr>
-<td>SSH</td>
-<td>安全远程登录协议</td>
-<td>22</td>
-</tr>
-<tr>
-<td>Telnet</td>
-<td>非加密的远程登录协议</td>
-<td>23</td>
-</tr>
-<tr>
-<td>RDP</td>
-<td>远程桌面协议</td>
-<td>3389</td>
-</tr>
-<tr>
-<td>VNC</td>
-<td>远程桌面</td>
-<td>5900</td>
-</tr>
-<tr>
-<td>MySQL</td>
-<td>MySQL 数据库访问协议</td>
-<td>3306</td>
-</tr>
-<tr>
-<td>PostgreSQL</td>
-<td>PostgreSQL 数据库访问协议</td>
-<td>5432</td>
-</tr>
-<tr>
-<td>MongoDB</td>
-<td>MongoDB 数据库协议</td>
-<td>27017</td>
-</tr>
-<tr>
-<td>Redis</td>
-<td>Redis 数据库协议</td>
-<td>6379</td>
-</tr>
-<tr>
-<td>MsSQL</td>
-<td>MicroSoft数据库协议</td>
-<td>1433</td>
-</tr>
-<tr>
-<td>Oracle</td>
-<td>甲骨文数据库协议</td>
-<td>1521</td>
-</tr>
-<tr>
-<td>HTTP</td>
-<td>超文本传输协议</td>
-<td>80</td>
-</tr>
-<tr>
-<td>HTTPS</td>
-<td>加密的 HTTP 协议</td>
-<td>443</td>
-</tr>
-<tr>
-<td>SMB</td>
-<td>用于共享文件、打印机</td>
-<td>445</td>
-</tr>
-<tr>
-<td>NFS</td>
-<td>网络文件系统协议</td>
-<td>2049</td>
-</tr>
-</tbody></table>
-<p>常见的服务及其默认端口号</p>
-<table>
-<thead>
-<tr>
-<th>服务</th>
-<th>端口号</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>weblogic</td>
-<td>7001</td>
-</tr>
-<tr>
-<td>tomcat</td>
-<td>8080</td>
-</tr>
-</tbody></table>
-<h4><span id="ipv4">IPv4</span></h4><p>地址:<code>0.0.0.0-255.255.255.255</code></p>
-<h4><span id="内网地址amp外网地址">内网地址&amp;外网地址</span></h4><p>常见的内网地址段<br>:LOGBOOK:<br>CLOCK: [2024-11-28 Thu 15:49:57]–[2024-11-28 Thu 15:49:57] &#x3D;&gt;  00:00:00<br>CLOCK: [2024-11-28 Thu 15:49:58]–[2024-11-28 Thu 15:49:59] &#x3D;&gt;  00:00:01<br>:END:</p>
-<table>
-<thead>
-<tr>
-<th><strong>网段</strong></th>
-<th><strong>地址范围</strong></th>
-<th><strong>适用场景</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>10.0.0.0/8</code></td>
-<td><code>10.0.0.0 - 10.255.255.255</code></td>
-<td>大型组织，需大量地址的场景。</td>
-</tr>
-<tr>
-<td><code>172.16.0.0/12</code></td>
-<td><code>172.16.0.0 - 172.31.255.255</code></td>
-<td>中型组织，灵活的子网划分需求。</td>
-</tr>
-<tr>
-<td><code>192.168.0.0/16</code></td>
-<td><code>192.168.0.0 - 192.168.255.255</code></td>
-<td>小型网络，家庭和办公网络。</td>
-</tr>
-<tr>
-<td><code>127.0.0.0/8</code></td>
-<td><code>127.0.0.1 - 127.255.255.254</code></td>
-<td>本地回环，设备自身通信。</td>
-</tr>
-</tbody></table>
-<h4><span id="一次完整的tcp请求会做什么以http请求为例">一次完整的TCP请求会做什么(以HTTP请求为例)</span></h4><h3><span id="wireshark抓包之icmp">wireshark抓包之ICMP</span></h3><p>整个icmp包，<code>ping baidu.com</code></p>
-<p><img src="/../assets/image_1732771878624_0.png" alt="image.png"></p>
-<h3><span id="wireshark抓包之arp">wireshark抓包之ARP</span></h3><p>要构造出arp包，我们可以手动进行arp请求。我们使用<code>arping 192.168.2.198</code>。</p>
-<p>或是删除arp表等待arp广播</p>
-<p><img src="/../assets/image_1732772669210_0.png" alt="image.png"></p>
-<h3><span id="wireshark抓包之tcp">wireshark抓包之TCP</span></h3><p>浅浅构造一个http包，来观察TCP，<code>curl baidu.com</code></p>
-<p><img src="/../assets/image_1732775304528_0.png" alt="image.png"></p>
-<h5><span id="三次握手">三次握手</span></h5><p>我来了哦SYN 😃</p>
-<p>我知道了哦，你来吧SYN,ACK 😁</p>
-<p>我真的来了哦SYN 🥵</p>
-<h5><span id="四次挥手">四次挥手</span></h5><p>我要走了哦，好想你FIN,ACK 😢</p>
-<p>你走吧SYN 🤔</p>
-<p>你走吧，拜拜了您内FIN,ACK 🤡</p>
-<p>我走了SYN 😭</p>
-<h3><span id="wireshark抓包之udp">wireshark抓包之UDP</span></h3><p>使用nc的udp模式构造udp包</p>
-<p><img src="/../assets/image_1732780002791_0.png" alt="image.png"></p>
-<h3><span id="tcp-vs-udp">TCP vs UDP</span></h3><p>快慢、是否可靠、系统开销、是否有连接</p>
-<p>应用场景：</p>
-<p>TCP：数据敏感型服务，http</p>
-<p>UDP：速度敏感型服务，直播、电话</p>
-<h3><span id="wireshark抓包之dns">wireshark抓包之DNS</span></h3><p>向dns服务器发送dns请求<code>dig kali.pcx.home</code></p>
-<p><img src="/../assets/image_1732782831532_0.png" alt="image.png"></p>
-<h4><span id="dns记录类型">dns记录类型</span></h4><p><strong>A 记录</strong>：将域名解析为 IPv4 地址。</p>
-<p><strong>AAAA 记录</strong>：将域名解析为 IPv6 地址。</p>
-<p><strong>CNAME 记录</strong>：别名记录，将一个域名映射到另一个域名。</p>
-<p><strong>PTR 记录</strong>：反向解析记录。</p>
-<p><strong>MX 记录</strong>：邮件交换记录，用于电子邮件服务器。</p>
-<p><strong>NS 记录</strong>：指向域名的权威 DNS 服务器。</p>
-<p><strong>SOA 记录</strong>：起始授权机构记录，标识区域的主要信息。</p>
-<p><strong>TXT 记录</strong>：存储任意文本数据，常用于身份验证（如 SPF、DKIM）。</p>
-<h4><span id="dns查询模式">dns查询模式</span></h4><p>递归查询</p>
-<p>迭代查询</p>
-<p>反向查询</p>
-<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://xiaolincoding.com/network">图解网络介绍 | 小林coding</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/summary-of-network.html">计算机网络基础知识总结 | 菜鸟教程</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/29/day14_kls/" data-id="cm4ockldt0008a3iwh6sgfg4j" data-title="day14_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1371,7 +1220,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/xam/">xam</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/exam/">exam</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/xam/">xam</a></li></ul>
     </div>
   </div>
 
@@ -1413,6 +1262,10 @@
       <ul>
         
           <li>
+            <a href="/2025/01/10/week9_kls_exam/">week9_kls_exam</a>
+          </li>
+        
+          <li>
             <a href="/2025/01/03/week8_kls_exam/">week8_kls_exam</a>
           </li>
         
@@ -1426,10 +1279,6 @@
         
           <li>
             <a href="/2024/12/26/day34_kls/">day34_kls</a>
-          </li>
-        
-          <li>
-            <a href="/2024/12/26/sqli-labs/">sqli-labs</a>
           </li>
         
       </ul>

