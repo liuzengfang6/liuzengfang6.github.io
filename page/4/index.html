@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-linux常用的系统信息查看命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/30/linux%E5%B8%B8%E7%94%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2024-11-30T15:03:00.000Z" itemprop="datePublished">2024-11-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/30/linux%E5%B8%B8%E7%94%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/">linux常用的系统信息查看命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="引子">引子</span></h2><p>俺经常需要查看某个linux操作系统的版本信息，硬件信息，等等，做个备忘</p>
+<h2><span id="版本信息">版本信息</span></h2><h3><span id="查看操作系统版本">查看操作系统版本</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/os-release</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>实际上对于不同的发行版，他们可能会有自己的专属版本信息文件，<code>os-release</code>很通用，其他的我们不多作介绍了</p>
+</blockquote>
+<h3><span id="查看内核版本架构等">查看内核版本架构等</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>uname</code>提供了一些查看某些内容的参数，我们这里仅介绍了使用<code>-a</code>查看所有的</p>
+</blockquote>
+<h3><span id="检查发行版和版本号">检查发行版和版本号</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>lsb_release</code>也提供了一些查看某些内容的参数</p>
+</blockquote>
+<h2><span id="硬件信息">硬件信息</span></h2><h3><span id="硬件信息">硬件信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">list hardware</span></span><br><span class="line">lshw</span><br></pre></td></tr></table></figure>
+
+<h3><span id="cpu">cpu</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lscpu</span><br></pre></td></tr></table></figure>
+
+<h3><span id="硬盘块设备">硬盘(块设备)</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br></pre></td></tr></table></figure>
+
+<h3><span id="存储空间">存储空间</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">disk use 慢</span></span><br><span class="line">du -h</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">disk free 快</span></span><br><span class="line">df -h</span><br></pre></td></tr></table></figure>
+
+<h3><span id="内存">内存</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br></pre></td></tr></table></figure>
+
+<h3><span id="pci设备">pci设备</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci</span><br></pre></td></tr></table></figure>
+
+<h3><span id="主板信息">主板信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmidecode -t baseboard</span><br></pre></td></tr></table></figure>
+
+<h2><span id="网络">网络</span></h2><h3><span id="网卡信息">网卡信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip a</span><br></pre></td></tr></table></figure>
+
+<h3><span id="路由信息">路由信息</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route -n</span><br></pre></td></tr></table></figure>
+
+<h3><span id="arp表">arp表</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp -a</span><br></pre></td></tr></table></figure>
+
+<h2><span id="其他系统信息">其他系统信息</span></h2><h3><span id="启动时间">启动时间</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uptime</span><br></pre></td></tr></table></figure>
+
+<h3><span id="系统日志">系统日志</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg</span><br></pre></td></tr></table></figure>
+
+<h3><span id="登陆用户">登陆用户</span></h3><p><strong>当前登陆用户</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w</span><br></pre></td></tr></table></figure>
+
+<p><strong>最后登陆用户</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">last</span><br></pre></td></tr></table></figure>
+
+<h2><span id="shell脚本">shell脚本</span></h2><p>为了方便查看，俺添加了vim的折叠</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       系统版本信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;操作系统版本：&quot;</span><br><span class="line">cat /etc/os-release</span><br><span class="line">echo</span><br><span class="line">echo &quot;内核版本：&quot;</span><br><span class="line">uname -r</span><br><span class="line">echo</span><br><span class="line">echo &quot;详细内核信息：&quot;</span><br><span class="line">uname -a</span><br><span class="line">echo</span><br><span class="line">echo &quot;发行版信息：&quot;</span><br><span class="line">lsb_release -a 2&gt;/dev/null || echo &quot;lsb_release 命令未找到，请安装 lsb-release 包&quot;</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       硬件信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;CPU 信息：&quot;</span><br><span class="line">lscpu</span><br><span class="line">echo</span><br><span class="line">echo &quot;内存信息：&quot;</span><br><span class="line">free -h</span><br><span class="line">echo</span><br><span class="line">echo &quot;硬盘信息：&quot;</span><br><span class="line">lsblk</span><br><span class="line">echo</span><br><span class="line">echo &quot;磁盘使用情况：&quot;</span><br><span class="line">df -h</span><br><span class="line">echo</span><br><span class="line">echo &quot;显卡信息：&quot;</span><br><span class="line">lspci | grep -i vga</span><br><span class="line">echo</span><br><span class="line">echo &quot;主板信息：&quot;</span><br><span class="line">sudo dmidecode -t baseboard 2&gt;/dev/null || echo &quot;请以 root 权限运行以查看主板信息&quot;</span><br><span class="line">echo</span><br><span class="line">echo &quot;硬件概览：&quot;</span><br><span class="line">sudo lshw -short 2&gt;/dev/null || echo &quot;请以 root 权限运行以查看硬件信息&quot;</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       网络信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;IP 地址：&quot;</span><br><span class="line">ip a</span><br><span class="line">echo</span><br><span class="line">echo &quot;路由表信息：&quot;</span><br><span class="line">ip route</span><br><span class="line">echo</span><br><span class="line">echo &quot;网络适配器信息：&quot;</span><br><span class="line">lspci | grep -i network</span><br><span class="line">echo</span><br><span class="line">echo &quot;测试网络连通性（到 example.com）：&quot;</span><br><span class="line">ping -c 4 example.com</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       其他系统信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;系统启动时间和负载：&quot;</span><br><span class="line">uptime</span><br><span class="line">echo</span><br><span class="line">echo &quot;当前登录用户：&quot;</span><br><span class="line">w</span><br><span class="line">echo</span><br><span class="line">echo &quot;系统日志（最近 10 行）：&quot;</span><br><span class="line">dmesg | tail -n 10</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       驱动和模块信息 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;已加载的内核模块：&quot;</span><br><span class="line">lsmod</span><br><span class="line">echo</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;       脚本运行完成 &#123;&#123;&#123;&quot;</span><br><span class="line">echo &quot;===============================&quot;</span><br><span class="line">echo &quot;完成所有信息收集&quot;</span><br><span class="line">echo &quot;&#125;&#125;&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/30/linux%E5%B8%B8%E7%94%A8%E7%9A%84%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4/" data-id="cm5vste5b002bfriw5oii37jl" data-title="linux常用的系统信息查看命令" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day15_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/30/day15_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-30T04:20:18.000Z" itemprop="datePublished">2024-11-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/30/day15_kls/">day15_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="http">HTTP</span></h3><p>http超文本传输协议</p>
+<h4><span id="urlampampuriampampurn">url&amp;&amp;uri&amp;&amp;urn</span></h4><p><img src="/../assets/image_1709692126096_0.png" alt="image.png"></p>
+<p>url的规范<br>card-last-interval:: -1<br>card-repeats:: 1<br>card-ease-factor:: 2.5<br>card-next-schedule:: 2024-03-06T16:00:00.000Z<br>card-last-reviewed:: 2024-03-06T02:41:01.223Z<br>card-last-score:: 1</p>
+<p>card-last-score:: 1<br>card-repeats:: 1<br>card-next-schedule:: 2024-08-05T16:00:00.000Z<br>card-last-interval:: -1<br>card-ease-factor:: 2.5<br>card-last-reviewed:: 2024-08-05T07:47:11.561Z</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>scheme</td>
+<td>协议也叫protocol</td>
+<td>http,https,ftp</td>
+</tr>
+<tr>
+<td>username:password</td>
+<td>认证</td>
+<td></td>
+</tr>
+<tr>
+<td>parameters</td>
+<td>参数</td>
+<td><code>?id=123</code></td>
+</tr>
+<tr>
+<td>fragment</td>
+<td>片段，对资源描的补充</td>
+<td>vue的路由</td>
+</tr>
+</tbody></table>
+<h4><span id="请求头">请求头</span></h4><table>
+<thead>
+<tr>
+<th>请求头</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User-Agent</td>
+<td>标识客户端发送请求的用户代理（User Agent），通常是浏览器或其他应用程序的标识。</td>
+</tr>
+<tr>
+<td>Accept</td>
+<td>指定客户端可接受的响应媒体类型。服务器可以根据该头部信息返回适合客户端的响应。</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>指定请求体的媒体类型。</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>包含了用于进行身份验证的凭证信息。通常用于向服务器提供身份验证令牌或用户名密码。</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>包含了之前由服务器通过Set-Cookie头发送的Cookie信息。</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>标识了发送请求的页面的URL地址。服务器可以根据该头部信息判断请求的来源。</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>请求体的字节长度。</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>指定请求的目标服务器的主机名和端口号。</td>
+</tr>
+<tr>
+<td>If-Modified-Since</td>
+<td>指定一个日期时间，表示如果资源自指定日期时间之后未被修改，才执行请求的操作。用于缓存控制和条件请求。</td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>控制缓存行为，包含了一系列指令，如max-age、no-cache等。</td>
+</tr>
+<tr>
+<td>X-Requested-With</td>
+<td>标识请求是通过Ajax发送的。</td>
+</tr>
+</tbody></table>
+<h4><span id="请求方式">请求方式</span></h4><table>
+<thead>
+<tr>
+<th>请求方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>用于从服务器获取资源。请求的URL中包含要获取的资源的地址。GET方法是幂等的，多次相同的GET请求应该返回相同的结果。</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>用于向服务器提交数据，并在服务器上创建新资源。通常用于提交表单数据、上传文件等。POST方法不是幂等的，多次相同的POST请求可能会创建多个资源。</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>用于向服务器上传或覆盖指定URL处的资源。PUT方法要求完全替换目标资源，如果目标资源不存在，则创建一个新资源。</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>用于从服务器删除指定URL处的资源。DELETE方法用于删除指定资源，删除成功后返回204状态码或200状态码。</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>用于对资源进行部分更新。PATCH方法类似于PUT方法，但是只需要传输要更新的字段。</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>与GET方法类似，但只返回响应头部信息，不返回响应体。HEAD方法通常用于检查资源是否存在，获取资源的元数据等。</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>用于获取服务器支持的请求方法、CORS（跨域资源共享）相关的信息等。OPTIONS方法请求返回服务器支持的HTTP方法列表。</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>用于在请求-响应链路上执行一个回环诊断。TRACE方法会在目标服务器返回接收到的请求的完整副本，用于调试和诊断。</td>
+</tr>
+<tr>
+<td>CONNECT</td>
+<td>用于将请求连接转换为透明的TCP&#x2F;IP隧道，通常用于代理服务器的通信。CONNECT方法通常用于HTTPS请求。</td>
+</tr>
+</tbody></table>
+<h4><span id="相应码">相应码</span></h4><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>100</td>
+<td>Continue</td>
+<td>服务器已接收到请求的首部，客户端应继续发送请求主体部分</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Switching Protocols</td>
+<td>服务器已根据请求要求切换协议</td>
+</tr>
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>请求成功完成</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>请求成功并创建了新资源</td>
+</tr>
+<tr>
+<td>202</td>
+<td>Accepted</td>
+<td>请求已被接受，但处理尚未完成</td>
+</tr>
+<tr>
+<td>203</td>
+<td>Non-Authoritative Information</td>
+<td>请求成功，但返回的信息来自第三方，非官方来源</td>
+</tr>
+<tr>
+<td>204</td>
+<td>No Content</td>
+<td>服务器成功处理了请求，但响应中不包含返回的实体内容。</td>
+</tr>
+<tr>
+<td>205</td>
+<td>Reset Content</td>
+<td>请求成功完成，客户端应重置当前页面</td>
+</tr>
+<tr>
+<td>206</td>
+<td>Partial Content</td>
+<td>客户端只请求资源的一部分，服务器成功地响应了该部分</td>
+</tr>
+<tr>
+<td>300</td>
+<td>Multiple Choices</td>
+<td>请求的资源存在多个选择，用户或代理可以选择其一进行重定向</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved Permanently</td>
+<td>资源的URL已永久移动到新位置</td>
+</tr>
+<tr>
+<td>302</td>
+<td>Found</td>
+<td>资源的URL已临时移动到新位置</td>
+</tr>
+<tr>
+<td>303</td>
+<td>See Other</td>
+<td>对应当前请求的响应可以在另一个URL下找到</td>
+</tr>
+<tr>
+<td>304</td>
+<td>Not Modified</td>
+<td>资源未修改，客户端可以使用缓存的版本</td>
+</tr>
+<tr>
+<td>307</td>
+<td>Temporary Redirect</td>
+<td>对应当前请求的响应可以在另一个URL下找到，但请继续使用原始请求URL进行访问</td>
+</tr>
+<tr>
+<td>308</td>
+<td>Permanent Redirect</td>
+<td>对应当前请求的响应可以在另一个URL下找到，客户端应使用新的URL进行访问</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>请求无效或无法被服务器理解</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>请求需要身份验证</td>
+</tr>
+<tr>
+<td>402</td>
+<td>Payment Required</td>
+<td>预留状态码，表示需要付款才能访问请求的资源</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>请求被服务器拒绝访问</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td>请求的资源不存在</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed</td>
+<td>请求方法不被允许</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable</td>
+<td>服务器无法根据请求的内容特性完成请求</td>
+</tr>
+<tr>
+<td>407</td>
+<td>Proxy Authentication Required</td>
+<td>请求要求代理身份验证</td>
+</tr>
+<tr>
+<td>408</td>
+<td>Request Timeout</td>
+<td>服务器在等待请求时超时</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict</td>
+<td>请求存在冲突，服务器无法处理</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone</td>
+<td>请求的资源已永久消失</td>
+</tr>
+<tr>
+<td>411</td>
+<td>Length Required</td>
+<td>服务器要求在请求中包含Content-Length首部</td>
+</tr>
+<tr>
+<td>412</td>
+<td>Precondition Failed</td>
+<td>请求条件失败，例如请求头中指定的一些前提条件未满足</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Payload Too Large</td>
+<td>请求实体过大，超出服务器的处理能力</td>
+</tr>
+<tr>
+<td>414</td>
+<td>URI Too Long</td>
+<td>请求的URI过长，服务器无法处理</td>
+</tr>
+<tr>
+<td>415</td>
+<td>Unsupported Media Type</td>
+<td>请求的媒体类型不受支持</td>
+</tr>
+<tr>
+<td>416</td>
+<td>Range Not Satisfiable</td>
+<td>服务器无法满足请求中的Range头字段指定的范围</td>
+</tr>
+<tr>
+<td>417</td>
+<td>Expectation Failed</td>
+<td>服务器无法满足Expect请求头字段指定的期望值</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests</td>
+<td>客户端在给定的时间内发送了太多请求</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>服务器内部错误</td>
+</tr>
+<tr>
+<td>501</td>
+<td>Not Implemented</td>
+<td>服务器不支持当前请求的功能或未能实现</td>
+</tr>
+<tr>
+<td>502</td>
+<td>Bad Gateway</td>
+<td>服务器作为网关或代理，从上游服务器接收到无效的响应</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+<td>服务器暂时无法处理请求</td>
+</tr>
+<tr>
+<td>504</td>
+<td>Gateway Timeout</td>
+<td>服务器作为网关或代理，未能及时从上游服务器接收到响应</td>
+</tr>
+<tr>
+<td>505</td>
+<td>HTTP Version Not Supported</td>
+<td>服务器不支持请求中所用的HTTP协议版本</td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3><span id="csrf">csrf</span></h3><p>客户端请求伪造，该漏洞的前提是请求参数可控</p>
+<h3><span id="f12元素与网页源代码的区别">F12元素与网页源代码的区别</span></h3><p>F12元素查看的内容是当前网页上真实的显示，会经过js渲染</p>
+<p>源代码顾名思义就是源代码</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/30/day15_kls/" data-id="cm5vste4u000ifriw0cdo7bhy" data-title="day15_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-week3_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/29/week3_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2024-11-29T08:07:21.000Z" itemprop="datePublished">2024-11-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/exam/">exam</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/29/week3_kls_exam/">week3_kls_exam</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="题目1">题目1</span></h2><p>编写shell脚本，能够对指定IP地址段进行icmp探测扫描</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否传入了 CIDR 格式的网段</span></span><br><span class="line">if [ -z &quot;$1&quot; ]; then</span><br><span class="line">  echo &quot;用法: $0 &lt;CIDR格式网段&gt;&quot;</span><br><span class="line">  echo &quot;例如: $0 192.168.0.0/24&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取网段和掩码</span></span><br><span class="line">CIDR=$1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将 CIDR 格式分解为网络地址和子网掩码</span></span><br><span class="line">NETWORK=$(echo $CIDR | cut -d&#x27;/&#x27; -f1)</span><br><span class="line">NETMASK=$(echo $CIDR | cut -d&#x27;/&#x27; -f2)</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将网络地址转为十进制</span></span><br><span class="line">ip_to_decimal() &#123;</span><br><span class="line">  local IFS=.</span><br><span class="line">  read -r i1 i2 i3 i4 &lt;&lt;&lt; &quot;$1&quot;</span><br><span class="line">  echo $(( (i1 &lt;&lt; 24) + (i2 &lt;&lt; 16) + (i3 &lt;&lt; 8) + i4 ))</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将十进制地址转为点分十进制</span></span><br><span class="line">decimal_to_ip() &#123;</span><br><span class="line">  local ip=$1</span><br><span class="line">  echo &quot;$(( (ip &gt;&gt; 24) &amp; 255 )).$(( (ip &gt;&gt; 16) &amp; 255 )).$(( (ip &gt;&gt; 8) &amp; 255 )).$(( ip &amp; 255 ))&quot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">计算起始 IP 和结束 IP</span></span><br><span class="line">start_ip=$(ip_to_decimal $NETWORK)</span><br><span class="line">end_ip=$((start_ip + (1 &lt;&lt; (32 - NETMASK)) - 1))</span><br><span class="line">echo &quot;正在扫描网段 $CIDR ...&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">循环扫描每个 IP</span></span><br><span class="line">for ip in $(seq $start_ip $end_ip); do</span><br><span class="line">  target=$(decimal_to_ip $ip)</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">使用 ping 检查是否在线 (-c 1 表示发送 1 个包, -W 1 表示超时时间 1 秒)</span></span><br><span class="line">  ping -c 1 -W 1 $target &amp;&gt; /dev/null</span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo &quot;发现活动主机: $target&quot;</span><br><span class="line">  fi</span><br><span class="line">done</span><br><span class="line">echo &quot;扫描完成！&quot;</span><br></pre></td></tr></table></figure>
+
+<p>运行</p>
+<p><img src="/../assets/image_1732861634753_0.png" alt="image.png"></p>
+<h2><span id="题目2">题目2</span></h2><p>编写shell脚本，探测指定IP地址段有哪些计算机开启了80（HTTP）端口</p>
+<p>本题对题目1稍加修改即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检查是否传入了 CIDR 格式的网段</span></span><br><span class="line">if [ -z &quot;$1&quot; ]; then</span><br><span class="line">  echo &quot;用法: $0 &lt;CIDR格式网段&gt;&quot;</span><br><span class="line">  echo &quot;例如: $0 192.168.0.0/24&quot;</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">获取网段和掩码</span></span><br><span class="line">CIDR=$1</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将 CIDR 格式分解为网络地址和子网掩码</span></span><br><span class="line">NETWORK=$(echo $CIDR | cut -d&#x27;/&#x27; -f1)</span><br><span class="line">NETMASK=$(echo $CIDR | cut -d&#x27;/&#x27; -f2)</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将网络地址转为十进制</span></span><br><span class="line">ip_to_decimal() &#123;</span><br><span class="line">  local IFS=.</span><br><span class="line">  read -r i1 i2 i3 i4 &lt;&lt;&lt; &quot;$1&quot;</span><br><span class="line">  echo $(( (i1 &lt;&lt; 24) + (i2 &lt;&lt; 16) + (i3 &lt;&lt; 8) + i4 ))</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将十进制地址转为点分十进制</span></span><br><span class="line">decimal_to_ip() &#123;</span><br><span class="line">  local ip=$1</span><br><span class="line">  echo &quot;$(( (ip &gt;&gt; 24) &amp; 255 )).$(( (ip &gt;&gt; 16) &amp; 255 )).$(( (ip &gt;&gt; 8) &amp; 255 )).$(( ip &amp; 255 ))&quot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">计算起始 IP 和结束 IP</span></span><br><span class="line">start_ip=$(ip_to_decimal $NETWORK)</span><br><span class="line">end_ip=$((start_ip + (1 &lt;&lt; (32 - NETMASK)) - 1))</span><br><span class="line">echo &quot;正在扫描网段 $CIDR ...&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">循环扫描每个 IP</span></span><br><span class="line">for ip in $(seq $start_ip $end_ip); do</span><br><span class="line">  target=$(decimal_to_ip $ip)</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">使用 curl 检查是否开启80端口</span></span><br><span class="line">  curl &quot;http://$target&quot; &amp;&gt; /dev/null</span><br><span class="line">if [ $? -eq 0 ]; then</span><br><span class="line">echo &quot;发现开启80端口主机: $target&quot;</span><br><span class="line">fi</span><br><span class="line">done</span><br><span class="line">echo &quot;扫描完成！&quot;</span><br></pre></td></tr></table></figure>
+
+<p>运行</p>
+<p><img src="/../assets/image_1732862424683_0.png" alt="image.png"></p>
+<blockquote>
+<p>小修改没有改脚本名字，和题目1输出不同</p>
+</blockquote>
+<h2><span id="题目3">题目3</span></h2><p>使用物理机CMD连接Windows 7 Samba服务，并在物理机使用CMD命令在Windows7 Samba服务所在机器C:\Windows\Temp\ 文件夹中新建 hello_chaitin.txt</p>
+<h3><span id="step1开启administrator用户">step1:开启administrator用户</span></h3><p>管理员开启cmd</p>
+<p><img src="/../assets/image_1732862389969_0.png" alt="image.png"></p>
+<p>设置administrator的密码并激活改用户</p>
+<p><img src="/../assets/image_1732862839998_0.png" alt="image.png"></p>
+<h3><span id="setp2连接smb中的c">setp2:连接smb中的c$</span></h3><p><img src="/../assets/image_1732862780914_0.png" alt="image.png"></p>
+<h3><span id="setp3cd到挂载的目录并创建hello_chaitintxt">setp3:cd到挂载的目录，并创建hello_chaitin.txt</span></h3><p><img src="/../assets/image_1732863090478_0.png" alt="image.png"></p>
+<p><code>D:\windows\</code>中有Temp文件，我们无需创建，仅需创建txt即可</p>
+<p><img src="/../assets/image_1732863159606_0.png" alt="image.png"></p>
+<h2><span id="题目4">题目4</span></h2><p>描述TCP三次握手与四次挥手过程</p>
+<p>c：client,s：server</p>
+<p>三次握手：</p>
+<p>c：我来了哦SYN</p>
+<p>s：知道来，来吧SYN&#x2F;ACK</p>
+<p>c：那我真的来了哦SYN</p>
+<p>四次挥手</p>
+<p>c：我走了哦，要想我FIN&#x2F;ACK</p>
+<p>s：知道了ACK</p>
+<p>s：你走吧，勿念FIN&#x2F;ACK</p>
+<p>c：555我走了ACK</p>
+<h2><span id="题目5">题目5</span></h2><p>使用docker搭建 Pikachu 网站，要求网站服务单独使用一个容器，数据库服务单独使用一个容器</p>
+<h3><span id="step1分析题目">step1：分析题目</span></h3><p>我们前往pikachu的gayhub中查看readme</p>
+<p><img src="/../assets/image_1732863365464_0.png" alt="image.png"></p>
+<p>几个重要的信息：</p>
+<p>项目使用php，数据库mysql</p>
+<p>提供了现成的镜像，和dockerfile</p>
+<p>结合本题要求，解题步骤如下</p>
+<p>修改pikachu提供的dockerfile</p>
+<blockquote>
+<p>这里想偷懒直接用官方的dockerfile，但是踩了个大坑。。。。</p>
+</blockquote>
+<p>将mysql抽离出来</p>
+<p>创建一个docker网络</p>
+<p>改一下pikachu的配置文件</p>
+<p>编写docker-compose.yml</p>
+<h3><span id="step2修改拉取项目并修改相关配置文件和dockerfile">step2：修改拉取项目并修改相关配置文件和dockerfile</span></h3><p>拉取镜像</p>
+<p><img src="/../assets/image_1732863644998_0.png" alt="image.png"></p>
+<p>查看dockerfile并结合ai提取关键信息</p>
+<p><img src="/../assets/image_1732864124277_0.png" alt="image.png"></p>
+<p><del>官方提供的dockerfile中将数据库密码置空了，好像是等待我们修改这里，我们修改成我们的mysql密码，修改后如下</del></p>
+<p><img src="/../assets/image_1732864181840_0.png" alt="image.png"></p>
+<blockquote>
+<p>蛋，这个不生效</p>
+</blockquote>
+<p>修改mysql连接地址</p>
+<p>由dockerfile可知，数据库连接地址在<code>pkxss/inc/config.inc.php </code>和<code>inc/config.inc.php</code>,因为官方的dockerfile只对这两个文件修改了数据库密码。</p>
+<p><img src="/../assets/image_1732866705573_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732866529091_0.png" alt="image.png"></p>
+<blockquote>
+<p>后记：后来发现dockerfile的sed也没生效，没有改密码，所以我们手动修改</p>
+</blockquote>
+<p><del>在对<code>inc/config.inc.php</code>的修改中，我们发现dbpw后面的root不见了，我们给他补上，防止影响我们dockerfile的逻辑</del></p>
+<p><img src="/../assets/image_1732864311232_0.png" alt="image.png"></p>
+<blockquote>
+<p>不用操心了这个根本不生效，手动改密码吧</p>
+</blockquote>
+<p>对dockerfile的测试</p>
+<p>build一下</p>
+<p><img src="/../assets/image_1732864585769_0.png" alt="image.png"></p>
+<p>失败了，被官方摆了一道，官方的dockerfile使用的镜像是arm平台的，我们替换成x64平台的<code>0.8.0-1804-php7</code></p>
+<p>整个mysql</p>
+<p><img src="/../assets/image_1732864602387_0.png" alt="image.png"></p>
+<p>添加一个docker网络</p>
+<p><img src="/../assets/image_1732865158908_0.png" alt="image.png"></p>
+<p>经历了千辛万苦终于调试成功了</p>
+<p><img src="/../assets/image_1732866467091_0.png" alt="image.png"></p>
+<h3><span id="step3编写docker-composeyml">step3编写docker-compose.yml</span></h3><p>最后版本的dockerfile</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> mattrayner/lamp:<span class="number">0.8</span>.<span class="number">0</span>-<span class="number">2004</span>-php7</span><br><span class="line"><span class="keyword">LABEL</span><span class="language-bash"> maintainer=<span class="string">&quot;8023 - i@8023.moe&quot;</span></span></span><br><span class="line"><span class="keyword">LABEL</span><span class="language-bash"> description=<span class="string">&quot;pikachu on php7 with expect @230613&quot;</span></span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . /app/</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update -y &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    apt-get install -y php7.4-dev php-pear expect tcl-dev tcl-expect-dev &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">ln</span> -s /usr/include/tcl8.6/tcl.h /usr/include/tcl.h &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">ln</span> -s /usr/include/tcl8.6/tclDecls.h /usr/include/tclDecls.h &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">ln</span> -s /usr/include/tcl8.6/expect_tcl.h /usr/include/expect_tcl.h &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    <span class="built_in">ln</span> -s /usr/include/tcl8.6/tclPlatDecls.h /usr/include/tclPlatDecls.h &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    pecl channel-update pecl.php.net &amp;&amp; pecl install expect &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;/AllowNoPassword/s/false/true/g&#x27;</span> /var/www/phpMyAdmin-5.1.1-all-languages/config.inc.php ;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;/display_startup_errors/s/Off/On/g&#x27;</span> /etc/php/7.4/apache2/php.ini ;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;/allow_url_include/s/Off/On/g&#x27;</span> /etc/php/7.4/apache2/php.ini ;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;/allow_url_fopen/s/Off/On/g&#x27;</span> /etc/php/7.4/apache2/php.ini ;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;/display_errors/s/Off/On/g&#x27;</span> /etc/php/7.4/apache2/php.ini ;\</span></span><br><span class="line"><span class="language-bash">    sed -i <span class="string">&#x27;$a extension=expect.so&#x27;</span> /etc/php/7.4/apache2/php.ini ;\</span></span><br><span class="line"><span class="language-bash">    phpenmod expect &amp;&amp; \</span></span><br><span class="line"><span class="language-bash">    apt-get remove -y php7.4-dev tcl-dev tcl-expect-dev &amp;&amp;\</span></span><br><span class="line"><span class="language-bash">    apt-get autoremove -y &amp;&amp; apt-get clean -y &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;/run.sh&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>最后版本的docker-compose.yml</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">&#x27;2&#x27;</span></span><br><span class="line">services:</span><br><span class="line"><span class="comment"># MySQL 服务</span></span><br><span class="line">  pikachu-db:</span><br><span class="line">    image: mysql:<span class="number">5.7</span></span><br><span class="line">    container_name: pikachu-db</span><br><span class="line">    environment:</span><br><span class="line">      MYSQL_ROOT_PASSWORD: pikachu_db_pass  <span class="comment"># 设置 MySQL root 密码</span></span><br><span class="line">      MYSQL_DATABASE: pikachu        <span class="comment"># 可选：指定初始数据库</span></span><br><span class="line">    networks:</span><br><span class="line">pikachu-network                      <span class="comment"># 连接到指定的网络</span></span><br><span class="line"> ports:</span><br><span class="line">    - <span class="string">&quot;3306:3306&quot;</span>                     <span class="comment"># 映射 MySQL 端口</span></span><br><span class="line"> volumes:</span><br><span class="line">     - mysql_data:/var/lib/mysql       <span class="comment"># 保持数据持久化</span></span><br><span class="line"> web:</span><br><span class="line"> build: .                      <span class="comment"># 指定 Web 容器的构建目录（包含 Dockerfile）</span></span><br><span class="line"> container_name: pikachu</span><br><span class="line"> networks:</span><br><span class="line">     - pikachu-network                     <span class="comment"># 连接到指定的网络</span></span><br><span class="line"> ports:</span><br><span class="line">     - <span class="string">&quot;8080:80&quot;</span>                      <span class="comment"># 映射 Web 端口</span></span><br><span class="line"> depends_on:</span><br><span class="line">     - pikachu-db</span><br><span class="line"> networks:</span><br><span class="line"> pikachu-network:                          <span class="comment"># 自定义网络</span></span><br><span class="line"> driver: bridge</span><br><span class="line"> volumes:</span><br><span class="line"> mysql_data:                          <span class="comment"># MySQL 数据卷</span></span><br></pre></td></tr></table></figure>
+
+<p>直接运行</p>
+<p><img src="/../assets/image_1732867031332_0.png" alt="image.png"></p>
+<p>访问8080</p>
+<p><img src="/../assets/image_1732867360190_0.png" alt="image.png"></p>
+<p>存在的问题：</p>
+<p>lnmp会多起一个mysql</p>
+<p>使用pikachu提供的dockerfile踩的坑：</p>
+<p>官方用的镜像是arm的</p>
+<p>修改数据库密码的sed似乎不起作用</p>
+<p>数据库初始化时需要创建一个pikachu的库</p>
+<blockquote>
+<p>😢</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/29/week3_kls_exam/" data-id="cm5vste5f002qfriwdl9x067d" data-title="week3_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day14_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/29/day14_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-29T00:55:23.000Z" itemprop="datePublished">2024-11-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/29/day14_kls/">day14_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="计算机网络模型">计算机网络模型</span></h3><h4><span id="osiampamptcpx2fip">OSI&amp;&amp;TCP&#x2F;IP</span></h4><p><img src="/../assets/image_1732792214231_0.png" alt="image.png"></p>
+<h4><span id="设备网络安全相关">设备(网络安全相关)</span></h4><p>应用层: WAF、IPS&#x2F;IDS等</p>
+<p>网络层:防火墙、VPN、IPS&#x2F;IDS等</p>
+<p>传输层:防火墙、VPN、IPS&#x2F;IDS等</p>
+<h4><span id="传输层常见协议">传输层常见协议</span></h4><p>ARP、ICMP、IP</p>
+<h4><span id="网络层常见协议">网络层常见协议</span></h4><p>TCP、UDP、OSPF</p>
+<h4><span id="应用层常见协议及其默认端口">应用层常见协议及其默认端口</span></h4><table>
+<thead>
+<tr>
+<th>协议</th>
+<th>说明</th>
+<th>端口号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FTP</td>
+<td>文件传输协议</td>
+<td>21</td>
+</tr>
+<tr>
+<td>SFTP</td>
+<td>基于ssh的文件传输协议</td>
+<td>22</td>
+</tr>
+<tr>
+<td>FTPS</td>
+<td>支持SSL&#x2F;TLS的文件传输协议</td>
+<td>21&#x2F;990</td>
+</tr>
+<tr>
+<td>SMTP</td>
+<td>发送邮件协议</td>
+<td>25、587(TLS)</td>
+</tr>
+<tr>
+<td>IMAP</td>
+<td>收取邮件协议</td>
+<td>143 、993 (TLS)</td>
+</tr>
+<tr>
+<td>POP3</td>
+<td>收取邮件协议</td>
+<td>110 、995 (TLS)</td>
+</tr>
+<tr>
+<td>SSH</td>
+<td>安全远程登录协议</td>
+<td>22</td>
+</tr>
+<tr>
+<td>Telnet</td>
+<td>非加密的远程登录协议</td>
+<td>23</td>
+</tr>
+<tr>
+<td>RDP</td>
+<td>远程桌面协议</td>
+<td>3389</td>
+</tr>
+<tr>
+<td>VNC</td>
+<td>远程桌面</td>
+<td>5900</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>MySQL 数据库访问协议</td>
+<td>3306</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>PostgreSQL 数据库访问协议</td>
+<td>5432</td>
+</tr>
+<tr>
+<td>MongoDB</td>
+<td>MongoDB 数据库协议</td>
+<td>27017</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>Redis 数据库协议</td>
+<td>6379</td>
+</tr>
+<tr>
+<td>MsSQL</td>
+<td>MicroSoft数据库协议</td>
+<td>1433</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>甲骨文数据库协议</td>
+<td>1521</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>超文本传输协议</td>
+<td>80</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>加密的 HTTP 协议</td>
+<td>443</td>
+</tr>
+<tr>
+<td>SMB</td>
+<td>用于共享文件、打印机</td>
+<td>445</td>
+</tr>
+<tr>
+<td>NFS</td>
+<td>网络文件系统协议</td>
+<td>2049</td>
+</tr>
+</tbody></table>
+<p>常见的服务及其默认端口号</p>
+<table>
+<thead>
+<tr>
+<th>服务</th>
+<th>端口号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>weblogic</td>
+<td>7001</td>
+</tr>
+<tr>
+<td>tomcat</td>
+<td>8080</td>
+</tr>
+</tbody></table>
+<h4><span id="ipv4">IPv4</span></h4><p>地址:<code>0.0.0.0-255.255.255.255</code></p>
+<h4><span id="内网地址amp外网地址">内网地址&amp;外网地址</span></h4><p>常见的内网地址段<br>:LOGBOOK:<br>CLOCK: [2024-11-28 Thu 15:49:57]–[2024-11-28 Thu 15:49:57] &#x3D;&gt;  00:00:00<br>CLOCK: [2024-11-28 Thu 15:49:58]–[2024-11-28 Thu 15:49:59] &#x3D;&gt;  00:00:01<br>:END:</p>
+<table>
+<thead>
+<tr>
+<th><strong>网段</strong></th>
+<th><strong>地址范围</strong></th>
+<th><strong>适用场景</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>10.0.0.0/8</code></td>
+<td><code>10.0.0.0 - 10.255.255.255</code></td>
+<td>大型组织，需大量地址的场景。</td>
+</tr>
+<tr>
+<td><code>172.16.0.0/12</code></td>
+<td><code>172.16.0.0 - 172.31.255.255</code></td>
+<td>中型组织，灵活的子网划分需求。</td>
+</tr>
+<tr>
+<td><code>192.168.0.0/16</code></td>
+<td><code>192.168.0.0 - 192.168.255.255</code></td>
+<td>小型网络，家庭和办公网络。</td>
+</tr>
+<tr>
+<td><code>127.0.0.0/8</code></td>
+<td><code>127.0.0.1 - 127.255.255.254</code></td>
+<td>本地回环，设备自身通信。</td>
+</tr>
+</tbody></table>
+<h4><span id="一次完整的tcp请求会做什么以http请求为例">一次完整的TCP请求会做什么(以HTTP请求为例)</span></h4><h3><span id="wireshark抓包之icmp">wireshark抓包之ICMP</span></h3><p>整个icmp包，<code>ping baidu.com</code></p>
+<p><img src="/../assets/image_1732771878624_0.png" alt="image.png"></p>
+<h3><span id="wireshark抓包之arp">wireshark抓包之ARP</span></h3><p>要构造出arp包，我们可以手动进行arp请求。我们使用<code>arping 192.168.2.198</code>。</p>
+<p>或是删除arp表等待arp广播</p>
+<p><img src="/../assets/image_1732772669210_0.png" alt="image.png"></p>
+<h3><span id="wireshark抓包之tcp">wireshark抓包之TCP</span></h3><p>浅浅构造一个http包，来观察TCP，<code>curl baidu.com</code></p>
+<p><img src="/../assets/image_1732775304528_0.png" alt="image.png"></p>
+<h5><span id="三次握手">三次握手</span></h5><p>我来了哦SYN 😃</p>
+<p>我知道了哦，你来吧SYN,ACK 😁</p>
+<p>我真的来了哦SYN 🥵</p>
+<h5><span id="四次挥手">四次挥手</span></h5><p>我要走了哦，好想你FIN,ACK 😢</p>
+<p>你走吧SYN 🤔</p>
+<p>你走吧，拜拜了您内FIN,ACK 🤡</p>
+<p>我走了SYN 😭</p>
+<h3><span id="wireshark抓包之udp">wireshark抓包之UDP</span></h3><p>使用nc的udp模式构造udp包</p>
+<p><img src="/../assets/image_1732780002791_0.png" alt="image.png"></p>
+<h3><span id="tcp-vs-udp">TCP vs UDP</span></h3><p>快慢、是否可靠、系统开销、是否有连接</p>
+<p>应用场景：</p>
+<p>TCP：数据敏感型服务，http</p>
+<p>UDP：速度敏感型服务，直播、电话</p>
+<h3><span id="wireshark抓包之dns">wireshark抓包之DNS</span></h3><p>向dns服务器发送dns请求<code>dig kali.pcx.home</code></p>
+<p><img src="/../assets/image_1732782831532_0.png" alt="image.png"></p>
+<h4><span id="dns记录类型">dns记录类型</span></h4><p><strong>A 记录</strong>：将域名解析为 IPv4 地址。</p>
+<p><strong>AAAA 记录</strong>：将域名解析为 IPv6 地址。</p>
+<p><strong>CNAME 记录</strong>：别名记录，将一个域名映射到另一个域名。</p>
+<p><strong>PTR 记录</strong>：反向解析记录。</p>
+<p><strong>MX 记录</strong>：邮件交换记录，用于电子邮件服务器。</p>
+<p><strong>NS 记录</strong>：指向域名的权威 DNS 服务器。</p>
+<p><strong>SOA 记录</strong>：起始授权机构记录，标识区域的主要信息。</p>
+<p><strong>TXT 记录</strong>：存储任意文本数据，常用于身份验证（如 SPF、DKIM）。</p>
+<h4><span id="dns查询模式">dns查询模式</span></h4><p>递归查询</p>
+<p>迭代查询</p>
+<p>反向查询</p>
+<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://xiaolincoding.com/network">图解网络介绍 | 小林coding</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/summary-of-network.html">计算机网络基础知识总结 | 菜鸟教程</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/29/day14_kls/" data-id="cm5vste4t000gfriw461n6d9x" data-title="day14_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day13_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/28/day13_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-28T00:50:44.000Z" itemprop="datePublished">2024-11-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/28/day13_kls/">day13_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="windows">windows</span></h3><p>值得注意的几点:win不区分大小写，win的路径应该这么写<code>\xxx\xxx</code></p>
+<h3><span id="windows常用的东西">windows常用的东西</span></h3><p>注册表<code>regedit</code></p>
+<p>服务<code>services.msc</code></p>
+<p>计算机管理<code>compmgmt.msc</code></p>
+<p>windows配置:<code>msconfig</code>记住他就够了</p>
+<p>远程连接<code>mstsc</code></p>
+<h3><span id="windows命令行">windows命令行</span></h3><h4><span id="cmd">cmd</span></h4><h5><span id="常用命令">常用命令</span></h5><p><code>cd</code>切换目录，特殊的如果进入其他盘符应该这样<code>X:</code>而不是<code>cd X:</code>，x为你向进入的盘符</p>
+<p><code>dir</code>列出文件，列出隐藏文件<code>-a</code></p>
+<p><code>findstr</code>查找内容类似grep</p>
+<p><code>netstat -ano</code>查看网络连接</p>
+<p><code>ipconfig</code>网卡信息</p>
+<p><code>type</code>输出文件内容</p>
+<p><code>move</code>移动，重命名文件</p>
+<p><code>copy</code>复制文件</p>
+<h5><span id="小技巧">小技巧</span></h5><p>使用管理员终端：</p>
+<p>方法1：<code>win+x</code>然后你就会看到管理员终端了，点击它</p>
+<p>方法2：找到<code>cmd.exe</code>右键以管理员身份运行</p>
+<h4><span id="powershell">powershell</span></h4><p>兼容部分cmd。</p>
+<h3><span id="用户和用户组管理">用户和用户组管理</span></h3><h4><span id="用户相关操作">用户相关操作</span></h4><p><strong>查看用户信息</strong>:<code>net user [USERNAME]</code></p>
+<p><strong>创建新用户</strong>:<code>net user USERNAME PASSWORD /add</code></p>
+<p><strong>删除用户</strong>:<code>net user USERNAME /delete</code></p>
+<p><strong>修改密码</strong>:<code>net user USERNAME NEW_PASSWORD</code></p>
+<p><strong>启用&#x2F;禁用用户</strong>:<code>net user USERNAME /active:&lt;yes/no&gt;</code></p>
+<h4><span id="用户组相关操作">用户组相关操作</span></h4><p><strong>查看用户组</strong>，<strong>新建用户组</strong>，<strong>删除用户组</strong>和用户的操作相同，将<code>net user</code>改为<code>net localgroup</code>即可</p>
+<p><strong>添加用户到用户组</strong>:<code>net localgroup GROUPNAME USERNAME /add</code></p>
+<p><strong>从用户组中删除用户</strong>:<code>net localgroup GROUPNAME USERNAME /delete</code></p>
+<h3><span id="文件共享">文件共享</span></h3><p>windows默认的smb仅有administrator可以登陆，默认情况下administrator没有密码</p>
+<h3><span id="windows中rdp安全">windows中rdp安全</span></h3><p>一般来说，如果需要rdp连接。要选择这个</p>
+<p><img src="/../assets/image_1732706692033_0.png" alt="image.png"></p>
+<h3><span id="phpstudy部署dvwa">phpstudy部署dvwa</span></h3><p>安装phpstudy</p>
+<p>启动phpstudy</p>
+<p>下载dvwa源码</p>
+<p>拷贝dvwa配置文件</p>
+<p>修改dvwa配置文件</p>
+<p>访问相关路径，创建数据库</p>
+<h3><span id="phpstudy安全配置">phpstudy安全配置</span></h3><h4><span id="数据库mysql">数据库mysql</span></h4><p>仅监听本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">bind-address = 127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<h4><span id="中间件">中间件</span></h4><h4><span id="nginx">nginx</span></h4><p>仅监听本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 127.0.0.1:80; # 仅监听本地的 80 端口</span><br><span class="line">    server_name localhost;</span><br><span class="line">    location / &#123;</span><br><span class="line">        root /var/www/html;</span><br><span class="line">        index index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4><span id="apache">apache</span></h4><p>仅监听本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Listen 127.0.0.1:80</span><br></pre></td></tr></table></figure>
+
+<h4><span id="phpstudy部署sqli-labs">phpstudy部署sqli-labs</span></h4><h4><span id="源码下载">源码下载</span></h4><p><a target="_blank" rel="noopener" href="https://github.com/Audi-1/sqli-labs">GitHub Audi-1&#x2F;sqli-labs: SQLI labs to test error based, Blind boolean based, Time based.</a></p>
+<p>下载后将其扔到phpstudy的www目录。</p>
+<h4><span id="修改配置">修改配置</span></h4><p>readme是洋文，看不太懂，翻译一下。告诉我们修改<code>sql-connections/db-creds.inc</code></p>
+<p><img src="/../assets/image_1732703485449_0.png" alt="image.png"></p>
+<p>修改</p>
+<p><img src="/../assets/image_1732704271404_0.png" alt="image.png"></p>
+<h4><span id="大功告成直接访问">大功告成，直接访问</span></h4><p><img src="/../assets/image_1732697571527_0.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/28/day13_kls/" data-id="cm5vste4r000dfriwhl67gjcp" data-title="day13_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day12_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/26/day12_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-26T05:14:59.000Z" itemprop="datePublished">2024-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/26/day12_kls/">day12_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="shell脚本参数处理getopts">shell脚本参数处理getopts</span></h3><h3><span id="shell脚本模板">shell脚本模板</span></h3><h4><span id="必须有的">必须有的</span></h4><p>脚本描述</p>
+<p>脚本使用方法</p>
+<p>参数处理</p>
+<p>依赖检查</p>
+<p>日志</p>
+<h4><span id="模板可能需要的东西">模板可能需要的东西:</span></h4><p>配置文件处理</p>
+<p>调试模式</p>
+<h3><span id="代理相关">代理相关</span></h3><h4><span id="分类">分类</span></h4><p>按协议:</p>
+<p>http,https,socks</p>
+<p>按功能：</p>
+<p>正向代理，反向代理</p>
+<p>按匿名性：</p>
+<p>透明代理，匿名代理，高匿名代理</p>
+<h4><span id="代理模式">代理模式</span></h4><p>系统代理，规则代理</p>
+<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="docker-tool">docker-tool</span></h3><p>自动安装docker，添加代理，镜像等</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">discription:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">      a docker tool, intall script, config proxy, mirror</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">author: lzf</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">feature:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">      1. docker and docker-compose auto install(support centos,ubuntu,debian,kali)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">      2. proxy registry-mirrors insecure-registries auto config, via jq</span></span><br><span class="line">help()&#123;</span><br><span class="line">    echo &quot;$0 install/i | proxy/p url | mirror/m url | mirror-addtrust/mt url | add-trust/at url | rm-stoped/rs | compose&quot;</span><br><span class="line">    echo -e &quot;\t install \t\t install docker&quot;</span><br><span class="line">    echo -e &quot;\t proxy url \t\t add proxy&quot;</span><br><span class="line">    echo -e &quot;\t mirror url \t\t add registry-mirrors&quot;</span><br><span class="line">    echo -e &quot;\t add-trust url \t\t add insecure-registries&quot;</span><br><span class="line">    echo -e &quot;\t mirror-addtrust url \t\t add registry-mirrors and insecure-registries&quot;</span><br><span class="line">    echo -e &quot;\t compose \t\t install docker-compose&quot;</span><br><span class="line">    exit 0</span><br><span class="line">&#125;</span><br><span class="line">init()&#123;</span><br><span class="line">    source /etc/os-release</span><br><span class="line">    if command -v jq &gt;/dev/null 2&gt;&amp;1 ;then</span><br><span class="line">        jq_exist=1</span><br><span class="line">    fi</span><br><span class="line">    case $ID in</span><br><span class="line">        centos | ubuntu | debian | kali)</span><br><span class="line">            ;;</span><br><span class="line">        arch)</span><br><span class="line">            echo &quot;正在编写代码，暂不支持$ID&quot;</span><br><span class="line">            #exit 1</span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            echo &quot;Error: $ID is not supported.&quot;</span><br><span class="line">            exit 1</span><br><span class="line">    esac</span><br><span class="line">    # 整个配置文件</span><br><span class="line">    CONFIG_PATH=.docker_tools.conf</span><br><span class="line">    if [ -f $CONFIG_PATH ]; then</span><br><span class="line">        source $CONFIG_PATH</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检测依赖软件包</span></span><br><span class="line">check_depen()&#123;</span><br><span class="line">    local depen=(&quot;jq&quot;)</span><br><span class="line">    for c in $&#123;depen[@]&#125;; do</span><br><span class="line">        has_cmd $c || &#123;</span><br><span class="line">            echo &quot;Error: $c is not installed.&quot;</span><br><span class="line">            exit 1</span><br><span class="line">        &#125;</span><br><span class="line">    done</span><br><span class="line">&#125;</span><br><span class="line">has_cmd () &#123;</span><br><span class="line">    command -v $1 &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">&#125;</span><br><span class="line">install()&#123;</span><br><span class="line">    case $ID in</span><br><span class="line">        ubuntu | debian | kali)</span><br><span class="line">            # 添加公钥</span><br><span class="line">            install -m 0755 -d /etc/apt/keyrings</span><br><span class="line">            curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg</span><br><span class="line">            chmod a+r /etc/apt/keyrings/docker.gpg</span><br><span class="line">            # 参加仓库</span><br><span class="line">            if &quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;)&quot; = &#x27;kali-rolling&#x27; ; then</span><br><span class="line">                echo \</span><br><span class="line">                  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian \</span><br><span class="line">                  buster stable&quot; | \</span><br><span class="line">                  tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br><span class="line">            else</span><br><span class="line">                echo \</span><br><span class="line">                  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian \</span><br><span class="line">                  &quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;)&quot; stable&quot; | \</span><br><span class="line">                  tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br><span class="line">            fi</span><br><span class="line">            # 安装</span><br><span class="line">            apt-get update</span><br><span class="line">            apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br><span class="line">            ;;</span><br><span class="line">        centos)</span><br><span class="line">            yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">            yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line">            # 这里我们换成清华的源</span><br><span class="line">            sed -i &#x27;s+https://download.docker.com+https://mirrors.tuna.tsinghua.edu.cn/docker-ce+&#x27; /etc/yum.repos.d/docker-ce.repo</span><br><span class="line">            yum makecache</span><br><span class="line">            yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br><span class="line">            ;;</span><br><span class="line">        arch)</span><br><span class="line">            # pacman -S docker</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">&#125;</span><br><span class="line">install_docker_compose()&#123;</span><br><span class="line">    curl -L &quot;https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">    chmod +x /usr/local/bin/docker-compose</span><br><span class="line">&#125;</span><br><span class="line">docker_config_init()&#123;</span><br><span class="line">    config_file=&quot;/etc/docker/daemon.json&quot;</span><br><span class="line">    #config_file=&quot;./daemon.json&quot;</span><br><span class="line">    [ -f &quot;$config_file&quot; ] || echo &quot;&#123;&#125;&quot; &gt; &quot;$config_file&quot;</span><br><span class="line">&#125;</span><br><span class="line">modify_config()&#123;</span><br><span class="line">    jq &quot;$1&quot; &quot;$config_file&quot; &gt; &quot;$config_file.tmp&quot; &amp;&amp; mv &quot;$config_file.tmp&quot; &quot;$config_file&quot;</span><br><span class="line">&#125;</span><br><span class="line">proxy()&#123;</span><br><span class="line">    modify_config &quot;.proxies.\&quot;http-proxy\&quot; = \&quot;$1\&quot;&quot; \</span><br><span class="line">        &amp;&amp; echo &quot;http代理配置成功:$1&quot; \</span><br><span class="line">        || echo &quot;ttp代理配置失败&quot;</span><br><span class="line">    modify_config &quot;.proxies.\&quot;https-proxy\&quot; = \&quot;$1\&quot;&quot; \</span><br><span class="line">        &amp;&amp; echo &quot;https代理配置成功:$1&quot; \</span><br><span class="line">        || echo &quot;https代理配置失败&quot;</span><br><span class="line">    # todo 校验</span><br><span class="line">    restart_docker</span><br><span class="line">&#125;</span><br><span class="line">mirror()&#123;</span><br><span class="line">    modify_config  &quot;.[\&quot;registry-mirrors\&quot;] |= if index(\&quot;$1\&quot;) == null then . + [\&quot;$1\&quot;] else . end&quot; \</span><br><span class="line">        &amp;&amp; echo &quot;mirror配置成功:$1&quot; \</span><br><span class="line">        || echo &quot;mirror配置失败&quot;</span><br><span class="line">    # todo 校验</span><br><span class="line">    restart_docker</span><br><span class="line">&#125;</span><br><span class="line">mirror_trust()&#123;</span><br><span class="line">    if [[ $1 =~ http://* ]]; then</span><br><span class="line">        trust=$&#123;1:7:$&#123;#1&#125;&#125;</span><br><span class="line">        echo $trust</span><br><span class="line">        modify_config &quot;if .\&quot;insecure-registries\&quot; | index(\&quot;$trust\&quot;) | not then .\&quot;insecure-registries\&quot; += [\&quot;$trust\&quot;] else . end&quot; \</span><br><span class="line">            &amp;&amp; echo &quot;mirror_trust配置成功:$trust&quot; \</span><br><span class="line">            || echo &quot;mirror_trust配置失败&quot;</span><br><span class="line">        # todo 校验</span><br><span class="line">        restart_docker</span><br><span class="line">    else</span><br><span class="line">        echo &quot;mirror is not http, not change mirror_trust&quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line">enable_doceker()&#123;</span><br><span class="line">    systemctl enable --now docker</span><br><span class="line">&#125;</span><br><span class="line">restart_docker()&#123;</span><br><span class="line">    systemctl daemon-reload</span><br><span class="line">    systemctl restart docker</span><br><span class="line">&#125;</span><br><span class="line">rm_stoped()&#123;</span><br><span class="line">    docker ps -a -f &quot;status=exited&quot; -q | xargs docker rm</span><br><span class="line">&#125;</span><br><span class="line">main()&#123;</span><br><span class="line">    init</span><br><span class="line">    docker_config_init</span><br><span class="line">    if [ $# -eq 0 ]; then</span><br><span class="line">        install</span><br><span class="line">        install_docker_compose</span><br><span class="line">        enable_doceker</span><br><span class="line">    else</span><br><span class="line">        case $1 in</span><br><span class="line">            install | i)</span><br><span class="line">                install</span><br><span class="line">                ;;</span><br><span class="line">            proxy | p)</span><br><span class="line">                # todo 校验输入的参数</span><br><span class="line">                [ -z &quot;$2&quot; ] &amp;&amp; [ -z &quot;$config_proxy&quot; ] &amp;&amp; exit 1</span><br><span class="line">                proxy $&#123;2:-$config_proxy&#125;</span><br><span class="line">                ;;</span><br><span class="line">            mirror | m)</span><br><span class="line">                [ -z &quot;$2&quot; ] &amp;&amp; [ -z &quot;$config_mirror&quot; ] &amp;&amp; exit 1</span><br><span class="line">                mirror $&#123;2:-$config_mirror&#125;</span><br><span class="line">                ;;</span><br><span class="line">            mirror-addtrust | mt)</span><br><span class="line">                [ -z &quot;$2&quot; ] &amp;&amp; [ -z &quot;$config_mirror_trust&quot; ] &amp;&amp; exit 1</span><br><span class="line">                mirror_trust $&#123;2:-$config_mirror_trust&#125;</span><br><span class="line">                [ -z &quot;$2&quot; ] &amp;&amp; [ -z &quot;$config_mirror&quot; ] &amp;&amp; exit 1</span><br><span class="line">                mirror $&#123;2:-$config_mirror&#125;</span><br><span class="line">                ;;</span><br><span class="line">            add-trust | at)</span><br><span class="line">                [ -z &quot;$2&quot; ] &amp;&amp; [ -z &quot;$config_mirror_trust&quot; ] &amp;&amp; exit 1</span><br><span class="line">                 mirror_trust $&#123;2:-$config_mirror_trust&#125;</span><br><span class="line">                ;;</span><br><span class="line">            rm-stoped | rs)</span><br><span class="line">                rm_stoped</span><br><span class="line">                ;;</span><br><span class="line">            compose)</span><br><span class="line">                install_docker_compose</span><br><span class="line">                ;;</span><br><span class="line">            *)</span><br><span class="line">                help</span><br><span class="line">                ;;</span><br><span class="line">        esac</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line">main $@</span><br></pre></td></tr></table></figure>
+
+<h3><span id="archjava">archjava</span></h3><p>archlinux官方提供的切换脚本，我们对其稍作修改，让其支持ubuntu，并附带了install功能</p>
+<h4><span id="使用">使用</span></h4><p>安装</p>
+<p><img src="/../assets/image_1732610680509_0.png" alt="image.png"></p>
+<p>查看当前安装了那些</p>
+<p><img src="/../assets/image_1732610743279_0.png" alt="image.png"></p>
+<p>使用指定版本</p>
+<p><img src="/../assets/image_1732611808092_0.png" alt="image.png"></p>
+<h4><span id="代码">代码</span></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">! /bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Arch Linux helper script to <span class="built_in">set</span>/unset/check/fix the enabled Java environment</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">This program may be freely redistributed under the terms of the GNU General Public License</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"><span class="comment"># Author: Guillaume ALAUX &lt;guillaume@archlinux.org&gt;</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Modify: by lzf, 2024-11-26</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">feature:</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">      1. add jdk download</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">      2. support other linux</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">warning: this script will change /bin/java <span class="built_in">link</span></span></span><br><span class="line">JVM_DIR=/usr/lib/jvm</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">JVM_DIR=./jvm</span></span><br><span class="line">DEFAULT_NAME=default</span><br><span class="line">DEFAULT_PATH=$&#123;JVM_DIR&#125;/$&#123;DEFAULT_NAME&#125;</span><br><span class="line">DEFAULT_NAME_JRE=default-runtime</span><br><span class="line">DEFAULT_PATH_JRE=$&#123;JVM_DIR&#125;/$&#123;DEFAULT_NAME_JRE&#125;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ORIGIN_JAVA_LN=<span class="variable">$PWD</span>/bin/java</span></span><br><span class="line">ORIGIN_JAVA_LN=/bin/java</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Utility <span class="built_in">functions</span></span></span><br><span class="line">check_root() &#123;</span><br><span class="line">  return</span><br><span class="line">  if [ $(id -u) -ne 0 ]; then</span><br><span class="line">    echo &#x27;This script must be run as root&#x27;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="variable">$1</span>: parameter count given to this script <span class="keyword">for</span> this option</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="variable">$2</span>: expected parameter count <span class="keyword">for</span> this option</span></span><br><span class="line">check_param_count() &#123;</span><br><span class="line">  if [ $1 -ne $2 ]; then</span><br><span class="line">    echo &#x27;Wrong parameter count&#x27;</span><br><span class="line">    exit 2</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Second level <span class="built_in">functions</span></span></span><br><span class="line">get_default_java() &#123;</span><br><span class="line">  path=$(readlink -e $&#123;DEFAULT_PATH&#125;)</span><br><span class="line">  if [ &quot;x$&#123;path&#125;&quot; != &quot;x/dev/null&quot; ]; then</span><br><span class="line">    echo $&#123;path/$&#123;JVM_DIR&#125;\/&#125;</span><br><span class="line">  else</span><br><span class="line">    echo &quot;&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line">get_installed_javas() &#123;</span><br><span class="line">  if [ -d $&#123;JVM_DIR&#125; ]; then</span><br><span class="line">    for dir in $(find $&#123;JVM_DIR&#125; -mindepth 1 -maxdepth 1 -type d | sort); do</span><br><span class="line">      if [ -x $&#123;dir&#125;/bin/java ]; then</span><br><span class="line">        javas+=($&#123;dir/$&#123;JVM_DIR&#125;\/&#125;)</span><br><span class="line">      else</span><br><span class="line">        if [ -x $&#123;dir&#125;/jre/bin/java ]; then</span><br><span class="line">        javas+=($&#123;dir/$&#123;JVM_DIR&#125;\/&#125;/jre)</span><br><span class="line">        fi</span><br><span class="line">      fi</span><br><span class="line">    done</span><br><span class="line">  fi</span><br><span class="line">  echo $&#123;javas[@]&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="variable">$1</span>: Java environment name to <span class="built_in">test</span></span></span><br><span class="line">is_java_valid() &#123;</span><br><span class="line">  test &quot;x$1&quot; != &quot;x$&#123;DEFAULT_NAME&#125;&quot; &amp;&amp; test -x $&#123;JVM_DIR&#125;/$1/bin/java</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="variable">$1</span>: Java environment name to <span class="built_in">set</span> as default</span></span><br><span class="line">set_default_link_to() &#123;</span><br><span class="line">  new_default=$1</span><br><span class="line">  unlink $&#123;DEFAULT_PATH&#125; 2&gt;/dev/null</span><br><span class="line">  ln -sf $&#123;new_default&#125; $&#123;DEFAULT_PATH&#125;</span><br><span class="line">  unlink $&#123;DEFAULT_PATH_JRE&#125; 2&gt;/dev/null</span><br><span class="line">  if [[ -d $&#123;new_default&#125;/jre ]]; then</span><br><span class="line">    ln -sf $&#123;new_default&#125;/jre $&#123;DEFAULT_PATH_JRE&#125;</span><br><span class="line">  else</span><br><span class="line">    ln -sf $&#123;new_default&#125; $&#123;DEFAULT_PATH_JRE&#125;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line">unset_default_link() &#123;</span><br><span class="line">  unlink $&#123;DEFAULT_PATH&#125; 2&gt;/dev/null</span><br><span class="line">  unlink $&#123;DEFAULT_PATH_JRE&#125; 2&gt;/dev/null</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">First level <span class="built_in">functions</span></span></span><br><span class="line">do_status() &#123;</span><br><span class="line">  installed_java=($(get_installed_javas))</span><br><span class="line">  if [ $&#123;#installed_java[@]&#125; -eq 0 ]; then</span><br><span class="line">    echo &#x27;No compatible Java environment installed&#x27;</span><br><span class="line">  else</span><br><span class="line">    default_java=$(get_default_java)</span><br><span class="line">    echo &#x27;Available Java environments:&#x27;</span><br><span class="line">    for java in $&#123;installed_java[@]&#125;; do</span><br><span class="line">      # We discoverd this Java env but its JRE is actually set as default</span><br><span class="line">      if [ &quot;$&#123;java&#125;/jre&quot; = &quot;$&#123;default_java&#125;&quot; ]; then</span><br><span class="line">        echo -e &quot;  $&#123;java&#125; ($&#123;java&#125;/jre default)&quot;</span><br><span class="line">      elif [ $&#123;java&#125; = &quot;$&#123;default_java&#125;&quot; ]; then</span><br><span class="line">        echo -e &quot;  $&#123;java&#125; (default)&quot;</span><br><span class="line">      else</span><br><span class="line">        echo &quot;  $&#123;java&#125;&quot;</span><br><span class="line">      fi</span><br><span class="line">    done</span><br><span class="line">    if [ -z $&#123;default_java&#125; ]; then</span><br><span class="line">      echo &quot;No Java environment set as default&quot;</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line">do_get() &#123;</span><br><span class="line">  get_default_java</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="variable">$1</span>: Java environment name to <span class="built_in">set</span> as default</span></span><br><span class="line">do_set() &#123;</span><br><span class="line">  if ! is_java_valid $1; then</span><br><span class="line">    echo &quot;&#x27;$&#123;JVM_DIR&#125;/$1&#x27; is not a valid Java environment path&quot;</span><br><span class="line">    exit 1</span><br><span class="line">  fi</span><br><span class="line">  default=$(get_default_java)</span><br><span class="line">  if [ &quot;x$1&quot; != &quot;x$&#123;default&#125;&quot; ] || ! is_java_valid $&#123;default&#125;; then</span><br><span class="line">    unset_default_link</span><br><span class="line">    set_default_link_to $1</span><br><span class="line">  fi</span><br><span class="line"><span class="meta prompt_">  #</span><span class="language-bash">parent_dir=$(<span class="built_in">dirname</span> <span class="variable">$1</span>)</span></span><br><span class="line"><span class="meta prompt_">  #</span><span class="language-bash"><span class="keyword">if</span> is_java_valid <span class="variable">$&#123;parent_dir&#125;</span>; <span class="keyword">then</span></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash"> <span class="built_in">echo</span> <span class="string">&quot;Warning: &#x27;<span class="variable">$&#123;parent_dir&#125;</span>&#x27; looks like a valid JDK whereas &#x27;<span class="variable">$1</span>&#x27; is set as default&quot;</span></span></span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash"> <span class="built_in">echo</span> <span class="string">&quot;Fix this with &#x27;archlinux-java set <span class="variable">$&#123;parent_dir&#125;</span>&#x27;&quot;</span></span></span><br><span class="line"><span class="meta prompt_">  #</span><span class="language-bash"><span class="keyword">fi</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="variable">$1</span>: Java environment name to <span class="built_in">unset</span></span></span><br><span class="line">do_unset() &#123;</span><br><span class="line">  unset_default_link</span><br><span class="line">&#125;</span><br><span class="line">do_fix() &#123;</span><br><span class="line">  default=$(get_default_java)</span><br><span class="line">  if is_java_valid $&#123;default&#125;; then</span><br><span class="line">    # If its parent is also a valid Java environment</span><br><span class="line">    if is_java_valid $(dirname $&#123;default&#125;); then</span><br><span class="line">      unset_default_link</span><br><span class="line">      set_default_link_to $(dirname $&#123;default&#125;)</span><br><span class="line">    fi</span><br><span class="line">  else</span><br><span class="line">    prev=$(readlink $&#123;DEFAULT_PATH&#125;)</span><br><span class="line">    unset_default_link</span><br><span class="line">    potential_fixes=(&quot;$&#123;prev/\/jre&#125;&quot; &quot;$&#123;prev&#125;/jre&quot;)</span><br><span class="line">    openjdk8=(&#x27;java-8-openjdk&#x27; &#x27;java-8-openjdk/jre&#x27;)</span><br><span class="line">    # List of environments to check by order of preference:</span><br><span class="line">    # - first potential fixes of user choices,</span><br><span class="line">    # - then OpenJDK8 as it is considered a default in Arch Linux</span><br><span class="line">    # - finally, any installed environment</span><br><span class="line">    to_check=($&#123;potential_fixes[@]&#125; $&#123;openjdk8[@]&#125; $(get_installed_javas))</span><br><span class="line">    for java in $&#123;to_check[@]&#125;; do</span><br><span class="line">      if ! is_java_valid $(get_default_java) &amp;&amp; is_java_valid $&#123;java&#125;; then</span><br><span class="line">        set_default_link_to $&#123;java&#125;</span><br><span class="line">      fi</span><br><span class="line">    done</span><br><span class="line">  fi</span><br><span class="line">  if ! is_java_valid $(get_default_java); then</span><br><span class="line">    echo &#x27;No valid Java environment found&#x27;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载并解压，避免繁琐的操作</span></span><br><span class="line">download_and_untar()&#123;</span><br><span class="line">  file=&quot;$JVM_DIR/$1&quot;</span><br><span class="line">  wget -O &quot;$file&quot; &quot;$2&quot;</span><br><span class="line">  tar -xf &quot;$file&quot; -C &quot;$JVM_DIR&quot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这里写死了</span></span><br><span class="line">install()&#123;</span><br><span class="line">  case $1 in</span><br><span class="line">    8)</span><br><span class="line">      download_and_untar jdk-8u421-linux-x64.tar.gz https://d.injdk.cn/d/download/oraclejdk/8/jdk-8u421-linux-x64.tar.gz</span><br><span class="line">      ;;</span><br><span class="line">    11)</span><br><span class="line">      download_and_untar jdk-11.0.24_linux-x64_bin.tar.gz https://d.injdk.cn/d/download/oraclejdk/11/jdk-11.0.24_linux-x64_bin.tar.gz</span><br><span class="line">      ;;</span><br><span class="line">    17)</span><br><span class="line">      download_and_untar jdk-17_linux-x64_bin.tar.gz https://d.injdk.cn/d/download/oraclejdk/17/jdk-17_linux-x64_bin.tar.gz</span><br><span class="line">      ;;</span><br><span class="line">    21)</span><br><span class="line">      download_and_untar jdk-21_linux-x64_bin.tar.gz https://d.injdk.cn/d/download/oraclejdk/21/jdk-21_linux-x64_bin.tar.gz</span><br><span class="line">      ;;</span><br><span class="line">    23)</span><br><span class="line">      download_and_untar jdk-23_linux-x64_bin.tar.gz https://d.injdk.cn/d/download/oraclejdk/23/jdk-23_linux-x64_bin.tar.gz</span><br><span class="line">      ;;</span><br><span class="line">    *)</span><br><span class="line">      echo &quot;暂不支持$1&quot;</span><br><span class="line">      exit 1</span><br><span class="line">      ;;</span><br><span class="line">  esac</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">为了兼容其他发行版，强制将/bin/java连接到了<span class="variable">$JDK_DIR</span>/default/bin/java</span></span><br><span class="line">change_ln()&#123;</span><br><span class="line">  if [ -f $ORIGIN_JAVA_LN ];then</span><br><span class="line">    if ! [[ $(readlink $ORIGIN_JAVA_LN) == *default* ]]; then</span><br><span class="line">      cp $ORIGIN_JAVA_LN &quot;.$ORIGIN_JAVA_LN.back&quot;</span><br><span class="line">      unlink /bin/java</span><br><span class="line">      ln -s &quot;$JVM_DIR/default/bin/java&quot; $ORIGIN_JAVA_LN</span><br><span class="line">    fi</span><br><span class="line">  else</span><br><span class="line">    ln -s &quot;$JVM_DIR/default/bin/java&quot; $ORIGIN_JAVA_LN</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line">usage() &#123;</span><br><span class="line">  echo &quot;$(basename $0) &lt;COMMAND&gt;&quot;</span><br><span class="line">  echo -e &quot;\nCOMMAND:&quot;</span><br><span class="line">  echo -e &#x27;\tstatus\t\tList installed Java environments and enabled one&#x27;</span><br><span class="line">  echo -e &#x27;\tget\t\tReturn the short name of the Java environment set as default&#x27;</span><br><span class="line">  echo -e &#x27;\tset &lt;JAVA_ENV&gt;\tForce &lt;JAVA_ENV&gt; as default&#x27;</span><br><span class="line">  echo -e &#x27;\tunset\t\tUnset current default Java environment&#x27;</span><br><span class="line">  echo -e &#x27;\tfix\t\tFix an invalid/broken default Java environment configuration&#x27;</span><br><span class="line">  echo -e &#x27;\tinstall 8/11/17/21/23\t\tInstall jdk tar&#x27;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">初始化</span></span><br><span class="line">init()&#123;</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">判断jvm目录是否存在</span></span><br><span class="line">  if [ ! -d &quot;$JVM_DIR&quot; ]; then</span><br><span class="line">    mkdir -p &quot;$JVM_DIR&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># Main</span></span></span><br><span class="line">init</span><br><span class="line">case $1 in</span><br><span class="line">  &#x27;status&#x27;) do_status;;</span><br><span class="line">  &#x27;get&#x27;)    do_get;;</span><br><span class="line">  &#x27;set&#x27;)    check_root; check_param_count $# 2; do_set $2; change_ln;;</span><br><span class="line">  &#x27;unset&#x27;)  check_root; do_unset;;</span><br><span class="line">  &#x27;fix&#x27;)    check_root; do_fix;;</span><br><span class="line">  &#x27;install&#x27;) check_root; install $2;;</span><br><span class="line">  &#x27;help&#x27; | &#x27;--help&#x27; | &#x27;-h&#x27; | &#x27;&#x27;) usage;;</span><br><span class="line">  *)           echo &quot;$(basename $0): unknown option &#x27;$@&#x27;&quot;; exit 1;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<h3><span id="网卡配置">网卡配置</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">检测系统类型</span></span><br><span class="line">function detect_os() &#123;</span><br><span class="line">    if [[ -f /etc/os-release ]]; then</span><br><span class="line">        . /etc/os-release</span><br><span class="line">        echo &quot;$ID&quot;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;无法检测操作系统类型。&quot;</span><br><span class="line">        exit 1</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改 IP 地址</span></span><br><span class="line">function set_ip() &#123;</span><br><span class="line">    local iface=&quot;$1&quot;</span><br><span class="line">    local ip=&quot;$2&quot;</span><br><span class="line">    local netmask=&quot;$3&quot;</span><br><span class="line">    sudo ip addr flush dev &quot;$iface&quot;  # 清除现有 IP 地址</span><br><span class="line">    sudo ip addr add &quot;$ip/$netmask&quot; dev &quot;$iface&quot;  # 添加新 IP 地址</span><br><span class="line">    sudo ip link set &quot;$iface&quot; up  # 启动网卡</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">修改 DNS</span></span><br><span class="line">function set_dns() &#123;</span><br><span class="line">    local dns=&quot;$1&quot;</span><br><span class="line">    local connection_name=&quot;$(nmcli -t -f name con show --active | grep -m 1 &quot;$iface&quot;)&quot;</span><br><span class="line">    if [ -z &quot;$connection_name&quot; ]; then</span><br><span class="line">        echo &quot;未找到活动连接，无法设置 DNS。&quot;</span><br><span class="line">        exit 1</span><br><span class="line">    fi</span><br><span class="line">    nmcli con mod &quot;$connection_name&quot; ipv4.dns &quot;$dns&quot;</span><br><span class="line">    nmcli con up &quot;$connection_name&quot;  # 重新启动连接</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">主程序</span></span><br><span class="line">OS_NAME=$(detect_os)</span><br><span class="line">read -p &quot;请输入网卡名称 (例如 ens33): &quot; iface</span><br><span class="line">read -p &quot;请输入新的 IP 地址 (例如 192.168.1.122): &quot; ip</span><br><span class="line">read -p &quot;请输入子网掩码 (例如 24): &quot; netmask</span><br><span class="line">read -p &quot;请输入新的 DNS 地址 (例如 8.8.8.8): &quot; dns</span><br><span class="line">set_ip &quot;$iface&quot; &quot;$ip&quot; &quot;$netmask&quot;</span><br><span class="line">set_dns &quot;$dns&quot;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><h2><span id="参考">参考</span></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/26/day12_kls/" data-id="cm5vste4q000bfriw90mub7q0" data-title="day12_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day11_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/25/day11_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-25T14:12:52.000Z" itemprop="datePublished">2024-11-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/25/day11_kls/">day11_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="thinkphpx2f5-rce">thinkphp&#x2F;5-rce</span></h3><p>开启容器后访问<code>http://localhost:8099/index.php?s=/Index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=shell_exec&amp;vars[1][]=ls%20-la</code></p>
+<p><img src="/../assets/image_1732504864187_0.png" alt="image.png"></p>
+<h3><span id="命令拼接">命令拼接</span></h3><p>这里的命令拼接意味一次执行多个命令</p>
+<p><code>;</code>执行前面的命令后，接着执行后面的</p>
+<p><code>&amp;</code>实际上其是让命令后台运行</p>
+<p><code>&amp;&amp;</code>,<code>||</code>实际上这两位是逻辑操作符，尽量避免使用</p>
+<p><code>|</code>实际上其是管道符，用户将上一个命令的输出作为下一个命令的输入</p>
+<p>妙用echo</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;`ls` `echo 123`&quot;</span><br></pre></td></tr></table></figure>
+
+<h3><span id="shell脚本">shell脚本</span></h3><h4><span id="环境变量">环境变量</span></h4><p><code>PATH</code>可执行程序的路径</p>
+<p><code>PWD</code>当前所在的目录</p>
+<p><code>SHELL</code>当前使用的shell</p>
+<h4><span id="39和quot的区别"><code>&#39;</code>和<code>&quot;</code>的区别</span></h4><p><code>&#39;</code>字符原始数据，<code>&quot;</code>可以解析其中的变量值</p>
+<h4><span id="变量定义以及使用">变量定义以及使用</span></h4><p>限定符<code>local</code>当前作用域,<code>export</code>作为环境变量</p>
+<p><code>name=value</code>定义</p>
+<p><code>$name</code></p>
+<h4><span id="参数">参数</span></h4><p>传参<code>fun1 var1 var2</code></p>
+<p>处理参数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fun()&#123;</span><br><span class="line">	echo $1 $2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>特殊的</p>
+<p><code>$0</code>为该脚本本身的名字</p>
+<p><code>$#</code>：表示传入参数的个数。</p>
+<p><code>$@</code>：表示所有传入的参数（以独立形式显示，每个参数都保留为单独的字符串）<br><code>$*</code>：表示所有传入的参数（以一个字符串形式显示，所有参数被合并）</p>
+<h4><span id="运算">运算</span></h4><p>算术：</p>
+<p><code>expr</code>(不推荐)</p>
+<p><code>echo &#39;1+1&#39; | bc</code></p>
+<p>(推荐)</p>
+<p><code>$(( a + b ))</code></p>
+<p><code>let x=a+b</code></p>
+<p>字符串：</p>
+<p><code>$&#123;#var1&#125;</code>字符串长度</p>
+<p><code>$&#123;str:start:end&#125;</code>截取字符串</p>
+<p><code>$&#123;str/old/new&#125;</code>替换字符</p>
+<h4><span id="流程ifcase">流程if,case</span></h4><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if [ condition ]; then</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">commands</span></span><br><span class="line">elif [ another_condition ]; then</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">commands</span></span><br><span class="line">else</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">commands</span></span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h4><span id="循环forwhile">循环for,while</span></h4><p>for语法:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for i in $@ ; do</span><br><span class="line">    if [[ condition ]]; then</span><br><span class="line">        continue</span><br><span class="line">    fi</span><br><span class="line">    if [[ condition ]]; then</span><br><span class="line">        break</span><br><span class="line">    fi</span><br><span class="line">    # cmmmands</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>while语法:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while [ condition ]; do</span><br><span class="line"><span class="meta prompt_">  # </span><span class="language-bash">commands</span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h4><span id="condition相关">condition相关</span></h4><p>| 特性 | <code>[ ]</code> | <code>[[ ]]</code> | 无括号 |<br>| —- | —- | —- |<br>| <strong>本质</strong> | <code>test</code> 命令 | Bash 内置功能 | 直接执行命令 |<br>| <strong>支持正则表达式</strong> | 不支持 | 支持 | 取决于命令 |<br>| <strong>支持逻辑运算符</strong> | 需要使用 <code>-a</code> 和 <code>-o</code> | 使用 <code>&amp;&amp;</code> 和 &#96; |  |<br>| <strong>变量双引号要求</strong> | 必须加 | 可省略 | 通常不需要 |<br>| <strong>安全性</strong> | 较低（易受空值或特殊字符影响） | 高 | 高 |</p>
+<h3><span id="散碎的知识点">散碎的知识点</span></h3><h4><span id="poc">poc</span></h4><p><code>Proof of Concept</code>,漏洞概念验证代码或脚本，用于证明某个漏洞的存在、触发条件以及可能的危害。</p>
+<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="自动更新apt和yum源的脚本">自动更新apt和yum源的脚本</span></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"># author: lzf</span><br><span class="line"># feature:</span><br><span class="line">#     1. suport ubuntu,debinen,centos,kali</span><br><span class="line">#     2. backup and restore</span><br><span class="line"># todo:</span><br><span class="line">#     1. yum源更新，仅支持了centos7</span><br><span class="line">#     1. apt源更新，遗漏了部分源</span><br><span class="line"># 帮助</span><br><span class="line">help()&#123;</span><br><span class="line">    echo &quot;$0 update | backup | restore [file_real_path] | list-backup&quot;</span><br><span class="line">&#125;</span><br><span class="line"># 初始化</span><br><span class="line">init()&#123;</span><br><span class="line">    check_depen</span><br><span class="line">    get_os_info</span><br><span class="line">    case $ID in</span><br><span class="line">        ubuntu)</span><br><span class="line">            ;;</span><br><span class="line">        debian)</span><br><span class="line">            ;;</span><br><span class="line">        centos)</span><br><span class="line">            if [ $VERSION_ID != &#x27;7&#x27; ]; then</span><br><span class="line">                echo &quot;Error, Only support centos7.&quot;</span><br><span class="line">                exit 1</span><br><span class="line">            fi</span><br><span class="line">            ;;</span><br><span class="line">        kali)</span><br><span class="line">            ;;</span><br><span class="line">        arch)</span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            echo &quot;Error: $ID is not supported.&quot;</span><br><span class="line">            exit 1</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">&#125;</span><br><span class="line"># 获取系统源路径(用于获取备份文件)</span><br><span class="line">get_os_source_path()&#123;</span><br><span class="line">    file_list=()</span><br><span class="line">    case $ID in</span><br><span class="line">        arch)</span><br><span class="line">            file_list+=(&quot;/etc/pacman.d/mirrorlist&quot;)</span><br><span class="line">            ;;</span><br><span class="line">        centos)</span><br><span class="line">            for f in /etc/yum.repos.d/*.repo; do</span><br><span class="line">                file_list+=(&quot;$f&quot;)</span><br><span class="line">            done</span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            file_list+=(&quot;/etc/apt/sources.list&quot;)</span><br><span class="line">            for f in /etc/apt/sources.list.d/*; do</span><br><span class="line">                if [[ &quot;$f&quot; != *back ]]; then</span><br><span class="line">                    file_list+=(&quot;$f&quot;)</span><br><span class="line">                fi</span><br><span class="line">            done</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">    if [ -z $1 ]; then</span><br><span class="line">        echo $&#123;file_list[@]&#125;</span><br><span class="line">    elif [ $1 = &quot;backup&quot; ]; then</span><br><span class="line">        new_list=()</span><br><span class="line">        for f in $&#123;file_list[@]&#125;;do</span><br><span class="line">            # 如果文件存在则放入新的数组</span><br><span class="line">            if [ -f $f ]; then</span><br><span class="line">                new_list+=(&quot;$f.back&quot;)</span><br><span class="line">            fi</span><br><span class="line">        done</span><br><span class="line">        echo $&#123;new_list[@]&#125;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"># 检测依赖软件包</span><br><span class="line">check_depen()&#123;</span><br><span class="line">    local depen=(&quot;ls&quot; &quot;declare&quot;)</span><br><span class="line">    for c in $&#123;depen[@]&#125;; do</span><br><span class="line">        has_cmd $c || &#123;</span><br><span class="line">            echo &quot;Error: $c is not installed.&quot;</span><br><span class="line">            exit 1</span><br><span class="line">        &#125;</span><br><span class="line">    done</span><br><span class="line">&#125;</span><br><span class="line">has_cmd () &#123;</span><br><span class="line">    command -v $1 &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">&#125;</span><br><span class="line"># 获取当前系统信息</span><br><span class="line">get_os_info()&#123;</span><br><span class="line">    if [ -f /etc/os-release ]; then</span><br><span class="line">        source /etc/os-release</span><br><span class="line">    else</span><br><span class="line">        echo &quot;Error: /etc/os-release not found.&quot;</span><br><span class="line">        exit 1</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"># 备份镜像源(单个文件)</span><br><span class="line">backup_source()&#123;</span><br><span class="line">    if [ -f $1 ]; then</span><br><span class="line">        cp $1 $1.back \</span><br><span class="line">            &amp;&amp; echo &quot;$1 Backup success.Backup file is $1.back&quot; \</span><br><span class="line">            || echo &quot;$1 Backup failed.&quot;</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"># 恢复备份源(单个文件)</span><br><span class="line">restore_source()&#123;</span><br><span class="line">    backup_file_path=$1</span><br><span class="line">    if [ -f $backup_file_path ]; then</span><br><span class="line">        file_postfix=$&#123;backup_file_path:($&#123;#backup_file_path&#125;-4):$&#123;#backup_file_path&#125;&#125;</span><br><span class="line">        origin_file_path=$&#123;backup_file_path:0:($&#123;#backup_file_path&#125;-5)&#125;</span><br><span class="line">        echo $file_postfix</span><br><span class="line">        echo $origin_file_path</span><br><span class="line">        if [ $&#123;backup_file_path:($&#123;#backup_file_path&#125;-4):$&#123;#backup_file_path&#125;&#125; = &#x27;back&#x27; ]; then</span><br><span class="line">            if [ -f $origin_file_path ]; then</span><br><span class="line">                rm $origin_file_path</span><br><span class="line">            fi</span><br><span class="line">            cp $backup_file_path $origin_file_path \</span><br><span class="line">                &amp;&amp; echo &quot;$backup_file_path Restore success.Restore file is $origin_file_path&quot; \</span><br><span class="line">                || echo &quot;$backup_file_path Restore failed.&quot;</span><br><span class="line">        fi</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"># 列出所有备份文件</span><br><span class="line">list_backup_source()&#123;</span><br><span class="line">    files=`get_os_source_path back`</span><br><span class="line">    if [ -z $files ];then</span><br><span class="line">        return 0</span><br><span class="line">    else</span><br><span class="line">        for file in $files; do</span><br><span class="line">            echo backup_file: `realpath $file`</span><br><span class="line">        done</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line"># 备份源</span><br><span class="line">backup()&#123;</span><br><span class="line">    case $ID in</span><br><span class="line">        centos)</span><br><span class="line">            p=`get_os_source_path backup`</span><br><span class="line">            echo $p</span><br><span class="line">            for f in ls $p ; do</span><br><span class="line">                backup_source $f</span><br><span class="line">            done</span><br><span class="line">            ;;</span><br><span class="line">        arch)</span><br><span class="line">            echo &quot;正在编写代码，暂时不支持$ID&quot;</span><br><span class="line">            exit 1</span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            echo `get_os_source_path`</span><br><span class="line">            for f in `get_os_source_path`; do</span><br><span class="line">                backup_source $f</span><br><span class="line">            done</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">&#125;</span><br><span class="line"># 对源文件进行sed操作</span><br><span class="line">sed_list()&#123;</span><br><span class="line">    for f in `get_os_source_path`; do</span><br><span class="line">        echo &quot;正在为$&#123;f&#125;进行sed操作...&quot;</span><br><span class="line">        sed -i &quot;$1&quot; $f</span><br><span class="line">    done</span><br><span class="line">&#125;</span><br><span class="line"># apt更新</span><br><span class="line">update_apt()&#123;</span><br><span class="line">    apt update \</span><br><span class="line">        &amp;&amp; echo &quot;Update success.&quot; \</span><br><span class="line">        || echo &quot;Update failed.&quot;</span><br><span class="line">&#125;</span><br><span class="line"># 换源</span><br><span class="line">change_source()&#123;</span><br><span class="line">    case $ID in</span><br><span class="line">        ubuntu)</span><br><span class="line">            sed_list &quot;s@//.*archive.ubuntu.com@//mirrors.aliyun.com@g&quot;</span><br><span class="line">            update_apt</span><br><span class="line">            ;;</span><br><span class="line">        debian)</span><br><span class="line">            sed_list &quot;s@http://\(deb.debian.org\|archive.debian.org\)@https://mirrors.aliyun.com@g&quot;</span><br><span class="line">            update_apt</span><br><span class="line">            ;;</span><br><span class="line">        centos)</span><br><span class="line">            if [ $VERSION_ID -eq &#x27;7&#x27; ] ;then</span><br><span class="line">                # todo</span><br><span class="line">                curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">                curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br><span class="line">                sed -i &#x27;s/http:\/\/mirrors.cloud.aliyuncs.com/url_tmp/g&#x27;  /etc/yum.repos.d/CentOS-Base.repo &amp;&amp;  sed -i &#x27;s/http:\/\/mirrors.aliyun.com/http:\/\/mirrors.cloud.aliyuncs.com/g&#x27; /etc/yum.repos.d/CentOS-Base.repo &amp;&amp; sed -i &#x27;s/url_tmp/http:\/\/mirrors.aliyun.com/g&#x27; /etc/yum.repos.d/CentOS-Base.repo</span><br><span class="line">                yum clean all &amp;&amp; yum makecache \</span><br><span class="line">                    &amp;&amp; echo &quot;Update success.&quot; \</span><br><span class="line">                    || echo &quot;Update failed.&quot;</span><br><span class="line">            fi</span><br><span class="line">            ;;</span><br><span class="line">        kali)</span><br><span class="line">            sed_list &quot;s@http://http.kali.org@https://mirrors.aliyun.com@g&quot;</span><br><span class="line">            update_apt</span><br><span class="line">            ;;</span><br><span class="line">        arch)</span><br><span class="line">            echo &quot;正在编写代码，暂时不支持$ID&quot;</span><br><span class="line">            exit 1</span><br><span class="line">            ;;</span><br><span class="line">    esac</span><br><span class="line">&#125;</span><br><span class="line">main()&#123;</span><br><span class="line">    init</span><br><span class="line">    #ID=&quot;centos&quot;</span><br><span class="line">    if [ $# -eq 0 ]; then</span><br><span class="line">        backup</span><br><span class="line">        change_source</span><br><span class="line">    else</span><br><span class="line">        case $1 in</span><br><span class="line">            &quot;update&quot;)</span><br><span class="line">                backup</span><br><span class="line">                change_source</span><br><span class="line">                ;;</span><br><span class="line">            &quot;backup&quot;)</span><br><span class="line">                backup</span><br><span class="line">                ;;</span><br><span class="line">            &quot;restore&quot;)</span><br><span class="line">                if [ -f $2 ]; then</span><br><span class="line">                    restore_source $2</span><br><span class="line">                else</span><br><span class="line">                    echo &quot;Error: $2 not found.&quot;</span><br><span class="line">                fi</span><br><span class="line">                ;;</span><br><span class="line">            &quot;list-backup&quot;)</span><br><span class="line">                list_backup_source</span><br><span class="line">                ;;</span><br><span class="line">            *)</span><br><span class="line">                help</span><br><span class="line">                ;;</span><br><span class="line">        esac</span><br><span class="line">    fi</span><br><span class="line">&#125;</span><br><span class="line">main $@</span><br></pre></td></tr></table></figure>
+
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><h2><span id="参考">参考</span></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/25/day11_kls/" data-id="cm5vste4p0009friw4vifed11" data-title="day11_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rce/" rel="tag">rce</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day10_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/23/day10_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-23T06:45:08.000Z" itemprop="datePublished">2024-11-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/23/day10_kls/">day10_kls_review</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="docker-compose">docker-compose</span></h3><h4><span id="yml的构成">yml的构成</span></h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.9&#x27;</span>  <span class="comment"># Compose 文件格式版本</span></span><br><span class="line"><span class="attr">services:</span>       <span class="comment"># 服务定义</span></span><br><span class="line">  <span class="attr">service_name:</span> <span class="comment"># 服务名称</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">image_name:tag</span>  <span class="comment"># 使用的镜像和标签</span></span><br><span class="line">    <span class="attr">build:</span>       <span class="comment"># 构建选项（可选）</span></span><br><span class="line">      <span class="attr">context:</span> <span class="string">./path</span>      <span class="comment"># Dockerfile 的上下文目录</span></span><br><span class="line">      <span class="attr">dockerfile:</span> <span class="string">Dockerfile</span>  <span class="comment"># Dockerfile 文件名</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">container_name</span> <span class="comment"># 容器名称（可选）</span></span><br><span class="line">    <span class="attr">ports:</span>        <span class="comment"># 端口映射</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;外部端口:容器端口&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span>      <span class="comment"># 数据卷挂载</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&quot;宿主路径:容器路径&quot;</span></span><br><span class="line">    <span class="attr">environment:</span>  <span class="comment"># 环境变量</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">KEY=value</span></span><br><span class="line">    <span class="attr">depends_on:</span>   <span class="comment"># 服务依赖关系</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">other_service_name</span></span><br><span class="line">    <span class="attr">networks:</span>     <span class="comment"># 网络配置</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">network_name</span></span><br><span class="line"><span class="attr">networks:</span>         <span class="comment"># 自定义网络（可选）</span></span><br><span class="line">  <span class="attr">network_name:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span></span><br><span class="line"><span class="attr">volumes:</span>          <span class="comment"># 定义数据卷（可选）</span></span><br><span class="line">  <span class="attr">volume_name:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">local</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="docker-compose搭建harbor">docker-compose搭建harbor</span></h3><p><img src="/../assets/image_1732239707110_0.png" alt="image.png"></p>
+<blockquote>
+<p>已经启动过了，这里就不演示启动了</p>
+</blockquote>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>复习内容没写，累了，周五下午打游戏去了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/23/day10_kls/" data-id="cm5vste4n0007friwcnwc28be" data-title="day10_kls_review" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/review/" rel="tag">review</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-week2_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/22/week2_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2024-11-22T07:03:19.000Z" itemprop="datePublished">2024-11-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/exam/">exam</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/22/week2_kls_exam/">week2_kls_exam</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="题目1">题目1</span></h2><p>  id:: 67401618-77f2-4cd7-ab26-b033e352aa66</p>
+<p>配置vsftpd服务，添加ftp服务用户lihua，并限制lihua使用ftp服务的访问路径为&#x2F;usr&#x2F;share&#x2F;ftp_files</p>
+<h3><span id="step1添加用户并设置家目录以及家目录权限设置密码">step1：添加用户，并设置家目录，以及家目录权限，设置密码</span></h3><p><img src="/../assets/image_1732253536205_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732254737383_0.png" alt="image.png"></p>
+<h3><span id="step2修改vsftp配置文件">step2：修改vsftp配置文件</span></h3><p><img src="/../assets/image_1732254394767_0.png" alt="image.png"></p>
+<p>修改<code>/etc/vsftpd/vsftpd_userlist</code></p>
+<p><img src="/../assets/image_1732253873260_0.png" alt="image.png"></p>
+<p>创建<code>/etc/vsftpd/user_conf</code>目录，并添加<code>lihua</code>配置文件</p>
+<p><img src="/../assets/image_1732253955889_0.png" alt="image.png"></p>
+<h3><span id="step3重新加载vsftp配置文件并重启">step3:重新加载vsftp配置文件并重启</span></h3><p><img src="/../assets/image_1732254036298_0.png" alt="image.png"></p>
+<h3><span id="step4连接ftp">step4:连接ftp</span></h3><p><img src="/../assets/image_1732254539764_0.png" alt="image.png"></p>
+<p><img src="/../assets/vsftp_1732254502349_0.gif" alt="vsftp.gif"></p>
+<h2><span id="题目2">题目2</span></h2><p>配置ssh服务，要求用户jack可以使用id_rsa 免密登录ssh</p>
+<p>server: centos.pcx.home</p>
+<p>client: kali.pcx.home</p>
+<h3><span id="step1添加jack用户创建家目录设置密码">step1:添加jack用户,创建家目录，设置密码</span></h3><p><img src="/../assets/image_1732254970492_0.png" alt="image.png"></p>
+<h3><span id="step2让jack生成ssh公私钥匙对">step2:让jack生成ssh公私钥匙对</span></h3><p><img src="/../assets/image_1732255036501_0.png" alt="image.png"></p>
+<h3><span id="step3上传公钥">step3：上传公钥</span></h3><p><img src="/../assets/image_1732255169120_0.png" alt="image.png"></p>
+<h3><span id="step4登陆centos">step4：登陆centos</span></h3><p><img src="/../assets/image_1732255239120_0.png" alt="image.png"></p>
+<p>在centos端查看在线用户：</p>
+<p><img src="/../assets/image_1732255267589_0.png" alt="image.png"></p>
+<p>在centos端查看<code>~/.ssh/authorized_keys</code></p>
+<p><img src="/../assets/image_1732255349220_0.png" alt="image.png"></p>
+<h2><span id="题目3">题目3</span></h2><p>在kali上编写ufw防火墙规则，禁止kali连接任何机器的smb服务</p>
+<h3><span id="step1开启smb服务并测试">step1:开启smb服务并测试</span></h3><p><img src="/../assets/image_1732255758185_0.png" alt="image.png"></p>
+<p>连接测试</p>
+<p><img src="/../assets/image_1732255898430_0.png" alt="image.png"></p>
+<h3><span id="step2ufw规则编写">step2：ufw规则编写</span></h3><p>现有规则查看</p>
+<p><img src="/../assets/image_1732255960355_0.png" alt="image.png"></p>
+<p>新规则添加</p>
+<p><img src="/../assets/image_1732256290665_0.png" alt="image.png"></p>
+<p><code>sudo ufw deny out 139/tcp</code>，445和139都要禁止</p>
+<p>查看规则</p>
+<p><img src="/../assets/image_1732256695233_0.png" alt="image.png"></p>
+<h3><span id="step3重启ufw并尝试连接其他主机的smb">step3：重启ufw并尝试连接其他主机的smb</span></h3><p>重启</p>
+<p><img src="/../assets/image_1732256373774_0.png" alt="image.png"></p>
+<p>尝试连接</p>
+<p><img src="/../assets/kalismb_1732256611407_0.gif" alt="kalismb.gif"></p>
+<h2><span id="题目4">题目4</span></h2><p>基于Dockerfile构建的镜像搭建一个容器，要求同时具有ssh服务与redis服务，基础镜像选择 centos&#x2F;debian&#x2F;ubuntu均可</p>
+<h3><span id="step1拉取ubuntu镜像">step1:拉取ubuntu镜像</span></h3><p><img src="/../assets/image_1732257125498_0.png" alt="image.png"></p>
+<p>这里拉过了，就不拉了</p>
+<h3><span id="step2编写dockerfile">step2:编写Dockerfile</span></h3><p>启动脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动 SSH 服务</span></span><br><span class="line">service ssh start</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动 Redis 服务</span></span><br><span class="line">redis-server &amp;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">保持容器运行</span></span><br><span class="line">tail -f /dev/null</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1732258931385_0.png" alt="image.png"></p>
+<h3><span id="step3构建镜像">step3：构建镜像</span></h3><p><img src="/../assets/image_1732257384246_0.png" alt="image.png"></p>
+<p>查看镜像</p>
+<p><img src="/../assets/image_1732258009591_0.png" alt="image.png"></p>
+<h3><span id="step4测试镜像">step4：测试镜像</span></h3><p>创建容器</p>
+<p><img src="/../assets/image_1732258122511_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732259498695_0.png" alt="image.png"></p>
+<p>测试ssh连接</p>
+<p><img src="/../assets/image_1732258814860_0.png" alt="image.png"></p>
+<p>测试redis连接</p>
+<p><img src="/../assets/image_1732258841977_0.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/22/week2_kls_exam/" data-id="cm5vste5f002pfriw8luv9bcd" data-title="week2_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day9_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/21/day9_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-21T02:42:15.000Z" itemprop="datePublished">2024-11-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/21/day9_kls/">day9_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="docker网络">docker网络</span></h3><h4><span id="docker中的网络模式">docker中的网络模式</span></h4><p>bridge</p>
+<p>host</p>
+<p>none</p>
+<h4><span id="相关命令">相关命令</span></h4><p>查看:<code>docker network ls</code>,<code>docker network inspect NETWORK</code></p>
+<p>创建:<code>docker network create -d TYPE network_name</code></p>
+<p>加入:<code>docker network connect NETWORK CONTAINER [CONTAINERS]</code></p>
+<h4><span id="使用">使用</span></h4><p>在创建容器时使用<code>--network </code>指定网络即可<code>docker run --network NETWORK IMAGE</code></p>
+<h3><span id="docker卷">docker卷</span></h3><h4><span id="基本用法">基本用法</span></h4><p>查看<code>docker volume ls</code></p>
+<p>创建<code>docker volume create volume_name</code></p>
+<p>删除<code>docker volume rm VOLUME</code></p>
+<h4><span id="使用">使用</span></h4><p>在创建容器时使用<code>-v</code>指定即可<code>docker run -v VOLUME:xxx IMAGE</code></p>
+<h3><span id="docker创建自己的镜像dockerfile">docker创建自己的镜像(dockerfile)</span></h3><h4><span id="不使用dockerfiledocker-commit-不推荐">不使用dockerfile(docker commit 不推荐)</span></h4><p>不使用dockerfile，基于CONIANER的修改生成新的镜像</p>
+<p>使用<code>docker commit CONTAINER IMAGE</code></p>
+<p>不推荐使用:</p>
+<p>难以维护</p>
+<p>不透明，无法得知修改了什么</p>
+<h4><span id="使用dockerfile">使用dockerfile</span></h4><h5><span id="基本语法">基本语法</span></h5><p><code>FROM</code>：指定基础镜像。</p>
+<p><code>RUN</code>：运行命令。</p>
+<p><code>CMD</code> 和 <code>ENTRYPOINT</code>：指定容器启动命令。</p>
+<p><code>COPY</code> 和 <code>ADD</code>：复制文件到镜像中。</p>
+<p><code>WORKDIR</code>：设置工作目录。</p>
+<p><code>ENV</code>：设置环境变量。</p>
+<p><code>EXPOSE</code>：声明端口。</p>
+<p><code>VOLUME</code>：定义挂载点。</p>
+<p><code>LABEL</code>：添加元数据。</p>
+<h5><span id="生成镜像">生成镜像</span></h5><p><code>docker build -t IMAGE docker_file_dirname</code></p>
+<h3><span id="docker-compose">docker-compose</span></h3><h4><span id="概念">概念</span></h4><p><code>docker-compose.yml</code>是docker-compose启动所需的配置文件。默认是这个，如果你要使用其他的请在运行时指定<code>docker-compose up -f /path/to/your_yml</code></p>
+<h4><span id="命令">命令</span></h4><p>创建<code>docker-compose up [options]</code>，常用的参数<code>-d</code>后台运行</p>
+<p>启停<code>docker-compose start/stop</code></p>
+<p>删除<code>docker-compose down</code></p>
+<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="dvwa站库分离php-apachemysql">dvwa站库分离(php-apache+mysql)</span></h3><p>创建docker网络</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d bridge my_self_bridge</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1732153437645_0.png" alt="image.png"></p>
+<p>php-apache环境搭建</p>
+<p><img src="/../assets/image_1732153569619_0.png" alt="image.png"></p>
+<blockquote>
+<p>因拓展无法安装，后面这个我换成了<code>php:8.0-apache</code>，后面发现不是php版本的问题。dvwa官方推荐7.3及以上</p>
+</blockquote>
+<p>创建mysql数据库</p>
+<p><img src="/../assets/image_1732153724752_0.png" alt="image.png"></p>
+<blockquote>
+<p>这里无需进行映射端口，使用主机名(容器名)连接即可</p>
+</blockquote>
+<p>创建结束后，我们查看该网络的信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network inspect my_self_bridge</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1732153969902_0.png" alt="image.png"></p>
+<blockquote>
+<p>我们发现这两个container已经加入到网络中了</p>
+</blockquote>
+<p>把dvwa源码扔到php的app目录</p>
+<p><img src="/../assets/image_1732154086639_0.png" alt="image.png"></p>
+<p>复制配置文件并修改</p>
+<p><img src="/../assets/image_1732154359160_0.png" alt="image.png"></p>
+<blockquote>
+<p>这里的db_server我们可以设置为dvwa-mysql(容器名)</p>
+</blockquote>
+<p>修改完成后访问<code>setup.php</code></p>
+<p><img src="/../assets/image_1732155125186_0.png" alt="image.png"></p>
+<p>发现没有mysqli拓展</p>
+<p>php镜像官方提供了一个工具<code>docker-php-ext-install</code>用于安装拓展</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it my-apache-php-app /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">为dg的安装提前安装相关依赖</span></span><br><span class="line">apt-get update &amp;&amp; apt-get install -y \</span><br><span class="line">    libjpeg-dev \</span><br><span class="line">    libpng-dev \</span><br><span class="line">    libfreetype6-dev \</span><br><span class="line">    zlib1g-dev</span><br><span class="line">docker-php-ext-install mysqli dg pdo_mysql</span><br></pre></td></tr></table></figure>
+
+<p>现在我们退出容器，重新启动容器</p>
+<p><img src="/../assets/image_1732156852055_0.png" alt="image.png"></p>
+<h3><span id="创建第一个自己的镜像docker-commit">创建第一个自己的镜像(docker commit)</span></h3><p>拉取ubuntu镜像</p>
+<p><img src="/../assets/image_1732167921582_0.png" alt="image.png"></p>
+<p>创建一个ubuntu容器，并在后台运行</p>
+<p><img src="/../assets/image_1732168395251_0.png" alt="image.png"></p>
+<p>将<code>kitten</code>可执行文件上传</p>
+<p><img src="/../assets/image_1732168260215_0.png" alt="image.png"></p>
+<p>将镜像提交</p>
+<p><img src="/../assets/image_1732168929925_0.png" alt="image.png"></p>
+<p>根据刚创建的镜像开启一个新的容器，查看<code>/bin</code>下是否有kitten</p>
+<p><img src="/../assets/image_1732168813773_0.png" alt="image.png"></p>
+<h2><span id><img src="/../assets/image_1732168742837_0.png" alt="image.png"></span></h2><h3><span id="构建python程序镜像docker-build">构建python程序镜像(docker build)</span></h3><p>dockerbuild文件编写</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> python:<span class="number">3.8</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">mkdir</span> /opt/app</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /opt/app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pip install --upgrade pip \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; pip install -r requirements.txt</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;python&quot;</span>, <span class="string">&quot;/opt/app/main.py&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>关于参数传递，可以使用，run的参数传递，环境变量，配置文件等</p>
+</blockquote>
+<p><img src="/../assets/image_1732179427146_0.png" alt="image.png"></p>
+<p>创建镜像<code>docker build -t IMAGE:TAG .</code></p>
+<p>运行<code>docker run IMAGE args</code></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>DONE dockerfile编写</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/21/day9_kls/" data-id="cm5vste5a0029friwfl4wd63k" data-title="day9_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/changeme/">changeme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/exam/">exam</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SqlInject/" rel="tag">SqlInject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SqlInject/" style="font-size: 10px;">SqlInject</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 12.5px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 12.5px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 12.5px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/review/" style="font-size: 12.5px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 17.5px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ssrf/" style="font-size: 12.5px;">ssrf</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 12.5px;">xss</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 15px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 15px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/01/13/SqlInject/">SqlInject</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/13/CVE-2016-4437/">CVE-2016-4437</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/11/Sec-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Sec-Linux常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/10/week9_kls_exam/">week9_kls_exam</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/03/week8_kls_exam/">week8_kls_exam</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

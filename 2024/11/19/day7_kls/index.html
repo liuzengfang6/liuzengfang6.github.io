@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>day7_kls | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="课程内容防火墙linux常用的防火墙iptables(基于netfilter) nftables(iptables的后继，现代化的防火墙) ufw(基于iptables) firewalld 基本概念四表五链四表(table)：Filter表、NAT表、Mangle表、Raw表 五链(chain)：PREROUTING链、INPUT链、FORWARD链、OUTPUT链、POSTROUTING链 规">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day7_kls">
+<meta property="og:url" content="http://example.com/2024/11/19/day7_kls/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="课程内容防火墙linux常用的防火墙iptables(基于netfilter) nftables(iptables的后继，现代化的防火墙) ufw(基于iptables) firewalld 基本概念四表五链四表(table)：Filter表、NAT表、Mangle表、Raw表 五链(chain)：PREROUTING链、INPUT链、FORWARD链、OUTPUT链、POSTROUTING链 规">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/assets/image_1731984214812_0.png">
+<meta property="og:image" content="http://example.com/assets/iptables_1731984644135_0.gif">
+<meta property="og:image" content="http://example.com/assets/image_1731984623918_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1731998578134_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1731998633835_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1731998653324_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1731999065689_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1731999112568_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1731999515849_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1731999553907_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732003604921_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732003123810_0.png">
+<meta property="og:image" content="http://example.com/assets/image_1732003492874_0.png">
+<meta property="article:published_time" content="2024-11-19T11:29:05.000Z">
+<meta property="article:modified_time" content="2024-11-30T15:09:01.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="kls">
+<meta property="article:tag" content="firewalld">
+<meta property="article:tag" content="iptables">
+<meta property="article:tag" content="ufw">
+<meta property="article:tag" content="selinux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/assets/image_1731984214812_0.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-day7_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/19/day7_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-19T11:29:05.000Z" itemprop="datePublished">2024-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      day7_kls
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="防火墙">防火墙</span></h3><h4><span id="linux常用的防火墙">linux常用的防火墙</span></h4><p>iptables(基于netfilter)</p>
+<p>nftables(iptables的后继，现代化的防火墙)</p>
+<p>ufw(基于iptables)</p>
+<p>firewalld</p>
+<h4><span id="基本概念">基本概念</span></h4><h5><span id="四表五链">四表五链</span></h5><p>四表(table)：Filter表、NAT表、Mangle表、Raw表</p>
+<p>五链(chain)：PREROUTING链、INPUT链、FORWARD链、OUTPUT链、POSTROUTING链</p>
+<h5><span id="规则以iptables为例">规则(以iptables为例)</span></h5><p>匹配条件:</p>
+<p>指定规则适用的数据包类型（如源地址、目标地址、协议等）。</p>
+<p>IP 地址：-s 192.168.1.1（源地址）或 -d 10.0.0.1（目标地址）。</p>
+<p>协议：-p tcp。</p>
+<p>端口：–dport 22（目标端口）或 –sport 80（源端口）。</p>
+<p>动作（Action）:</p>
+<p>定义数据包被匹配后执行的操作。</p>
+<p>常见动作：</p>
+<p>ACCEPT：允许数据包通过。</p>
+<p>DROP：直接丢弃数据包。</p>
+<p>REJECT：拒绝数据包并返回响应。</p>
+<p>LOG：记录数据包信息到日志中。</p>
+<p>便捷的规则书写</p>
+<p>多个ip</p>
+<p>指定某个网络：<code>iptables -A INPUT -s 192.168.1.1,192.168.1.0/24 -j ACCEPT</code></p>
+<p>指定多个非连续ip：<code>iptables -A INPUT -s 192.168.1.1,192.168.1.2,192.168.1.3 -j ACCEPT</code></p>
+<p>指定多个连续ip：<code>sudo iptables -A INPUT -m iprange --src-range 192.168.1.100-192.168.1.120 -j ACCEPT</code></p>
+<p>多个端口</p>
+<p>使用<code>,</code>指定多个端口：<code>-m multiport</code>,<code>iptables -A INPUT -p tcp -m multiport --dports 22,80,443 -j ACCEPT</code></p>
+<p>使用<code>:</code>指定多个端口：，<code>iptables -A INPUT -p tcp --dport 1000:2000 -j ACCEPT</code></p>
+<h5><span id="规则匹配逻辑">规则匹配逻辑</span></h5><p>从上到下逐行匹配，第一条匹配成功后立即停止检查后续规则</p>
+<p>因此，规则匹配的顺序应从具体到通用，特例优先，全局策略后置。</p>
+<h3><span id="iptables">iptables</span></h3><h4><span id="启停">启停</span></h4><p><code>systemctl start/stop iptables</code></p>
+<h4><span id="查看规则">查看规则</span></h4><p>查看规则<code>iptables -t [table]  -L [chain] [options]</code></p>
+<p>常用参数:</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-n</code></td>
+<td>numeric，显示数字ip和端口</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>verbose，冗长的信息</td>
+<td></td>
+</tr>
+<tr>
+<td><code>--line-number</code></td>
+<td>列出规则时在每一行添加数字(这个数字在删除时有帮助)</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4><span id="添加规则">添加规则</span></h4><p><code>iptables -t [table] -A [chain] [match] -j [action]</code></p>
+<h4><span id="删除规则">删除规则</span></h4><p><code>iptables -t [table] -D [chain]</code></p>
+<blockquote>
+<p>table默认为filter</p>
+</blockquote>
+<h4><span id="永久保存防火墙配置">永久保存防火墙配置</span></h4><p>保存<code>iptables-save &gt; file</code></p>
+<p>加载<code>iptables-restore &lt; file</code></p>
+<p>自动导入:写一个开机自启脚本，使用 <code>iptables-persistent</code></p>
+<h3><span id="ufw">ufw</span></h3><h4><span id="启停">启停</span></h4><p><code>systemctl start/stop/restart ufw</code></p>
+<p><code>ufw enable/disable/reload</code></p>
+<p>状态查看:</p>
+<p><code>systemctl status ufw</code></p>
+<p><code>ufw status</code></p>
+<h4><span id="查看规则">查看规则</span></h4><p><code>ufw status [numberd] [verbose]</code></p>
+<h4><span id="添加规则">添加规则</span></h4><p><code>ufw action args</code></p>
+<p>action:<code>allow</code>,<code>reject</code>,<code>deny</code>,<code>limit</code></p>
+<p>简单的args：</p>
+<p>端口号&#x2F;协议<code>port[/protocol]</code></p>
+<p>服务名<code>service</code>，example:<code>samba</code>,<code>ftp</code>,<code>mysql</code></p>
+<blockquote>
+<p>注意这里的mysql等服务都是默认的端口，如果你改了对应服务的端口，这里不会生效</p>
+</blockquote>
+<p>指定出入方向</p>
+<p><code>ufw allow out 22</code></p>
+<blockquote>
+<p>值得注意的，如果没有指定方向那么方向默认为in</p>
+</blockquote>
+<p>指定出入ip,协议，端口</p>
+<p><code>ufw deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 25</code></p>
+<p>from:原ip,to 目的ip</p>
+<p>指定网卡</p>
+<p><code>ufw deny on interface proto tcp</code></p>
+<p>一些方便的写法</p>
+<p><code>any</code>所有的ip</p>
+<h4><span id="删除规则">删除规则</span></h4><p><code>ufw delete add_thing</code></p>
+<blockquote>
+<p><code>add_thing</code>为你添加时输入的内容</p>
+</blockquote>
+<h4><span id="永久保存防火墙配置">永久保存防火墙配置</span></h4><p>ufw默认就是永久保存，无需做其他操作</p>
+<h3><span id="firewalld">firewalld</span></h3><h4><span id="启停">启停</span></h4><p><code>systemctl start/stop/restart firewalld</code></p>
+<h4><span id="查看规则">查看规则</span></h4><p><code>firewall-cmd --list-all</code></p>
+<h4><span id="添加规则">添加规则</span></h4><p><code>firewall-cmd --add-xx args</code></p>
+<p>example:</p>
+<p>添加http服务放行<code>firewall-cmd --add-service http</code></p>
+<p>添加tcp88端口放行<code>firewall-cmd --add-port 88/tcp</code></p>
+<blockquote>
+<p>如果想要添加永久规则，需要添加参数<code>--permanent</code>，例如<code>firewall-cmd --permanent --add-service http</code>，让其生效需要执行<code>firewall-cmd --reload</code></p>
+</blockquote>
+<h4><span id="删除规则">删除规则</span></h4><p><code>firewall-cmd --remove-xx args</code></p>
+<p>example:</p>
+<p>删除服务规则<code>firewall-cmd --remove-service service_name</code></p>
+<h4><span id="其他的">其他的</span></h4><p>应急模式<code>firewall-cmd --panic-on/off</code></p>
+<h3><span id="selinux">selinux</span></h3><p>强制访问控制，为linux提供了细粒度的安全控制。</p>
+<p>临时关闭</p>
+<p><code>setenforce 0</code></p>
+<p>永久关闭</p>
+<p>编辑<code>/etc/selinux/config</code></p>
+<p>修改SELINUX为disable<code>SELINUX=disabled</code></p>
+<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="iptables添加规则拦截icmpiptables">iptables添加规则拦截icmp(iptables)</span></h3><p>规则添加前，ping kali</p>
+<p><img src="/../assets/image_1731984214812_0.png" alt="image.png"></p>
+<p>添加规则</p>
+<p><img src="/../assets/iptables_1731984644135_0.gif" alt="iptables.gif"></p>
+<p>规则添加后，ping kali</p>
+<p><img src="/../assets/image_1731984623918_0.png" alt="image.png"></p>
+<h3><span id="防火墙禁止https出网iptables">防火墙禁止https出网(iptables)</span></h3><p>未配置的情况</p>
+<p><img src="/../assets/image_1731998578134_0.png" alt="image.png"></p>
+<p>添加防火墙规则</p>
+<p><img src="/../assets/image_1731998633835_0.png" alt="image.png"></p>
+<p>配置后的情况</p>
+<p><img src="/../assets/image_1731998653324_0.png" alt="image.png"></p>
+<h3><span id="防火墙禁止访问tcp8000端口iptables">防火墙禁止访问tcp8000端口(iptables)</span></h3><p>在<code>pcx.z.home</code>开启一个8000端口的http服务</p>
+<p><img src="/../assets/image_1731999065689_0.png" alt="image.png"></p>
+<p>访问正常</p>
+<p><img src="/../assets/image_1731999112568_0.png" alt="image.png"></p>
+<p>配置防火墙策略</p>
+<p><img src="/../assets/image_1731999515849_0.png" alt="image.png"></p>
+<p>配置后的情况</p>
+<p><img src="/../assets/image_1731999553907_0.png" alt="image.png"></p>
+<h3><span id="防火墙配置禁止某个网卡发送icmp包">防火墙配置禁止某个网卡发送icmp包</span></h3><p>配置防火墙策略<code>iptables -I OUTPUT -o interface_name -p icmp -j DROP</code></p>
+<p>验证<code>ping -I interface host</code></p>
+<h3><span id="防火墙配置允许连接本地sshufw">防火墙配置允许连接本地ssh(ufw)</span></h3><p>配置前</p>
+<p><img src="/../assets/image_1732003604921_0.png" alt="image.png"></p>
+<blockquote>
+<p>假装连不上</p>
+</blockquote>
+<p>配置防火墙规则</p>
+<p><img src="/../assets/image_1732003123810_0.png" alt="image.png"></p>
+<p>连接成功</p>
+<p><img src="/../assets/image_1732003492874_0.png" alt="image.png"></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>DONE kitty+zsh补全显示异常问题解决</p>
+<blockquote>
+<p>kali的zsh配置的问题，我们自己配置就不会有这个问题了</p>
+</blockquote>
+<h2><span id="参考">参考</span></h2><p>man ufw</p>
+<p>man iptables</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/SELinux">SELinux ArchWiki</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/19/day7_kls/" data-id="cm5vste590024friwger62wj1" data-title="day7_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/11/20/day8_kls/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          day8_kls
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/11/18/day6_kls/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">day6_kls</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/changeme/">changeme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/exam/">exam</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SqlInject/" rel="tag">SqlInject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SqlInject/" style="font-size: 10px;">SqlInject</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 12.5px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 12.5px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 12.5px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/review/" style="font-size: 12.5px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 17.5px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ssrf/" style="font-size: 12.5px;">ssrf</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 12.5px;">xss</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 15px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 15px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/01/13/SqlInject/">SqlInject</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/13/CVE-2016-4437/">CVE-2016-4437</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/11/Sec-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Sec-Linux常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/10/week9_kls_exam/">week9_kls_exam</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/03/week8_kls_exam/">week8_kls_exam</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

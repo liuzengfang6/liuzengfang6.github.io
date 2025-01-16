@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-day24_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/12/day24_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-12T14:12:24.000Z" itemprop="datePublished">2024-12-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/12/day24_kls/">day24_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="sqlmap使用">sqlmap使用</span></h3><p>简单用法</p>
+<p><code>sqlmap -u url </code></p>
+<p>常用参数</p>
+<p><code>-p xx</code>选择参数</p>
+<p><code>--batch</code>使用sqlmap的默认策略</p>
+<p><code>--flush-session</code>强制刷新缓存</p>
+<p><code>--dbms</code>指定数据库类型</p>
+<p><code>-v</code>详情信息</p>
+<p><code>--tech TYPE</code>教sqlmap做事，让他使用你指定的注入类型</p>
+<p>sqlmap中的注入类型</p>
+<p>B布尔盲注</p>
+<p>E报错注入</p>
+<p>U联合查询注入</p>
+<p>S堆叠注入</p>
+<p>T时间盲注</p>
+<p>Q内联注入</p>
+<p>发现相关</p>
+<p><code>--level</code>等级，越高探测的内容越多</p>
+<p><code>--rask</code>风险，越高对目标伤害越高</p>
+<p>代理</p>
+<p><code>--proxy</code></p>
+<p>利用</p>
+<p><code>--sql-shell</code>交互式进入sql-shell</p>
+<h3><span id="宽字节注入">宽字节注入</span></h3><p>gbk编码由两个字节作为一个字符，后端开发者处理时没有正确的将gbk编码的字符过滤，但是mysql会将<code>%df%27</code>认为是<code>%df&#39;</code></p>
+<p>要求编码必须为gbk</p>
+<h3><span id="二次编码">二次编码</span></h3><p>后端开发者在过滤sql时错误的进行了编码，在对即将执行的sql语句进行了编码。例如将<code>%2527</code>变为了<code>%27</code>，在传入sql后，数据库将<code>%27</code>解析为<code>&#39;</code>，从而让攻击者绕过了后端程序对某些特殊字符的过滤。</p>
+<h3><span id="二阶注入">二阶注入</span></h3><p>多个接口间存在关联关系，开发者过于信任来源于数据库的信息，导致恶意的sql被拼接执行。</p>
+<h3><span id="堆叠注入">堆叠注入</span></h3><p>一般出现在asp+sqlserver组合中。使用<code>;</code>进行多个sql语句的执行</p>
+<h3><span id="insertupdatedelete注入">insert,update,delete注入</span></h3><p>注意闭合符号的判断。</p>
+<p>sql注入并非仅存在于查询，插入更新删除也会存在。</p>
+<blockquote>
+<p>注意，在不了解sql语句的执行逻辑前，谨慎做这些类型的sql注入。不然你会和凡凡一起踩缝纫机，喜提银手镯一对。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/12/day24_kls/" data-id="cm5vste500014friw0ullcy7v" data-title="day24_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day23_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/11/day23_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-11T15:28:51.000Z" itemprop="datePublished">2024-12-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/11/day23_kls/">day23_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="sql注入之报错注入">sql注入之报错注入</span></h3><p>原理：通过回显错误夹带信息。</p>
+<p>报错注入常用函数</p>
+<p><code>updatexml(1,concat(1,(sql)),1)</code></p>
+<p><code>extractvalue(0x0a,concat(0x0a,(sql)))</code></p>
+<h3><span id="sql注入之盲注">sql注入之盲注</span></h3><p>站点存在sql注入，但既不报错也不返回信息。通过猜测每个字段的每个值获取信息。</p>
+<p>此时可以通过<code>&#39; and sleep(1)</code>来判断是否存在sql注入</p>
+<p>盲注常用函数</p>
+<p><code>SUBSTRING()</code></p>
+<p><code>LEFT()</code></p>
+<p><code>CHAR_LENGTH()</code></p>
+<p><code>LENGTH()</code></p>
+<p><code>ASCII()</code></p>
+<h3><span id="sqlmap">sqlmap</span></h3><p>梭哈，梭哈，梭哈，梭哈</p>
+<h4><span id="简单用法">简单用法</span></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">简单的用法 -p 指定注入参数</span></span><br><span class="line">sqlmap -u https://host?param=xxx -p param</span><br></pre></td></tr></table></figure>
+
+<h4><span id="进阶用法">进阶用法</span></h4><p>是否厌倦了复杂的cookie填写，header填写。没有关系，我来帮你</p>
+<p>找到牛栏器，找到请求，右键复制请求头。然后把它扔到一个文件里。如果你有请求体，那么请到请求体的地方，选择查看原始内容，复制过来，扔到刚才的文件的最下面，记得添加请求空行</p>
+<h4><span id="利用">利用</span></h4><p><strong>常用参数</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">当前数据库</span></span><br><span class="line">--current-db</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">当前用户</span></span><br><span class="line">--current-user</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">数据库信息</span></span><br><span class="line">--banner</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">数据库名</span></span><br><span class="line">--dbs</span><br></pre></td></tr></table></figure>
+
+<p><strong>dump相关参数</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">拖库基础选项</span></span><br><span class="line">--dump</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">拖库表列</span></span><br><span class="line">--dbs --tables --columns</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">指定库表列，用于细粒度拖库</span></span><br><span class="line">-D -T -C</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/11/day23_kls/" data-id="cm5vste4z0011friwci5hd8f6" data-title="day23_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day20_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/11/day20_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-11T01:07:03.000Z" itemprop="datePublished">2024-12-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/11/day20_kls/">day20_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>tags: #kls</p>
+<hr>
+<p>笔记在同步时被清空了。少了一天，但是忘记记了啥来。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/11/day20_kls/" data-id="cm5vste4x000wfriwf7yf2cew" data-title="day20_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day22_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/10/day22_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-10T09:50:47.000Z" itemprop="datePublished">2024-12-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/10/day22_kls/">day22_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="数据库mysql">数据库(mysql)</span></h3><p><strong>数据库备份</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u username -p database_name &gt; backup_file.sql</span><br></pre></td></tr></table></figure>
+
+<p><strong>数据库恢复</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u username -p database_name &lt; backup_file.sql</span><br></pre></td></tr></table></figure>
+
+<h3><span id="漏洞学习方法">漏洞学习方法</span></h3><p>如何产生的</p>
+<p>会产生何种危害</p>
+<p>如何挖掘</p>
+<p>如何利用</p>
+<p>如何防御，如何修复</p>
+<p>如何绕过防御</p>
+<h3><span id="sql注入">sql注入</span></h3><h4><span id="产生的原因">产生的原因</span></h4><p>开发者没有对传入数据进行严格的校验过滤，导致恶意sql语句被拼接到sql语句中执行。</p>
+<h4><span id="危害">危害</span></h4><p>泄漏信息，控制目标服务器。</p>
+<h4><span id="挖掘">挖掘</span></h4><h5><span id="白盒">白盒</span></h5><p>查看可控参数是否被严格过滤。</p>
+<h5><span id="黑盒">黑盒</span></h5><p>扫描器测试所有参数。</p>
+<p>手工测试：寻找可能与数据库交互的参数</p>
+<h4><span id="利用">利用</span></h4><p>利用</p>
+<p>mysql</p>
+<p>元数据</p>
+<p>information_schema</p>
+<p>数据库</p>
+<p>UNION SELECT NULL, schema_name FROM information_schema.schemata–</p>
+<p>表名</p>
+<p>UNION SELECT NULL, table_name FROM information_schema.tables WHERE table_schema &#x3D; ‘your_database_name’–</p>
+<p>列名</p>
+<p>UNION SELECT NULL, column_name FROM information_schema.columns WHERE table_name &#x3D; ‘your_table_name’–</p>
+<p>查询注入点列数</p>
+<p>group by 2 –</p>
+<p>查找回显位</p>
+<p>union select 1,2,3,4</p>
+<p>常用函数</p>
+<p>USER()</p>
+<p>CONCAT()</p>
+<p>CURRENT_USER()</p>
+<p>VERSION()</p>
+<p>盲注用</p>
+<p>SUBSTRING()</p>
+<p>CHAR_LENGTH()</p>
+<p>LENGTH()</p>
+<p>ASCII()</p>
+<h3><span id="黑盒测试之手工注入">黑盒测试之手工注入</span></h3><h4><span id="注入点测试">注入点测试</span></h4><p>闭合符号，<code>&#39;</code>,<code>&quot;</code>,<code>)</code></p>
+<h5><span id="报错测试">报错测试</span></h5><p>将闭合符号拼接到</p>
+<h5><span id="and测试">and测试</span></h5><p>需要有正确的值，拼接后输入正确的值，服务器仍能返回与之前相同的内容</p>
+<h5><span id="or测试">or测试</span></h5><p><code>&#39; or 1=1</code></p>
+<h5><span id="sleep测试">sleep测试</span></h5><p><code>&#39; or sleep(3)</code></p>
+<h4><span id="分类">分类</span></h4><p><img src="/../assets/image_1733823916686_0.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/10/day22_kls/" data-id="cm5vste4y000zfriwd80j1yp4" data-title="day22_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day21_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/10/day21_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-09T16:54:04.000Z" itemprop="datePublished">2024-12-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/10/day21_kls/">day21_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="信息收集dirsearch">信息收集dirsearch</span></h3><h4><span id="dirsearch会收集什么东西">dirsearch会收集什么东西</span></h4><p>源代码备份文件，路径等敏感信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python dirsearch.py -u url</span><br></pre></td></tr></table></figure>
+
+<h3><span id="信息收集之git泄漏">信息收集之git泄漏</span></h3><p>当发现了<code>.git</code>泄漏时，需要使用一些工具进行恢复</p>
+<h4><span id="githack">githack</span></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python GitHack.py url</span><br></pre></td></tr></table></figure>
+
+<h3><span id="java信息泄漏">java信息泄漏</span></h3><p>actuator信息泄漏</p>
+<p>接口文档泄漏</p>
+<h4><span id="jdumpspider敏感信息提取工具">JDumpSpider敏感信息提取工具</span></h4><p>如果你获得了heapdump</p>
+<p>可以使用这款工具来提取其敏感信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar JDumpSpider-1.1-SNAPSHOT-full.jar heapdump</span><br></pre></td></tr></table></figure>
+
+<h3><span id="信息泄漏之burpsuite插件">信息泄漏之burpsuite插件</span></h3><h4><span id="routevulscan">RouteVulScan</span></h4><p>这款插件可以帮自动扫描路径，可以自己手动配置规则</p>
+<h4><span id="hae">HaE</span></h4><p>这款插件提供了敏感信息收集，手机号码、邮箱、api、等等，也提供了规则配置。提供了高亮，非常好用</p>
+<h3><span id="信息泄漏之前端代码">信息泄漏之前端代码</span></h3><p>通过前端寻找后端接口等敏感信息。</p>
+<h4><span id="浏览器插件findsomething">浏览器插件findsomething</span></h4><p>点击即用</p>
+<h3><span id="企业信息收集">企业信息收集</span></h3><p>收集企业资产，主要内容：网站、app、公众号、小程序</p>
+<p><strong>常用的信息收集网站：</strong></p>
+<ol>
+<li><p>爱企查</p>
+</li>
+<li><p>企查查</p>
+</li>
+<li><p>小蓝本</p>
+</li>
+<li><p>阿拉丁</p>
+</li>
+</ol>
+<p><strong>其他途径</strong></p>
+<p>微信搜索</p>
+<p>搜狗等国内搜索引擎</p>
+<p><strong>app收集途径</strong></p>
+<p>7麦网</p>
+<h3><span id="快速入门php">快速入门php</span></h3><h4><span id="一个简单的htmlphp登陆逻辑实现">一个简单的html+php登陆逻辑实现</span></h4><p>html代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!-- 登陆到login.php--&gt;</span><br><span class="line">    &lt;form action=&quot;login.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">        用户名:&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br&gt;</span><br><span class="line">        密码:&lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;&lt;br&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;&lt;/input&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">    &lt;form action=&quot;login.php&quot; method=&quot;get&quot;&gt;</span><br><span class="line">        用户名:&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br&gt;</span><br><span class="line">        密码:&lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;&lt;br&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;&lt;/input&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>php代码2</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="variable">$username</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line"><span class="variable">$password</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;password&#x27;</span>];</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$username</span> == <span class="string">&quot;admin&quot;</span> &amp;&amp; <span class="variable">$password</span> == <span class="string">&quot;admin&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Login Success&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;Login Failed&quot;</span>;</span><br><span class="line">&#125; <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/10/day21_kls/" data-id="cm5vste4y000xfriw1maa49uv" data-title="day21_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day19_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/05/day19_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-05T14:51:48.000Z" itemprop="datePublished">2024-12-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/05/day19_kls/">day19_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="oneforall">oneforall</span></h3><p><a target="_blank" rel="noopener" href="https://liuzengfang6.github.io/2024/12/05/OneForAll/">OneForAll | Hexo</a></p>
+<h3><span id="cdn">cdn</span></h3><p><em>Content Delivery Network</em>，内容分发网络。</p>
+<p>为了优化用户浏览体验，厂商将静态资源通过cdn分发。</p>
+<h4><span id="如何确定目标使用了cdn">如何确定目标使用了cdn</span></h4><h5><span id="nslookupampampdig">nslookup&amp;&amp;dig</span></h5><p>通过解析查看解析出的ip个数或通过cname记录简单判断</p>
+<p>如果目标域名解析出了多个ip，目标可能使用了cdn</p>
+<p>如果目标的域名解析有cname且指向了cdn运营商，目标使用了cdn。如果没有指向cdn运营商，也不一定能确定目标没有使用cdn</p>
+<p><img src="/../assets/image_1733367790765_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1733367889067_0.png" alt="image.png"></p>
+<h5><span id="多地ping">多地ping</span></h5><p>如果解析出的目标ip不同，且存在地理趋向，即可初步认为其使用了cdn</p>
+<p><img src="/../assets/image_1733367038676_0.png" alt="image.png"></p>
+<h4><span id="cdn对渗透测试的影响">cdn对渗透测试的影响</span></h4><p>影响目标识别</p>
+<p>流量过滤和 WAF 防护</p>
+<p>限制 DDoS 和暴力破解攻击</p>
+<p>隐藏真实资产和业务逻辑</p>
+<h4><span id="绕过cdn">绕过cdn</span></h4><p>dns历史记录(不一定能用)</p>
+<p>通过特殊手段让目标的cdn欠费，失效(难度大)</p>
+<p>旁站(仅限于主站与旁站在同一服务器上，且仅主站使用了cdn)</p>
+<p>mx记录(限于邮件服务器与主站在一起的时候)</p>
+<p>扫c段(旁站c段可能存在)</p>
+<h4><span id="验证是否绕过了cdn">验证是否绕过了cdn</span></h4><p>查看网页源代码</p>
+<p>通过cdn运营商的查询接口(阿里云等)</p>
+<h3><span id="指纹识别">指纹识别</span></h3><p>确定目标运行的操作系统、服务、开放端口、软件版本及其相关特性。便于寻找漏洞。</p>
+<h3><span id="ip探活ampamp端口扫描ampamp指纹识别工具">ip探活&amp;&amp;端口扫描&amp;&amp;指纹识别工具</span></h3><h4><span id="nmap">nmap</span></h4><p>老牌ip探活、端口扫描、指纹识别、漏洞扫描等等。面试喜欢问</p>
+<h4><span id="goby">goby</span></h4><p>强大的扫描工具，漏洞扫描等功能，点点就会用</p>
+<h4><span id="kscan">kscan</span></h4><p>go编写的，快速。ip探活、端口扫描、指纹识别。作者断更了，但是很好用</p>
+<h4><span id="allin">AlliN</span></h4><p>一个由py编写的小巧工具，无需安装任何依赖，有py就能运行。非常适用于渗透前资产收集和渗透后内网横向移动。</p>
+<h4><span id="observer_ward">observer_ward</span></h4><p>对标AlliN的go编写的工具。适用于内网横向移动等场景。</p>
+<h4><span id="ehole">EHole</span></h4><p>暂无。</p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>go</p>
+<p>nmap使用(面试bushi)</p>
+<p>信息收集相关</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/05/day19_kls/" data-id="cm5vste4w000tfriw1zjg68bf" data-title="day19_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-OneForAll" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/05/OneForAll/" class="article-date">
+  <time class="dt-published" datetime="2024-12-05T04:19:16.000Z" itemprop="datePublished">2024-12-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/05/OneForAll/">OneForAll</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="下载">下载</span></h2><p>该工具是使用py写的，这里仅介绍在linux的安装方法</p>
+<h3><span id="手动安装">手动安装</span></h3><p>对python版本有要求，如果安装失败可以选择使用docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/shmilylty/OneForAll</span><br><span class="line">cd OneForAll</span><br><span class="line">pip install -r requests.txt</span><br></pre></td></tr></table></figure>
+
+<h3><span id="docker">docker</span></h3><p>官方提供了dockerfile，我们可以选择构建docker镜像使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/shmilylty/OneForAll</span><br><span class="line">cd OneForAll</span><br><span class="line">docker build -t onforall:latest .</span><br></pre></td></tr></table></figure>
+
+<h2><span id="用途">用途</span></h2><p>用于信息收集中的子域名信息收集</p>
+<h2><span id="使用">使用</span></h2><p>在使用前建议去配置一下api，请参考<strong>配置</strong></p>
+<p>一个简单的使用案例</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 oneforall.py --target example.com run</span><br></pre></td></tr></table></figure>
+
+<h3><span id="docker运行配置">docker运行配置</span></h3><p>对于使用docker的用户，运行OneForAll可能需要映射一些数据卷，比如<code>config</code>、<code>result</code>等</p>
+<p>编写一个简单的shell脚本，映射数据卷，并将入参全部传给<code>docker run</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">docker run -v `realpath ~/tools/OneForAll/config`:/OneForAll/config -v `realpath ~/tools/OneForAll/result`:/OneForAll/result --rm oneforall:4.5 $@</span><br></pre></td></tr></table></figure>
+
+<p>使用时这样:</p>
+<p><code>run.sh --target example.com run</code></p>
+<h2><span id="配置">配置</span></h2><p>配置文件在<code>OneForAll/config</code>下</p>
+<p><img src="/../assets/image_1733363984736_0.png" alt="image.png"></p>
+<p>配置中有中文注释，非常舒服。</p>
+<h3><span id="api">api</span></h3><p>这里存放着各类api，有些查询站点不添加api不能使用，或是只能查询一部分</p>
+<h3><span id="default">default</span></h3><p>这里存放着默认配置，好像是<code>setting.py</code>+<code>api.py</code>，但实际不是，<code>setting</code>中的一些配置这里没有，这里有些配置<code>setting</code>中没有。</p>
+<h3><span id="setting">setting</span></h3><p>这里放着自定义配置，代理，模块启用等等</p>
+<blockquote>
+<p>对于相同的配置，实际上俺也不知道他会生效哪一个，default优先还是其他配置文件优先</p>
+</blockquote>
+<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://github.com/shmilylty/OneForAll">GitHub shmilylty&#x2F;OneForAll: OneForAll是一款功能强大的子域收集工具</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/05/OneForAll/" data-id="cm5vste4i0002friwa7e6hmt5" data-title="OneForAll" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day18_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/04/day18_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-04T13:19:29.000Z" itemprop="datePublished">2024-12-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/04/day18_kls/">day18_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="网站架构之前后端分离">网站架构之前后端分离</span></h3><p>前后端分离是现在开发一个站点站常用的方式，为了兼容app，小程序，大家采用前后端分离的模式来开发网站。</p>
+<p>如何区分是否为前后端分离1.0：</p>
+<p>查看网页源码，如果源码内容为真实显示的数据，则为前后端不分离。更准确的方法是，你的每一个操作，网站都会返回给你一个确定的网页。当然前提是这个站点是非静态的。</p>
+<h3><span id="前端">前端</span></h3><p>html+css+js</p>
+<h3><span id="后端语言">后端语言</span></h3><p>java、python、php等等</p>
+<h3><span id="前后端分离20">前后端分离2.0</span></h3><p>为了解决js加载慢，网络爬虫无法正确爬取内容的问题。前后端分离2.0出现了。</p>
+<p>前后端分离2.0在前端与后端之间添加了一个node前端服务器(实质上还是后端)。</p>
+<h3><span id="信息收集">信息收集</span></h3><h4><span id="域名信息收集">域名信息收集</span></h4><p>ICP备案</p>
+<p>whois查询</p>
+<h4><span id="子域名收集">子域名收集</span></h4><h5><span id="工具">工具</span></h5><p>子域名挖掘机(内置字典，仅win可用)</p>
+<p><strong>ksubdomain</strong></p>
+<p>安装： <code>yay -S ksubdomain</code></p>
+<h5><span id="在线查询">在线查询</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://developers.facebook.com/tools/ct/search</span><br><span class="line">https://crt.sh</span><br></pre></td></tr></table></figure>
+
+<h5><span id="搜索引擎">搜索引擎</span></h5><p>google、baidu、bing等</p>
+<h5><span id="网络空间测绘引擎">网络空间测绘引擎</span></h5><p>shodan</p>
+<p>fofa</p>
+<p>hunter</p>
+<p>钟馗之眼</p>
+<h5><span id="其他工具">其他工具</span></h5><p><strong>oneforall</strong></p>
+<p><strong>安装</strong>：</p>
+<p><code>pip install -r requests.txt</code></p>
+<p><strong>构建docker镜像</strong></p>
+<p><code>docker build -t onforall:latest .</code></p>
+<p><strong>构建镜像报错</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tep 1/15 : FROM --platform=$TARGETPLATFORM python:3.8-alpine3.10</span><br><span class="line">failed to parse platform : &quot;&quot; is an invalid OS component of &quot;&quot;: OSAndVersion specifier component must match &quot;^([A-Za-z0-9_-]+)(?:\\(([A-Za-z0-9_.-]*)\\))?$&quot;: invalid argument</span><br></pre></td></tr></table></figure>
+
+<p>你需要安装<code>docker-buildx</code></p>
+<p><strong>运行</strong></p>
+<h2><span id="这里映射了两个数据卷一个是config另一个是result1docker-run-v-realpath-~toolsoneforallconfigoneforallconfig-v-realpath-~toolsoneforallresultoneforallresult-rm-oneforall45-target-xxxcom-run">这里映射了两个数据卷，一个是config另一个是result<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -v `realpath ~/tools/OneForAll/config`:/OneForAll/config -v `realpath ~/tools/OneForAll/result`:/OneForAll/result --rm oneforall:4.5 --target xxx.com run</span><br></pre></td></tr></table></figure></span></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/04/day18_kls/" data-id="cm5vste4v000rfriwfjsh4fur" data-title="day18_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day17_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/03/day17_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-03T13:19:43.000Z" itemprop="datePublished">2024-12-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/03/day17_kls/">day17_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="从报文的角度分析get和post请求的区别">从报文的角度分析get和post请求的区别</span></h3><h4><span id="get请求">get请求</span></h4><p><img src="/../assets/image_1733190524775_0.png" alt="image.png"></p>
+<h4><span id="post请求">post请求</span></h4><p><img src="/../assets/image_1733190450609_0.png" alt="image.png"></p>
+<p>参数位置：get的请求参数在url中(请求头)，post的请求参数在请求体中。</p>
+<p>携带数据量：url的容量有限，导致get的传参有限。</p>
+<p>安全性：get的传参更容易被捕获，post配合https会更安全</p>
+<h3><span id="请求头之content-type">请求头之Content-Type</span></h3><p>常用于文件上传漏洞中</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/http/mime-types.html">MIME 类型 | 菜鸟教程</a></p>
+<h3><span id="渗透测试常关注的请求头">渗透测试常关注的请求头</span></h3><p><strong>伪造请求头</strong>：如篡改 <code>Host</code> 或 <code>X-Forwarded-For</code>。</p>
+<p><strong>注入恶意 Payload</strong>：如在 <code>User-Agent</code> 或 <code>Referer</code> 中注入 SQL&#x2F;XSS 代码。</p>
+<p><strong>利用敏感信息</strong>：如通过 <code>Cookie</code> 或 <code>Authorization</code> 劫持会话。</p>
+<h3><span id="thinkphp-5023-rce复现">thinkphp 5.0.23-rce复现</span></h3><p>启动漏洞环境，<code>localhost:8000</code></p>
+<h4><span id="burpsuite">burpsuite</span></h4><p>在repeater中将文档中的请求复制过来，点击send即可</p>
+<p><img src="/../assets/image_1733204959115_0.png" alt="image.png"></p>
+<h3><span id="burpsuite之intruder暴力破解">burpsuite之Intruder暴力破解</span></h3><p>dvwa密码爆破</p>
+<h4><span id="将请求发送至intruder">将请求发送至intruder</span></h4><p>找到请求，将其发送到intruder</p>
+<p><img src="/../assets/image_1733212266023_0.png" alt="image.png"></p>
+<h4><span id="设置爆破变量">设置爆破变量</span></h4><p>选中需要变化的值，点击add</p>
+<p><img src="/../assets/image_1733227655788_0.png" alt="image.png"></p>
+<h4><span id="添加字典">添加字典</span></h4><p>选择payload类型，选中字典文件</p>
+<p><img src="/../assets/image_1733227716180_0.png" alt="image.png"></p>
+<h4><span id="运行">运行</span></h4><p><img src="/../assets/image_1733227770885_0.png" alt="image.png"></p>
+<h4><span id="筛选正确密码">筛选正确密码</span></h4><p>查看运行结果。</p>
+<p><img src="/../assets/image_1733227802686_0.png" alt="image.png"></p>
+<p>对于本例，我们查看通过length排序即可获得正确密码。</p>
+<p><img src="/../assets/image_1733227883618_0.png" alt="image.png"></p>
+<p>验证结果，通过返回结果查看</p>
+<p><img src="/../assets/image_1733227916689_0.png" alt="image.png"></p>
+<h3><span id="暴力破解">暴力破解</span></h3><p>防御措施：</p>
+<p>添加不确定的参数(验证码、双因素认证)</p>
+<p>登陆次数限制</p>
+<h3><span id="爆破中快速筛选结果">爆破中快速筛选结果</span></h3><p>返回的状态码</p>
+<p>返回结果长度</p>
+<p>burp自带的筛选</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/03/day17_kls/" data-id="cm5vste4v000ofriw573dhtv8" data-title="day17_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day16_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/02/day16_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-02T14:12:44.000Z" itemprop="datePublished">2024-12-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/02/day16_kls/">day16_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="burpsuite激活">burpsuite激活</span></h3><p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/12/02/%E5%A5%B6%E5%A6%88%E7%BA%A7%E6%95%99%E5%AD%A6%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8%E5%BC%80%E5%BF%83%E7%89%88burpsuite/">奶妈级教学从0开始手把手教你使用开心版burpsuite | ziWindlu的博客</a></p>
+<h3><span id="burp常用功能">burp常用功能</span></h3><h4><span id="intruder">Intruder</span></h4><p>提供爆破功能</p>
+<h4><span id="proxy">Proxy</span></h4><p>拦截请求</p>
+<h4><span id="repeater">Repeater</span></h4><p>重放请求</p>
+<h3><span id="proxy功能设置代理">Proxy功能设置代理</span></h3><p>简单的代理设置，proxy&#x2F;proxy setting</p>
+<p><img src="/../assets/image_1733141816180_0.png" alt="image.png"></p>
+<h3><span id="浏览器配置burp代理">浏览器配置burp代理</span></h3><p>通过浏览器插件进行代理配置，如果想要访问https的网站，还需要添加证书信任</p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/12/02/burp%E6%B7%BB%E5%8A%A0%E8%AF%81%E4%B9%A6%E4%BF%A1%E4%BB%BB/">burp添加证书信任 | ziWindlu的博客</a></p>
+<h3><span id="http之状态管理">http之状态管理</span></h3><p>在HTTP中，Cookie 和 Session 是两种常用的状态管理机制，用于弥补HTTP协议无状态的缺陷，以便在多个请求之间保持用户状态。</p>
+<h4><span id="cookie">cookie</span></h4><p>存在于客户端的身份认证，每次在发送请求时请求中都会携带cookie。</p>
+<p><strong>存在的安全隐患</strong></p>
+<p>劫持、伪造</p>
+<p><strong>特点</strong></p>
+<p>大小受限，安全性较低，影响性能(每次请求都要携带)</p>
+<h4><span id="session">session</span></h4><p>存在于服务器的身份认证。客户端会存储一个<code>session_id</code>用于鉴定session的有效性。</p>
+<p><strong>存在的安全隐患</strong></p>
+<p>劫持</p>
+<p><strong>特点</strong></p>
+<p>存在于服务器，消耗服务器资源，相对而言安全性较高</p>
+<h4><span id="安全问题与安全加固">安全问题与安全加固</span></h4><h5><span id="cookie加固">cookie加固</span></h5><p>强制使用https，防止cookie在传输时被窃取</p>
+<p>设置httponly，让cookie避免被js解析导致出现xss漏洞</p>
+<p>启用 SameSite 属性，限制第三方网站使用用户的 Cookie，防止 CSRF 攻击。</p>
+<p>加密cookie，防止cookie被篡改</p>
+<h5><span id="session加固">session加固</span></h5><p>使用强随机生成的 Session ID，防止 Session ID 被预测或暴力破解。</p>
+<p>限制 Session 的有效期，防止长时间未操作导致的风险。</p>
+<h3><span id="散碎的知识点">散碎的知识点</span></h3><h4><span id="浏览器代理插件">浏览器代理插件</span></h4><p><code>Proxy SwitchyOmega</code></p>
+<p><strong>下载:</strong></p>
+<p>去你的浏览器插件商店，搜索proxy</p>
+<p><img src="/../assets/image_1733121103794_0.png" alt="image.png"></p>
+<p><strong>使用：</strong></p>
+<p>点点就行，注意这里的代理端口要配置成和burp相同的</p>
+<p><img src="/../assets/image_1733121211703_0.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/02/day16_kls/" data-id="cm5vste4u000mfriw0nxgdlcn" data-title="day16_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/session/" rel="tag">session</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/changeme/">changeme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/exam/">exam</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SqlInject/" rel="tag">SqlInject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SqlInject/" style="font-size: 10px;">SqlInject</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 12.5px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 12.5px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 12.5px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/review/" style="font-size: 12.5px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 17.5px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ssrf/" style="font-size: 12.5px;">ssrf</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 12.5px;">xss</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 15px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 15px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/01/13/SqlInject/">SqlInject</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/13/CVE-2016-4437/">CVE-2016-4437</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/11/Sec-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Sec-Linux常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/10/week9_kls_exam/">week9_kls_exam</a>
+          </li>
+        
+          <li>
+            <a href="/2025/01/03/week8_kls_exam/">week8_kls_exam</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
