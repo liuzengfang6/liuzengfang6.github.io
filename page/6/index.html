@@ -69,10 +69,107 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-virt-manager+remmina舒适的虚拟机体验" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-week2_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/11/12/virt-manager+remmina%E8%88%92%E9%80%82%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%93%E9%AA%8C/" class="article-date">
-  <time class="dt-published" datetime="2024-11-12T10:40:49.000Z" itemprop="datePublished">2024-11-12</time>
+    <a href="/2024/11/22/week2_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2024-11-22T07:03:19.000Z" itemprop="datePublished">2024-11-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/exam/">exam</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/22/week2_kls_exam/">week2_kls_exam</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="题目1">题目1</span></h2><p>  id:: 67401618-77f2-4cd7-ab26-b033e352aa66</p>
+<p>配置vsftpd服务，添加ftp服务用户lihua，并限制lihua使用ftp服务的访问路径为&#x2F;usr&#x2F;share&#x2F;ftp_files</p>
+<h3><span id="step1添加用户并设置家目录以及家目录权限设置密码">step1：添加用户，并设置家目录，以及家目录权限，设置密码</span></h3><p><img src="/../assets/image_1732253536205_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732254737383_0.png" alt="image.png"></p>
+<h3><span id="step2修改vsftp配置文件">step2：修改vsftp配置文件</span></h3><p><img src="/../assets/image_1732254394767_0.png" alt="image.png"></p>
+<p>修改<code>/etc/vsftpd/vsftpd_userlist</code></p>
+<p><img src="/../assets/image_1732253873260_0.png" alt="image.png"></p>
+<p>创建<code>/etc/vsftpd/user_conf</code>目录，并添加<code>lihua</code>配置文件</p>
+<p><img src="/../assets/image_1732253955889_0.png" alt="image.png"></p>
+<h3><span id="step3重新加载vsftp配置文件并重启">step3:重新加载vsftp配置文件并重启</span></h3><p><img src="/../assets/image_1732254036298_0.png" alt="image.png"></p>
+<h3><span id="step4连接ftp">step4:连接ftp</span></h3><p><img src="/../assets/image_1732254539764_0.png" alt="image.png"></p>
+<p><img src="/../assets/vsftp_1732254502349_0.gif" alt="vsftp.gif"></p>
+<h2><span id="题目2">题目2</span></h2><p>配置ssh服务，要求用户jack可以使用id_rsa 免密登录ssh</p>
+<p>server: centos.pcx.home</p>
+<p>client: kali.pcx.home</p>
+<h3><span id="step1添加jack用户创建家目录设置密码">step1:添加jack用户,创建家目录，设置密码</span></h3><p><img src="/../assets/image_1732254970492_0.png" alt="image.png"></p>
+<h3><span id="step2让jack生成ssh公私钥匙对">step2:让jack生成ssh公私钥匙对</span></h3><p><img src="/../assets/image_1732255036501_0.png" alt="image.png"></p>
+<h3><span id="step3上传公钥">step3：上传公钥</span></h3><p><img src="/../assets/image_1732255169120_0.png" alt="image.png"></p>
+<h3><span id="step4登陆centos">step4：登陆centos</span></h3><p><img src="/../assets/image_1732255239120_0.png" alt="image.png"></p>
+<p>在centos端查看在线用户：</p>
+<p><img src="/../assets/image_1732255267589_0.png" alt="image.png"></p>
+<p>在centos端查看<code>~/.ssh/authorized_keys</code></p>
+<p><img src="/../assets/image_1732255349220_0.png" alt="image.png"></p>
+<h2><span id="题目3">题目3</span></h2><p>在kali上编写ufw防火墙规则，禁止kali连接任何机器的smb服务</p>
+<h3><span id="step1开启smb服务并测试">step1:开启smb服务并测试</span></h3><p><img src="/../assets/image_1732255758185_0.png" alt="image.png"></p>
+<p>连接测试</p>
+<p><img src="/../assets/image_1732255898430_0.png" alt="image.png"></p>
+<h3><span id="step2ufw规则编写">step2：ufw规则编写</span></h3><p>现有规则查看</p>
+<p><img src="/../assets/image_1732255960355_0.png" alt="image.png"></p>
+<p>新规则添加</p>
+<p><img src="/../assets/image_1732256290665_0.png" alt="image.png"></p>
+<p><code>sudo ufw deny out 139/tcp</code>，445和139都要禁止</p>
+<p>查看规则</p>
+<p><img src="/../assets/image_1732256695233_0.png" alt="image.png"></p>
+<h3><span id="step3重启ufw并尝试连接其他主机的smb">step3：重启ufw并尝试连接其他主机的smb</span></h3><p>重启</p>
+<p><img src="/../assets/image_1732256373774_0.png" alt="image.png"></p>
+<p>尝试连接</p>
+<p><img src="/../assets/kalismb_1732256611407_0.gif" alt="kalismb.gif"></p>
+<h2><span id="题目4">题目4</span></h2><p>基于Dockerfile构建的镜像搭建一个容器，要求同时具有ssh服务与redis服务，基础镜像选择 centos&#x2F;debian&#x2F;ubuntu均可</p>
+<h3><span id="step1拉取ubuntu镜像">step1:拉取ubuntu镜像</span></h3><p><img src="/../assets/image_1732257125498_0.png" alt="image.png"></p>
+<p>这里拉过了，就不拉了</p>
+<h3><span id="step2编写dockerfile">step2:编写Dockerfile</span></h3><p>启动脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动 SSH 服务</span></span><br><span class="line">service ssh start</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动 Redis 服务</span></span><br><span class="line">redis-server &amp;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">保持容器运行</span></span><br><span class="line">tail -f /dev/null</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1732258931385_0.png" alt="image.png"></p>
+<h3><span id="step3构建镜像">step3：构建镜像</span></h3><p><img src="/../assets/image_1732257384246_0.png" alt="image.png"></p>
+<p>查看镜像</p>
+<p><img src="/../assets/image_1732258009591_0.png" alt="image.png"></p>
+<h3><span id="step4测试镜像">step4：测试镜像</span></h3><p>创建容器</p>
+<p><img src="/../assets/image_1732258122511_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732259498695_0.png" alt="image.png"></p>
+<p>测试ssh连接</p>
+<p><img src="/../assets/image_1732258814860_0.png" alt="image.png"></p>
+<p>测试redis连接</p>
+<p><img src="/../assets/image_1732258841977_0.png" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/22/week2_kls_exam/" data-id="cm6z08or5003cy1iw0ta87h33" data-title="week2_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day9_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/21/day9_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-21T02:42:15.000Z" itemprop="datePublished">2024-11-21</time>
 </a>
     
   </div>
@@ -83,7 +180,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/12/virt-manager+remmina%E8%88%92%E9%80%82%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%93%E9%AA%8C/">virt-manager+remmina舒适的虚拟机体验</a>
+      <a class="p-name article-title" href="/2024/11/21/day9_kls/">day9_kls</a>
     </h1>
   
 
@@ -91,32 +188,101 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2><span id="引子">引子</span></h2><p>在使用virtualbox时，vbox打开的虚拟机窗口无法便捷得最小化和展开。于是俺用了remmina，在每台vbox虚拟机的系统中开启rdp或是vnc。后面越发约感觉鸡肋，每次安装虚拟机后都要重新安装一下远程桌面服务。这时俺想到之前使用的virt-manager可以使用spice直接连接，而且这是虚拟化软件提供的，并非操作系统提供的。一是无需对虚拟机安装多余的软件，二是即便虚拟机网络不通，也可以方便的管理。</p>
-<p>本文会展示一些关键的配置和一些注意事项。</p>
-<h2><span id="正文">正文</span></h2><h3><span id="virt-manager配置spice连接">virt-manager配置spice连接</span></h3><p><img src="/../assets/image_1731372521093_0.png" alt="image.png"></p>
-<p>password可选，如果想要暴露连接可以将address改为”All interfaces“</p>
-<h3><span id="配置remmina连接">配置remmina连接</span></h3><p><img src="/../assets/image_1731372696484_0.png" alt="image.png"></p>
-<p>仅需填入ip+端口号。这里的ip为宿主机的ip并非客户机的ip</p>
-<h3><span id="安装spice增强">安装spice增强</span></h3><p><strong>windows</strong></p>
-<p>下载链接在这里找</p>
-<p><a target="_blank" rel="noopener" href="https://www.spice-space.org/download.html">spice-space download</a></p>
-<p><strong>linux</strong></p>
-<p>debian:</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一般来说linux客户机安装后这个包是默认被安装的</span><br><span class="line">sudo apt install qemu-guest-agent</span><br><span class="line">sudo apt install spice-vdagent</span><br></pre></td></tr></table></figure>
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="docker网络">docker网络</span></h3><h4><span id="docker中的网络模式">docker中的网络模式</span></h4><p>bridge</p>
+<p>host</p>
+<p>none</p>
+<h4><span id="相关命令">相关命令</span></h4><p>查看:<code>docker network ls</code>,<code>docker network inspect NETWORK</code></p>
+<p>创建:<code>docker network create -d TYPE network_name</code></p>
+<p>加入:<code>docker network connect NETWORK CONTAINER [CONTAINERS]</code></p>
+<h4><span id="使用">使用</span></h4><p>在创建容器时使用<code>--network </code>指定网络即可<code>docker run --network NETWORK IMAGE</code></p>
+<h3><span id="docker卷">docker卷</span></h3><h4><span id="基本用法">基本用法</span></h4><p>查看<code>docker volume ls</code></p>
+<p>创建<code>docker volume create volume_name</code></p>
+<p>删除<code>docker volume rm VOLUME</code></p>
+<h4><span id="使用">使用</span></h4><p>在创建容器时使用<code>-v</code>指定即可<code>docker run -v VOLUME:xxx IMAGE</code></p>
+<h3><span id="docker创建自己的镜像dockerfile">docker创建自己的镜像(dockerfile)</span></h3><h4><span id="不使用dockerfiledocker-commit-不推荐">不使用dockerfile(docker commit 不推荐)</span></h4><p>不使用dockerfile，基于CONIANER的修改生成新的镜像</p>
+<p>使用<code>docker commit CONTAINER IMAGE</code></p>
+<p>不推荐使用:</p>
+<p>难以维护</p>
+<p>不透明，无法得知修改了什么</p>
+<h4><span id="使用dockerfile">使用dockerfile</span></h4><h5><span id="基本语法">基本语法</span></h5><p><code>FROM</code>：指定基础镜像。</p>
+<p><code>RUN</code>：运行命令。</p>
+<p><code>CMD</code> 和 <code>ENTRYPOINT</code>：指定容器启动命令。</p>
+<p><code>COPY</code> 和 <code>ADD</code>：复制文件到镜像中。</p>
+<p><code>WORKDIR</code>：设置工作目录。</p>
+<p><code>ENV</code>：设置环境变量。</p>
+<p><code>EXPOSE</code>：声明端口。</p>
+<p><code>VOLUME</code>：定义挂载点。</p>
+<p><code>LABEL</code>：添加元数据。</p>
+<h5><span id="生成镜像">生成镜像</span></h5><p><code>docker build -t IMAGE docker_file_dirname</code></p>
+<h3><span id="docker-compose">docker-compose</span></h3><h4><span id="概念">概念</span></h4><p><code>docker-compose.yml</code>是docker-compose启动所需的配置文件。默认是这个，如果你要使用其他的请在运行时指定<code>docker-compose up -f /path/to/your_yml</code></p>
+<h4><span id="命令">命令</span></h4><p>创建<code>docker-compose up [options]</code>，常用的参数<code>-d</code>后台运行</p>
+<p>启停<code>docker-compose start/stop</code></p>
+<p>删除<code>docker-compose down</code></p>
+<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="dvwa站库分离php-apachemysql">dvwa站库分离(php-apache+mysql)</span></h3><p>创建docker网络</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d bridge my_self_bridge</span><br></pre></td></tr></table></figure>
 
-<h2><span id="存在的问题">存在的问题</span></h2><h3><span id="使用xfce桌面环境的客户机无法自动调整屏幕大小">使用xfce桌面环境的客户机无法自动调整屏幕大小</span></h3><p>目前xfce暂时没有办法自动调整屏幕大小，如有需求可以参考下面这个链接或者使用其他桌面环境，比如gnome。kde没有测试</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/seife/spice-autorandr">GitHub seife&#x2F;spice-autorandr: Automatically adjust the client window resolution in Linux KVM guests using the SPICE driver</a></p>
-<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://www.spice-space.org/download.html">spice-space download</a></p>
-<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Virt-manager">Virt-manager ArchWiki</a></p>
+<p><img src="/../assets/image_1732153437645_0.png" alt="image.png"></p>
+<p>php-apache环境搭建</p>
+<p><img src="/../assets/image_1732153569619_0.png" alt="image.png"></p>
+<blockquote>
+<p>因拓展无法安装，后面这个我换成了<code>php:8.0-apache</code>，后面发现不是php版本的问题。dvwa官方推荐7.3及以上</p>
+</blockquote>
+<p>创建mysql数据库</p>
+<p><img src="/../assets/image_1732153724752_0.png" alt="image.png"></p>
+<blockquote>
+<p>这里无需进行映射端口，使用主机名(容器名)连接即可</p>
+</blockquote>
+<p>创建结束后，我们查看该网络的信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network inspect my_self_bridge</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1732153969902_0.png" alt="image.png"></p>
+<blockquote>
+<p>我们发现这两个container已经加入到网络中了</p>
+</blockquote>
+<p>把dvwa源码扔到php的app目录</p>
+<p><img src="/../assets/image_1732154086639_0.png" alt="image.png"></p>
+<p>复制配置文件并修改</p>
+<p><img src="/../assets/image_1732154359160_0.png" alt="image.png"></p>
+<blockquote>
+<p>这里的db_server我们可以设置为dvwa-mysql(容器名)</p>
+</blockquote>
+<p>修改完成后访问<code>setup.php</code></p>
+<p><img src="/../assets/image_1732155125186_0.png" alt="image.png"></p>
+<p>发现没有mysqli拓展</p>
+<p>php镜像官方提供了一个工具<code>docker-php-ext-install</code>用于安装拓展</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it my-apache-php-app /bin/bash</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">为dg的安装提前安装相关依赖</span></span><br><span class="line">apt-get update &amp;&amp; apt-get install -y \</span><br><span class="line">    libjpeg-dev \</span><br><span class="line">    libpng-dev \</span><br><span class="line">    libfreetype6-dev \</span><br><span class="line">    zlib1g-dev</span><br><span class="line">docker-php-ext-install mysqli dg pdo_mysql</span><br></pre></td></tr></table></figure>
+
+<p>现在我们退出容器，重新启动容器</p>
+<p><img src="/../assets/image_1732156852055_0.png" alt="image.png"></p>
+<h3><span id="创建第一个自己的镜像docker-commit">创建第一个自己的镜像(docker commit)</span></h3><p>拉取ubuntu镜像</p>
+<p><img src="/../assets/image_1732167921582_0.png" alt="image.png"></p>
+<p>创建一个ubuntu容器，并在后台运行</p>
+<p><img src="/../assets/image_1732168395251_0.png" alt="image.png"></p>
+<p>将<code>kitten</code>可执行文件上传</p>
+<p><img src="/../assets/image_1732168260215_0.png" alt="image.png"></p>
+<p>将镜像提交</p>
+<p><img src="/../assets/image_1732168929925_0.png" alt="image.png"></p>
+<p>根据刚创建的镜像开启一个新的容器，查看<code>/bin</code>下是否有kitten</p>
+<p><img src="/../assets/image_1732168813773_0.png" alt="image.png"></p>
+<h2><span id><img src="/../assets/image_1732168742837_0.png" alt="image.png"></span></h2><h3><span id="构建python程序镜像docker-build">构建python程序镜像(docker build)</span></h3><p>dockerbuild文件编写</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> python:<span class="number">3.8</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">mkdir</span> /opt/app</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /opt/app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pip install --upgrade pip \</span></span><br><span class="line"><span class="language-bash">    &amp;&amp; pip install -r requirements.txt</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;python&quot;</span>, <span class="string">&quot;/opt/app/main.py&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>关于参数传递，可以使用，run的参数传递，环境变量，配置文件等</p>
+</blockquote>
+<p><img src="/../assets/image_1732179427146_0.png" alt="image.png"></p>
+<p>创建镜像<code>docker build -t IMAGE:TAG .</code></p>
+<p>运行<code>docker run IMAGE args</code></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>DONE dockerfile编写</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/12/virt-manager+remmina%E8%88%92%E9%80%82%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%BD%93%E9%AA%8C/" data-id="cm5vste5e002nfriwfpr64lr4" data-title="virt-manager+remmina舒适的虚拟机体验" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/21/day9_kls/" data-id="cm6z08oqu0022y1iw433p2fuw" data-title="day9_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
 
     </footer>
   </div>
@@ -126,10 +292,10 @@
 
 
   
-    <article id="post-day1_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-day8_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/11/12/day1_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-11-12T02:58:00.000Z" itemprop="datePublished">2024-11-12</time>
+    <a href="/2024/11/20/day8_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-20T12:35:43.000Z" itemprop="datePublished">2024-11-20</time>
 </a>
     
   </div>
@@ -140,7 +306,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/11/12/day1_kls/">day1_kls</a>
+      <a class="p-name article-title" href="/2024/11/20/day8_kls/">day8_kls</a>
     </h1>
   
 
@@ -148,17 +314,843 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2><span id="课程内容">课程内容</span></h2><p>vmware安装</p>
-<p>centos7安装</p>
-<h2><span id="思考">思考</span></h2>
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="docker">docker</span></h3><h4><span id="安装docker-ce">安装docker-ce</span></h4><p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/04/10/centos%E5%AE%89%E8%A3%85docker%E4%BB%A5%E5%8F%8Adocker-compose/">centos安装docker以及docker-compose | ziWindlu的博客</a></p>
+<p>使用apt包管理器的发行版</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加公钥</span></span><br><span class="line">install -m 0755 -d /etc/apt/keyrings</span><br><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg</span><br><span class="line">sudo chmod a+r /etc/apt/keyrings/docker.gpg</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">参加仓库</span></span><br><span class="line">echo \</span><br><span class="line">  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/debian \</span><br><span class="line">  &quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;)&quot; stable&quot; | \</span><br><span class="line">  tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装</span></span><br><span class="line">apt-get update</span><br><span class="line">apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>特殊的，如果你使用的kalilinux,那么在添加仓库这一步需要将<code>&quot;$(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;)&quot;</code>替换为<code>buster</code></p>
+</blockquote>
+<h4><span id="普通权限用户便捷地执行docker">普通权限用户便捷地执行docker</span></h4><p>方案1使用sudo无需输入密码</p>
+<p>编辑你的<code>sudoers</code></p>
+<p><code>user_name ALL=(root:root) NOPASSWD: /bin/docker</code></p>
+<p>这样你就可以愉快的<code>sudo docker</code>啦</p>
+<p>方案2加入docker用户组(好用，推荐)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">usermod -aG docker $USER</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">切换到docker用户组，不想执行这个命令的话，你可以重新登陆一下</span></span><br><span class="line">newgrp docker</span><br></pre></td></tr></table></figure>
+
+<p>这样你就可以愉快的使用<code>docker</code>啦，不用使用<code>sudo</code>哦</p>
+<h4><span id="docker添加代理">docker添加代理</span></h4><p>编辑<code>/etc/docker/daemon.json</code>配置docker的代理</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;proxies&quot;: &#123;</span><br><span class="line">		&quot;http-proxy&quot;: &quot;your_proxy&quot;,</span><br><span class="line">		&quot;https-proxy&quot;: &quot;your_proxy&quot;,</span><br><span class="line">		&quot;no-proxy&quot;: &quot;your_no_proxy_doman,other_doman&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<h4><span id="使用">使用</span></h4><h5><span id="概念">概念</span></h5><p>容器(CONTAINER)、镜像(IMAGE)</p>
+<h5><span id="镜像相关操作">镜像相关操作</span></h5><p>搜索镜像<code>docker search IMAGE</code></p>
+<p>拉取镜像<code>docker pull IMAGE</code></p>
+<h5><span id="创建">创建</span></h5><p><code>docker run [options] IMAGE [command [args]]</code></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-d</code></td>
+<td>以守护程序运行(后台运行)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>创建挂载绑定</td>
+<td><code>docker run -v /host/path:/container/path IMAGE</code></td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>端口映射</td>
+<td><code>docker run -p host_port:container_port IMAGE</code></td>
+</tr>
+<tr>
+<td><code>--name</code></td>
+<td>指定容器名</td>
+<td><code>docker -run --name container_name IMAGE</code></td>
+</tr>
+<tr>
+<td><code>--restart</code></td>
+<td>重启策略</td>
+<td>常用的<code>always</code>,<code>no</code></td>
+</tr>
+<tr>
+<td><code>-e</code></td>
+<td>设置环境变量</td>
+<td><code>docker run -e ENV_KEY=&quot;env_value&quot; IMAGE</code></td>
+</tr>
+<tr>
+<td><code>--rm</code></td>
+<td>容器退出后删除</td>
+<td><code>docker run --rm busybox ping baidu.com </code></td>
+</tr>
+</tbody></table>
+<h5><span id="修改">修改</span></h5><p><code>docker update [options] CONTAINER [CONTAINERS]</code></p>
+<h5><span id="删除">删除</span></h5><p>删除容器<code>docker rm CONTAINER</code></p>
+<p>删除镜像<code>docker rmi IMAGE</code></p>
+<h5><span id="打包与导入">打包与导入</span></h5><p><strong>镜像</strong></p>
+<p>打包:<code>docker save -o xx.tar IMAGE</code></p>
+<p>导入:<code>docker load -i xx.tar</code></p>
+<p><strong>容器</strong></p>
+<p>打包:<code>docker export -o xx.tar CONTAINER</code></p>
+<p>导入:<code>docker import xx.tar IMAGE</code></p>
+<h5><span id="docker网络">docker网络</span></h5><p>TODO [[docker网络]]</p>
+<h5><span id="日志">日志</span></h5><p><code>docker logs -f CONTAINER</code></p>
+<h4><span id="docker添加kitty集成">docker添加kitty集成</span></h4><p>step1：将<code>kitten</code>可执行文件放到docker的<code>/bin</code>或其他可执行目录中</p>
+<p>step2：接下来愉快的执行<code>docker exec -it container_name kitten run-shell --shell=/path/to/shell</code>啦</p>
+<h3><span id="散碎的知识点">散碎的知识点</span></h3><h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="使用docker启动一个nginx">使用docker启动一个nginx</span></h3><h4><span id="寻找可用镜像">寻找可用镜像</span></h4><p>在dockerhub中搜索ngnix</p>
+<p><img src="/../assets/image_1732080453573_0.png" alt="image.png"></p>
+<p>我们使用官方镜像</p>
+<h4><span id="拉取镜像">拉取镜像</span></h4><p><img src="/../assets/image_1732080547597_0.png" alt="image.png"></p>
+<h4><span id="创建docker容器">创建docker容器</span></h4><p>nginx文档给出了一个简单的命令</p>
+<p><img src="/../assets/image_1732081649447_0.png" alt="image.png"></p>
+<h4><span id="测试">测试</span></h4><p>在目录下创建一个<code>index.html</code></p>
+<p><img src="/../assets/image_1732081849987_0.png" alt="image.png">{:height 132, :width 687}</p>
+<p>访问<code>localhost:8080</code></p>
+<p><img src="/../assets/2024-11-20_13-51_1732081933535_0.jpg" alt="2024-11-20_13-51.jpg"><br>id:: 673d78e0-9c74-47bd-b3eb-5f9e34550dff</p>
+<h3><span id="使用docker搭建lampdvwa">使用docker搭建lamp+dvwa</span></h3><p>拉取lamp</p>
+<p><code>docker pull mattrayner/lamp:latest-1804</code></p>
+<p><img src="/../assets/image_1732103257475_0.png" alt="image.png"></p>
+<p>启动容器</p>
+<p><code>docker run -p &quot;80:80&quot; -v $&#123;PWD&#125;/app:/app mattrayner/lamp:latest-1804</code></p>
+<p><img src="/../assets/image_1732103526988_0.png" alt="image.png"></p>
+<p>我们发现了mysql的密码</p>
+<p><img src="/../assets/image_1732103997654_0.png" alt="image.png"></p>
+<p>下一步我们要修改mysql密码，我们直接使用phpmyadmin，账号为admin,密码为mysql的密码</p>
+<p><img src="/../assets/image_1732103618719_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732104065764_0.png" alt="image.png"></p>
+<p>下载dvwa源码并传到目标服务器</p>
+<p><img src="/../assets/image_1732104266691_0.png" alt="image.png"></p>
+<p>解压并复制一份dvwa配置</p>
+<p><img src="/../assets/image_1732104352245_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732104386233_0.png" alt="image.png"></p>
+<p>修改dvwa数据库配置</p>
+<p><img src="/../assets/image_1732104739475_0.png" alt="image.png"></p>
+<p>在网页端初始化dvwa</p>
+<p><img src="/../assets/image_1732104768661_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1732104791127_0.png" alt="image.png"></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><h2><span id="参考">参考</span></h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/12/day1_kls/" data-id="cm5vste4x000ufriw4mlt7x61" data-title="day1_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/11/20/day8_kls/" data-id="cm6z08oqt0020y1iwae7e1wpr" data-title="day8_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day7_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/19/day7_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-19T11:29:05.000Z" itemprop="datePublished">2024-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/19/day7_kls/">day7_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="防火墙">防火墙</span></h3><h4><span id="linux常用的防火墙">linux常用的防火墙</span></h4><p>iptables(基于netfilter)</p>
+<p>nftables(iptables的后继，现代化的防火墙)</p>
+<p>ufw(基于iptables)</p>
+<p>firewalld</p>
+<h4><span id="基本概念">基本概念</span></h4><h5><span id="四表五链">四表五链</span></h5><p>四表(table)：Filter表、NAT表、Mangle表、Raw表</p>
+<p>五链(chain)：PREROUTING链、INPUT链、FORWARD链、OUTPUT链、POSTROUTING链</p>
+<h5><span id="规则以iptables为例">规则(以iptables为例)</span></h5><p>匹配条件:</p>
+<p>指定规则适用的数据包类型（如源地址、目标地址、协议等）。</p>
+<p>IP 地址：-s 192.168.1.1（源地址）或 -d 10.0.0.1（目标地址）。</p>
+<p>协议：-p tcp。</p>
+<p>端口：–dport 22（目标端口）或 –sport 80（源端口）。</p>
+<p>动作（Action）:</p>
+<p>定义数据包被匹配后执行的操作。</p>
+<p>常见动作：</p>
+<p>ACCEPT：允许数据包通过。</p>
+<p>DROP：直接丢弃数据包。</p>
+<p>REJECT：拒绝数据包并返回响应。</p>
+<p>LOG：记录数据包信息到日志中。</p>
+<p>便捷的规则书写</p>
+<p>多个ip</p>
+<p>指定某个网络：<code>iptables -A INPUT -s 192.168.1.1,192.168.1.0/24 -j ACCEPT</code></p>
+<p>指定多个非连续ip：<code>iptables -A INPUT -s 192.168.1.1,192.168.1.2,192.168.1.3 -j ACCEPT</code></p>
+<p>指定多个连续ip：<code>sudo iptables -A INPUT -m iprange --src-range 192.168.1.100-192.168.1.120 -j ACCEPT</code></p>
+<p>多个端口</p>
+<p>使用<code>,</code>指定多个端口：<code>-m multiport</code>,<code>iptables -A INPUT -p tcp -m multiport --dports 22,80,443 -j ACCEPT</code></p>
+<p>使用<code>:</code>指定多个端口：，<code>iptables -A INPUT -p tcp --dport 1000:2000 -j ACCEPT</code></p>
+<h5><span id="规则匹配逻辑">规则匹配逻辑</span></h5><p>从上到下逐行匹配，第一条匹配成功后立即停止检查后续规则</p>
+<p>因此，规则匹配的顺序应从具体到通用，特例优先，全局策略后置。</p>
+<h3><span id="iptables">iptables</span></h3><h4><span id="启停">启停</span></h4><p><code>systemctl start/stop iptables</code></p>
+<h4><span id="查看规则">查看规则</span></h4><p>查看规则<code>iptables -t [table]  -L [chain] [options]</code></p>
+<p>常用参数:</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-n</code></td>
+<td>numeric，显示数字ip和端口</td>
+<td></td>
+</tr>
+<tr>
+<td><code>-v</code></td>
+<td>verbose，冗长的信息</td>
+<td></td>
+</tr>
+<tr>
+<td><code>--line-number</code></td>
+<td>列出规则时在每一行添加数字(这个数字在删除时有帮助)</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4><span id="添加规则">添加规则</span></h4><p><code>iptables -t [table] -A [chain] [match] -j [action]</code></p>
+<h4><span id="删除规则">删除规则</span></h4><p><code>iptables -t [table] -D [chain]</code></p>
+<blockquote>
+<p>table默认为filter</p>
+</blockquote>
+<h4><span id="永久保存防火墙配置">永久保存防火墙配置</span></h4><p>保存<code>iptables-save &gt; file</code></p>
+<p>加载<code>iptables-restore &lt; file</code></p>
+<p>自动导入:写一个开机自启脚本，使用 <code>iptables-persistent</code></p>
+<h3><span id="ufw">ufw</span></h3><h4><span id="启停">启停</span></h4><p><code>systemctl start/stop/restart ufw</code></p>
+<p><code>ufw enable/disable/reload</code></p>
+<p>状态查看:</p>
+<p><code>systemctl status ufw</code></p>
+<p><code>ufw status</code></p>
+<h4><span id="查看规则">查看规则</span></h4><p><code>ufw status [numberd] [verbose]</code></p>
+<h4><span id="添加规则">添加规则</span></h4><p><code>ufw action args</code></p>
+<p>action:<code>allow</code>,<code>reject</code>,<code>deny</code>,<code>limit</code></p>
+<p>简单的args：</p>
+<p>端口号&#x2F;协议<code>port[/protocol]</code></p>
+<p>服务名<code>service</code>，example:<code>samba</code>,<code>ftp</code>,<code>mysql</code></p>
+<blockquote>
+<p>注意这里的mysql等服务都是默认的端口，如果你改了对应服务的端口，这里不会生效</p>
+</blockquote>
+<p>指定出入方向</p>
+<p><code>ufw allow out 22</code></p>
+<blockquote>
+<p>值得注意的，如果没有指定方向那么方向默认为in</p>
+</blockquote>
+<p>指定出入ip,协议，端口</p>
+<p><code>ufw deny proto tcp from 10.0.0.0/8 to 192.168.0.1 port 25</code></p>
+<p>from:原ip,to 目的ip</p>
+<p>指定网卡</p>
+<p><code>ufw deny on interface proto tcp</code></p>
+<p>一些方便的写法</p>
+<p><code>any</code>所有的ip</p>
+<h4><span id="删除规则">删除规则</span></h4><p><code>ufw delete add_thing</code></p>
+<blockquote>
+<p><code>add_thing</code>为你添加时输入的内容</p>
+</blockquote>
+<h4><span id="永久保存防火墙配置">永久保存防火墙配置</span></h4><p>ufw默认就是永久保存，无需做其他操作</p>
+<h3><span id="firewalld">firewalld</span></h3><h4><span id="启停">启停</span></h4><p><code>systemctl start/stop/restart firewalld</code></p>
+<h4><span id="查看规则">查看规则</span></h4><p><code>firewall-cmd --list-all</code></p>
+<h4><span id="添加规则">添加规则</span></h4><p><code>firewall-cmd --add-xx args</code></p>
+<p>example:</p>
+<p>添加http服务放行<code>firewall-cmd --add-service http</code></p>
+<p>添加tcp88端口放行<code>firewall-cmd --add-port 88/tcp</code></p>
+<blockquote>
+<p>如果想要添加永久规则，需要添加参数<code>--permanent</code>，例如<code>firewall-cmd --permanent --add-service http</code>，让其生效需要执行<code>firewall-cmd --reload</code></p>
+</blockquote>
+<h4><span id="删除规则">删除规则</span></h4><p><code>firewall-cmd --remove-xx args</code></p>
+<p>example:</p>
+<p>删除服务规则<code>firewall-cmd --remove-service service_name</code></p>
+<h4><span id="其他的">其他的</span></h4><p>应急模式<code>firewall-cmd --panic-on/off</code></p>
+<h3><span id="selinux">selinux</span></h3><p>强制访问控制，为linux提供了细粒度的安全控制。</p>
+<p>临时关闭</p>
+<p><code>setenforce 0</code></p>
+<p>永久关闭</p>
+<p>编辑<code>/etc/selinux/config</code></p>
+<p>修改SELINUX为disable<code>SELINUX=disabled</code></p>
+<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="iptables添加规则拦截icmpiptables">iptables添加规则拦截icmp(iptables)</span></h3><p>规则添加前，ping kali</p>
+<p><img src="/../assets/image_1731984214812_0.png" alt="image.png"></p>
+<p>添加规则</p>
+<p><img src="/../assets/iptables_1731984644135_0.gif" alt="iptables.gif"></p>
+<p>规则添加后，ping kali</p>
+<p><img src="/../assets/image_1731984623918_0.png" alt="image.png"></p>
+<h3><span id="防火墙禁止https出网iptables">防火墙禁止https出网(iptables)</span></h3><p>未配置的情况</p>
+<p><img src="/../assets/image_1731998578134_0.png" alt="image.png"></p>
+<p>添加防火墙规则</p>
+<p><img src="/../assets/image_1731998633835_0.png" alt="image.png"></p>
+<p>配置后的情况</p>
+<p><img src="/../assets/image_1731998653324_0.png" alt="image.png"></p>
+<h3><span id="防火墙禁止访问tcp8000端口iptables">防火墙禁止访问tcp8000端口(iptables)</span></h3><p>在<code>pcx.z.home</code>开启一个8000端口的http服务</p>
+<p><img src="/../assets/image_1731999065689_0.png" alt="image.png"></p>
+<p>访问正常</p>
+<p><img src="/../assets/image_1731999112568_0.png" alt="image.png"></p>
+<p>配置防火墙策略</p>
+<p><img src="/../assets/image_1731999515849_0.png" alt="image.png"></p>
+<p>配置后的情况</p>
+<p><img src="/../assets/image_1731999553907_0.png" alt="image.png"></p>
+<h3><span id="防火墙配置禁止某个网卡发送icmp包">防火墙配置禁止某个网卡发送icmp包</span></h3><p>配置防火墙策略<code>iptables -I OUTPUT -o interface_name -p icmp -j DROP</code></p>
+<p>验证<code>ping -I interface host</code></p>
+<h3><span id="防火墙配置允许连接本地sshufw">防火墙配置允许连接本地ssh(ufw)</span></h3><p>配置前</p>
+<p><img src="/../assets/image_1732003604921_0.png" alt="image.png"></p>
+<blockquote>
+<p>假装连不上</p>
+</blockquote>
+<p>配置防火墙规则</p>
+<p><img src="/../assets/image_1732003123810_0.png" alt="image.png"></p>
+<p>连接成功</p>
+<p><img src="/../assets/image_1732003492874_0.png" alt="image.png"></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>DONE kitty+zsh补全显示异常问题解决</p>
+<blockquote>
+<p>kali的zsh配置的问题，我们自己配置就不会有这个问题了</p>
+</blockquote>
+<h2><span id="参考">参考</span></h2><p>man ufw</p>
+<p>man iptables</p>
+<p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/SELinux">SELinux ArchWiki</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/19/day7_kls/" data-id="cm6z08oqt001xy1iw5q7yd3s0" data-title="day7_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day6_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/18/day6_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-18T10:46:30.000Z" itemprop="datePublished">2024-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/18/day6_kls/">day6_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="ssh服务">ssh服务</span></h3><p>服务<code>sshd</code>，端口<code>22</code>，配置文件:<code>/etc/ssh/sshd_config</code>，重要的相关文件<code>~/.ssh/authorized_keys</code></p>
+<h2><span id="cron">cron</span></h2><p>服务<code>cronie</code>等，重要的相关文件<code>/etc/crontab</code>,<code>/var/spool/cron/username</code></p>
+<h3><span id="smb">SMB</span></h3><h4><span id="服务端">服务端</span></h4><p>安装:<code>yum install samba</code></p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/04/11/archlinux%E4%B8%8Bsamba%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/">archlinux下samba服务搭建 | ziWindlu的博客</a></p>
+<p>端口<code>445,139</code></p>
+<p>配置文件:<code>/etc/samba/smb.conf</code></p>
+<p>smb用户管理:<code>pdbedit</code></p>
+<h4><span id="客户端">客户端</span></h4><p>smbclient连接smb<code>smbclient --user username //host/share_name</code></p>
+<p>挂载<code>mount -t cifs -o username=user_name,password=passwd //host/share_name /local_mount_point</code></p>
+<blockquote>
+<p>对于linux挂载需要安装<code>cifs-utils</code></p>
+</blockquote>
+<p>win(net use)命令行挂载<code>net use \\host\share_name password /user:user_name</code></p>
+<h4><span id="安全">安全</span></h4><p><strong>windows的安全策略</strong></p>
+<p>防火墙默认组织smb连接</p>
+<p>杀毒软件默认阻止smb连接</p>
+<p><strong>历史漏洞</strong></p>
+<p>ms17010(永恒之蓝)</p>
+<p>CVE-2017-7494</p>
+<h3><span id="ftp">ftp</span></h3><h4><span id="服务端">服务端</span></h4><p>安装:<code>yum install vsftpd</code></p>
+<p>端口:</p>
+<p>配置文件:<code>/etc/vsftpd/vsftpd.conf</code></p>
+<p><strong>常见配置</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 匿名用户关闭</span><br><span class="line">anonymous_enable=NO</span><br><span class="line"># 匿名用户的ftp根目录(匿名用户开启才有效)</span><br><span class="line">anon_root=/opt/ftp</span><br><span class="line"># 允许本地用户登陆</span><br><span class="line">local_enable=YES</span><br><span class="line"># 允许写入</span><br><span class="line">write_enable=YES</span><br><span class="line"># 启用用户列表功能</span><br><span class="line">userlist_enable=YES</span><br><span class="line"># 用户列表文件</span><br><span class="line">userlist_file=/etc/vsftpd/vsftpd.userlist</span><br><span class="line"># 用户列表策略</span><br><span class="line">userlist_deny=NO</span><br><span class="line"># 禁止切换root目录</span><br><span class="line">chroot_local_user=YES</span><br><span class="line">allow_writeable_chroot=NO</span><br></pre></td></tr></table></figure>
+
+<p><strong>多用户列表配置</strong></p>
+<p>使用<code>pam</code></p>
+<p><code>auth required pam_listfile.so item=user sense=allow file=/etc/vsftpd/allow_list2 onerr=fail</code></p>
+<h4><span id="客户端">客户端</span></h4><p>ftp客户端<code>ftp host</code></p>
+<p>挂载<code>mount -t fuse.curlftpfs ftp://user_name:password@host /mnt_point</code><br>id:: 673af920-f628-4041-8bdb-9821d32774c0</p>
+<blockquote>
+<p>对于linux挂载需要安装<code>curlftpfs</code></p>
+</blockquote>
+<h4><span id="安全">安全</span></h4><p>linux默认会有对vsftp的安全配置，比如禁止root用户登陆</p>
+<h3><span id="散碎的知识点">散碎的知识点</span></h3><h4><span id="pip临时使用某镜像源">pip临时使用某镜像源</span></h4><p>清华源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple some-package</span><br></pre></td></tr></table></figure>
+
+<h4><span id="pyftpdlib使用">pyftpdlib使用</span></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pyftpdlib -u user_name -P password -p port --write</span><br></pre></td></tr></table></figure>
+
+<h2><span id="实例ampamp作业">实例&amp;&amp;作业</span></h2><h3><span id="windows连接smb图形化">windows连接smb(图形化)</span></h3><p><img src="/../assets/Peek_2024-11-18_11-25_1731900373481_0.gif" alt="Peek 2024-11-18 11-25.gif"></p>
+<h3><span id="windows连接smbnet-use">windows连接smb(net use)</span></h3><p><img src="/../assets/Peek_2024-11-18_14-10_1731910306453_0.gif" alt="Peek 2024-11-18 14-10.gif"></p>
+<h3><span id="允许root用户登陆ftp配置登陆演示">允许root用户登陆ftp(配置+登陆演示)</span></h3><h4><span id="配置文件修改">配置文件修改</span></h4><p><code>/etc/vsftpd/vsftpd.conf</code>主配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable=NO</span><br><span class="line">userlist_enable=YES</span><br><span class="line">userlist_file=/etc/vsftpd/vsftpd.userlist</span><br><span class="line"># 配置策略为允许列表内登陆</span><br><span class="line">userlist_deny=NO</span><br><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br></pre></td></tr></table></figure>
+
+<p><code>/etc/vsftpd/vsftpd.userlist</code>配置文件编写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">other_user</span><br></pre></td></tr></table></figure>
+
+<h4><span id="允许root登陆">允许root登陆</span></h4><p>在vsftpd安装后，linux会在<code>/etc/pam.d/vsftpd</code>添加相关安全策略</p>
+<p><img src="/../assets/image_1731916314993_0.png" alt="image.png"></p>
+<p>修改<code>/etc/vsftpd/ftpusers</code>将里面的root删除，或者把这条策略删除</p>
+<p>现在你就可以愉快的连接了</p>
+<h4><span id="连接ftp">连接ftp</span></h4><p><img src="/../assets/ftp_1731917042437_0.gif" alt="ftp.gif"></p>
+<h3><span id="使用pyftpdlib开启ftp">使用pyftpdlib开启ftp</span></h3><p>服务端</p>
+<p><img src="/../assets/ftp-s_1731925849706_0.gif" alt="ftp-s.gif"></p>
+<p>客户端</p>
+<p><img src="/../assets/ftp-c_1731925795294_0.gif" alt="ftp-c.gif"></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/"> pypi | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/18/day6_kls/" data-id="cm6z08oqs001vy1iwhc678lx2" data-title="day6_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/smb/" rel="tag">smb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-无代码鼠标党狂喜奶妈级教学从0开始手把手教你使用centos搭建dvwa" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/15/%E6%97%A0%E4%BB%A3%E7%A0%81%E9%BC%A0%E6%A0%87%E5%85%9A%E7%8B%82%E5%96%9C%E5%A5%B6%E5%A6%88%E7%BA%A7%E6%95%99%E5%AD%A6%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8centos%E6%90%AD%E5%BB%BAdvwa/" class="article-date">
+  <time class="dt-published" datetime="2024-11-15T14:01:02.000Z" itemprop="datePublished">2024-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/15/%E6%97%A0%E4%BB%A3%E7%A0%81%E9%BC%A0%E6%A0%87%E5%85%9A%E7%8B%82%E5%96%9C%E5%A5%B6%E5%A6%88%E7%BA%A7%E6%95%99%E5%AD%A6%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8centos%E6%90%AD%E5%BB%BAdvwa/">无代码鼠标党狂喜奶妈级教学从0开始手把手教你使用centos搭建dvwa</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="引子">引子</span></h2><p>dvwa搭建过很多次了，这次准备0开始搭建一次。本文将会从一台centos裸机开始，搭建出dvwa靶场。</p>
+<p>为了简化部分服务的枯燥安装，且复合中国特色，本文会使用bt面板。官方推荐XAMPP</p>
+<p>前排提醒：本文有点抽象，在意的集美集帅们请轻按键盘上的<code>ctrl+w</code></p>
+<p>后记:</p>
+<p>搭到一半，bt默认有些安全措施，导致dvwa初始化出现了各种问题。枯啦😥，越写越抽象，心态崩了。55555</p>
+<h2><span id="centos虚拟机安装pve">centos虚拟机安装(pve)</span></h2><p>没有使用pve的同志可以跳到centos的安装部分，使用vps或者实体鸡的大佬可以直接跳过了</p>
+<p>虚拟机创建</p>
+<p><img src="/../assets/image_1731669901740_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1731669954186_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1731670046173_0.png" alt="image.png"></p>
+<p>以上是基本配置，部分简单的操作这里就不截图了</p>
+<p>我们在安装时就将网卡配置好，免得后面再手动配置</p>
+<p><img src="/../assets/image_1731670146798_0.png" alt="image.png"></p>
+<p>配置root密码</p>
+<p><img src="/../assets/image_1731670187617_0.png" alt="image.png"></p>
+<h2><span id="本地ssh配置非必需可以跳过">本地ssh配置(非必需，可以跳过)</span></h2><p>为了更快捷的连接我们的dvwa主机，对自己电脑中的ssh进行配置。记得上传公钥</p>
+<p><img src="/../assets/image_1731670513385_0.png" alt="image.png"></p>
+<p>这样就可以使用<code>ssh dvwa</code>愉快的连接辣</p>
+<blockquote>
+<p>如果你对ssh配置不感兴趣，这一步你可以跳过</p>
+</blockquote>
+<h2><span id="宝塔安装">宝塔安装</span></h2><p>前排提醒：安装前你无需对centos进行任何操作，宝塔安装脚本会帮你换源。你也无需担心找不到curl命令。即使是最小安装的centos，curl命令也是会有的。</p>
+<p><img src="/../assets/2024-11-15_19-44_1731671072409_0.jpg" alt="2024-11-15_19-44.jpg"><br>id:: 6737337b-8018-4a31-b213-7fafa9020684</p>
+<p>复制连接，粘贴到终端中运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url=https://download.bt.cn/install/install_lts.sh;if [ -f /usr/bin/curl ];then curl -sSO $url;else wget -O install_lts.sh $url;fi;bash install_lts.sh ed8484bec</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/2024-11-15_19-45_1731671140086_0.jpg" alt="2024-11-15_19-45.jpg"></p>
+<p>输入y确定</p>
+<p>接下来就是等待</p>
+<p><img src="/../assets/2024-11-15_19-56_1731671831220_0.jpg" alt="2024-11-15_19-56.jpg"></p>
+<p>出现这个说明你已经成功安装了bt，接下就去愉快的安装lnmp吧</p>
+<p>这个信息建议保存，不保存的话忘记了也能重置</p>
+<p>使用浏览器进入面板地址</p>
+<p>登陆成功后bt会让你绑定账号</p>
+<p><img src="/../assets/2024-11-15_20-00_1731672070586_0.jpg" alt="2024-11-15_20-00.jpg"></p>
+<p>老老实实绑定吧骚年</p>
+<h2><span id="lnmp安装">lnmp安装</span></h2><p><img src="/../assets/2024-11-15_20-02_1731672145111_0.jpg" alt="2024-11-15_20-02.jpg"></p>
+<p>当你绑定完成账号后，bt就热情的推荐你安装lnmp，直接无脑一键安装</p>
+<p>这个步骤有点慢，这个时候你可以去下载dvwa的源码</p>
+<blockquote>
+<p>友情提示： php版本请使用7.3以上，dvwa在7.3以下有问题。</p>
+</blockquote>
+<h2><span id="dvwa安装">dvwa安装</span></h2><p>本文采用源码安装，dvwa提供了安装脚本，也有docker镜像。但是俺不得，就用源码装。</p>
+<h3><span id="源码下载">源码下载</span></h3><p>gayhub下载地址</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/digininja/DVWA/releases">Releases · digininja&#x2F;DVWA · GitHub</a></p>
+<h3><span id="上传源码">上传源码</span></h3><p>这一步有n种方法传上去，这里我们使用bt自带的文件管理上传</p>
+<p><img src="/../assets/2024-11-15_20-13_1731672829573_0.jpg" alt="2024-11-15_20-13.jpg"></p>
+<p>解压缩</p>
+<p><img src="/../assets/2024-11-15_20-14_1731672900310_0.jpg" alt="2024-11-15_20-14.jpg"></p>
+<h3><span id="创建站点">创建站点</span></h3><p>添加站点</p>
+<p><img src="/../assets/2024-11-15_20-20_1731673209290_0.jpg" alt="2024-11-15_20-20.jpg"></p>
+<p>域名这里我们写自己的ip地址，根目录选择解压后的dvwa的目录。</p>
+<p>创建一个数据库，为了方便账号密码这里使用的是dvwa配置文件中默认的。如果你想要个性化，后面还需要修改dvwa对应的配置文件。</p>
+<p><img src="/../assets/2024-11-15_20-19_1731673167492_0.jpg" alt="2024-11-15_20-19.jpg"></p>
+<h3><span id="测试可达性">测试可达性</span></h3><p>访问<code>http://192.168.0.124</code></p>
+<blockquote>
+<p>这里要替换成你的ip啊！！！！ 😠</p>
+</blockquote>
+<p>不出意外，你的dvwa就可以正常使用了</p>
+<p>如果有意外(实际上根据上面的教程来百分百会出意外😁)，请参考: 可能会遇到的问题</p>
+<h3><span id="初始化dvwa">初始化dvwa</span></h3><p><img src="/../assets/2024-11-15_20-31_1731673887874_0.jpg" alt="2024-11-15_20-31.jpg"></p>
+<p>先不要着急点击创建数据库，看到红色的没有。请先解决。参考: 可能会遇到的问题</p>
+<p>bt是作为建站使用的，会默认禁用很多php的危险函数，首先我们要先对这些危险函数放行。参考: 可能会遇到的问题</p>
+<p><img src="/../assets/2024-11-15_21-54_1731678895078_0.jpg" alt="2024-11-15_21-54.jpg"></p>
+<p>当红字都解决了，你就可以愉快的点击<code>Create / Reset Database</code>按钮辣😁</p>
+<p>这个时候你可能会狂点，发现它好像不起作用。不要点辣，重新访问一下<code>login.php</code>试试</p>
+<p><img src="/../assets/2024-11-15_21-59_1731679181312_0.jpg" alt="2024-11-15_21-59.jpg"></p>
+<p>现在你可以，dvwa启动了</p>
+<h2><span id="可能会遇到的问题">可能会遇到的问题</span></h2><h3><span id="宝塔安装时yum被占用了5555">宝塔安装时yum被占用了5555</span></h3><p>具体情况是这样</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Another app is currently holding the yum lock; waiting for it to exit...</span><br><span class="line">  The other application is: yum</span><br><span class="line">    Memory :  28 M RSS (1.1 GB VSZ)</span><br><span class="line">    Started: Fri Nov 15 19:47:54 2024 - 02:59 ago</span><br><span class="line">    State  : Sleeping, pid: 9557</span><br></pre></td></tr></table></figure>
+
+<p>这是脚本在安装其他软件，我这个状态是sleeping，可以先给他停止了，虽然不知道会出什么问题..</p>
+<p>比较稳妥的方法，使用ps看看是他在干什么</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -elf | grep 9557</span><br><span class="line">4 S root      9557  9556  0  80   0 - 279723 ep_pol 19:47 pts/0   00:00:00 /usr/bin/python /bin/yum -y update polkit</span><br></pre></td></tr></table></figure>
+
+<p>以我的这个为例，yum正在安装<code>polkit</code>，等会脚本结束如果没有这个软件，我再手动给他装上就行了</p>
+<h3><span id="首次访问dvwa报错不想玩辣">首次访问dvwa报错，不想玩辣</span></h3><p>DVWA System error config file not found. Copy<br>config&#x2F;config.inc.php.dist to config&#x2F;config.inc.php and configure to<br>your environment.</p>
+<p><img src="/../assets/2024-11-15_20-25_1731673739929_0.jpg" alt="2024-11-15_20-25.jpg"></p>
+<p>字面意思，按照他教你的方法做，将<code>config/config.inc.php.dist </code>拷贝一份到<code>config/config.inc.php </code></p>
+<p>你可以用bt的文件管理来做这件事情</p>
+<h3><span id="bt太安全辣让我的php网站很难被攻击删除php禁止函数">bt太安全辣让我的php网站很难被攻击(删除php禁止函数)</span></h3><p><img src="/../assets/2024-11-15_21-17_1731676645366_0.jpg" alt="2024-11-15_21-17.jpg"></p>
+<p>选择你建站时使用的php版本。</p>
+<blockquote>
+<p>我有这么多php，是因为踩了很多坑，挨个都尝试了一遍 😢</p>
+</blockquote>
+<p><img src="/../assets/2024-11-15_21-15_1731676612360_0.jpg" alt="2024-11-15_21-15.jpg"></p>
+<p>拿起你的鼠标挨个删除吧</p>
+<blockquote>
+<p>其实可能有更简便的方法来删除，但是我已经挨个点完了，所以你也要点🤓</p>
+</blockquote>
+<h3><span id="初始化时出现了很多红字字丸辣启用某些配置">初始化时出现了很多红字字🤬丸辣，启用某些配置</span></h3><p>你的红字可能不一样，这里仅介绍将Disabled的红字变成绿色的Enabled</p>
+<p><img src="/../assets/2024-11-15_21-30_1731677436636_0.jpg" alt="2024-11-15_21-30.jpg"></p>
+<p><img src="/../assets/2024-11-15_21-17_1731677153339_0.jpg" alt="2024-11-15_21-17.jpg"></p>
+<p>仍然选择你对应的版本</p>
+<p><img src="/../assets/2024-11-15_21-27_1731677252079_0.jpg" alt="2024-11-15_21-27.jpg"></p>
+<p><img src="/../assets/2024-11-15_21-32_1731677534622_0.jpg" alt="2024-11-15_21-32.jpg"></p>
+<p>搜索你对应的红色字的东西，把它后面的Off改成On</p>
+<p><img src="/../assets/2024-11-15_21-33_1731677592936_0.jpg" alt="2024-11-15_21-33.jpg"></p>
+<p><img src="/../assets/2024-11-15_21-35_1731677745406_0.jpg" alt="2024-11-15_21-35.jpg"></p>
+<p>改完之后重启PHP，重启中间件</p>
+<p>如果仍然是红的，那么请修改dvwa根目录下的<code>php.ini</code></p>
+<p><img src="/../assets/2024-11-15_21-37_1731677856165_0.jpg" alt="2024-11-15_21-37.jpg"></p>
+<h3><span id="初始化时recaptcha-key-missing">初始化时reCAPTCHA key: Missing</span></h3><p>这个是验证码靶场用的，需要去咕噜咕噜申请验证码的key，不使用这个靶场可以忽略。🪿且咱们搭建在内网，没法申请这个key。如果你搭建在公网上，请自行参考dvwa文档</p>
+<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="http://bt.cn/">宝塔面板 简单好用的Linux&#x2F;Windows服务器运维管理面板 </a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/digininja/DVWA/releases">Releases · digininja&#x2F;DVWA · GitHub</a></p>
+<h2><span id="github-digininjax2fdvwa-damn-vulnerable-web-application-dvwa"></span></h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/15/%E6%97%A0%E4%BB%A3%E7%A0%81%E9%BC%A0%E6%A0%87%E5%85%9A%E7%8B%82%E5%96%9C%E5%A5%B6%E5%A6%88%E7%BA%A7%E6%95%99%E5%AD%A6%E4%BB%8E0%E5%BC%80%E5%A7%8B%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E4%BD%BF%E7%94%A8centos%E6%90%AD%E5%BB%BAdvwa/" data-id="cm6z08orq007xy1iw1vr3ecir" data-title="无代码鼠标党狂喜奶妈级教学从0开始手把手教你使用centos搭建dvwa" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day5_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/15/day5_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-15T10:13:33.000Z" itemprop="datePublished">2024-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/15/day5_kls/">day5_kls_review</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="复习">复习</span></h2><h3><span id="虚拟机网络模式">虚拟机网络模式</span></h3><p>nat,bridge,host-only</p>
+<h3><span id="linux目录结构">linux目录结构</span></h3><p><code>tree -L 1 /</code>获取根目录结构</p>
+<p>每个目录的作用</p>
+<h3><span id="linux命令">linux命令</span></h3><h4><span id="文件相关">文件相关</span></h4><p>查看文件: ls</p>
+<p>查看文件内容: cat,more,tail,head,其他的文件编辑器</p>
+<p>修改文件: cp,mv,rm,rmdir</p>
+<p>创建文件: mkdir,touch</p>
+<h4><span id="网络相关">网络相关</span></h4><p>查看网卡信息: ip,ifconfig</p>
+<p>查看网络连接情况:netstat</p>
+<p>修改网卡信息: nmtui,配置文件修改</p>
+<blockquote>
+<p>redhat <code>/etc/sysconfig/network-script/ifcf-xxx</code><br>debain <code>/etc/network/interfaces</code></p>
+</blockquote>
+<h4><span id="进程相关">进程相关</span></h4><p>查看进程: ps,top</p>
+<p>进程管理: kill,top</p>
+<h4><span id="权限相关">权限相关</span></h4><p>修改权限: chmod</p>
+<p>修改所属用户和组: chown</p>
+<h4><span id="用户管理相关">用户管理相关</span></h4><p>相关配置文件:<code>/etc/passwd</code>,<code>/etc/shadow</code>,<code>/etc/group</code>,<code>/etc/gshadow</code></p>
+<p>创建: useradd,groupadd</p>
+<p>修改: usermod,groupmod</p>
+<p>删除: userdel,groupdel</p>
+<p>切换用户: su</p>
+<h4><span id="文本处理">文本处理</span></h4><p>grep</p>
+<p>find</p>
+<h4><span id="文件查找">文件查找</span></h4><p>find</p>
+<p>whereis</p>
+<h4><span id="打包解包压缩解压缩">打包解包压缩解压缩</span></h4><p>打包解包:tar</p>
+<p>压缩解压缩:zip,unzip</p>
+<h4><span id="定时任务">定时任务</span></h4><p>crontab</p>
+<h2><span id="查缺补漏">查缺补漏</span></h2><h3><span id="linux配置文件">linux配置文件</span></h3><ul>
+<li></li>
+</ul>
+<p><code>/etc/passwd</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">用户名:密码占位符:用户ID:组ID:用户全名:用户主目录:用户默认shell</span></span><br><span class="line">root:x:0:0::/root:/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><code>/etc/shadow</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">用户名:加密密码:最后修改密码的日期:最小密码年龄:最大密码年龄:警告期:不活动期:过期日期:保留字段</span></span><br><span class="line">root:sadfasdfxc:19612::::::</span><br></pre></td></tr></table></figure>
+
+<h2><span id="etcgroup"><code>/etc/group</code></span></h2><p><code>/etc/gshadow</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/15/day5_kls/" data-id="cm6z08oqs001sy1iw1yvu1xt3" data-title="day5_kls_review" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/review/" rel="tag">review</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day4_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/14/day4_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-14T14:10:28.000Z" itemprop="datePublished">2024-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/14/day4_kls/">day4_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h2><span id="包管理器">包管理器</span></h2><p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/14/linux%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/">linux包管理器 | ziWindlu的博客</a></p>
+<h3><span id="linux系统信息查看">linux系统信息查看</span></h3><p><code>cat /etc/os-release</code>查看系统相关信息</p>
+<p><code>uname -a</code>查看内核版本</p>
+<p><strong>工具</strong></p>
+<p>neofetch(已归档)</p>
+<p>fastfetch(推荐)</p>
+<h3><span id="lnmpx2flamp">LNMP&#x2F;LAMP</span></h3><p>bt.cn</p>
+<h3><span id="ssh">ssh</span></h3><h4><span id="服务相关">服务相关</span></h4><p>开启自启动，并现在开启服务<code>systemctl enable --now  sshd</code></p>
+<p>关闭开机自启动，并现在关闭服务<code>systemctl disable --now sshd</code></p>
+<p>修改配置文件，并令其生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<h4><span id="使用">使用</span></h4><p><code>ssh user@host</code>连接</p>
+<p><code>ssh-keygen</code>生成公私钥对</p>
+<p><code>ssh-copy-id -i /path/to/public user@host</code>上传公钥</p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/14/ssh%E4%B8%8A%E4%BC%A0%E5%85%AC%E9%92%A5%E6%89%8B%E5%8A%A8%E4%B8%8A%E4%BC%A0+%E5%91%BD%E4%BB%A4%E4%B8%8A%E4%BC%A0/">ssh上传公钥手动上传+命令上传 | ziWindlu的博客</a></p>
+<h4><span id="配置">配置</span></h4><p>对于ssh服务端的配置文件在<code>/etc/ssh/sshd_config</code></p>
+<p>几个重要的配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">允许root用户登陆</span></span><br><span class="line">PermitRootLogin yes</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">允许密码认证</span></span><br><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure>
+
+<h3><span id="计划任务">计划任务</span></h3><h4><span id="分类">分类</span></h4><p>系统计划任务<code>/etc/crontab</code></p>
+<p>用户计划任务<code>/var/spool/cron/username</code></p>
+<h4><span id="计划任务crontab">计划任务crontab</span></h4><p>查看(l)用户(u)的计划任务<code>crontab -l -u username</code></p>
+<p>编辑(e)用户(u)的计划任务<code>crontab -e -u username</code></p>
+<h3><span id="散碎的知识点">散碎的知识点</span></h3><h2><span id="实例">实例</span></h2><h3><span id="获取系统信息">获取系统信息</span></h3><p><img src="/../assets/fetch_1731548301788_0.gif" alt="fetch.gif"></p>
+<h3><span id="ssh修改配置文件">ssh修改配置文件</span></h3><p><img src="/../assets/shhd_1731551609156_0.gif" alt="shhd.gif"></p>
+<h3><span id="计划任务crontab使用">计划任务crontab使用</span></h3><p>为用户lzf创建一个定时任务</p>
+<p><img src="/../assets/crontab_1731578969266_0.gif" alt="crontab.gif"></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>asciinema不支持显示edit-in-kitty，以后需要避免使用</p>
+<p>kitty仅可在显式的使用ssh连接的用户中使用edit-in-kitty，切换用户后</p>
+<p>DONE 让kali的zsh支持<code>c-p</code>,<code>c-n</code>作为上和下键来使用</p>
+<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Cron#Configuration">cron ArchWiki</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/14/day4_kls/" data-id="cm6z08oqs001ry1iw6mez1jcw" data-title="day4_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-ssh上传公钥手动上传+命令上传" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/14/ssh%E4%B8%8A%E4%BC%A0%E5%85%AC%E9%92%A5%E6%89%8B%E5%8A%A8%E4%B8%8A%E4%BC%A0+%E5%91%BD%E4%BB%A4%E4%B8%8A%E4%BC%A0/" class="article-date">
+  <time class="dt-published" datetime="2024-11-14T06:07:04.000Z" itemprop="datePublished">2024-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/14/ssh%E4%B8%8A%E4%BC%A0%E5%85%AC%E9%92%A5%E6%89%8B%E5%8A%A8%E4%B8%8A%E4%BC%A0+%E5%91%BD%E4%BB%A4%E4%B8%8A%E4%BC%A0/">ssh上传公钥手动上传+命令上传</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="公钥生成">公钥生成</span></h2><p><code>ssh-keygen</code></p>
+<p>该命令会生成一个私钥和公钥在<code>~/.ssh</code>下</p>
+<h2><span id="手动上传">手动上传</span></h2><p><code>~/.ssh/authorized_keys</code>将你的公钥内容复制到远程主机的这个文件中即可，多个要分多行</p>
+<p><img src="/../assets/manual_put_public_key_1731563977362_0.gif" alt="manual_put_public_key.gif"></p>
+<h2><span id="命令上传ssh-copy-id">命令上传ssh-copy-id</span></h2><p><code>ssh-copy-id -i /your/public/key.pub username@host</code>命令上传公钥</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/14/ssh%E4%B8%8A%E4%BC%A0%E5%85%AC%E9%92%A5%E6%89%8B%E5%8A%A8%E4%B8%8A%E4%BC%A0+%E5%91%BD%E4%BB%A4%E4%B8%8A%E4%BC%A0/" data-id="cm6z08or2002yy1iwfzogd0lv" data-title="ssh上传公钥手动上传+命令上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day3_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/13/day3_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-13T14:09:39.000Z" itemprop="datePublished">2024-11-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/13/day3_kls/">day3_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="suampsudo">su&amp;sudo</span></h3><p><code>su</code>意为siwtch user，<code>su [username]</code>为切换到username用户并为其开启一个新的shell环境(-)</p>
+<p><code>sudo</code>意为siwtch user do，可以用户以其他用户的权限去执行命令，如果不使用<code>-u</code>参数来指定用户，那么默认会使用超级用户</p>
+<p>sudo的其他内容</p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/13/sudo%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8sudoer%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%AE%9E%E4%BE%8B/">sudo命令使用sudoer配置文件解析与实例 | ziWindlu的博客</a></p>
+<h3><span id="修改权限chmod">修改权限chmod</span></h3><p><code>chmod &lt;mod_options&gt; file</code> 修改权限</p>
+<p>关于mod_options:</p>
+<p>其有两种表示形式，数字形式和符号形式，这里简单介绍一下符号形式</p>
+<p>表示形式<code>[type]&lt;option&gt;&lt;p&gt;</code></p>
+<p>type: 可选，u用户、g用户组、o其他用户，a前面的全部，不填则为全部，可填多个</p>
+<p>option：必填，+添加权限，-减少权限，&#x3D;精确权限为</p>
+<p>p：必填，权限，r、w、x，s，t</p>
+<h3><span id="修改文件的所有用户和所有组chown">修改文件的所有用户和所有组chown</span></h3><p><code>chown &lt;&lt;username&gt;[:groupname]&gt; file</code></p>
+<p>这里展示了一种最常用的方式，修改file的所属用户为username,所属组为groups</p>
+<h3><span id="特殊权限suidguidsbit">特殊权限suid,guid,sbit</span></h3><p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/13/linux%E7%89%B9%E6%AE%8A%E6%9D%83%E9%99%90suid,sgid,sbit/">linux特殊权限suid,sgid,sbit | ziWindlu的博客</a></p>
+<h3><span id="网络管理工具ipifconfignmtui">网络管理工具ip,ifconfig,nmtui</span></h3><p>查看：<code>ip addr</code>，<code>ifconfig</code></p>
+<p>修改：<code>nmtui</code>在tui中配置网卡；配置文件修改网卡(对于不同的发行版，配置文件的位置可能不同)</p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/13/linux%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%B7%A5%E5%85%B7ip/">linux网络配置工具ip | ziWindlu的博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/13/linux%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C/">linux使用配置文件配置网络 | ziWindlu的博客</a></p>
+<h3><span id="网络工具ping">网络工具ping</span></h3><p><code>ping -c count ip</code>ping指定ip,count次(-c)</p>
+<h3><span id="网络管理工具netstat">网络管理工具netstat</span></h3><p><code>netstat -antulp</code>展示所有的(a)监听状态的(l)tcp(t)和udp(u)协议的连接，显示时展示数字地址(n,numeric)进程id和程序名(p)</p>
+<h3><span id="系统进程管理和监控工具pskilltop">系统进程管理和监控工具ps,kill,top</span></h3><p><code>ps -ef</code>显示所有进程(e,everyone)，显示全格式(f,full)(包括父进程、终端、启动时间等详细信息)</p>
+<p><code>ps -aux</code> 显示所有(a,all)用户的进程，显示用户格式(u)(包括用户、CPU、内存等信息)，显示没有控制终端(x)的进程</p>
+<p><code>kill -9 pid</code>为pid的程序发送强制终止信号(9)</p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/13/linux%E8%BF%9B%E7%A8%8B%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7top,htop,btm/">linux进程监控工具top,htop,btm | ziWindlu的博客</a></p>
+<h3><span id="windows中网络和进程工具">windows中网络和进程工具</span></h3><p><code>ipconfig</code>查看本地网卡信息</p>
+<p><code>netstat -ano</code>展示所有的(a)连接，显示时展示数字地址(n)进程id和程序名(o)</p>
+<h3><span id="包管理器apt">包管理器apt</span></h3><p><strong>安装</strong></p>
+<p><code>apt install package</code></p>
+<p><strong>搜索</strong></p>
+<p><code>apt search package</code></p>
+<p><strong>删除</strong></p>
+<p><code>apt remove package</code></p>
+<p><strong>更新</strong></p>
+<p><code>apt update</code>,<code>apt upgrade</code></p>
+<h3><span id="散碎的知识点">散碎的知识点</span></h3><p><code>/proc/pid/exe</code>为对应pid运行的程序</p>
+<h2><span id="实例">实例</span></h2><h3><span id="nmtui配置静态ip实例">nmtui配置静态ip实例</span></h3><p>启动nmtui</p>
+<p><img src="/../assets/image_1731483528936_0.png" alt="image.png"></p>
+<p>选择网卡</p>
+<p><img src="/../assets/image_1731483581352_0.png" alt="image.png"></p>
+<p>编辑并输入需要配置的内容</p>
+<p><img src="/../assets/image_1731483617001_0.png" alt="image.png"></p>
+<p>重新激活网卡</p>
+<p><img src="/../assets/image_1731483760932_0.png" alt="image.png"></p>
+<h3><span id="dns修改实例">dns修改实例</span></h3><p><img src="/../assets/dns.cast_1731486561096_0.gif" alt="dns.cast.gif"></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>btm使用</p>
+<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Main_page">ArchWiki</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/13/day3_kls/" data-id="cm6z08oqr001qy1iw86uygsef" data-title="day3_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
 
     </footer>
   </div>
@@ -172,7 +1164,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -183,7 +1175,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/changeme/">changeme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/exam/">exam</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/changeme/">changeme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/exam/">exam</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/">奇技淫巧</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li></ul>
     </div>
   </div>
 
@@ -193,7 +1185,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SqlInject/" rel="tag">SqlInject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">fastjson反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SqlInject/" rel="tag">SqlInject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burp/" rel="tag">burp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">fastjson反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/struts2/" rel="tag">struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
     </div>
   </div>
 
@@ -203,7 +1195,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/SqlInject/" style="font-size: 10px;">SqlInject</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 12.5px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 12.5px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 10px;">fastjson反序列化</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 12.5px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/review/" style="font-size: 12.5px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 17.5px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ssrf/" style="font-size: 12.5px;">ssrf</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 12.5px;">xss</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 15px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 15px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/SqlInject/" style="font-size: 10px;">SqlInject</a> <a href="/tags/blog/" style="font-size: 12px;">blog</a> <a href="/tags/burp/" style="font-size: 10px;">burp</a> <a href="/tags/burpsuite/" style="font-size: 12px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 12px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 10px;">fastjson反序列化</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 12px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 14px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/review/" style="font-size: 12px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 16px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ssrf/" style="font-size: 12px;">ssrf</a> <a href="/tags/struts2/" style="font-size: 18px;">struts2</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 12px;">xss</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 14px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">小程序</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 14px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
     </div>
   </div>
 
@@ -212,7 +1204,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
     </div>
   </div>
 
@@ -225,23 +1217,23 @@
       <ul>
         
           <li>
-            <a href="/2025/01/16/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">fastjson反序列化</a>
+            <a href="/2025/02/11/linux%E4%B8%8B%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%93%E5%8C%85/">linux下微信小程序抓包</a>
           </li>
         
           <li>
-            <a href="/2025/01/13/SqlInject/">SqlInject</a>
+            <a href="/2025/02/10/linux%E4%B8%8B%E5%AE%89%E5%8D%93%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%93%E5%8C%85%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">linux下安卓渗透测试抓包环境配置</a>
           </li>
         
           <li>
-            <a href="/2025/01/13/CVE-2016-4437/">CVE-2016-4437</a>
+            <a href="/2025/01/28/s2-015%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-015命令执行</a>
           </li>
         
           <li>
-            <a href="/2025/01/11/Sec-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Sec-Linux常用命令</a>
+            <a href="/2025/01/28/s2-013%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-013命令执行</a>
           </li>
         
           <li>
-            <a href="/2025/01/10/week9_kls_exam/">week9_kls_exam</a>
+            <a href="/2025/01/26/s2-009%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-009命令执行</a>
           </li>
         
       </ul>

