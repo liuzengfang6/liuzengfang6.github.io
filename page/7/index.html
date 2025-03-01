@@ -69,6 +69,92 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-day3_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/11/13/day3_kls/" class="article-date">
+  <time class="dt-published" datetime="2024-11-13T14:09:39.000Z" itemprop="datePublished">2024-11-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/13/day3_kls/">day3_kls</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="课程内容">课程内容</span></h2><h3><span id="suampsudo">su&amp;sudo</span></h3><p><code>su</code>意为siwtch user，<code>su [username]</code>为切换到username用户并为其开启一个新的shell环境(-)</p>
+<p><code>sudo</code>意为siwtch user do，可以用户以其他用户的权限去执行命令，如果不使用<code>-u</code>参数来指定用户，那么默认会使用超级用户</p>
+<p>sudo的其他内容</p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/13/sudo%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8sudoer%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%AE%9E%E4%BE%8B/">sudo命令使用sudoer配置文件解析与实例 | ziWindlu的博客</a></p>
+<h3><span id="修改权限chmod">修改权限chmod</span></h3><p><code>chmod &lt;mod_options&gt; file</code> 修改权限</p>
+<p>关于mod_options:</p>
+<p>其有两种表示形式，数字形式和符号形式，这里简单介绍一下符号形式</p>
+<p>表示形式<code>[type]&lt;option&gt;&lt;p&gt;</code></p>
+<p>type: 可选，u用户、g用户组、o其他用户，a前面的全部，不填则为全部，可填多个</p>
+<p>option：必填，+添加权限，-减少权限，&#x3D;精确权限为</p>
+<p>p：必填，权限，r、w、x，s，t</p>
+<h3><span id="修改文件的所有用户和所有组chown">修改文件的所有用户和所有组chown</span></h3><p><code>chown &lt;&lt;username&gt;[:groupname]&gt; file</code></p>
+<p>这里展示了一种最常用的方式，修改file的所属用户为username,所属组为groups</p>
+<h3><span id="特殊权限suidguidsbit">特殊权限suid,guid,sbit</span></h3><p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/13/linux%E7%89%B9%E6%AE%8A%E6%9D%83%E9%99%90suid,sgid,sbit/">linux特殊权限suid,sgid,sbit | ziWindlu的博客</a></p>
+<h3><span id="网络管理工具ipifconfignmtui">网络管理工具ip,ifconfig,nmtui</span></h3><p>查看：<code>ip addr</code>，<code>ifconfig</code></p>
+<p>修改：<code>nmtui</code>在tui中配置网卡；配置文件修改网卡(对于不同的发行版，配置文件的位置可能不同)</p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/13/linux%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E5%B7%A5%E5%85%B7ip/">linux网络配置工具ip | ziWindlu的博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/13/linux%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C/">linux使用配置文件配置网络 | ziWindlu的博客</a></p>
+<h3><span id="网络工具ping">网络工具ping</span></h3><p><code>ping -c count ip</code>ping指定ip,count次(-c)</p>
+<h3><span id="网络管理工具netstat">网络管理工具netstat</span></h3><p><code>netstat -antulp</code>展示所有的(a)监听状态的(l)tcp(t)和udp(u)协议的连接，显示时展示数字地址(n,numeric)进程id和程序名(p)</p>
+<h3><span id="系统进程管理和监控工具pskilltop">系统进程管理和监控工具ps,kill,top</span></h3><p><code>ps -ef</code>显示所有进程(e,everyone)，显示全格式(f,full)(包括父进程、终端、启动时间等详细信息)</p>
+<p><code>ps -aux</code> 显示所有(a,all)用户的进程，显示用户格式(u)(包括用户、CPU、内存等信息)，显示没有控制终端(x)的进程</p>
+<p><code>kill -9 pid</code>为pid的程序发送强制终止信号(9)</p>
+<p><a target="_blank" rel="noopener" href="https://ziwindlu.github.io/2024/11/13/linux%E8%BF%9B%E7%A8%8B%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7top,htop,btm/">linux进程监控工具top,htop,btm | ziWindlu的博客</a></p>
+<h3><span id="windows中网络和进程工具">windows中网络和进程工具</span></h3><p><code>ipconfig</code>查看本地网卡信息</p>
+<p><code>netstat -ano</code>展示所有的(a)连接，显示时展示数字地址(n)进程id和程序名(o)</p>
+<h3><span id="包管理器apt">包管理器apt</span></h3><p><strong>安装</strong></p>
+<p><code>apt install package</code></p>
+<p><strong>搜索</strong></p>
+<p><code>apt search package</code></p>
+<p><strong>删除</strong></p>
+<p><code>apt remove package</code></p>
+<p><strong>更新</strong></p>
+<p><code>apt update</code>,<code>apt upgrade</code></p>
+<h3><span id="散碎的知识点">散碎的知识点</span></h3><p><code>/proc/pid/exe</code>为对应pid运行的程序</p>
+<h2><span id="实例">实例</span></h2><h3><span id="nmtui配置静态ip实例">nmtui配置静态ip实例</span></h3><p>启动nmtui</p>
+<p><img src="/../assets/image_1731483528936_0.png" alt="image.png"></p>
+<p>选择网卡</p>
+<p><img src="/../assets/image_1731483581352_0.png" alt="image.png"></p>
+<p>编辑并输入需要配置的内容</p>
+<p><img src="/../assets/image_1731483617001_0.png" alt="image.png"></p>
+<p>重新激活网卡</p>
+<p><img src="/../assets/image_1731483760932_0.png" alt="image.png"></p>
+<h3><span id="dns修改实例">dns修改实例</span></h3><p><img src="/../assets/dns.cast_1731486561096_0.gif" alt="dns.cast.gif"></p>
+<h2><span id="思考ampamptodo">思考&amp;&amp;todo</span></h2><p>btm使用</p>
+<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Main_page">ArchWiki</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/11/13/day3_kls/" data-id="cm6z08oqr001qy1iw86uygsef" data-title="day3_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-day2_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/11/12/day2_kls/" class="article-date">
@@ -321,7 +407,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
     </div>
   </div>
 
@@ -332,6 +418,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2025/03/01/weekn_kls_exam/">weekn_kls_exam</a>
+          </li>
         
           <li>
             <a href="/2025/02/11/linux%E4%B8%8B%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%93%E5%8C%85/">linux下微信小程序抓包</a>
@@ -347,10 +437,6 @@
         
           <li>
             <a href="/2025/01/28/s2-013%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-013命令执行</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/26/s2-009%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-009命令执行</a>
           </li>
         
       </ul>

